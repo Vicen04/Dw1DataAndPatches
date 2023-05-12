@@ -1,7 +1,7 @@
 // This function checks if a digimon will reject an item being feed
+// 1 = rejected, 0 = accepted
 
-
-HandleItemRejection(void)
+HandleItemRejection(void) 
 
 {
   int RandomValue;
@@ -20,8 +20,8 @@ HandleItemRejection(void)
   RandomValue = ReturnRandom(10);
   itemFeedValue = ItemBeingFeed;
   if ((((ItemBeingFeed < 115) || (ItemBeingFeed == 121)) || (ItemBeingFeed == 122)) ||
-     (124 < (int)ItemBeingFeed?)) { // check if item  is an item that can be eaten
-    if ((ItemBeingFeed? < 33) || (37 < ItemBeingFeed?)) { // Another check for items that can be eaten
+     (124 < (int)ItemBeingFeed)) { // check if item  is an item that can be eaten
+    if ((ItemBeingFeed? < 33) || (37 < ItemBeingFeed)) { // Another check for items that can be eaten
       if (((70 < ItemBeingFeed) && (ItemBeingFeed < 115)) ||
          ((124 < ItemBeingFeed && (ItemBeingFeed < 128)))) { // evo items
         if (ItemBeingFeed == 126) { // panjamon evo item
@@ -37,9 +37,9 @@ HandleItemRejection(void)
         else {
           currentDigimonLevel = CurrentDigimonLevel;
           itemLevel = CurrentItemLevel;
-          if (((currentDigimonLevel == itemLevel) || (currentDigimonLevel + 2 == itemLevel)) ||
-             (currentDigimonLevel - 1 == itemLevel)) {
-            return 1;
+          if (((currentDigimonLevel == itemLevel) || (currentDigimonLevel + 2 == itemLevel)) || // Checks if the evo item can be eaten. 
+             (currentDigimonLevel - 1 == itemLevel)) { //This code is flawed, since it will let fresh digimon eat any evo item and in-training eat any ultimate evo items. 
+            return 1;                                  // Even if a fresh or in-training eats an evo item, the evolution will not trigger due to another check later.
           }
         }
       }
@@ -48,21 +48,21 @@ HandleItemRejection(void)
         returnValue = 0;
       }
       else {
-        if ((-1 < ItemBeingFeed?) && (ItemBeingFeed? < 38)) {
+        if ((-1 < ItemBeingFeed) && (ItemBeingFeed < 38)) {
           iVar1 = ReturnRandom(100);
           iVar2 = ReturnRandom(10);
-          if (iVar1 < 110 - (Discipline + iVar2 + 10)) {
+          if (iVar1 < 110 - (Discipline + iVar2 + 10)) { //Chance of eating healing item
             DAT_ffff912d = 1;
             return 1;
           }
         }
         if (((hungryFlag == 0) && (itemFeedValue == digimonFavouriteFood &&
            (RandomValue < 2)) {
-          FavouriteItemRejected = 2;
+          FavouriteItemRejected = 2; //If the digimon is not hungry and you try to feed its favourite item, there's a chance of rejection
         }
         returnValue = 0;
         if (FavouriteItemRejected != 0) {
-          if (hungryFlag != 0) {
+          if (hungryFlag != 0) { // this should allow scolding, but it is never triggered 
             DAT_ffff912d = '\x01';
           }
           returnValue = 1;

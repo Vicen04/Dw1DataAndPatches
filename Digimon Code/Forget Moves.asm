@@ -11,10 +11,11 @@ void ForgetMovesAfterAllLivesLost(uint moveID)
   
   count = 0;
   do {
-    moveValue = GetTechFromMove(DigimonPtr,(uint)(byte)(&DigimonCurrentTechs)[count]);
+    moveValue = GetTechFromMove(DigimonPtr,(&DigimonCurrentTechs)[count]);
     if (param_1 == moveValue) 
       {
           (&DigimonCurrentTechs)[count] = -1;
+		  count = 3;
       }
     count++;
     if (count > 3) {
@@ -40,7 +41,7 @@ void ForgetMovesAfterAllLivesLost(uint moveID)
       if (moveID < 0) {
         moveID = moveID + 31;
       }
-//this is wrong, it does not work as intended and causes a glitch
+//this is wrong, it does not work as intended and causes the game to delete an entire pool of moves
       (&moveBitArray)[moveID >> 5] = (&moveBitArray)[moveId >> 5] & (flagBit ^ 0xffff);
       return;
     }
