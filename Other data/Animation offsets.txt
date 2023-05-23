@@ -1,0 +1,287 @@
+Animations:
+
+Each animation uses 4 bytes.
+
+The moves animations start at (digimon animation pointer + 2E * 4) or (digimon animation pointer + B8).
+
+The end of a list it is more or less stated by the first value, if the value is less than B8, it means it has no moves animations.
+
+
+
+Animations values and actions that are performed (based on sukamon, each digimon differs in some sections):
+0) Idle animation
+1) Idle tired animation
+2) Walk animation
+3) Walk tired animation
+4) Walk fast animation
+5) Happy cry animation
+6) Empty (may be different for each digimon)
+7) Disrespect animation?
+8) Eat animation
+9) Going to sleep animation
+A) Toilet animation
+B) Praise animation
+C) Scold animation
+D) Reject item animation
+E/F/10/11) Evolution animations
+12) Stop training animation
+13) Frozen in place?
+14) Empty (different for each digimon)
+15) Fall and go back up animation
+16) Brains training animation
+17) Stumbling animation
+18) Dumb animation
+19) Scold with reason animation
+1A) Empty (different for each digimon)
+1B) Move boulder animation (HP training)
+1C) Empty (in curling, this is the move backwards disc) 
+1D) Empty (in curling, this is the hold disc in place)  
+1E) Kingsukamon dance (probably different for each digimon) (in curling, this is the throw disc) 
+1f) Empty (probably different for each digimon)
+20) Empty (probably different for each digimon)
+21) battle idle animation
+22) Stunned animation
+23) Walk in arena animation
+24) Walk towards opponent animation
+25) Defend animation
+26) Empty (probably different for each digimon)
+27) Empty (probably different for each digimon)
+28) Hit, fall backwards and roll backwards animation
+29) Hit, fall foward and roll animation
+2A) Battle win celebration
+2B) Defeat animation
+2C) Some sort of stunned (probably different for each digimon)
+2D) Empty (probably different for each digimon)
+
+2E+ moves animations (Some of this animations are picked for the offense training and the presentation movement at the arena).
+These follow the order of the moves the digimon has in their data.
+
+The list for the actions may have some errors since all of the digimon have not been tested.
+
+List of all the digimon and their animations (based on the NTSC-U version):
+
+Protagonist:
+0063C828 Hiro animations
+
+
+Playable:
+
+1 to 9:
+00634238 Botamon animations
+006EB8F8 Koromon animations
+005C9FCC Agumon animations
+0060C568 Betamon animations
+006ADCC0 Greymon animations
+0064E62C Devimon animations
+005DDEF4 Airdramon animations
+007BB2A0 Tyrannomon animations
+0070EB50 Meramon animations
+
+10 to 19:
+0078C1BC Seadramon animations
+0076883C Numemon animations
+00755A5C Metal Greymon animations
+006F5968 Mamemon animations
+007250F4 Monzaemon animations
+00783240 Punimon animations
+007B27D0 Tsunomon animations
+0067E46C Gabumon animations
+00666EA4 Elecmon animations
+006D460C Kabuterimon animations
+
+20 to 29:
+005F2EC8 Angemon animations
+0061F8B4 Birdramon animations
+006933A4 Garurumon animations
+007F4E9C Frigimon animations
+006C6B94 Whamon animations
+007E3154 Vegiemon animations
+0079ED50 Skullgreymon animations
+0074EF6C Metal Mamemon animations
+007D438C Vademon animations
+0077CEF8 Poyomon animations
+
+30 to 39:
+00A741F0 Tokomon animations
+009CE298 Patamon animations
+008FD330 Kunemon animations
+00A8038C Unimon animations
+009A6074 Ogremon animations
+00A40420 Shellmon animations
+00839DA8 Centarumon animations
+0081FE5C Bakemon animations
+00887930 Dimogremon animations
+00A2C458 Sukamon animations
+
+40 to 49:
+00808810 Andromon animations
+008BB460 Giromon animations
+008A12B0 Etemon animation
+00A96CF0 Yuramon animations
+00A6815C Tanemon animations
+00A150A4 Biyomon animations
+009BA86C Palmon animations
+009758B8 Monochromon animations
+0092FE8C Leomon animations
+00A52720 Coelamon animations
+
+50 to 59:
+00854E0C Kokatorimon animations
+009144A0 Kuwagamon animations
+0095D08C Mojyamon animations
+00990068 Nanimon animations
+00947D34 Megadramon animations?
+009FFB84 Piximon animations
+008703FC Digitamamon animations
+009E6664 Penguinmon animations
+008E6D50 Ninjamon animations
+008CB8B4 Phoenixmon animations
+
+60 to 65:
+00B16FE8 H-Kabuterimon animations
+00B4BFAC Megaseadramon animations
+00B9499C Panjamon animations
+00AE51B4 Gigadramon animations?
+00B6A688 Metal Etemon animations
+Weregarurumon has no model, so it has no animations either.
+
+
+Non playable:
+
+66 to 69:
+00C11970 Myotismon animations
+00C3E910 Yanmamon animations
+00B0A164 Gotsumon animations
+00ABB6D4 Flarerizamon animations
+
+70 to 79:
+00C32814 Warumonzaemon animations
+00BC722C Snow agumon animations
+00B31984 Hyogamon animations
+00BAB508 Platinumsukamon animations
+00AADF98 Dokunemon animations
+00BDE77C ShimaUnimon animations
+00BEE4C0 Tankmon animations
+00BD253C Red Vegiemon animations
+00B3F60C J-Mojyamon animations
+00B85950 Nisedrimogemon animations
+
+80 to 89:
+00AFBB10 Doburimon animations
+00C04D2C Mudfrigimon animations
+00BC722C Psychemon animations
+00B5E628 Modokibetamon animations
+00BF8B34 Toy agumon animations
+00BB7528 Piddomon animations
+00AA15CC Aruraumon animations
+00AD5EBC Geremon animations
+00C23C28 Vermilimon animations
+00AC8B6C Fugamon animations
+
+90 to 99:
+00DA0154 Tekkamon animations
+00D16120 Morishellmon animations
+00C9C798 Guardromon animations
+00D008B4 Muchomon animations
+00C5F0BC Akatorimon animations
+00CE58A4 Icemon animations
+00DB7068 Tsukaimon animations
+00D4F438 Sharmamon animations
+00C815D4 Clear agumon animations
+00DD03BC Weedmon animations
+
+100 to 109:
+00CD83BC Ice devimon animations
+00C8ED74 Darkrizamon animations
+00D5C870 Sand yanmamon animations
+00D6EBD8 Snow goburimon animations
+00C743D0 Blue meramon animations
+00CC7C6C Gururumon animations
+00D42B54 Saberdramon animations
+00D7B144 Soulmon animations
+00CBBE24 Rockmon animations
+00D36CC0 Otamamon animations
+
+110 to 119:
+00CAC67C Gekomon animations
+00D933B4 Tentomon animations
+00DC67DC Waruseadramon animations
+00CF1064 Meteoromon animations
+114 Does not exist
+00D25EB0 Machinedramon animations
+00C6D614 Analogman animations
+00D013FC Jijimon animations
+00D8ADB4 Market manager animations
+00DACCAC Shogun gekomon animations
+
+120 to 129:
+00F17FAC King of sukamon animations
+00F0BB84 Cherrymon animations
+00F05340 Hagurumon animations
+00DE3FA0 Tinmon animations
+00F1EAD8 Master Tyrannomon animations 
+00E53DA0 Goburimon animations (ID 125)
+00DDDD74 Brachiomon animations
+00F103B0 Demimeramon animations
+00E01AA8 Betamon animations (ID 128)
+00E5B590 Greymon animations (ID 129)
+
+130 to 139:
+00E1DD0C Devimon animations (ID 130)
+00DE9A84 Airdramon animations (ID 131)
+00EE8AA0 Tyrannomon animations (ID 132)
+00E91310 Meramon animations (ID 133)
+00ED349C Seadramon animations (ID 134) (the lake one)
+00EC3F3C Numemon animations (ID 135)
+00EA408C Metal greymon animations (ID 136)
+00E82148 Mamemon animations (ID 137)
+00E9D354 Monzaemon animations (ID 138)
+00E36BCC Gabumon animations (ID 139)
+
+140 to 149:
+00E2C954 Elecmon animations (ID 140)
+00E7020C Kabuterimon animations (ID 141)
+00DF69B8 Angemon animations (ID 142)
+00E0F214 Birdramon animations (ID 143)
+00E43134 Garurumon animations (ID 144)
+00EFE3CC Frigimon animations (ID 145)
+00E68AAC Whamon animations (ID 146) (the one that you can ride)
+00EF7514 Vegiemon animations (ID 147)
+00EDAB00 Skullgreymon animations (ID 148)
+00EB4BCC Metal mamemon animations (ID 149)
+
+150 to 159:
+0106AE7C Vademon animations (ID 150)
+00EB4BCC Patamon animations (ID 151)
+00FA6A10 Kunemon animations (ID 152)
+01058A2C Unimon animations (ID 153)
+00FF4BB4 Ogremon animations (ID 154)
+010469C0 Shellmon animations (ID 155)
+00F47C58 Centarumon animations (ID 156)
+00F3E77C Bakemon animations (ID 157)
+00F6D500 Drimogremon animations (ID 158)
+0103EAE8 Sukamon animations (ID 159)
+
+160 to 169:
+00F37270 Andromon animations (ID 160)
+00F8F320 Giromon animations (ID 161)
+00F7F6D0 Etemon animations (ID 162)
+01036614 Biyomon animations (ID 163)
+01004A2C Palmon animations (ID 164)
+00FDB378 Monochromon animations (ID 165)
+00FC25EC Leomon animations (ID 166)
+0104F090 Coelamon animations (ID 167)
+00F4F45C Kokatorimon animations (ID 168)
+00FB7670 Kuwagamon animations (ID 169)
+
+170 to 179:
+00FE495C Mojyamon animations (ID 170)
+00FED158 Nanimon animations (ID 171)
+00FCE3A4 Megadramon animations (ID 172) 
+0102AD24 Piximon animations (ID 173)
+00F60E1C Digitamamon animations (ID 174)
+00F99730 Ninjamon animations (ID 175)
+01021944 Penguinmon animations (ID 176)
+01061D18 Myotismon animations (ID 177)
+00F269F0 Greymon animations (ID 178)
+00F2E6BC Metal greymon animations (ID 179)

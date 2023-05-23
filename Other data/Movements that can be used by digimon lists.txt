@@ -1,0 +1,84 @@
+The game has a list for each movement, that checks if a digimon is able to perform the move in combat or not. If the list lacks the digimon, the digimon will only perform the animation, but not the movement due to how the code works.
+
+Each movement uses 5 bytes and are used like this (using the first value of fire tower):
+
+11 Digimon value (used to check if a digimon can use the move or not)
+00 Digimon bone to spawn at (changes depending on the attack, can also use either the partner or the opponent bones depending on the attack)
+00 position X relative to the bone
+00 position Y relative to the bone
+00 position Z relative to the bone
+
+
+Here are the offsets for each list (based on the NTSC-U version):
+
+Fire type:
+010F5352 Fire tower
+010FAE7C Prominence beam
+011009C6 Spit fire
+011065C2 Red inferno
+0110C2B2 Magma bomb
+01111D48 Heat laser
+01117A92 Infinity burn
+0111D800 Meltdown
+
+Wind type:
+01123150 Thunder justice
+01128D86 Spinning shot
+0112EA00 Electric cloud
+011344F0 Megalo spark
+0113A0A0 Static elec
+0113FC68 Wind cutter
+0114596C Confused storm
+0114B460 Hurricane
+
+Ice type:
+0115104E Giga freeze
+01156D1A Ice statue
+0115C79C Winter blast
+011623AC Ice needle
+01167F8C Water blit
+0116DBBC Aqua magic
+011737E0 Aurora freeze
+01179324 Tear drop
+
+Mech type:
+0117EF42 Power crane
+01184B20 All range beam
+0118A6E8 Metal sprinter
+011902D6 Pulse laser
+01195E98 Delete program
+0119BC6E DG dimension 
+011A16A0 Full potential
+011A74FC Reverse program
+
+Earth type:
+011ACDE8 Poison powder
+011B2AAC Bug
+011B85E4 Mass morph
+011BE1F0 Insect plague
+011C3E00 Perfume charm
+011C9960 Poison claw
+011CF540 Danger sting
+011D5138 Green trap
+
+Fight type:
+011DAD18 Tremar
+011E08E0 Muscle charge
+011E6534 War cry
+011EC0A0 Sonic jab
+011F7860 Counter
+011F1C80 Dynamite kick V1 (ID 44)
+01208C00 Dynamite kick V2 (ID 48)
+011FD4AC Megaton punch
+0120308C Buster dive
+
+Filth type:
+0120E81E Odor spray
+0121449A Poop spd toss
+0121A0A4 Big poop toss
+0121FC66 Big rnd toss
+0122583A Poop rnd toss
+0122B41A Rnd spd toss
+01230F80 Horizontal kick V1 (ID 55)
+0123C740 Horizontal kick V2 (ID 57)
+01236C08 Ultra poop hell
