@@ -156,7 +156,7 @@ Non playable:
 
 70 to 79:
 00C32814 Warumonzaemon animations
-00BC722C Snow agumon animations
+00C5189C Snow agumon animations
 00B31984 Hyogamon animations
 00BAB508 Platinumsukamon animations
 00AADF98 Dokunemon animations
