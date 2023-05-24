@@ -183,8 +183,8 @@ Non playable:
 00D16120 Morishellmon animations
 00C9C798 Guardromon animations
 00D088B4 Muchomon animations
-00C5F0BC Akatorimon animations
 00CE58A4 Icemon animations
+00C5F0BC Akatorimon animations
 00DB7068 Tsukaimon animations
 00D4F438 Sharmamon animations
 00C815D4 Clear agumon animations
@@ -198,7 +198,7 @@ Non playable:
 00C743D0 Blue meramon animations
 00CC7C6C Gururumon animations
 00D42B54 Saberdramon animations
-00D7B144 Soulmon animations
+00D7B1A4 Soulmon animations
 00CBBE24 Rockmon animations
 00D36CC0 Otamamon animations
 
