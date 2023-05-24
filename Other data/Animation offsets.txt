@@ -182,7 +182,7 @@ Non playable:
 00DA0154 Tekkamon animations
 00D16120 Morishellmon animations
 00C9C798 Guardromon animations
-00D008B4 Muchomon animations
+00D088B4 Muchomon animations
 00C5F0BC Akatorimon animations
 00CE58A4 Icemon animations
 00DB7068 Tsukaimon animations
