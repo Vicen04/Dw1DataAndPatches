@@ -34,11 +34,11 @@ E/F/10/11) Evolution animations
 19) Scold with reason animation
 1A) Empty (different for each digimon)
 1B) Move boulder animation (HP training)
-1C) Empty (in curling, this is the move backwards disc) 
-1D) Empty (in curling, this is the hold disc in place)  
-1E) Kingsukamon dance (probably different for each digimon) (in curling, this is the throw disc) 
-1f) Empty (probably different for each digimon)
-20) Empty (probably different for each digimon)
+1C) Empty (in curling with penguinmon, this is the move backwards disc ) 
+1D) Empty (in curling with penguinmon, this is the hold disc in place)  
+1E) Kingsukamon dance (probably different for each digimon) (in curling with penguinmon, this is the throw disc) (in curling with metal mamemon, this is the move backwards disc) 
+1f) Empty (probably different for each digimon) (in curling with metal mamemon, this is the hold disc in place)  
+20) Empty (probably different for each digimon) (in curling with metalmamemon, this is the throw disc) 
 21) battle idle animation
 22) Stunned animation
 23) Walk in arena animation
@@ -80,7 +80,7 @@ Playable:
 10 to 19:
 0078C1BC Seadramon animations
 0076883C Numemon animations
-00755A5C Metal Greymon animations
+00735A5C Metal Greymon animations
 006F5968 Mamemon animations
 007250F4 Monzaemon animations
 00783240 Punimon animations
@@ -130,7 +130,7 @@ Playable:
 009144A0 Kuwagamon animations
 0095D08C Mojyamon animations
 00990068 Nanimon animations
-00947D34 Megadramon animations?
+00947D34 Megadramon animations
 009FFB84 Piximon animations
 008703FC Digitamamon animations
 009E6664 Penguinmon animations
@@ -141,7 +141,7 @@ Playable:
 00B16FE8 H-Kabuterimon animations
 00B4BFAC Megaseadramon animations
 00B9499C Panjamon animations
-00AE51B4 Gigadramon animations?
+00AE51B4 Gigadramon animations
 00B6A688 Metal Etemon animations
 Weregarurumon has no model, so it has no animations either.
 
