@@ -17,7 +17,7 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
    pointerLocation = pointerText + 4;   // gets the next pointer
   }
 
-  pointerLocation = &ptr_metalmamemonLoactions; // It is located at 8005b40c in the code
+  pointerLocation = &ptr_metalmamemonLocations; // It is located at 8005b40c in the code
   
   for (int i = 0; i < 10; i++)
   {
@@ -47,19 +47,19 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
         Offset       Hex         command
 
         80059fa8 e0 fe bd 27     addiu      sp,sp,-0x120
-        80059fac 1c 00 bf af     sw         ra,local_104(sp)
-        80059fb0 18 00 b2 af     sw         s2,local_108(sp)
-        80059fb4 14 00 b1 af     sw         s1,local_10c(sp)
+        80059fac 1c 00 bf af     sw         ra,0x1c(sp)
+        80059fb0 18 00 b2 af     sw         s2,0x18(sp)
+        80059fb4 14 00 b1 af     sw         s1,0x14(sp)
         80059fb8 06 80 18 3c     lui        t8,0x8006
-        80059fbc 10 00 b0 af     sw         s0,local_110(sp)
+        80059fbc 10 00 b0 af     sw         s0,0x10(sp)
         80059fc0 21 88 80 00     move       s1,a0
         80059fc4 18 b3 18 27     addiu      t8,t8,-0x4ce8
         80059fc8 20 00 af 27     addiu      t7,sp,0x20
         80059fcc 3d 00 19 24     li         t9,0x3d
                              LAB_80059fd0                                   
-        80059fd0 00 00 0e 8f     lw         t6,0x0(t8)=>PTR_s__MetalMamemon_8005b318                                                                                                      
+        80059fd0 00 00 0e 8f     lw         t6,0x0(t8) // ptr_metalmamemonText                                                                                                     
         80059fd4 ff ff 39 27     addiu      t9,t9,-0x1
-        80059fd8 00 00 ee ad     sw         t6=>s__MetalMamemon_8005b058,0x0(t7)=>local_100                                                                                              
+        80059fd8 00 00 ee ad     sw         t6,0x0(t7)                                                                                              
         80059fdc 04 00 18 27     addiu      t8,t8,0x4
         80059fe0 fb ff 20 1f     bgtz       t9,LAB_80059fd0
         80059fe4 04 00 ef 25     _addiu     t7,t7,0x4
@@ -68,9 +68,9 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
         80059ff0 14 01 af 27     addiu      t7,sp,0x114
         80059ff4 0a 00 19 24     li         t9,0xa
                              LAB_80059ff8                                    
-        80059ff8 00 00 0e 83     lb         t6,0x0(t8)=>DAT_8005b40c                         
+        80059ff8 00 00 0e 83     lb         t6,0x0(t8) //ptr_metalmamemonLocations                        
         80059ffc ff ff 39 27     addiu      t9,t9,-0x1
-        8005a000 00 00 ee a1     sb         t6,0x0(t7)=>local_c
+        8005a000 00 00 ee a1     sb         t6,0x0(t7)
         8005a004 01 00 18 27     addiu      t8,t8,0x1
         8005a008 fb ff 20 1f     bgtz       t9,LAB_80059ff8
         8005a00c 01 00 ef 25     _addiu     t7,t7,0x1
@@ -116,10 +116,10 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
         8005a0a0 83 c8 02 00     sra        t9,v0,0x2
                              LAB_8005a0a4                                   
         8005a0a4 00 16 19 00     sll        v0,t9,0x18
-        8005a0a8 1c 00 bf 8f     lw         ra,local_104(sp)
-        8005a0ac 18 00 b2 8f     lw         s2,local_108(sp)
-        8005a0b0 14 00 b1 8f     lw         s1,local_10c(sp)
-        8005a0b4 10 00 b0 8f     lw         s0,local_110(sp)
+        8005a0a8 1c 00 bf 8f     lw         ra,0x1c(sp)
+        8005a0ac 18 00 b2 8f     lw         s2,0x18(sp)
+        8005a0b0 14 00 b1 8f     lw         s1,0x14(sp)
+        8005a0b4 10 00 b0 8f     lw         s0,0x10(sp)
         8005a0b8 03 16 02 00     sra        v0,v0,0x18
         8005a0bc 08 00 e0 03     jr         ra
         8005a0c0 20 01 bd 27     _addiu     sp,sp,0x120

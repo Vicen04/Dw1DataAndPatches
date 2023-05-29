@@ -46,19 +46,19 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
         Offset       Hex        Commands
 
         80059e8c e0 fe bd 27     addiu      sp,sp,-0x120
-        80059e90 1c 00 bf af     sw         ra,local_104(sp)
-        80059e94 18 00 b2 af     sw         s2,local_108(sp)
-        80059e98 14 00 b1 af     sw         s1,local_10c(sp)
+        80059e90 1c 00 bf af     sw         ra,0x1c(sp)
+        80059e94 18 00 b2 af     sw         s2,0x18(sp)
+        80059e98 14 00 b1 af     sw         s1,0x14(sp)
         80059e9c 06 80 18 3c     lui        t8,0x8006
-        80059ea0 10 00 b0 af     sw         s0,local_110(sp)
+        80059ea0 10 00 b0 af     sw         s0,0x10(sp)
         80059ea4 21 88 80 00     move       s1,a0
         80059ea8 58 af 18 27     addiu      t8,t8,-0x50a8
         80059eac 20 00 af 27     addiu      t7,sp,0x20
         80059eb0 3d 00 19 24     li         t9,0x3d
                              LAB_80059eb4                                         
-        80059eb4 00 00 0e 8f     lw         t6,0x0(t8)=>PTR_s__Penguinmon_8005af58                                                                                                
+        80059eb4 00 00 0e 8f     lw         t6,0x0(t8) // ptr_penguinmonText                                                                                              
         80059eb8 ff ff 39 27     addiu      t9,t9,-0x1
-        80059ebc 00 00 ee ad     sw         t6=>s__Penguinmon_8005abd0,0x0(t7)=>local_100                                                                                               
+        80059ebc 00 00 ee ad     sw         t6,0x0(t7)                                                                                            
         80059ec0 04 00 18 27     addiu      t8,t8,0x4
         80059ec4 fb ff 20 1f     bgtz       t9,LAB_80059eb4
         80059ec8 04 00 ef 25     _addiu     t7,t7,0x4
@@ -67,9 +67,9 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
         80059ed4 14 01 af 27     addiu      t7,sp,0x114
         80059ed8 0a 00 19 24     li         t9,0xa
                              LAB_80059edc                                    
-        80059edc 00 00 0e 83     lb         t6,0x0(t8)=>DAT_8005b04c                       
+        80059edc 00 00 0e 83     lb         t6,0x0(t8) // ptr_penguinmonLocations                
         80059ee0 ff ff 39 27     addiu      t9,t9,-0x1
-        80059ee4 00 00 ee a1     sb         t6,0x0(t7)=>local_c
+        80059ee4 00 00 ee a1     sb         t6,0x0(t7)
         80059ee8 01 00 18 27     addiu      t8,t8,0x1
         80059eec fb ff 20 1f     bgtz       t9,LAB_80059edc
         80059ef0 01 00 ef 25     _addiu     t7,t7,0x1
@@ -115,10 +115,10 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
         80059f84 83 c8 02 00     sra        t9,v0,0x2
                              LAB_80059f88                                   
         80059f88 00 16 19 00     sll        v0,t9,0x18
-        80059f8c 1c 00 bf 8f     lw         ra,local_104(sp)
-        80059f90 18 00 b2 8f     lw         s2,local_108(sp)
-        80059f94 14 00 b1 8f     lw         s1,local_10c(sp)
-        80059f98 10 00 b0 8f     lw         s0,local_110(sp)
+        80059f8c 1c 00 bf 8f     lw         ra,0x1c(sp)
+        80059f90 18 00 b2 8f     lw         s2,0x18(sp)
+        80059f94 14 00 b1 8f     lw         s1,0x14(sp)
+        80059f98 10 00 b0 8f     lw         s0,0x10(sp)
         80059f9c 03 16 02 00     sra        v0,v0,0x18
         80059fa0 08 00 e0 03     jr         ra
         80059fa4 20 01 bd 27     _addiu     sp,sp,0x120
