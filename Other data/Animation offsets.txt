@@ -1,6 +1,6 @@
 Animations:
 
-Each animation uses 4 bytes.
+Each animation pointer uses 4 bytes.
 
 The moves animations start at (digimon animation pointer + 2E * 4) or (digimon animation pointer + B8).
 
@@ -34,7 +34,7 @@ E/F/10/11) Evolution animations
 19) Scold with reason animation
 1A) Empty (different for each digimon)
 1B) Move boulder animation (HP training)
-1C) Empty (in curling with penguinmon, this is the move backwards disc ) 
+1C) Empty (in curling with penguinmon, this is the move backwards disc) 
 1D) Empty (in curling with penguinmon, this is the hold disc in place)  
 1E) Kingsukamon dance (probably different for each digimon) (in curling with penguinmon, this is the throw disc) (in curling with metal mamemon, this is the move backwards disc) 
 1f) Empty (probably different for each digimon) (in curling with metal mamemon, this is the hold disc in place)  
@@ -56,9 +56,11 @@ E/F/10/11) Evolution animations
 2E+ moves animations (Some of this animations are picked for the offense training and the presentation movement at the arena).
 These follow the order of the moves the digimon has in their data.
 
+Machinedramon and Megaseadramon have an extra animation after the finisher.
+
 The list for the actions may have some errors since all of the digimon have not been tested.
 
-List of all the digimon and their animations (based on the NTSC-U version):
+List of all the digimon and their animations pointers (based on the NTSC-U version):
 
 Protagonist:
 0063C828 Hiro animations
