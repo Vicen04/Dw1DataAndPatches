@@ -110,7 +110,7 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
         8005a088 14 01 42 80     lb         v0,0x114(v0)
         8005a08c 00 00 00 00     nop
         8005a090 22 10 52 00     sub        v0,v0,s2
-        8005a094 03 00 41 04     bgez       v0,LAB_8005a0a4
+        8005a094 03 00 41 04     bgez       v0,0x8005a0a4 // LAB_8005a0a4
         8005a098 83 c8 02 00     _sra       t9,v0,0x2
         8005a09c 03 00 42 24     addiu      v0,v0,0x3
         8005a0a0 83 c8 02 00     sra        t9,v0,0x2
