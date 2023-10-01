@@ -276,7 +276,7 @@ Disassembly:
         80063dd8 14 80 01 3c     lui        at,0x8014
         80063ddc 7e 84 20 a4     sh         zero,-0x7b82(at) //VirusBar                      
                              LAB_80063de0                                    
-        80063de0 8c 8f 01 0c     jal        0x80063e30          //CheckLimits                            
+        80063de0 8c 8f 01 0c     jal        0x80063e30          //CheckLimits()                            
         80063de4 00 00 00 00     _nop
         80063de8 10 00 02 86     lh         v0,0x10(s0)
         80063dec 14 00 03 86     lh         v1,0x14(s0)

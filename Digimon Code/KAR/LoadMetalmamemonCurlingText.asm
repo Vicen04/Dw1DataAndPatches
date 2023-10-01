@@ -83,12 +83,12 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
                              LAB_8005a028                                   
         8005a028 05 00 40 14     bne        v0,zero,LAB_8005a040
         8005a02c 00 00 00 00     _nop
-        8005a030 03 33 04 0c     jal        0x8010cc0c  // SetTextColor                                     
+        8005a030 03 33 04 0c     jal        0x8010cc0c  // SetTextColor(a0)                                     
         8005a034 07 00 04 24     _li        a0,0x7
         8005a038 04 00 00 10     b          LAB_8005a04c
         8005a03c 21 10 b1 03     _addu      v0,sp,s1
                              LAB_8005a040                                   
-        8005a040 03 33 04 0c     jal        0x8010cc0c   // SetTextColor                                    
+        8005a040 03 33 04 0c     jal        0x8010cc0c   // SetTextColor(a0)                                    
         8005a044 01 00 04 24     _li        a0,0x1
         8005a048 21 10 b1 03     addu       v0,sp,s1
                              LAB_8005a04c                                    
@@ -103,7 +103,7 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
         8005a06c 80 10 02 00     sll        v0,v0,0x2
         8005a070 20 10 50 00     add        v0,v0,s0
         8005a074 20 00 64 8c     lw         a0,0x20(v1)
-        8005a078 c9 33 04 0c     jal        0x8010cf24  // RenderString                                  
+        8005a078 c9 33 04 0c     jal        0x8010cf24  // RenderString(a0, a1, a2)                                  
         8005a07c 01 00 46 20     _addi      a2,v0,0x1
         8005a080 01 00 22 22     addi       v0,s1,0x1
         8005a084 21 10 a2 03     addu       v0,sp,v0

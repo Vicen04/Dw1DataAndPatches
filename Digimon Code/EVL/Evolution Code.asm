@@ -281,7 +281,7 @@ Disassembly:
         80063454 00 16 02 00     sll        v0,v0,0x18
         80063458 03 16 02 00     sra        v0,v0,0x18
         8006345c 21 28 40 00     move       a1,v0
-        80063460 ca 8e 01 0c     jal        0x80063b28   //  SpecialEvolution          
+        80063460 ca 8e 01 0c     jal        0x80063b28   //  SpecialStatGains(a0, a1, a2)          
         80063464 21 30 e0 00     _move      a2,a3
         80063468 0c 00 30 86     lh         s0,0xc(s1)
         8006346c bd 00 00 10     b          0x80063764  // LAB_80063764
@@ -478,7 +478,7 @@ Disassembly:
         8006371c 04 00 41 14     bne        v0,at,0x80063730 // LAB_80063730
         80063720 21 80 60 00     _move      s0,v1
         80063724 14 00 04 24     li         a0,0x14
-        80063728 fd b2 02 0c     jal        0x800acbf4    // Add Tamer Level
+        80063728 fd b2 02 0c     jal        0x800acbf4    // AddTamerLevel(a0, a1)
         8006372c 01 00 05 24     _li        a1,0x1
                              LAB_80063730                                   
         80063730 13 80 02 3c     lui        v0,0x8013
@@ -489,7 +489,7 @@ Disassembly:
         80063744 04 00 41 14     bne        v0,at,0x80063758 // LAB_80063758
         80063748 00 00 00 00     _nop
         8006374c 64 00 04 24     li         a0,0x64
-        80063750 fd b2 02 0c     jal        0x800acbf4   // Add Tamer Level
+        80063750 fd b2 02 0c     jal        0x800acbf4   // AddTamerLevel(a0, a1)
         80063754 01 00 05 24     _li        a1,0x1
                              LAB_80063758                                   
         80063758 0c 00 30 86     lh         s0,0xc(s1)
@@ -630,7 +630,7 @@ Disassembly:
         80063938 ff 00 01 24     li         at,0xff
         8006393c ec ff 41 14     bne        v0,at,0x800638f0 // LAB_800638f0
         80063940 21 28 40 00     _move      a1,v0
-        80063944 c5 97 03 0c     jal        0x800e5f14 // Learn Move
+        80063944 c5 97 03 0c     jal        0x800e5f14 // LearnMove(a0)
         80063948 21 20 20 02     _move      a0,s1
         8006394c 21 20 60 02     move       a0,s3
         80063950 06 00 00 10     b          0x8006396c // LAB_8006396c
@@ -721,12 +721,12 @@ Disassembly:
         80063a80 03 8c 11 00     sra        s1,s1,0x10
         80063a84 48 00 a2 af     sw         v0,0x48(sp)
         80063a88 21 20 c0 02     move       a0,s6
-        80063a8c 0c 85 02 0c     jal        0x800a1430  // Delete old digimon
+        80063a8c 0c 85 02 0c     jal        0x800a1430  // Delete old digimon (a0, a1)
         80063a90 01 00 05 24     _li        a1,0x1
         80063a94 13 80 01 3c     lui        at,0x8013
         80063a98 48 f3 20 ac     sw         zero,-0xcb8(at) // Entity Ptr
         80063a9c 21 20 c0 02     move       a0,s6
-        80063aa0 98 83 02 0c     jal        0x800a0e60  // free memory and data?
+        80063aa0 98 83 02 0c     jal        0x800a0e60  // free memory and data? (a0, a1)
         80063aa4 03 00 05 24     _li        a1,0x3
         80063aa8 48 00 a2 8f     lw         v0,0x48(sp)
         80063aac 21 20 00 02     move       a0,s0
@@ -735,9 +735,9 @@ Disassembly:
         80063ab8 18 00 b7 af     sw         s7,0x18(sp)
         80063abc 21 28 a0 02     move       a1,s5
         80063ac0 21 30 60 02     move       a2,s3
-        80063ac4 dd 93 02 0c     jal        0x800a4f74 // Evolved Digimon Data Setup
+        80063ac4 dd 93 02 0c     jal        0x800a4f74 // EvolvedDigimonDataSetup(a0, a1, a2, a3, 0x10(sp), 0x14(sp), 0x18(sp))
         80063ac8 21 38 20 02     _move      a3,s1
-        80063acc fe fd 03 0c     jal        0x800ff7f8 // Set Digimon Adquired Trigger
+        80063acc fe fd 03 0c     jal        0x800ff7f8 // SetDigimonAdquiredTrigger(a0)
         80063ad0 ff ff 04 32     _andi      a0,s0,0xffff
         80063ad4 13 80 02 3c     lui        v0,0x8013
         80063ad8 d1 ce 42 24     addiu      v0,v0,-0x312f

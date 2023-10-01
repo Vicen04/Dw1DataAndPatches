@@ -186,7 +186,7 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059eac 39 00 01 24     li         at,0x39
         80059eb0 2b 00 22 14     bne        at,v0,0x80059f60 // LAB_80059f60
         80059eb4 00 00 00 00     _nop
-        80059eb8 b5 8d 02 0c     jal        0x800a36d4  // ReturnRandom                                   
+        80059eb8 b5 8d 02 0c     jal        0x800a36d4  // ReturnRandom(a0)                                   
         80059ebc 72 00 04 24     _li        a0,0x72
         80059ec0 02 00 02 14     bne        zero,v0,0x80059ecc // LAB_80059ecc
         80059ec4 3e 00 01 24     _li        at,0x3e
@@ -197,18 +197,18 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059ed4 75 00 02 24     li         v0,0x75
                              LAB_80059ed8                                    
         80059ed8 02 00 a2 a3     sb         v0,0x2(sp)
-        80059edc 02 1b 04 0c     jal        0x80106c08    // FUN_80106c08                                  
+        80059edc 02 1b 04 0c     jal        0x80106c08    // FUN_80106c08(a0)                                  
         80059ee0 39 00 04 24     _li        a0,0x39
         80059ee4 02 00 a2 83     lb         v0,0x2(sp)
         80059ee8 14 80 04 3c     lui        a0,0x8014
         80059eec 50 cb 82 a0     sb         v0,-0x34b0(a0)
-        80059ef0 70 1a 04 0c     jal        0x801069c0  //  FUN_801069c0                                   
+        80059ef0 70 1a 04 0c     jal        0x801069c0  //  FUN_801069c0(a0)                                   
         80059ef4 21 20 02 00     _move      a0,v0
-        80059ef8 be 18 04 0c     jal        0x801062f8  //  FUN_801062f8                                
+        80059ef8 be 18 04 0c     jal        0x801062f8  //  FUN_801062f8(a0)                                
         80059efc ff 00 04 24     _li        a0,0xff
         80059f00 02 00 a4 83     lb         a0,0x2(sp)
         80059f04 21 30 00 00     clear      a2
-        80059f08 46 d8 02 0c     jal        0x800b6118  //  FUN_800b6118                                 
+        80059f08 46 d8 02 0c     jal        0x800b6118  //  FUN_800b6118(a0, a1, a2)                                 
         80059f0c 21 28 00 00     _clear     a1
         80059f10 08 00 a3 8f     lw         v1,0x8(sp)
         80059f14 13 80 02 3c     lui        v0,0x8013
@@ -226,12 +226,12 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059f44 13 80 02 3c     lui        v0,0x8013
         80059f48 b4 ce 42 24     addiu      v0,v0,-0x314c
         80059f4c 21 28 45 00     addu       a1,v0,a1
-        80059f50 93 44 02 0c     jal        0x8009124c  // memcpy                                        
+        80059f50 93 44 02 0c     jal        0x8009124c  // memcpy(a0, a1, a2)                                        
         80059f54 0e 00 06 24     _li        a2,0xe
         80059f58 08 00 a4 8f     lw         a0,0x8(sp)
         80059f5c 00 00 00 00     nop
                              LAB_80059f60                                     
-        80059f60 9f 44 02 0c     jal        0x8009127c  // rand                                             
+        80059f60 9f 44 02 0c     jal        0x8009127c  // rand()                                             
         80059f64 00 00 00 00     _nop
         80059f68 1c 00 bf 8f     lw         ra,0x1c(sp)
         80059f6c 00 00 00 00     nop
@@ -294,12 +294,12 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
                              LAB_8005a028                                   
         8005a028 05 00 40 14     bne        v0,zero,0x8005a040  // LAB_8005a040
         8005a02c 00 00 00 00     _nop
-        8005a030 03 33 04 0c     jal        0x8010cc0c   // SetTextColor                                 
+        8005a030 03 33 04 0c     jal        0x8010cc0c   // SetTextColor(a0)                                 
         8005a034 07 00 04 24     _li        a0,0x7
         8005a038 04 00 00 10     b          0x8005a04c  // LAB_8005a04c
         8005a03c 21 10 b1 03     _addu      v0,sp,s1
                              LAB_8005a040                                   
-        8005a040 03 33 04 0c     jal        0x8010cc0c   // SetTextColor                                  
+        8005a040 03 33 04 0c     jal        0x8010cc0c   // SetTextColor(a0)                                  
         8005a044 01 00 04 24     _li        a0,0x1
         8005a048 21 10 b1 03     addu       v0,sp,s1
                              LAB_8005a04c                                    
@@ -314,7 +314,7 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         8005a06c 80 10 02 00     sll        v0,v0,0x2
         8005a070 20 10 50 00     add        v0,v0,s0
         8005a074 20 00 64 8c     lw         a0,0x20(v1)
-        8005a078 c9 33 04 0c     jal        0x8010cf24   // RenderString                                   
+        8005a078 c9 33 04 0c     jal        0x8010cf24   // RenderString(a0, a1, a2)                                   
         8005a07c 01 00 46 20     _addi      a2,v0,0x1
         8005a080 01 00 22 22     addi       v0,s1,0x1
         8005a084 21 10 a2 03     addu       v0,sp,v0

@@ -82,12 +82,12 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
                              LAB_80059f0c                                    
         80059f0c 05 00 40 14     bne        v0,zero,LAB_80059f24
         80059f10 00 00 00 00     _nop
-        80059f14 03 33 04 0c     jal        0x8010cc0c   // SetTextColor                                     
+        80059f14 03 33 04 0c     jal        0x8010cc0c   // SetTextColor(a0)                                     
         80059f18 07 00 04 24     _li        a0,0x7
         80059f1c 04 00 00 10     b          LAB_80059f30
         80059f20 21 10 b1 03     _addu      v0,sp,s1
                              LAB_80059f24                                    
-        80059f24 03 33 04 0c     jal        0x8010cc0c   // SetTextColor                                    
+        80059f24 03 33 04 0c     jal        0x8010cc0c   // SetTextColor(a0)                                    
         80059f28 01 00 04 24     _li        a0,0x1
         80059f2c 21 10 b1 03     addu       v0,sp,s1
                              LAB_80059f30                                   
@@ -102,7 +102,7 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
         80059f50 80 10 02 00     sll        v0,v0,0x2
         80059f54 20 10 50 00     add        v0,v0,s0
         80059f58 20 00 64 8c     lw         a0,0x20(v1)
-        80059f5c c9 33 04 0c     jal        0x8010cf24  // RenderString                                   
+        80059f5c c9 33 04 0c     jal        0x8010cf24  // RenderString(a0, a1, a2)                                   
         80059f60 01 00 46 20     _addi      a2,v0,0x1
         80059f64 01 00 22 22     addi       v0,s1,0x1
         80059f68 21 10 a2 03     addu       v0,sp,v0

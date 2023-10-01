@@ -240,7 +240,7 @@ Disassembly:
         800a74f0 64 00 04 24     _li        a0,0x64
         800a74f4 00 8c 02 00     sll        s1,v0,0x10
         800a74f8 03 8c 11 00     sra        s1,s1,0x10
-        800a74fc b5 8d 02 0c     jal        RandomValue                           
+        800a74fc b5 8d 02 0c     jal        RandomValue(a0)                           
         800a7500 0a 00 04 24     _li        a0,0xa
         800a7504 14 80 01 3c     lui        at,0x8014
         800a7508 88 84 23 84     lh         v1,-0x7b78(at)                    

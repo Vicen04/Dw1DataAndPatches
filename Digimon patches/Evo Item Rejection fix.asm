@@ -25,6 +25,8 @@ int HandleItemRejection(void)
 
 Disassembly:
 
+        Offset       Hex         Commands
+
 Original:
         800a748c 08 00 82 10     beq        a0,v0,0x800a74b0
         800a7490 21 18 40 00     _move      v1,v0
