@@ -1,8 +1,8 @@
-This is a file that shows the changes made to the "forget moves" function from the game to fix the error caused after the game chooses which moves should be forgotten. The error can 
-The error was caused by the game having the wrong calculations, it changed a lot more data than the intended.
+This is a file that shows the changes made to the "forget moves" function from the game to fix the error caused after the game chooses which moves should be forgotten.
+The error was caused by the game having the wrong calculations, it changed a lot more data than the intended, which in turn, deletes more moves than intended
 This fix fully changes the old function with brand new code to be similar to the "learn  move" function, but making the game forget rather than learn a move.
 
-old:
+Original:
 
 void ForgetMovesAfterAllLivesLost(uint moveID)
 
@@ -44,7 +44,7 @@ void ForgetMovesAfterAllLivesLost(uint moveID)
   } while( true );
 }
 
-new:
+Changed:
 // similar to the learn moves code
 void ForgetMovesAfterAllLivesLost(uint moveID)
 
@@ -74,7 +74,7 @@ void ForgetMovesAfterAllLivesLost(uint moveID)
 
 Disassembly:
 
-Old:
+Original:
 
         Offset      Hex               Commands
 
@@ -158,7 +158,7 @@ Old:
         800e67e8 18 00 bd 27     _addiu     sp,sp,0x18
 
 
-New:
+Changed:
                    
         800e66e0 e8 ff bd 27     addiu      sp,sp,-0x18
         800e66e4 10 00 bf af     sw         ra,0x10(sp)
