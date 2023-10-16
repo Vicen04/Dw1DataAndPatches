@@ -1,6 +1,6 @@
 The game has a list for each movement, that checks if a digimon is able to perform the move in combat or not. If the list lacks the digimon, the digimon will only perform the animation, but not the movement due to how the code works.
 
-Each movement uses 5 bytes and are used like this (using the first value of fire tower):
+Each movement uses 10 bytes and are used like this (using the first value of fire tower):
 
 11 Digimon value (used to check if a digimon can use the move or not)
 00 Digimon bone to spawn at (changes depending on the attack, can also use either the partner or the opponent bones depending on the attack)
@@ -9,6 +9,8 @@ Each movement uses 5 bytes and are used like this (using the first value of fire
 00 position Z relative to the bone
 
 Link with an easier to read list: https://docs.google.com/spreadsheets/d/1vHHa8ynxtnFuwiQst09I0L4jDMKb8ZLdyxXYkoMi_UA/edit?usp=sharing
+
+14D6BEB6 list with digimon values used for each move list, it uses 2 bytes for each value; if the value is "FF FF" it will use its own value.
 
 Here are the offsets for each list (based on the NTSC-U version):
 
