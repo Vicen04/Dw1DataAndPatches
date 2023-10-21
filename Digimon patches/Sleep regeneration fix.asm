@@ -8,7 +8,7 @@ CurrentHour = (int)_CurrentHourMemory;
     HoursSleep = WakeUpHour - CurrentHour;
   }
   else {
-    HoursSleep = 24 - CurrentHour;
+    HoursSleep = 24 - CurrentHour + WakeUpHour;
   }
 //code ignored
 }
@@ -18,10 +18,10 @@ void SleepRegen(void)
 {
 CurrentHour = (int)_CurrentHourMemory;
   if (CurrentHour - WakeUpHour < 1) { //This does take into account if the time is 0, so it will stay in this option
-    HoursSleep = WakeUpHour - CurrentHour;
+    HoursSleep = WakeUpHour - CurrentHour ;
   }
   else {
-    HoursSleep = 24 - CurrentHour;
+    HoursSleep = 24 - CurrentHour + WakeUpHour;
   }
 //code ignored
 }
