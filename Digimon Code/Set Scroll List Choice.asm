@@ -2,20 +2,22 @@
 
 //This function is the cause of the famous Giromon's jukebox bug
 
-Ptr* SetChoiceScrollListTextBox(Ptr*param_1,int CharLimit,int CharAmount)
+Ptr* SetChoiceScrollListTextBox(Ptr* currentTextOffset,int CharLimit,int CharAmount)
 
 {
   undefined *puVar1;
   int iVar2;
   
-  for (iVar2 = CharLimit - (CharAmount / 2); iVar2 != 0; iVar2 = iVar2 + -1) //If by any chance the Character amount is more than the double of the Character limit, this function will break and it will start writing 0x40 into memory until it loops back to 0 due to an overflow
+  for (iVar2 = CharLimit - (CharAmount / 2);
+       iVar2 != 0; 
+       iVar2 = iVar2 + -1) //If by any chance the Character amount is more than the double of the Character limit, this function will break and it will start writing 0x40 into memory until it loops back to 0 due to an overflow
   {
-    *param_1 = 0x81;
-    puVar1 = param_1 + 1;
-    param_1 = param_1 + 2;
-    *puVar1 = 0x40;
+    *currentTextOffset = 0x81; // Writes in the first byte, the first part of a character
+    puVar1 = currentTextOffset + 1;
+    currentTextOffset = currentTextOffset + 2;
+    *puVar1 = 0x40; // Writes in the second byte, the second part of a character, this character is represented as an empty space in the text
   }
-  return param_1;
+  return currentTextOffset;
 }
 
 Disassembly:
