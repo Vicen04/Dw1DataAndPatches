@@ -353,6 +353,7 @@ Model pointers:
 14D5C480 00 00 00 00 to C0 CB 11 80 from no data to Machinedramon Model pointer (only for Machinedramon)
 
 
+//The maeson version may use different data for the next 3 sections
 
 Stat gains:
 
