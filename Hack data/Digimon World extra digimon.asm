@@ -146,7 +146,7 @@ Changed:
         800a2830 3e 00 01 24     li         at,0x3e
         800a2834 02 00 24 14     bne        at,a0,0x800a2840
         800a2838 21 80 04 00     _move      s0,a0
-        800a283c 73 00 10 24     li         s0,0x73
+        800a283c 73 00 10 24     li         s0,0x73         //this is the command that can be changed
                              LAB_800a2840                                  
         800a2840 04 00 00 06     bltz       s0,0x800a2854
         800a2844 21 90 07 00     _move      s2,a3
@@ -223,12 +223,12 @@ Changed:
 int * LoadDigimonModel(int DigimonToLoad,int param_2)
 
 {
-  if (a1 == 1) 
+  if (param_2 == 1) 
     piVar1 = 0;
   
   else if ((DigimonToLoad < 0) || (179 < DigimonToLoad))   
     piVar1 = 0;  
-  else if (a1 == 0)
+  else if (param_2 == 0)
   {
    // code ignored
   }
@@ -246,14 +246,14 @@ int * LoadDigimonModel(int DigimonToLoad,int param_2)
 
   
   piVar1 = 0;
-  if (a1 != 1) 
+  if (param_2 != 1) 
   {
     if (DigimonToLoad == 62) //Added this, I had to change how the code looks to manage it in a few lines
       DigimonToLoad = 115; //You can change this to any digimon of your preference
     
     if ((-1 < DigimonToLoad) && (DigimonToLoad < 180)) 
     {
-      if (a1 == 0) 
+      if (param_2 == 0) 
       {
        //code ignored
       }
@@ -319,7 +319,7 @@ Changed:
         800a1f88 3e 00 01 24     li         at,0x3e
         800a1f8c 02 00 24 14     bne        at,a0,0x800a1f98
         800a1f90 21 88 04 00     _move      s1,a0
-        800a1f94 73 00 11 24     li         s1,0x73
+        800a1f94 73 00 11 24     li         s1,0x73          //this is the command that can be changed
                              LAB_800a1f98                                    
         800a1f98 10 01 20 06     bltz       s1,0x800a23dc
         800a1f9c 00 00 00 00     _nop
