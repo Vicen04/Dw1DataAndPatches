@@ -11,13 +11,9 @@ Check the wiki for more detailed information: https://github.com/Vicen04/Dw1Data
 
 Update: 
 
-All of the patches that fix/improve code from the original game that are included in either my hack or Maeson's hack have been uploaded. The only part left is the code that adds/expands stuff. Which is going to be divided in two parts:
+There's only left to upload the following:
 
-1. Add an extra playable digimon
-2. Evolution an other miscellaneous changes
+* Evolution an other miscellaneous changes
 
-Update 2:
-
-"Add an extra playable digimon" has been uploaded, there's a short wiki page too. I have created new code that has to be added to the repository yet, it will be included in the hack and probably the Maeson version will add it too.
 
 Once this is done. I'll upload my hack here.
