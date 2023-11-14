@@ -596,7 +596,7 @@ SkullGreymon:
 
 MetalMamemon:
 
-14D62C23 MovementBoostID: 1B (27, Delete Program)
+14D62C23 MovementBoostID: 1B (27, Pulse Laser)
 14D62C26 MovementBoostValue: D3 00 (211)
 
 Vademon:
