@@ -519,7 +519,7 @@ Numemon:
 
 MetalGreymon:
 
-14D6294F MovementBoostID: 18 (24, Delete Program)
+14D6294F MovementBoostID: 18 (24, Power Crane)
 14D62952 MovementBoostValue: 12 01 (274)
 
 Mamemon:
