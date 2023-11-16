@@ -8,8 +8,6 @@ Original:
 int * LoadDigimonModelExtra(int DigimonValue,int param_2,uchar **param_3)
 
 {
- 
-  
   if ((param_1 < 0) || (0xb3 < param_1)) 
     unaff_s0 = (int *)0x0;
   
@@ -24,8 +22,10 @@ int * LoadDigimonModelExtra(int DigimonValue,int param_2,uchar **param_3)
   }
   return unaff_s0;
 }
-int * LoadDigimonModelExtra(int DigimonValue,int param_2,uchar **param_3)
 
+Changed:
+
+int * LoadDigimonModelExtra(int DigimonValue,int param_2,uchar **param_3)
 {
   
   if (((DigimonValue < 0) || (0xb3 < DigimonValue)) || (param_2 == 0))  //now (param_2 == 0) just returns 0, that section of he code was never used anyway
@@ -46,7 +46,7 @@ Disassembly:
 
 Original:
         800a2a64 21 88 80 00     move       s1,a0
-        800a2a68 04 00 20 06     bltz       s1,LAB_800a2a7c
+        800a2a68 04 00 20 06     bltz       s1,0x800a2a7c
         800a2a6c 21 90 c0 00     _move      s2,a2
         800a2a70 b4 00 21 2a     slti       at,s1,0xb4
         800a2a74 03 00 20 14     bne        at,zero,0x800a2a84
@@ -81,9 +81,9 @@ int * CalculateMovementDamage(int DigimonPointer,int *DigimonID,int MoveID)
  iVar3 = *(DigimonID + 58); //Get the opponent defense
 
   if (MoveID == 45) // if the move is counter
-    iVar3 = ((iVar3 * 3) / 10); Reduce the defense a 70%
+    iVar3 = ((iVar3 * 3) / 10) // Reduce the defense a 70%
   
-  if ((MoveID < 58) || (0x70 < MoveID)) //check if it is a normal move
+  if ((MoveID < 58) || (0x70 < MoveID)); //check if it is a normal move
   {
     iVar3 = *(DigimonPointer + 56) - iVar3;
     if (500 < iVar3) {
@@ -98,12 +98,7 @@ int * CalculateMovementDamage(int DigimonPointer,int *DigimonID,int MoveID)
     puVar7 = (((((Type1Effectivity + Type2Effectivity + Type3Effectivity) *
                      (uVar6 + (iVar3 * uVar6) / 500)) / 30) * (iVar5 + 90)) / 100);
   }
-  else  //finisher
-  {
-    iVar5 = Type1Effectivity + Type2Effectivity + Type3Effectivity; //Add the effectivity of each type
-    iVar3 = MoveDamage[MoveID]; //Get the damage of the move
-    puVar7 = (undefined *)((iVar3 * iVar5) / 30);
-  }
+ //code ignored
  
   return puVar7;
 }
@@ -132,31 +127,18 @@ int * CalculateMovementDamage(int DigimonPointer,int *DigimonID,int MoveID)
 
     iVar5 = ReturnRandom(21);
 
-// Start of AddMove2
+// Start of AddMove
     uVar6 = MoveDamage[MoveID]; //Get the damage of the move
 
     if ((DigimonPointer == EntityPtr) && (MoveID == (&MovementBoostID)[*EntityPtr * 0x1c])) // check if the tech has a boost, this was added
        uVar6 = uVar6 + (&MovementBoostValue)[*EntityPtr * 0xe];
 
-//End of AddMove2
+//End of AddMove
 
     puVar7 = (((((Type1Effectivity + Type2Effectivity + Type3Effectivity) * 
              (uVar6 + (iVar3 * uVar6) / 500)) / 30) * (iVar5 + 90)) / 100);
   }
-  else  //finisher
-  {
-    iVar5 = Type1Effectivity + Type2Effectivity + Type3Effectivity; //Add the effectivity of each type
 
-//Start of AddMove1
-    iVar3 = MoveDamage[MoveID]; //Get the damage of the move
-
-    if ((DigimonPointer == EntityPtr) && (MoveID == (&MovementBoostID)[*EntityPtr * 0x1c])) // check if the tech has a boost, added too
-       iVar3 = iVar3 + (&MovementBoostValue)[*EntityPtr * 0xe];
-  
-//End of AddMove1
-
-    puVar7 = (undefined *)((iVar3 * iVar5) / 30);
-  }
   //code ignored
 
   return puVar7;
@@ -178,103 +160,39 @@ Original:
 
 Changed:
 
-        8005c060 bf 8a 02 0c     jal        0x800a2afc  //AddMove2                               
+        8005c060 a3 8a 02 0c     jal        0x800a2a8c  //AddMove                              
         8005c064 00 00 00 00     _nop
 
 
  
-                             AddMove2                                 
-        800a2afc f0 ff bd 27     addiu      sp,sp,-0x10
-        800a2b00 00 00 00 00     nop
-        800a2b04 21 18 73 00     addu       v1,v1,s3
-        800a2b08 00 00 66 84     lh         a2,0x0(v1) //MoveDamage
-        800a2b0c 00 00 00 00     nop
-        800a2b10 13 80 01 3c     lui        at,0x8013
-        800a2b14 48 f3 21 8c     lw         at,-0xcb8(at)  //EntityPtr
-        800a2b18 00 00 00 00     nop
-        800a2b1c 11 00 41 16     bne        s2,at,0x800a2b64
-        800a2b20 00 00 00 00     _nop
-        800a2b24 00 00 23 8c     lw         v1,0x0(at)  //EntityID
-        800a2b28 00 00 00 00     nop
-        800a2b2c 00 00 00 00     nop
-        800a2b30 00 00 00 00     nop
-        800a2b34 c0 08 03 00     sll        at,v1,0x3
-        800a2b38 22 08 23 00     sub        at,at,v1
-        800a2b3c 80 18 01 00     sll        v1,at,0x2
-        800a2b40 12 80 01 3c     lui        at,0x8012
-        800a2b44 c7 25 21 24     addiu      at,at,0x25c7
-        800a2b48 21 08 23 00     addu       at,at,v1
-        800a2b4c 00 00 23 80     lb         v1,0x0(at) //MovementBoostID
-        800a2b50 04 00 03 16     bne        s0,v1,LAB_800a2b64
-        800a2b54 00 00 00 00     _nop
-        800a2b58 03 00 23 84     lh         v1,0x3(at)  //MovementBoostValue
-        800a2b5c 00 00 00 00     nop
-        800a2b60 20 30 c3 00     add        a2,a2,v1
-                             LAB_800a2b64                                   
-        800a2b64 00 00 00 00     nop
-        800a2b68 08 00 e0 03     jr         ra
-        800a2b6c 10 00 bd 27     _addiu     sp,sp,0x10
-
-
-
-        8005bff0 a3 8a 02 0c     jal        0x800a2a8c  //AddMove1                                     
-        8005bff4 00 00 00 00     _nop
-        8005bff8 00 00 00 00     nop
-
-                           
-                             AddMove1                                   
+                               AddMove                                 
         800a2a8c f0 ff bd 27     addiu      sp,sp,-0x10
         800a2a90 00 00 00 00     nop
-        800a2a94 00 00 63 84     lh         v1,0x0(v1) //MoveDamage
-        800a2a98 00 00 00 00     nop
-        800a2a9c 13 80 01 3c     lui        at,0x8013
-        800a2aa0 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
-        800a2aa4 20 10 43 00     add        v0,v0,v1
-        800a2aa8 11 00 41 16     bne        s2,at,0x800a2af0
-        800a2aac 00 00 00 00     _nop
-        800a2ab0 00 00 23 8c     lw         v1,0x0(at) //EntityID
-        800a2ab4 00 00 00 00     nop
+        800a2a94 21 18 73 00     addu       v1,v1,s3
+        800a2a98 00 00 66 84     lh         a2,0x0(v1) //MoveDamage
+        800a2a9c 00 00 00 00     nop
+        800a2aa0 13 80 01 3c     lui        at,0x8013
+        800a2aa4 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
+        800a2aa8 00 00 00 00     nop
+        800a2aac 0f 00 41 16     bne        s2,at,0x800a2aec
+        800a2ab0 00 00 00 00     _nop
+        800a2ab4 00 00 23 8c     lw         v1,0x0(at)
         800a2ab8 00 00 00 00     nop
-        800a2abc 00 00 00 00     nop
-        800a2ac0 c0 08 03 00     sll        at,v1,0x3
-        800a2ac4 22 08 23 00     sub        at,at,v1
-        800a2ac8 80 18 01 00     sll        v1,at,0x2
-        800a2acc 12 80 01 3c     lui        at,0x8012
-        800a2ad0 c7 25 21 24     addiu      at,at,0x25c7
-        800a2ad4 21 08 23 00     addu       at,at,v1
-        800a2ad8 00 00 23 80     lb         v1,0x0(at) //MovementBoostID
-        800a2adc 04 00 03 16     bne        s0,v1,0x800a2af0
-        800a2ae0 00 00 00 00     _nop
-        800a2ae4 03 00 23 84     lh         v1,0x3(at) //MovementBoostValue
-        800a2ae8 00 00 00 00     nop
-        800a2aec 20 10 43 00     add        v0,v0,v1
-                             LAB_800a2af0                                   
-        800a2af0 00 00 00 00     nop
-        800a2af4 08 00 e0 03     jr         ra
-        800a2af8 10 00 bd 27     _addiu     sp,sp,0x10
-
-//This is just filler not used yet
-        800a2b70 00 00 00 00     nop
-        800a2b74 00 00 00 00     nop
-        800a2b78 00 00 00 00     nop
-        800a2b7c 00 00 00 00     nop
-        800a2b80 00 00 00 00     nop
-        800a2b84 00 00 00 00     nop
-        800a2b88 00 00 00 00     nop
-        800a2b8c 00 00 00 00     nop
-        800a2b90 00 00 00 00     nop
-        800a2b94 00 00 00 00     nop
-        800a2b98 00 00 00 00     nop
-        800a2b9c 00 00 00 00     nop
-        800a2ba0 00 00 00 00     nop
-        800a2ba4 00 00 00 00     nop
-        800a2ba8 00 00 00 00     nop
-        800a2bac 00 00 00 00     nop
-        800a2bb0 00 00 00 00     nop
-        800a2bb4 00 00 00 00     nop
-        800a2bb8 00 00 00 00     nop
-        800a2bbc 00 00 00 00     nop
-        800a2bc0 00 00 00 00     nop
+        800a2abc c0 08 03 00     sll        at,v1,0x3
+        800a2ac0 22 08 23 00     sub        at,at,v1
+        800a2ac4 80 18 01 00     sll        v1,at,0x2
+        800a2ac8 12 80 01 3c     lui        at,0x8012
+        800a2acc c7 25 21 24     addiu      at,at,0x25c7
+        800a2ad0 21 08 23 00     addu       at,at,v1
+        800a2ad4 00 00 23 80     lb         v1,0x0(at) //TempMovementBoostID
+        800a2ad8 04 00 03 16     bne        s0,v1,0x800a2aec
+        800a2adc 00 00 00 00     _nop
+        800a2ae0 03 00 23 84     lh         v1,0x3(at) //TempMovementBoostValue
+        800a2ae4 00 00 00 00     nop
+        800a2ae8 20 30 c3 00     add        a2,a2,v1		
+		                     LAB_800a2aec                            
+        800a2aec 08 00 e0 03     jr         ra
+        800a2af0 10 00 bd 27     _addiu     sp,sp,0x10
 
 
 
@@ -325,43 +243,43 @@ Original:
 
 Changed:
 
-        800bc434 f1 8a 02 08     j          0x800a2bc4
+        800bc434 bd 8a 02 08     j          0x800a2af4
         800bc438 00 00 00 00     _nop
+                                
+                             LAB_800a2af4                                  
+        800a2af4 04 00 02 86     lh         v0,0x4(s0) //MovementDamage  
+        800a2af8 00 00 00 00     nop
+        800a2afc 13 80 01 3c     lui        at,0x8013
+        800a2b00 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
+        800a2b04 00 00 00 00     nop
+        800a2b08 00 00 24 8c     lw         a0,0x0(at) //EntityValue
+        800a2b0c 00 00 00 00     nop
+        800a2b10 c0 08 04 00     sll        at,a0,0x3
+        800a2b14 22 08 24 00     sub        at,at,a0
+        800a2b18 80 20 01 00     sll        a0,at,0x2
+        800a2b1c 12 80 01 3c     lui        at,0x8012
+        800a2b20 c7 25 21 24     addiu      at,at,0x25c7
+        800a2b24 21 08 24 00     addu       at,at,a0
+        800a2b28 00 00 24 80     lb         a0,0x0(at) //TempMovementBoostID
+        800a2b2c 00 00 00 00     nop
+        800a2b30 08 87 85 27     addiu      a1,gp,-0x78f8
+        800a2b34 21 28 b3 00     addu       a1,a1,s3
+        800a2b38 00 00 a5 90     lbu        a1,0x0(a1) //Tech choosen
+        800a2b3c 00 00 00 00     nop
+        800a2b40 07 00 85 14     bne        a0,a1,0x800a2b60
+        800a2b44 00 00 00 00     _nop
+        800a2b48 03 00 24 84     lh         a0,0x3(at) //TempMovementBoostValue
+        800a2b4c 00 00 00 00     nop
+        800a2b50 21 10 44 00     addu       v0,v0,a0
+        800a2b54 07 00 04 24     li         a0,0x7
+        800a2b58 02 00 00 10     b          0x800a2b64
+        800a2b5c 00 00 00 00     _nop
+                             LAB_800a2b60                                    
+        800a2b60 21 20 00 00     clear      a0
+                             LAB_800a2b64                                  
+        800a2b64 0f f1 02 08     j          0x800bc43c
+        800a2b68 00 00 00 00     _nop
 
-                             LAB_800a2bc4                                   
-        800a2bc4 04 00 02 86     lh         v0,0x4(s0)  //MovementDamage                     
-        800a2bc8 00 00 00 00     nop
-        800a2bcc 13 80 01 3c     lui        at,0x8013
-        800a2bd0 48 f3 21 8c     lw         at,-0xcb8(at)  //EntityPtr
-        800a2bd4 00 00 00 00     nop
-        800a2bd8 00 00 24 8c     lw         a0,0x0(at)
-        800a2bdc 00 00 00 00     nop
-        800a2be0 c0 08 04 00     sll        at,a0,0x3
-        800a2be4 22 08 24 00     sub        at,at,a0
-        800a2be8 80 20 01 00     sll        a0,at,0x2
-        800a2bec 12 80 01 3c     lui        at,0x8012
-        800a2bf0 c7 25 21 24     addiu      at,at,0x25c7
-        800a2bf4 21 08 24 00     addu       at,at,a0
-        800a2bf8 00 00 24 80     lb         a0,0x0(at)  //MovementBoostID
-        800a2bfc 00 00 00 00     nop
-        800a2c00 08 87 85 27     addiu      a1,gp,-0x78f8
-        800a2c04 21 28 b3 00     addu       a1,a1,s3
-        800a2c08 00 00 a5 90     lbu        a1,0x0(a1) //TechChoosen
-        800a2c0c 00 00 00 00     nop
-        800a2c10 07 00 85 14     bne        a0,a1,0x800a2c30
-        800a2c14 00 00 00 00     _nop
-        800a2c18 03 00 24 84     lh         a0,0x3(at)  //MovementBoostValue
-        800a2c1c 00 00 00 00     nop
-        800a2c20 21 10 44 00     addu       v0,v0,a0
-        800a2c24 07 00 04 24     li         a0,0x7     //colour, Meason has a 0x10 here
-        800a2c28 02 00 00 10     b          0x800a2c34
-        800a2c2c 00 00 00 00     _nop
-                             LAB_800a2c30                                   
-        800a2c30 21 20 00 00     clear      a0
-                             LAB_800a2c34                                   
-        800a2c34 00 00 00 00     nop
-        800a2c38 0f f1 02 08     j          0x800bc43c
-        800a2c3c 00 00 00 00     _nop
 
 
 
@@ -415,42 +333,36 @@ Original:
 
 Changed:
 
-        800bfac0 10 8b 02 08     j          0x800a2c40
+        800bfac0 db 8a 02 08     j          0x800a2b6c
         800bfac4 00 00 00 00     _nop
 
-                             LAB_800a2c40                                  
-        800a2c40 04 00 22 86     lh         v0,0x4(s1) //MovementDamage 
-        800a2c44 00 00 00 00     nop
-        800a2c48 13 80 01 3c     lui        at,0x8013
-        800a2c4c 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPointer
-        800a2c50 21 20 00 00     clear      a0
-        800a2c54 00 00 25 8c     lw         a1,0x0(at) //EntityID
-        800a2c58 00 00 00 00     nop
-        800a2c5c c0 08 05 00     sll        at,a1,0x3
-        800a2c60 22 08 25 00     sub        at,at,a1
-        800a2c64 80 28 01 00     sll        a1,at,0x2
-        800a2c68 12 80 01 3c     lui        at,0x8012
-        800a2c6c c7 25 21 24     addiu      at,at,0x25c7
-        800a2c70 21 08 25 00     addu       at,at,a1
-        800a2c74 00 00 25 80     lb         a1,0x0(at) //MovementBoostID
-        800a2c78 00 00 00 00     nop
-        800a2c7c 06 00 05 16     bne        s0,a1,0x800a2c98
-        800a2c80 00 00 00 00     _nop
-        800a2c84 07 00 04 24     li         a0,0x7  //colour, maeson has a 0x10 here
-        800a2c88 00 00 00 00     nop
-        800a2c8c 03 00 25 84     lh         a1,0x3(at) //MovementBoostValue
-        800a2c90 00 00 00 00     nop
-        800a2c94 20 10 45 00     add        v0,v0,a1
-                             LAB_800a2c98                                   
-        800a2c98 9c ff 65 22     addi       a1,s3,-0x64
-        800a2c9c 00 00 00 00     nop
-        800a2ca0 b2 fe 02 08     j          0x800bfac8
-        800a2ca4 00 00 00 00     _nop
+                             LAB_800a2b6c                                    
+        800a2b6c 04 00 22 86     lh         v0,0x4(s1) //MovementDamage  
+        800a2b70 00 00 00 00     nop
+        800a2b74 13 80 01 3c     lui        at,0x8013
+        800a2b78 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
+        800a2b7c 21 20 00 00     clear      a0
+        800a2b80 00 00 25 8c     lw         a1,0x0(at) //Entity Value
+        800a2b84 00 00 00 00     nop
+        800a2b88 c0 08 05 00     sll        at,a1,0x3
+        800a2b8c 22 08 25 00     sub        at,at,a1
+        800a2b90 80 28 01 00     sll        a1,at,0x2
+        800a2b94 12 80 01 3c     lui        at,0x8012
+        800a2b98 c7 25 21 24     addiu      at,at,0x25c7
+        800a2b9c 21 08 25 00     addu       at,at,a1
+        800a2ba0 00 00 25 80     lb         a1,0x0(at) //TempMovementBoostID
+        800a2ba4 00 00 00 00     nop
+        800a2ba8 06 00 05 16     bne        s0,a1,0x800a2bc4
+        800a2bac 00 00 00 00     _nop
+        800a2bb0 07 00 04 24     li         a0,0x7
+        800a2bb4 00 00 00 00     nop
+        800a2bb8 03 00 25 84     lh         a1,0x3(at) //TempMovementBoostValue
+        800a2bbc 00 00 00 00     nop
+        800a2bc0 20 10 45 00     add        v0,v0,a1
+                             LAB_800a2bc4                                     
+        800a2bc4 9c ff 65 22     addi       a1,s3,-0x64
+        800a2bc8 b2 fe 02 08     j          0x800bfac8
 
-//Some filler
-        800a2ca8 00 00 00 00     nop
-        800a2cac 00 00 00 00     nop
-        800a2cb0 00 00 00 00     nop
 
 
 This works by reading data that is never used inside the raise data, here are my modifications (Maeson may have different data here):
