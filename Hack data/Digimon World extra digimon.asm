@@ -462,6 +462,10 @@ Changed:
 14D6F8F7 Techniques: 2E 0B 08 16 19 6A 1E 07 FF FF FF FF FF FF FF FF  (this is different from the original Machinedramon)
 
 
+Meltdown move list:
+111D828 A5 to 73
+
+
 Enable the use of Machinedramon moves:
 14D6BF30 FF FF to 73 00  (can be changed)
 
