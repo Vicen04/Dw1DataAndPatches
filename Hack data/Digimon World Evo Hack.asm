@@ -1792,7 +1792,12 @@ HandleItemRejection()
 if (((69 < ItemBeingFeed) && (ItemBeingFeed < 115)) ||...  //check if this is an evo item
                            
 
-// code ignored                              
+// code ignored         
+
+if (digimonTargetLevel == 3) //only the chain melon has this level
+    digimonTargetLevel = 5;  //use an Ultimate level
+
+// code ignored                     
 }
 
 
@@ -1820,6 +1825,18 @@ Disassembly:
 
          Offset       Hex         Command     
         800a7350 46 00 01 2a     slti       at,s0,0x46
+		
+		800a748c 03 00 01 24     li         at,0x3
+        800a7490 02 00 22 14     bne        at,v0,0x800a749c
+        800a7494 00 00 00 00     _nop
+        800a7498 02 00 42 20     addi       v0,v0,0x2
+                             LAB_800a749c                                   
+        800a749c 01 00 84 24     addiu      a0,a0,0x1
+        800a74a0 05 00 44 10     beq        v0,a0,0x800a74b8
+        800a74a4 00 00 00 00     _nop
+        800a74a8 00 00 00 00     nop
+        800a74ac 00 00 00 00     nop
+
 
 
                                HandleFood
