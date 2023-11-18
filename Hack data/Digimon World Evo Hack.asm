@@ -1867,7 +1867,7 @@ Disassembly:
 14D68CE8 Chain Melon pointer change: 6C 39 0C 80 to 60 38 0C 80 //this makes it call the evo item function rather than the food function
 
 
-//Improved lifetime when evolving to ultimate
+//Improved lifetime when evolving to ultimate (Exclusive to my hack)
 //Check the repository for the original code
 void EvolutionCode(int entityPtr,short *StatsPtr,int DigimonDataPtr,int targetDigimon) // Used to get and set the new digimon data during the evolution
 {
@@ -1886,6 +1886,41 @@ Disassembly:
 					   
          Offset       Hex         Command   
         800637d4 C0 00 42 20     addi       v0,v0,0xC0
+
+
+
+
+//Change exclusive to the Maeson hack, this was the first code change I made
+//Check SydMontague repository for the original code
+uint CalculateRequirementScoreEvo(int DigimonType,int TargetDigimon,bool isMaxCareMistakes,bool isMaxBattles,char bestDigimon)
+{
+
+if ((BattlesRequired != -1) && (Battles <= BattlesRequired) && (BattlesRequired - 3 <= Battles) //this transform the battles into a range
+     extraFlag = 1;
+}
+
+
+                    CalculateRequirementScoreEvo
+					   
+         Offset       Hex         Command   		
+				
+Changed:
+
+        800e2a78 00 00 00 00     nop
+        800e2a7c 00 00 00 00     nop
+        800e2a80 54 00 62 84     lh         v0,0x54(v1) //Battles                           
+        800e2a84 00 00 00 00     nop
+        800e2a88 2a 08 82 00     slt        at,a0,v0
+        800e2a8c 09 00 20 14     bne        at,zero,0x800e2ab4
+        800e2a90 00 00 00 00     _nop
+        800e2a94 fd ff 87 20     addi       a3,a0,-0x3
+        800e2a98 2a 08 47 00     slt        at,v0,a3                               
+        800e2a9c 05 00 20 14     bne        at,zero,0x800e2ab4                          
+        800e2aa0 00 00 00 00     _nop
+        800e2aa4 00 00 00 00     nop
+        800e2aa8 00 00 00 00     nop
+        800e2aac 00 00 00 00     nop
+        800e2ab0 01 00 12 24     li         s2,0x1
 
 
 
@@ -2202,4 +2237,15 @@ Animation change:
 B6A75C Move 8 animation (Full Potential): 
 Original: 48 D9 00 00 //War Cry animation
 Changed:  5A F2 00 00 //Thunder Justice animation
+
+
+
+//Maeson exclusive miscellaneous changes
+
+These are changes in the code that were done by just modifying 1 byte, since the code was found by me, I'm including these.
+
+Since the change are small, I'll just show the offsets:
+
+14CD1CA4, 14D14A04 & 14D14E6C total lifetime of a digimon
+
 
