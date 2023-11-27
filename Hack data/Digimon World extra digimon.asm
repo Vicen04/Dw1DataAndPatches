@@ -459,8 +459,10 @@ Changed:
 14D6F8F4 Speciality 3: 01
 14D6F8F5 Item drop: 46 
 14D6F8F6 Drop chance: 00
-14D6F8F7 Techniques: 2E 0B 08 16 19 6A 1E 07 FF FF FF FF FF FF FF FF  (this is different from the original Machinedramon)
+14D6F8F7 Techniques: 2E 0B 08 16 19 6A 1E 07 FF FF FF FF FF FF FF FF  (this is different from the original Machinedramon) 
 
+//make sure to swap the original too
+14D704F0 OG Machinedramon Tech data 1E 6A to 6A 1E
 
 Meltdown move list:
 111D828 A5 to 73
@@ -502,6 +504,25 @@ DE 19 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 72 0F 00 00 62 21 00 00 00 00 00 00 00 00 00 00 
 B6 24 00 00 44 2F 00 00 0C 38 00 00 94 3F 00 00 
 F8 49 00 00 00 00 00 00 BC 51 00 00 DE 58 00 00 
-B4 60 00 00 FC 6B 00 00 14 77 00 00 66 7E 00 00 
-00 85 00 00 44 9A 00 00
+B4 60 00 00 FC 6B 00 00 14 77 00 00 00 85 00 00 //This one is swapped with the next one since the moves are in a different position than in the original game
+66 7E 00 00 44 9A 00 00
+
+
+Change the move position since the animation has changed
+
+59E5A5C Mugen 99 map machinedramon data
+
+59E5A8E 34 to 33
+
+9858822 ICSA 08 map machinedramon data
+
+9858852 33 00 34 00 to 34 00 33 00
+
+76269BC Ogre 02 map machinedramon data
+
+76269EC 33 00 34 00 to 34 00 33 00
+
+7D6A690 CHKA 01 map machinedramon data
+
+7D6A6C0 33 00 34 00 to 34 00 33 00
 
