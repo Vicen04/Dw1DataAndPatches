@@ -104,7 +104,7 @@ int StartTournament(pointer *dataOffset)
   
   for (iVar2 = 1; iVar2 < 8; iVar2 = iVar2 + 1)
   {
-    if (dataOffset[iVar2] == 62) //It will crash without this (or just not render anything) if by any chance it has choosen WereGarurumon
+    if (dataOffset[iVar2] == 62 || dataOffset[iVar2] == 0) //It will crash without this (or just not render anything) if by any chance it has choosen WereGarurumon
       dataOffset[iVar2] = 115; //Machinedramon
     
   }
@@ -158,25 +158,26 @@ Original:
 
 Changed:
         800579fc 0a 00 00 10     b          0x80057a28
-        80057a00 01 00 04 24     _li        param_1,0x1
+        80057a00 01 00 04 24     _li        a0,0x1
         80057a04 00 00 00 00     nop
                              LAB_80057a08                                   
         80057a08 21 18 a4 02     addu       v1,s5,a0
         80057a0c 00 00 62 90     lbu        v0,0x0(v1)
-        80057a10 3e 00 01 24     li         at,0x3e
-        80057a14 03 00 41 14     bne        v0,at,0x80057a24
-        80057a18 00 00 00 00     _nop
-        80057a1c 73 00 02 24     li         v0,0x73
-        80057a20 00 00 62 a0     sb         v0,0x0(v1)
-                             LAB_80057a24                                   
-        80057a24 01 00 84 20     addi       a0,a0,0x1
-                             LAB_80057a28                                  
-        80057a28 08 00 81 28     slti       at,a0,0x8
-        80057a2c f6 ff 20 14     bne        at,zero,0x80057a08
-        80057a30 00 00 00 00     _nop
-        80057a34 00 00 00 00     nop        //Just some empty commands
-        80057a38 00 00 00 00     nop
-        80057a3c 00 00 00 00     nop
+        80057a10 04 00 02 10     beq        zero,v0,0x80057a24
+        80057a14 00 00 00 00     _nop
+        80057a18 3e 00 01 24     li         at,0x3e
+        80057a1c 03 00 41 14     bne        v0,at,0x80057a2c
+        80057a20 00 00 00 00     _nop
+                             LAB_80057a24                                    
+        80057a24 73 00 02 24     li         v0,0x73
+        80057a28 00 00 62 a0     sb         v0,0x0(v1)
+                             LAB_80057a2c                                 
+        80057a2c 01 00 84 20     addi       a0,a0,0x1
+                             LAB_80057a30                                   
+        80057a30 08 00 81 28     slti       at,a0,0x8
+        80057a34 f4 ff 20 14     bne        at,zero,0x80057a08
+        80057a38 00 00 00 00     _nop
+        80057a3c 00 00 00 00     nop       //just some empty commands
         80057a40 00 00 00 00     nop
         80057a44 00 00 00 00     nop
         80057a48 00 00 00 00     nop
