@@ -30,7 +30,7 @@ void TextboxChoiceCreation()
     DAT_801be954 = 0xd;
   
   DAT_801be94c = ScriptPointer + 2; //stores the place where it should move the script in case triangle is pressed 
-//note that this is just the next script instruction after the start of the first choice, which can cause a lot of errors when this should just close the box
+//note that this is just the next script instruction after the start of the first choice if there's no terminator as it should, which can cause a lot of errors when this should just close the box
 
   ScriptPointer = ScriptPointer + 2; //Advance the script
 
