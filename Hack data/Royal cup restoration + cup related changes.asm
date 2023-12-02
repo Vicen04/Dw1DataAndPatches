@@ -29,7 +29,7 @@ void CreateTournament(void)
 //code ignored
 
   if (currentTournament == 5) //I'm just taking advantage of the old code
-    WritePStat(3,4);  //change the tournament with the S class tournament
+    WritePStat(3,5);  //Original: change the tournament with the S class tournament, Update: keep the value of the tournament
   
   
 
@@ -64,7 +64,7 @@ Changed:
         800e6c44 00 00 00 00     _nop
         800e6c48 03 00 04 24     li         a0,0x3
         800e6c4c 1d 19 04 0c     jal        0x0x80106474 //WritePStat                                       
-        800e6c50 04 00 05 24     _li        a1,0x4
+        800e6c50 05 00 05 24     _li        a1,0x5  //updated
         800e6c54 00 00 00 00     nop
                              LAB_800e6c58                                    
         800e6c58 03 00 02 24     li         v0,0x3
@@ -517,6 +517,99 @@ Changed:
 
 
         8005d660 21 18 14 00     move       v1,s4 //second change
+
+
+
+//script changes
+
+140A702E  C grade victory prize
+08 00 03 01 to 0D 00 03 02   this will make the reward be triggered by D and C
+
+140A6F2B  D grade victory prize
+00 to 05 to make it be triggered by the Royal Cup
+
+140A6F34 D grade victory money prize
+98 3A   (15000)   
+
+140A6FD6  D grade victory Item + quantity
+7D Item  (Giga Hand)
+01 Quantity
+
+140A7024  D grade victory Item + quantity bag full
+7D Item (Giga Hand)
+01 Quantity
+
+
+140A8C6E C grade second place prize
+08 00 03 01 to 0D 00 03 02   this will make the reward be triggered by D and C
+
+140A8B5F D grade second place prize
+00 to 05 to make it be triggered by the Royal Cup
+
+140A8B68 D grade second place money prize
+40 1F (8000)
+
+140A8C1A D grade second place Item + quantity
+7E Item (Noble Mane)
+01 Quantity
+
+
+140A8C68 D grade second place Item + quantity if bag full
+7E Item (Noble Mane)
+01 Quantity
+
+
+Text change (just to adapt it to the new rewards):
+
+140A6F64 Victory prize D
+
+Original:
+82 94 82 97 82 8F
+
+Changed:
+81 40 82 50 82 54
+
+
+140A6FB2 Victory prize D 2
+
+Original:
+82 63 82 8F 82 95 82 82 82 8C 82 85 81 40 82 65 82 8C 82 8F 82 90 82 90 82 99 01 01 81 49
+
+Changed:
+81 40 81 40 82 66 82 89 82 87 82 81 81 40 82 67 82 81 82 8E 82 84 01 01 81 49 81 40 81 40
+
+
+140A8BA0 Second prize D
+
+Original:
+81 40 82 86 82 89 82 96 82 85 81 40 82 88 82 95 82 8E 82 84
+
+Changed:
+82 57 81 40 82 94 82 88 82 8F 82 95 82 93 82 81 82 8E 82 84
+
+
+140A8BF4 Second prize D 2
+Original:
+82 73 82 97 82 8F 81 40 82 66 82 89 82 81 82 8E 82 94 81 40 82 6C 82 85 82 81 82 94 01 01 81 49
+
+Changed:
+81 40 82 6D 82 8F 82 82 82 8C 82 85 81 40 82 6C 82 81 82 8E 82 85 01 01 81 49 81 40 84 40 81 40
+
+
+
+Royal cup text 14027170, 140646C2, 1409C676 & 140A4F7A
+
+Original:
+82 65 82 8F 82 95 82 92 81 7C 82 6F 82 85 82 92 82 93 82 8F 82 8E 81 40 82 61 82 81 82 94 82 94 82 8C 82 85 81 40 82 71 82 8F 82 99 82 81 82 8C 81 43 0D 00 82 94 82 97 82 8F 81 40 82 92 82 8F 82 95 82 8E 82 84 82 93 81 43 81 40 82 85 82 89 82 87 82 88 82 94 81 40 82 83 82 8F 82 8E 82 94 82 85 82 93 82 94 82 81 82 8E 82 94 82 93 81 42
+
+"Four-Person Battle Royal,
+ two round, eight contestants."
+
+Changed:
+82 73 82 88 82 85 81 40 82 95 82 8C 82 94 82 89 82 8D 82 81 82 94 82 85 81 40 82 66 82 92 82 81 82 84 82 85 81 40 82 82 82 81 82 94 82 94 82 8C 82 85 0D 00 82 8F 82 8E 82 8C 82 94 81 40 82 94 82 88 82 85 81 40 82 93 82 94 82 92 82 8F 82 8E 82 87 82 85 82 93 82 94 81 40 82 97 82 89 82 8C 82 8C 81 40 82 8A 82 8F 82 89 82 8E 81 42 81 40 
+
+"The ultimate Grade battle
+ only the strongest will join."
 
 
 
