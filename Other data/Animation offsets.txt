@@ -25,7 +25,7 @@ C) Scold animation
 D) Reject item animation
 E/F/10/11) Evolution animations
 12) Stop training animation
-13) Frozen in place?
+13) Dumb in battle
 14) Empty (different for each digimon)
 15) Fall and go back up animation
 16) Brains training animation
@@ -50,7 +50,7 @@ E/F/10/11) Evolution animations
 29) Hit, fall foward and roll animation
 2A) Battle win celebration
 2B) Defeat animation
-2C) Some sort of stunned (probably different for each digimon)
+2C) Get up after defeat
 2D) Empty (probably different for each digimon)
 
 2E+ moves animations (Some of this animations are picked for the offense training and the presentation movement at the arena).
