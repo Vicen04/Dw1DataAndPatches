@@ -40,9 +40,9 @@ E/F/10/11) Evolution animations
 1f) Empty (probably different for each digimon) (in curling with metal mamemon, this is the hold disc in place)  
 20) Empty (probably different for each digimon) (in curling with metalmamemon, this is the throw disc) 
 21) battle idle animation
-22) Stunned animation
-23) Walk in arena animation
-24) Walk towards opponent animation
+22) battle idle tired animation
+23) battle walk animation
+24) battle walk fast animation
 25) Defend animation
 26) Empty (probably different for each digimon)
 27) Empty (probably different for each digimon)
