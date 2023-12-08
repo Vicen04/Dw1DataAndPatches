@@ -9,7 +9,7 @@ Document with a easier to read "movement allowed" list: https://docs.google.com/
 
 Check the wiki for more detailed information: https://github.com/Vicen04/Dw1DataAndPatches/wiki 
 
-I have created a hack which mostly includes the changes shown in this repository (Last update 07/12/23).
+I have created a hack which mostly includes the changes shown in this repository (Last update 08/12/23).
 
 Download my hack here: https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack
 
