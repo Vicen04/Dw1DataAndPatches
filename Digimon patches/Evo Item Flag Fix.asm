@@ -35,7 +35,7 @@ void EvolutionCode(int entityPtr,short *StatsPtr,int DigimonDataPtr,int targetDi
 
 Disassembly:
 
-        Offset       Hex         Commands
+	    Offset       Hex         Commands
 
 Original:
         80063aec 02 00 43 10     beq        v0,v1,0x80063af8 // LAB_80063af8
