@@ -9,12 +9,18 @@ Document with a easier to read "movement allowed" list: https://docs.google.com/
 
 Check the wiki for more detailed information: https://github.com/Vicen04/Dw1DataAndPatches/wiki 
 
-I have created a hack which mostly includes the changes shown in this repository (Last update 14/12/23).
+I have created a hack which mostly includes the changes shown in this repository (Last update 20/12/23).
 
 Download my hack here: https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack
 
 
 If you would like to play a hack based on this code, which also changes a lot of other features, check the Maeson hack: https://www.romhacking.net/hacks/8069/
+
+If you only want the curling randomizer, you can download it here:
+https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Curling_randomizer
+
+A version of the curling randomizer for the JP version of the game:
+https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Curling_randomizer_JP
 
 
 This is being done during my free time; the hack has been finished, I'm not sure if I'll upload more of the original code.
