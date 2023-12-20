@@ -6,7 +6,7 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
   vector<byte> textLocations;
   ptr pointerText;
   ptr pointerLoaction;
-  int iVar7;
+  int iVar3;
   
   pointerText = &ptr_penguinmonText; // It is located at 8005af58 in the code
   textAdresses = new vector<int>;
@@ -17,6 +17,8 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
   }
 
   pointerLocation = &ptr_penguinmonLocations; // It is located at 8005b04c in the code
+  
+  textLocations = new vector<byte>;
   
   for (int i = 0; i < 10; i++)
   {
@@ -36,11 +38,12 @@ int LoadPenguinmonText(int currentTextLocation,uint currentTextValue) // current
   }
   cVar1 = textLocations(currentTextLocation);
   RenderString(textAdresses[(int)cVar1 + currentTextValue],0,currentTextValue * 13 + 1); // RenderString(stringPtr, xPos, yPos) from sydMontague github
-  iVar7 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
-  if (iVar7 < 0) {
-    iVar7 = iVar7 + 3;
+  
+  iVar3 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
+  if (iVar3 < 0) {
+    iVar3 = iVar3 + 3;
   }
-  return (int)(char)(iVar7 >> 2);
+  return (int)(char)(iVar3 >> 2);
 }  
 
         Offset       Hex        Commands

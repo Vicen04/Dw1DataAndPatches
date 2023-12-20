@@ -7,7 +7,7 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
   vector<byte> textLocations;
   ptr pointerText;
   ptr pointerLoaction;
-  int iVar7;
+  int iVar3;
   
   pointerText = &ptr_metalmamemonText; // It is located at 8005b318 in the code
   textAdresses = new vector<int>;
@@ -18,6 +18,8 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
   }
 
   pointerLocation = &ptr_metalmamemonLocations; // It is located at 8005b40c in the code
+  
+  textLocations = new vector<byte>;
   
   for (int i = 0; i < 10; i++)
   {
@@ -37,11 +39,11 @@ int LoadMetalmamemonText(int currentTextLocation,uint currentTextValue)  // curr
   }
   cVar1 = textLocations(currentTextLocation);
   RenderString(textAdresses[(int)cVar1 + currentTextValue],0,currentTextValue * 13 + 1); // RenderString(stringPtr, xPos, yPos) from sydMontague github
-  iVar7 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
-  if (iVar7 < 0) {
-    iVar7 = iVar7 + 3;
+  iVar3 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
+  if (iVar3 < 0) {
+    iVar3 = iVar3 + 3;
   }
-  return (int)(char)(iVar7 >> 2);
+  return (int)(char)(iVar3 >> 2);
 }                             
 
         Offset       Hex         command

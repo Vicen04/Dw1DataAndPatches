@@ -70,7 +70,10 @@ int RandomizePenguinmon() // code to randomize the digimon that will appear in a
       iVar1 = 115; // set the digimon to machinedramon
     
     if (iVar1 == 62) // if weregarurumon is choosen
-      iVar1 = 117; // set the digimon to jijimon
+	{
+      iVar1 = ReturnRandom(4); // return a random number
+	  iVar1 = iVar1 + 117; //set the new digimon, it can be either Jijimon, Market Manager, Shogun Gekkomon or King Sukamon
+	}
     
     FUN_80106c08(57);  // Free the pointer and memory used by the current digimon 
 
@@ -99,7 +102,7 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
   vector<byte> textLocations;
   ptr pointerText;
   ptr pointerLoaction;
-  int iVar7;
+  int iVar3;
   
  
   if (cGpffff971c == 2) // checks if the opponent is penguinmon or not
@@ -109,6 +112,7 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
     pointerText = &ptr_metalmamemonText;  // It is located at 8005b318 in the code
 
   textAdresses = new vector<int>;
+  
   for (int i = 0; i < 61; i++)
   {
    textAdresses.push_back(*pointerText); // value in that address
@@ -128,22 +132,24 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
   }
  
   uVar2 = currentTextValue % 3;
-  if (((int)currentTextValue < 0) && (currentTextValue != 0)) {
+  
+  if (((int)currentTextValue < 0) && (currentTextValue != 0)) 
     uVar2 = uVar2 - 4;
-  }
-  if (uVar2 == 0) {
+  
+  if (uVar2 == 0) 
     SetTextColor(7); // SetTextColor(byte color) from sydMontague github
-  }
-  else {
+  
+  else 
     SetTextColor(1);
-  }
+  
   cVar1 = textLocations(currentTextLocation);
   RenderString(textAdresses[(int)cVar1 + currentTextValue],0,currentTextValue * 13 + 1); // RenderString(stringPtr, xPos, yPos) from sydMontague github
-  iVar7 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
-  if (iVar7 < 0) {
-    iVar7 = iVar7 + 3;
-  }
-  return (int)(char)(iVar7 >> 2);
+  iVar3 = (int)textLocations(currentTextLocation + 1) - (int)cVar1;
+  
+  if (iVar3 < 0) 
+    iVar3 = iVar3 + 3;
+  
+  return (iVar3 / 2);
 }           
 
         Offset       Hex         Command        
@@ -172,51 +178,49 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
 
 
 
-
-                             RandomizePenguinmon 
-                            
-        80059e8c e0 fe bd 27     addiu      sp,sp,-0x120
+                             RandomizePenguinmon                            
+        80059e8c d0 ff bd 27     addiu      sp,sp,-0x30
         80059e90 1c 00 bf af     sw         ra,0x1c(sp)
         80059e94 08 00 a4 af     sw         a0,0x8(sp)
         80059e98 13 80 02 3c     lui        v0,0x8013
-        80059e9c 4c f3 42 8c     lw         v0,-0xcb4(v0)
+        80059e9c 4c f3 42 8c     lw         v0,-0xcb4(v0) // DAT_8012f34c
         80059ea0 00 00 00 00     nop
         80059ea4 00 00 42 8c     lw         v0,0x0(v0)
         80059ea8 00 00 00 00     nop
         80059eac 39 00 01 24     li         at,0x39
-        80059eb0 2b 00 22 14     bne        at,v0,0x80059f60 // LAB_80059f60
+        80059eb0 29 00 22 14     bne        at,v0,0x80059f58
         80059eb4 00 00 00 00     _nop
-        80059eb8 b5 8d 02 0c     jal        0x800a36d4  // ReturnRandom(a0)                                   
+        80059eb8 b5 8d 02 0c     jal        0x800a36d4 //ReturnRandom                                     
         80059ebc 72 00 04 24     _li        a0,0x72
-        80059ec0 02 00 02 14     bne        zero,v0,0x80059ecc // LAB_80059ecc
-        80059ec4 3e 00 01 24     _li        at,0x3e
+        80059ec0 02 00 02 14     bne        zero,v0,0x80059ecc
+        80059ec4 00 00 00 00     _nop
         80059ec8 73 00 02 24     li         v0,0x73
                              LAB_80059ecc                                  
-        80059ecc 02 00 22 14     bne        at,v0,0x80059ed8 // LAB_80059ed8
-        80059ed0 00 00 00 00     _nop
-        80059ed4 75 00 02 24     li         v0,0x75
-                             LAB_80059ed8                                    
-        80059ed8 02 00 a2 a3     sb         v0,0x2(sp)
-        80059edc 02 1b 04 0c     jal        0x80106c08    // FUN_80106c08(a0)                                  
-        80059ee0 39 00 04 24     _li        a0,0x39
-        80059ee4 02 00 a2 83     lb         v0,0x2(sp)
-        80059ee8 14 80 04 3c     lui        a0,0x8014
-        80059eec 50 cb 82 a0     sb         v0,-0x34b0(a0)
-        80059ef0 70 1a 04 0c     jal        0x801069c0  //  FUN_801069c0(a0)                                   
-        80059ef4 21 20 02 00     _move      a0,v0
-        80059ef8 be 18 04 0c     jal        0x801062f8  //  FUN_801062f8(a0)                                
-        80059efc ff 00 04 24     _li        a0,0xff
-        80059f00 02 00 a4 83     lb         a0,0x2(sp)
-        80059f04 21 30 00 00     clear      a2
-        80059f08 46 d8 02 0c     jal        0x800b6118  //  FUN_800b6118(a0, a1, a2)                                 
-        80059f0c 21 28 00 00     _clear     a1
-        80059f10 08 00 a3 8f     lw         v1,0x8(sp)
-        80059f14 13 80 02 3c     lui        v0,0x8013
-        80059f18 4c f3 42 8c     lw         v0,-0xcb4(v0)
-        80059f1c 00 00 00 00     nop
-        80059f20 00 00 42 8c     lw         v0,0x0(v0)
+        80059ecc 3e 00 01 24     li         at,0x3e
+        80059ed0 05 00 22 14     bne        at,v0,0x80059ee8
+        80059ed4 00 00 00 00     _nop
+        80059ed8 04 00 04 24     li         a0,0x4
+        80059edc b5 8d 02 0c     jal        0x800a36d4 //ReturnRandom                                    
+        80059ee0 00 00 00 00     _nop
+        80059ee4 75 00 42 24     addiu      v0,v0,0x75
+                             LAB_80059ee8                                   
+        80059ee8 02 00 a2 a3     sb         v0,0x2(sp)
+        80059eec 02 1b 04 0c     jal        0x80106c08 //FUN_80106c08                                    
+        80059ef0 39 00 04 24     _li        a0,0x39
+        80059ef4 02 00 a2 83     lb         v0,0x2(sp)
+        80059ef8 14 80 04 3c     lui        a0,0x8014
+        80059efc 50 cb 82 a0     sb         v0,-0x34b0(a0) //DAT_8013cb50                    
+        80059f00 70 1a 04 0c     jal        0x801069c0 //FUN_801069c0                                     
+        80059f04 21 20 02 00     _move      a0,v0
+        80059f08 be 18 04 0c     jal        0x801062f8 //FUN_801062f8                                   
+        80059f0c ff 00 04 24     _li        a0,0xff
+        80059f10 02 00 a4 83     lb         a0,0x2(sp)
+        80059f14 21 30 00 00     clear      a2
+        80059f18 46 d8 02 0c     jal        0x800b6118 //FUN_800b6118                                    
+        80059f1c 21 28 00 00     _clear     a1
+        80059f20 02 00 a2 83     lb         v0,0x2(sp)
         80059f24 06 80 04 3c     lui        a0,0x8006
-        80059f28 d0 ab 84 24     addiu      a0,a0,-0x5430
+        80059f28 d0 ab 84 24     addiu      a0,a0,-0x5430  //ptr_penguinmonText        
         80059f2c ff 00 45 30     andi       a1,v0,0xff
         80059f30 40 10 05 00     sll        v0,a1,0x1
         80059f34 20 10 45 00     add        v0,v0,a1
@@ -226,17 +230,18 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059f44 13 80 02 3c     lui        v0,0x8013
         80059f48 b4 ce 42 24     addiu      v0,v0,-0x314c
         80059f4c 21 28 45 00     addu       a1,v0,a1
-        80059f50 93 44 02 0c     jal        0x8009124c  // memcpy(a0, a1, a2)                                        
+        80059f50 93 44 02 0c     jal        0x8009124c //memcpy                                          
         80059f54 0e 00 06 24     _li        a2,0xe
-        80059f58 08 00 a4 8f     lw         a0,0x8(sp)
-        80059f5c 00 00 00 00     nop
-                             LAB_80059f60                                     
-        80059f60 9f 44 02 0c     jal        0x8009127c  // rand()                                             
-        80059f64 00 00 00 00     _nop
+                             LAB_80059f58                                   
+        80059f58 9f 44 02 0c     jal        0x8009127c //rand                                            
+        80059f5c 00 00 00 00     _nop
+        80059f60 08 00 a4 8f     lw         a0,0x8(sp)
+        80059f64 00 00 00 00     nop
         80059f68 1c 00 bf 8f     lw         ra,0x1c(sp)
         80059f6c 00 00 00 00     nop
         80059f70 08 00 e0 03     jr         ra
-        80059f74 20 01 bd 27     _addiu     sp,sp,0x120
+        80059f74 30 00 bd 27     _addiu     sp,sp,0x30
+
 
 
                              LoadCurlingTextBetter                         
@@ -683,5 +688,10 @@ Meteoromon has animations
 D25F24 00 00 00 00 to 00 85 00 00     machinedramon animation
 D25F28 00 00 00 00 to BC 51 00 00     machinedramon animation
 
-jijimon has animations
+Jijimon has animations
 
+Market Manager has animations
+
+Shogun Gekkomon has animation 
+
+King Sukamon has animations

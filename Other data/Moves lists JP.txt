@@ -1,0 +1,160 @@
+The game has a list for each movement, that checks if a digimon is able to perform the move in combat or not. If the list lacks the digimon, the digimon will only perform the animation, but not the movement due to how the code works.
+
+Each movement uses 10 bytes and are used like this (using the first value of fire tower):
+
+11 Digimon value (used to check if a digimon can use the move or not)
+00 Digimon bone to spawn at (changes depending on the attack, can also use either the partner or the opponent bones depending on the attack).
+00 position X relative to the bone
+00 position Y relative to the bone
+00 position Z relative to the bone
+
+Link with an easier to read list (The JP version has the same digimon in each list): https://docs.google.com/spreadsheets/d/1vHHa8ynxtnFuwiQst09I0L4jDMKb8ZLdyxXYkoMi_UA/edit?usp=sharing
+
+14CDA25E list with digimon values used for each move list, it uses 2 bytes for each value; if the value is "FF FF" it will use its own value.
+
+These are the offsets for the JP (NTSC-J) lists:
+
+
+Fire type:
+010F5C82 list for fire tower
+010FB7AC list for prominence beam
+011012F6 list for spit fire
+01106EF2 list for red inferno
+0110CBE2 list for magma bomb
+01112678 list for heat laser
+011183C2 list for infinity burn
+0111E130 list for meltdown
+
+Wind type:
+01123A80 list for thunder justice
+011296B6 list for spinning shot
+0112F330 list for electric cloud
+01134E20 list for megalo spark
+0113A9D0 list for static elec
+01140598 list for wind cutter
+0114629C list for confused storm
+0114BD90 list for hurricane
+
+Ice type:
+0115197E list for giga freeze
+0115764A list for ice statue
+0115D0CC list for winter blast
+01162CDC list por ice needle
+011688BC list for water blit
+0116E4EC list for aqua magic
+01174110 list for aurora freeze
+01179C54 list for tear drop
+
+Mech type:
+0117F872 list for power crane
+01185450 list for all range beam
+0118B018 list for metal sprinter
+01190C06 list for pulse laser
+011967C8 list for delete program
+0119C59E list for DG dimension 
+011A1FD0 list for full potential
+011A7E2C list for reverse program
+
+Earth type:
+011AD718 list for poison powder
+011B33DC list for Bug
+011B8F14 list for mass morph
+011BEB20 list for insect plague
+011C4730 List for perfume charm
+011CA290 list for poison claw
+011CFE70 list for danger sting
+011D5A68 list for green trap
+
+Fight type:
+011DB648 list for tremor/tremar
+011E1210 list for muscle charge
+011E6E64 list for war cry
+011EC9D0 list for sonic jab
+011F8190 list for counter
+011F25B0 list for dynamite kick V1 (ID 44)
+01209530 list for dynamite kick V2 (ID 48)
+011FDDDC list for megaton punch
+012039BC list for buster dive
+
+Filth type:
+0120F14E list for odor spray
+01214DCA list for poop spd toss
+0121A9D4 list for big poop toss
+01220596 list for big rnd toss
+0122616A list for poop rnd toss
+0122BD4A list for rnd spd toss
+012318B0 list for horizontal kick V1 (ID 55)
+0123D070 list for horizontal kick V2 (ID 57)
+01237538 list for ultra poop hell
+
+
+Finishers:
+
+01242C2E Blaze Blast (Tyrannomon Finisher)
+012487E2 Pepper Breath (Agumon Finisher)
+0124E3D4 Lovely Attack (Monzaemon Finisher)
+01254042 Fireball (Meramon Finisher)
+01259BCC Death Claw (Devimon Finisher)
+0125F78E Mega Flame (Greymon Finisher)
+0126536E Howling Blaster (Garurumon Finisher)
+0126AFDE Party Time (Sukamon Finisher)
+01270B1C Electric Shock (Betamon Finisher)
+01276708 Abduction Ray (Vademon Finisher) 
+0127C31E Smiley Bomb (Mamemon Finisher)
+01281EB8 Spnning Needle (Airdramon Finisher)
+01287ABA Spiral Twister (Biyomon Finisher)
+0128D658 Boom Bubble (Patamon Finisher)
+0129333C Sweet Breath (Vegiemon Finisher)
+01298F7A Bit Bomb (Piximon Finisher)
+0129EA68 Deadly Bomb (Giromon Finisher)
+012A46E4 Drill Spin (Drimogemon Finisher)
+012AA20C Electric Thread (Kunemon Finisher)
+012AFF9A Energy Bomb (MetalMamemon Finisher)
+012B59E4 Genoside Attack (Megadramon & Gigadramon Finisher)
+012BB5D0 Giga Scissor Claw (Greymon Finisher)
+012C1198 Dark Shot (SkullGreymon Finisher)
+012C6E50 Plummel Whack (Ogremon Finisher)
+012CC954 Hand of Fate (Angemon Finisher)
+012D261C Dark Claw (Bakemon Finisher)
+012D8130 Aerial Attack (Unimon Finisher)
+012DDCA8 Bone Boomerang (Mojyamon Finisher)
+012E3954 Solar Ray (Centarumon Finisher)
+012E949C Hydro Pressure (Shellmon Finisher)
+012EF0B0 Ice Blast (Seadramon Finisher)
+012F4C50 Iga School Knife Throw (Ninjamon Finisher)
+012FA83C Blasting Spout (Whamon Finisher)
+013004C0 Fist of the Beast King (Leomon & Panjyamon Finisher) 
+01306020 Dark Network & Concert Crush (Etemon & MetalEtemon Finisher)
+0130BC70 Electro Shocker (Kabuterimon & H-Kabuterimon Finisher)
+0131185C Meteor Wing (Birdramon Finisher)
+013173E8 Super Slap (Penguinmon Finisher)
+0131CF74 Nightmare Syndrome (Digitamamon Finisher)
+01322B84 Frozen Fire Shot (Kokatorimon Finisher)
+013286F4 Poison Ivy (Palmon Finisher)
+0132E2D8 Blue Blaster (Gabumon Finisher)
+01333EC0 Scissor Claw (Kuwagamon Finisher)
+01339AC8 Super Thunder Strike (Elecmon Finisher)
+0133F718 Spiral Sword (Andromon Finisher)
+0134532E Variable Darts (Coelamon Finisher)
+0134B0CC Volcanic Strike (Monochromon Finisher)
+01350A74 Subzero Ice Punch (Frigimon Finisher)
+01356690 Infinity Cannon (Machinedramon Finisher)
+0135C2D2 Party Time (Nanimon Finisher)
+01361E7E Party Time (Numemon Finisher)
+01367A7C Crimson Flare (Phoenixmon Finisher)
+0136D5F0 Glacial Blast (WereGarurumon Finisher, this one is broken)
+013731D0 Mail Strome (MegaSeadramon Finisher)
+
+
+
+Other Moves:
+
+01378D88 Move ID 112 (has Botamon and a Bubble texture)
+0137E968 Bubble ID 113 (Botamon)
+01384548 Bubble ID 114 (Punimon)
+0138A128 Bubble ID 115 (Poyomon)
+0138FD08 Bubble ID 116 (Yuramon)
+013958E8 Bubble ID 117 (Koromon)
+0139B4C8 Bubble ID 118 (Tsunomon)
+013A10A8 Bubble ID 119 (Tokomon)
+013A6C88 Bubble ID 120 (Tanemon)
