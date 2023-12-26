@@ -1,0 +1,71 @@
+Version 1.0:
+
+- Added Panjamon, Gigadramon and Metal etemon as evolutions to certain digimons. The requirements are the same as their normal colour counterpart (Leomon, Megadramon and Etemon).
+
+- The three earlier mentioned digimon have different moves and types than in the original game. 
+
+- Higher chances to find piximon, metal mamemon and mamemon in the map.
+
+- The Monochromon shop minigame now has a lower profit requirement
+
+- Certain digimons now have an extra move
+
+- Added an extra companion digimon.
+
+- All of the added digimon will show in the chart
+
+- The electro ring and the moon mirror have been changed, now the items can be properly used to evolve to certain digimon. An item that used to be food, has been changed and now is an evolution item, another has been changed to give the same effects as the earlier item.
+
+- Some digimon have changed the item dropped after battle.
+
+- Factorial Town now accepts more digimon to be upgraded.
+
+- More digimon accepted in tournaments, bettter regenaration in tournaments.
+
+- Improved lifetime extension after evolving to ultimate (from 4 days to 8 days).
+
+- Fixed some text not rendering, changed the name and description of some items to align them better.
+
+- Various bug fixes that improve the game
+
+- 3 Minor glitches added due to the changes and a bug
+
+
+Version 1.0.1
+
+- A brand new mechanic which boost a specific tech for each partner digimon, it only affects your partner, NPC are not affected.
+
+- The chart now shows all of the digimon that can be obtained.
+
+
+
+Version 1.0.2:
+
+- Royal Cup restored
+
+- All of the extra digimon have an evolution item that can be obtained multiple times in the game.
+
+
+Version 1.0.3:
+
+- The piximon dialogue glitch fix was improved.
+
+- Tankmon wrong tech fix.
+
+- The Save data file will now not display a corrupted digimon name.
+
+Version 1.0.4:
+
+- The BGM will keep playing rather than resetting even if you change the map as long as the BGM on the new map is the same.
+
+- Added the extra patches for the randomizer
+
+- The Tournament Schedule now will display each tournament it the correct row.
+
+Version 1.0.5:
+
+- Two possible softlocks have been fixed.
+
+- The bonus try now will not attempt to screw the player if its not a lucky try.
+
+- The Grey Lord Mansion and the Ice Sanctuary now can accept all digimon under certain conditions.
