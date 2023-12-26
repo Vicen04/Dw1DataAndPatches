@@ -13,7 +13,7 @@ I have created a hack which mostly includes the changes shown in this repository
 
 Download my hack here: https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack
 
-Changelog: 
+Changelog: https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Changelog.txt
 
 
 If you would like to play a hack based on this code, which also changes a lot of other features, check the Maeson hack: https://www.romhacking.net/hacks/8069/
