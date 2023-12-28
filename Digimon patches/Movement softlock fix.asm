@@ -137,7 +137,7 @@ Disassembly:
                              LAB_800ac9a0                                    
         800ac9a0 00 00 12 ae     sw         s2,0x0(s0) entityAxis
         800ac9a4 54 91 80 a3     sb         zero,-0x6eac(gp) //DAT_80134c80
-        800ac9a8 20 00 00 10     b          0x800aca2c
+        800ac9a8 1e 00 00 10     b          0x800aca24
         800ac9ac 01 00 02 24     _li        v0,0x1
                              LAB_800ac9b0                                   
         800ac9b0 2a 08 32 00     slt        at,at,s2
