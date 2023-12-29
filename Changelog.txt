@@ -69,3 +69,9 @@ Version 1.0.5:
 - The bonus try now will not attempt to screw the player if its not a lucky try.
 
 - The Grey Lord Mansion and the Ice Sanctuary now can accept all digimon under certain conditions.
+
+Version 1.0.6
+
+- New maps and new boss battles added
+
+- An attempt to avoid the Machinedramon bug has been added
