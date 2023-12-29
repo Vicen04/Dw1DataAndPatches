@@ -1938,6 +1938,87 @@ Changed:
         800e2aa8 00 00 00 00     nop
         800e2aac 00 00 00 00     nop
         800e2ab0 01 00 12 24     li         s2,0x1
+		
+		
+		
+//NEW code
+
+//This is to avoid the extra digimon (Machinedramon in this case) to turn into a Sukamon, since Machinedramon can crash the game while evolving
+
+Original:
+int HandlePoopingInFloor(uint tileX,uint tileZ)
+{
+//code ignored
+  if (DigimonType != 39) 
+    VirusBar++;
+  
+  if (99 < DAT_80134C58) {
+    DAT_80134C58 = 0;
+  }
+  
+  //code ignored
+}
+
+int HandlePoopingInFloor(uint tileX,uint tileZ)
+{
+//code ignored
+  if (DigimonType != 39 && DigimonType != 62) 
+    VirusBar++;
+  
+  if (99 < DAT_80134C58) {
+    DAT_80134C58 = 0;
+  }
+  
+  //code ignored
+}
+
+
+Original:
+
+                             LAB_800a6c3c                                    
+        800a6c3c 15 80 01 3c     lui        at,0x8015
+        800a6c40 a8 57 22 8c     lw         v0,0x57a8(at) // DigimonType                
+        800a6c44 27 00 01 24     li         at,0x27
+        800a6c48 07 00 41 10     beq        v0,at,0x800a6c68
+        800a6c4c 00 00 00 00     _nop
+        800a6c50 14 80 01 3c     lui        at,0x8014
+        800a6c54 7e 84 22 84     lh         v0,-0x7b82(at) // VirusBar                    
+        800a6c58 00 00 00 00     nop
+        800a6c5c 01 00 42 20     addi       v0,v0,0x1
+        800a6c60 14 80 01 3c     lui        at,0x8014
+        800a6c64 7e 84 22 a4     sh         v0,-0x7b82(at) // VirusBar                    
+                             LAB_800a6c68                                   
+        800a6c68 2c 91 82 93     lbu        v0,-0x6ed4(gp) // DAT_80134C58
+        800a6c6c 00 00 00 00     nop
+        800a6c70 64 00 41 2c     sltiu      at,v0,0x64
+        800a6c74 02 00 20 14     bne        at,zero,0x800a6c80
+        800a6c78 00 00 00 00     _nop
+        800a6c7c 2c 91 80 a3     sb         zero,-0x6ed4(gp) // DAT_80134C58
+
+
+
+Changed:
+
+                             LAB_800a6c3c                                 
+        800a6c3c 15 80 01 3c     lui        at,0x8015
+        800a6c40 a8 57 22 8c     lw         v0,0x57a8(at) // DigimonType                    
+        800a6c44 27 00 01 24     li         at,0x27
+        800a6c48 2c 91 83 93     lbu        v1,-0x6ed4(gp) // DAT_80134C58
+        800a6c4c 08 00 41 10     beq        v0,at,0x800a6c70
+        800a6c50 3e 00 01 24     _li        at,0x3e
+        800a6c54 06 00 41 10     beq        v0,at,0x800a6c70
+        800a6c58 00 00 00 00     _nop
+        800a6c5c 14 80 01 3c     lui        at,0x8014
+        800a6c60 7e 84 22 84     lh         v0,-0x7b82(at) // VirusBar                       
+        800a6c64 00 00 00 00     nop
+        800a6c68 01 00 42 24     addiu      v0,v0,0x1
+        800a6c6c 7e 84 22 a4     sh         v0,-0x7b82(at) // VirusBar                        
+                             LAB_800a6c70                                   
+        800a6c70 64 00 61 2c     sltiu      at,v1,0x64
+        800a6c74 02 00 20 14     bne        at,zero,0x800a6c80
+        800a6c78 00 00 00 00     _nop
+        800a6c7c 2c 91 80 a3     sb         zero,-0x6ed4(gp) // DAT_80134C58
+
 
 
 
