@@ -75,3 +75,13 @@ Version 1.0.6
 - New maps and new boss battles added
 
 - An attempt to avoid the Machinedramon bug has been added
+
+Version 1.0.7:
+
+- All the Ultimate playable Digimon now have 16 techs (including Machinedramon, Myotismon will have them to with the Myotismon patch).
+
+- New Curling version for this hack.
+
+- Panyjamon and vegiemon now have more techs.
+
+- Fixed the animation bug from the Greymon battle.
