@@ -84,4 +84,6 @@ Version 1.0.7:
 
 - Panyjamon and vegiemon now have more techs.
 
-- Fixed the animation bug from the Greymon battle.
+- Fixed the animation glitch from the Greymon battle.
+
+- Changed the moveset of a post game battle
