@@ -86,4 +86,8 @@ Version 1.0.7:
 
 - Fixed the animation glitch from the Greymon battle.
 
-- Changed the moveset of a post game battle
+- Changed the moveset of a post game battle.
+
+- Added a patch to unlock areas for players that use the randomizer
+
+- Added a "short intro" patch
