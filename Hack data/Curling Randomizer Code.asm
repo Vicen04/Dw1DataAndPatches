@@ -75,20 +75,45 @@ int RandomizePenguinmon() // code to randomize the digimon that will appear in a
 	  iVar1 = iVar1 + 117; //set the new digimon, it can be either Jijimon, Market Manager, Shogun Gekkomon or King Sukamon
 	}
     
-    FUN_80106c08(57);  // Free the pointer and memory used by the current digimon 
+    FUN_80106c08(57);  // Free the pointer and memory used by the current digimon model (penguinmon in this case)
 
-    DAT_8013cb50 = iVar1; // set the value to a check that will be done later to the new digimon
+    DAT_8013cb50 = iVar1; // set the value of the first digimon of the map data to the new digimon
 
-    FUN_801069c0(iVar1); // read and set digimon model data
+    LoadDigimon(iVar1); // read and set digimon model data
 
     FUN_801062f8(0xff); 
 
-    FUN_800b6118(iVar1,0,0); // delete the old model and load the new one
+    SetDigimonInMap(iVar1,0,0); // delete the old model and load the new one
 
     memcpy(ptr_penguinmonText, (DigimonNamesPointer + (*OpponentDigimonValue % 255) * 54),14); // Copy the name of the new digimon and overwrite penguinmon's name
   }
   iVar1 = rand();
   return iVar1;
+}
+
+int RandomizePenguinmon() // Vice hack version
+
+{
+  //these are the differences 
+  
+    iVar1 = ReturnRandom(120); // returns a random number between 0 and the value input
+	iVar2 = iVar2 + 1; //makes sure the digimon cannot be 0 (the tamer)
+
+    if (iVar1 == 62) // if weregarurumon is choosen
+      iVar1 = 122; // set the digimon to hagurumon
+    
+    if (iVar1 == 114) // if the empty slot is choosen
+	{
+      iVar1 = 123; // set the digimon to tinmon
+	}
+    
+	FUN_801062f8(0xff);
+	
+    UnloadDigimon(5); //uses the Digimon value in the script
+	
+	//FUN_80106c08 has been removed
+	
+	//everything else is the same
 }
 
 //Fused both load text functions (penguinmon and metalmamemon) into one to have enough space to put the randomizer code, this one is located where the old metalmamemon load text function was
@@ -178,7 +203,9 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
 
 
 
-                             RandomizePenguinmon                            
+                             RandomizePenguinmon 
+
+//vanilla version								 
         80059e8c d0 ff bd 27     addiu      sp,sp,-0x30
         80059e90 1c 00 bf af     sw         ra,0x1c(sp)
         80059e94 08 00 a4 af     sw         a0,0x8(sp)
@@ -187,7 +214,7 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059ea0 00 00 00 00     nop
         80059ea4 00 00 42 8c     lw         v0,0x0(v0)
         80059ea8 00 00 00 00     nop
-        80059eac 39 00 01 24     li         at,0x39
+        80059eac 39 00 01 24     li         at,0x39			
         80059eb0 29 00 22 14     bne        at,v0,0x80059f58
         80059eb4 00 00 00 00     _nop
         80059eb8 b5 8d 02 0c     jal        0x800a36d4 //ReturnRandom                                     
@@ -210,13 +237,13 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059ef4 02 00 a2 83     lb         v0,0x2(sp)
         80059ef8 14 80 04 3c     lui        a0,0x8014
         80059efc 50 cb 82 a0     sb         v0,-0x34b0(a0) //DAT_8013cb50                    
-        80059f00 70 1a 04 0c     jal        0x801069c0 //FUN_801069c0                                     
+        80059f00 70 1a 04 0c     jal        0x801069c0 //LoadDigimon                                    
         80059f04 21 20 02 00     _move      a0,v0
         80059f08 be 18 04 0c     jal        0x801062f8 //FUN_801062f8                                   
         80059f0c ff 00 04 24     _li        a0,0xff
         80059f10 02 00 a4 83     lb         a0,0x2(sp)
         80059f14 21 30 00 00     clear      a2
-        80059f18 46 d8 02 0c     jal        0x800b6118 //FUN_800b6118                                    
+        80059f18 46 d8 02 0c     jal        0x800b6118 //SetDigimonInMap                                   
         80059f1c 21 28 00 00     _clear     a1
         80059f20 02 00 a2 83     lb         v0,0x2(sp)
         80059f24 06 80 04 3c     lui        a0,0x8006
@@ -241,6 +268,73 @@ int CurlingTextBetter(int currentTextLocation,uint currentTextValue)  // current
         80059f6c 00 00 00 00     nop
         80059f70 08 00 e0 03     jr         ra
         80059f74 30 00 bd 27     _addiu     sp,sp,0x30
+		
+		
+//Vice hack version
+        80059e8c d0 ff bd 27     addiu      sp,sp,-0x30
+        80059e90 1c 00 bf af     sw         ra,0x1c(sp)
+        80059e94 08 00 a4 af     sw         a0,0x20(sp)
+        80059e98 13 80 02 3c     lui        v0,0x8013
+        80059e9c 4c f3 42 8c     lw         v0,-0xcb4(v0) // DAT_8012f34c
+        80059ea0 00 00 00 00     nop
+        80059ea4 00 00 42 8c     lw         v0,0x0(v0)
+        80059ea8 00 00 00 00     nop
+        80059eac 39 00 01 24     li         at,0x39
+        80059eac 2b 00 22 14     bne        at,v0,0x80059f5c 
+        80059eb0 00 00 00 00     _nop
+        80059eb4 b5 8d 02 0c     jal        //ReturnRandom                                     
+        80059eb8 78 00 04 24     _li        a0,0x78
+        80059ebc 3e 00 01 24     li         at,0x3e
+        80059ec0 01 00 42 24     addiu      v0,v0,0x1
+        80059ec4 02 00 22 14     bne        at,v0,0x80059ed0
+        80059ec8 00 00 00 00     _nop
+        80059ecc 7a 00 02 24     li         v0,0x7a
+                             LAB_80059ed0                                  
+        80059ed0 72 00 01 24     li         at,0x72
+        80059ed4 02 00 22 14     bne        at,v0,0x80059ee0
+        80059ed8 00 00 00 00     _nop
+        80059edc 7b 00 02 24     li         v0,0x7b
+                             LAB_80059ee0                                  
+        80059ee0 10 00 a2 a3     sb         v0,0x10(sp)
+        80059ee4 be 18 04 0c     jal        0x801062f8   //FUN_801062f8                                    
+        80059ee8 ff 00 04 24     _li        a0,0xff
+        80059eec f1 d8 02 0c     jal        0x800b63c4   //UnloadDigimon                                  
+        80059ef0 05 00 04 24     _li        a0,0x5
+        80059ef4 10 00 a2 83     lb         v0,0x10(sp)
+        80059ef8 14 80 04 3c     lui        a0,0x8014
+        80059efc 50 cb 82 a0     sb         v0,-0x34b0(a0) //DAT_8013cb50                  
+        80059f00 70 1a 04 0c     jal        0x801069c0  //LoadDigimon                                
+        80059f04 21 20 02 00     _move      a0,v0
+        80059f08 be 18 04 0c     jal        0x801062f8  //FUN_801062f8                                  
+        80059f0c ff 00 04 24     _li        a0,0xff
+        80059f10 10 00 a4 83     lb         a0,0x10(sp)
+        80059f14 21 30 00 00     clear      a2
+        80059f18 46 d8 02 0c     jal        0x800b6118   //SetDigimonInMap
+        80059f1c 21 28 00 00     _clear     a1
+        80059f20 10 00 a2 83     lb         v0,0x10(sp)
+        80059f24 06 80 04 3c     lui        a0,0x8006
+        80059f28 d0 ab 84 24     addiu      a0,a0,-0x5430  //ptr_penguinmonText               
+        80059f2c ff 00 45 30     andi       a1,v0,0xff
+        80059f30 40 10 05 00     sll        v0,a1,0x1
+        80059f34 20 10 45 00     add        v0,v0,a1
+        80059f38 80 10 02 00     sll        v0,v0,0x2
+        80059f3c 20 10 45 00     add        v0,v0,a1
+        80059f40 80 28 02 00     sll        a1,v0,0x2
+        80059f44 13 80 02 3c     lui        v0,0x8013
+        80059f48 b4 ce 42 24     addiu      v0,v0,-0x314c
+        80059f4c 21 28 45 00     addu       a1,v0,a1                   
+        80059f50 93 44 02 0c     jal        0x8009124c  //memcpy                                           
+        80059f54 0e 00 06 24     _li        a2,0xe
+        80059f58 00 00 00 00     nop
+                             LAB_80059f5c                                   
+        80059f5c 9f 44 02 0c     jal        0x8009127c  //rand                                            
+        80059f60 00 00 00 00     _nop
+        80059f64 1c 00 a4 8f     lw         a0,0x1c(sp)
+        80059f68 20 00 bf 8f     lw         ra,0x20(sp)
+        80059f6c 00 00 00 00     nop
+        80059f70 08 00 e0 03     jr         ra
+        80059f74 30 00 bd 27     _addiu     sp,sp,0x30
+
 
 
 

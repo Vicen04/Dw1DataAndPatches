@@ -65,15 +65,15 @@ int RandomizeCurling() // code to randomize the digimon that will appear in a ma
     }        
     
 
-    DAT_8013cb50 = iVar1; // set the value to a check that will be done later to set the new digimon
+    DAT_80145608 = iVar1; // set the value of the first digimon of the map data to the new digimon
 
-    FUN_800f1590(iVar1); // read and set the digimon model data
+    LoadDigimonJP(iVar1); // read and set the digimon model data
 
     FUN_800f0ae8(0xff); 
 
-    FUN_800bb544(iVar1,0,0); // load the new model and place it in the map
+    SetDigimonInMapJP(iVar1,0,0); // load the new model and place it in the map
 
-    memcpy(ptr_penguinmonNameText, (DigimonNamesPointer + (iVar1 % 255) * 54),10); // Copy the name of the new digimon and overwrite penguinmon's name, this version has a lower character limit
+    memcpy(ptr_penguinmonNameTextJP, (DigimonNamesPointerJP + (iVar1 % 255) * 54),10); // Copy the name of the new digimon and overwrite penguinmon's name, this version has a lower character limit
   }
 
   iVar1 = rand();
@@ -224,13 +224,13 @@ Changed:
         8005bdd4 14 80 04 3c     lui        a0,0x8014
         8005bdd8 08 56 82 a0     sb         v0,0x5608(a0) //DAT_80145608                    
         8005bddc 00 00 00 00     nop
-        8005bde0 64 c5 03 0c     jal        0x800f1590 //FUN_800f1590                                   
+        8005bde0 64 c5 03 0c     jal        0x800f1590 //LoadDigimonJP                                   
         8005bde4 21 20 02 00     _move      a0,v0
         8005bde8 ba c2 03 0c     jal        0x800f0ae8 //FUN_800f0ae8                                  
         8005bdec ff 00 04 24     _li        a0,0xff
         8005bdf0 10 00 a4 83     lb         a0,0x10(sp)
         8005bdf4 21 30 00 00     clear      a2
-        8005bdf8 51 ed 02 0c     jal        0x800bb544 //FUN_800bb544                                   
+        8005bdf8 51 ed 02 0c     jal        0x800bb544 //SetDigimonInMapJP                                  
         8005bdfc 21 28 00 00     _clear     a1
         8005be00 10 00 a2 83     lb         v0,0x10(sp)
         8005be04 06 80 04 3c     lui        a0,0x8006
