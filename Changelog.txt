@@ -91,3 +91,7 @@ Version 1.0.7:
 - Added a patch to unlock areas for players that use the randomizer
 
 - Added a "short intro" patch
+
+- Fixed the camera after battle in the new maps
+
+- Included the "Mojyamon fix" patch
