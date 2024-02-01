@@ -95,3 +95,17 @@ Version 1.0.7:
 - Fixed the camera after battle in the new maps
 
 - Included the "Mojyamon fix" patch
+
+
+
+Version 1.0.8:
+
+- Created a poop animation for Machinedramon (it even has the sound effect)
+
+- Added the hardmode patch, both vanilla and Vice hack version
+
+- New patches that improve the learning chances of techs (optional)
+
+- New patch that enables the digimon to learn more than 1 move in battle (optional)
+
+- Fixed an error in the "fully unlock areas" patch
