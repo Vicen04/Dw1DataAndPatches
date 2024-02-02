@@ -104,8 +104,10 @@ Version 1.0.8:
 
 - Added the hardmode patch, both vanilla and Vice hack version
 
-- New patches that improve the learning chances of techs (optional)
+- New extra patches that improve the learning chances of techs (optional)
 
-- New patch that enables the digimon to learn more than 1 move in battle (optional)
+- New extra patch that enables the digimon to learn more than 1 move in battle (optional)
 
 - Fixed an error in the "fully unlock areas" patch
+
+- Added the "Enable stat gains for evo items" and "helpful items" extra patches.
