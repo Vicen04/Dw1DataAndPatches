@@ -111,3 +111,5 @@ Version 1.0.8:
 - Fixed an error in the "fully unlock areas" patch
 
 - Added the "Enable stat gains for evo items" and "helpful items" extra patches.
+
+- New toilet animation for Myotismon from the "Myotismon patch"
