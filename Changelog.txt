@@ -113,3 +113,12 @@ Version 1.0.8:
 - Added the "Enable stat gains for evo items" and "helpful items" extra patches.
 
 - New toilet animation for Myotismon from the "Myotismon patch"
+
+
+Version 1.0.9:
+
+- Fixed an animation in the "Myotismon patch"
+
+- Added the "Filth Challenge" to the Extra patches.
+
+- Fixed the move boost of Penguinmon
