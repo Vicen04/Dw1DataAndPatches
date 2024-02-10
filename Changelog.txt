@@ -122,3 +122,5 @@ Version 1.0.9:
 - Added the "Filth Challenge" to the Extra patches.
 
 - Fixed the move boost of Penguinmon
+
+- Added the second Training code to the "Bonus try" patches, modified the hack to include the basic fix.
