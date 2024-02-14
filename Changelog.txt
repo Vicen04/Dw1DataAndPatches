@@ -124,3 +124,7 @@ Version 1.0.9:
 - Fixed the move boost of Penguinmon
 
 - Added the second Training code to the "Bonus try" patches, modified the hack to include the basic fix.
+
+- Added the "Recycling shop fix" to the hack.
+
+- Updated the "Giromon Jukebox Fix".

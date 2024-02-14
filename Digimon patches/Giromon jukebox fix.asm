@@ -85,7 +85,9 @@ Changed:
 
         800fee5c 18 00 05 24     li         a1,0x18
 
-        800ff048 10 00 05 24     li         a1,0x10
+    Old //800ff048 10 00 05 24     li         a1,0x10
+	New //800ff048 0C 00 05 24     li         a1,0xc
+		
 
         8010aaf4 0c 00 05 24     li         a1,0xc
 
@@ -102,119 +104,42 @@ Changed:
 
 //Text changes as text
 
-"Non Bewildering Forest Theme" to "Native Forest Theme"
-"Non Bewildering Forest Night Theme" to "Native Forest Night Theme"
-"Ogremon Theme No. 2" to "Ogremon Theme 2"
-"Everything Shop Theme" to "Monocromon Shop Theme"
-"Ogremon ThemeNo. 3" to "Ogremon Theme 3"
-"Dark Aristcrat's Mansion Theme" to "Grey Lord Mansion Theme"
-"The Ancient Region of Dino Speedy Time Zone Theme" to "Dino Speed Theme" 
-"The Ancient Region of Dino Speedy Time Zone Night Theme" to "Dino Speed Night Theme"
-"The Ancient Region of Dino Glacial Time Zone Theme" to "Dino Glacial Theme"
-"The Ancient Region of Dino Glacial Time Zone Night Theme" to "Dino Glacial Night Theme"
-"Sanctuary Below Theme" to "Sanctuary Secret Theme" //Just a personal change
-"Theme of Factorial" to "Factorial Town Day" //The *Theme* was ommited due to a lack of space
-"Factorial Night Theme" to "Factorial Town Night" //The *Theme* was ommited due to a lack of space
-"Beatland Theme" to "Bettle Land Day" //The *Theme* was ommited due to a lack of space
-"Beatland Night Theme" to "Bettle Land Night" //The *Theme* was ommited to match the day theme
-"Tornament Opening Theme" to "Tournament Start Theme"
-"Tornament Progress Theme" to "Tournament Progress Theme"
-"Tornament Championship Theme" to "Tournament Champion Theme"
-"Partner's Entrance Theme" to "Partner Entrance Theme" //This is just to match the next one
-"Competition Battle Opponent's Entrance Theme" to "Opponent Entrance Theme" 
+//Update: all of the themes have been removed from the names
+
+"Non Bewildering Forest Theme" to "Native Forest"
+"Non Bewildering Forest Night Theme" to "Native Forest Night"
+"Ogremon Theme No. 2" to "Ogremon 2"
+"Everything Shop Theme" to "Monocromon Shop"
+"Ogremon ThemeNo. 3" to "Ogremon 3"
+"Dark Aristcrat's Mansion Theme" to "Grey Lord Mansion"
+"The Ancient Region of Dino Speedy Time Zone Theme" to "A. Dino Speed " 
+"The Ancient Region of Dino Speedy Time Zone Night Theme" to "A. Dino Speed Night"
+"The Ancient Region of Dino Glacial Time Zone Theme" to "A. Dino Glacial"
+"The Ancient Region of Dino Glacial Time Zone Night Theme" to "A. Dino Glacial Night"
+"Sanctuary Below Theme" to "Sanctuary Underground" //Just a personal change
+"Theme of Factorial" to "Factorial Town Day"
+"Factorial Night Theme" to "Factorial Town Night" 
+"Beatland Theme" to "Bettle Land Day" 
+"Beatland Night Theme" to "Bettle Land Night" 
+"Tornament Opening Theme" to "Tournament Start"
+"Tornament Progress Theme" to "Tournament Progress"
+"Tornament Championship Theme" to "Tournament Champion"
+"Partner's Entrance Theme" to "Partner Entrance" //This is just to match the next one
+"Competition Battle Opponent's Entrance Theme" to "Opponent Entrance" 
 "Mt. Infinity Theme" Added around here
-"Arena Battle Theme No. 1" to "Arena Battle Theme 1"
-"Partner's Win Theme" to "Partner Win Theme" //match the previous ones
-"Partner's Loss Theme" to "Partner Loss Theme" //match the previous ones
-"Arena Battle Theme No. 2" to "Arena Battle Theme 2"
-"Arena Battle Theme No. 3" to "Arena Battle Theme 3"
-"Normal Battle Theme" to "Hard Battle Theme"
-"Normal Battle  Theme No.2" to "Normal Battle Theme"
+"Arena Battle Theme No. 1" to "Arena Battle 1"
+"Partner's Win Theme" to "Partner Win" //match the previous ones
+"Partner's Loss Theme" to "Partner Loss" //match the previous ones
+"Arena Battle Theme No. 2" to "Arena Battle 2"
+"Arena Battle Theme No. 3" to "Arena Battle 3"
+"Normal Battle Theme" to "Hard Battle"
+"Normal Battle  Theme No.2" to "Normal Battle"
+"Last Battle Theme" to "Last Battle"
  
 
 
 //Text changes as Hex
 
 14D717E8 to 14D71917
-Changed:
-4E 61 74 69 76 65 20 46 6F 72 65 73 74 20 54 68 65 6D 65 00
-00 00 00 00 00 00 00 05 00 00 00 00 4E 61 74 69 76 65 20 46
-6F 72 65 73 74 20 4E 69 67 68 74 20 54 68 65 6D 65 00 00 00
-00 00 00 00 00 05 00 00 54 72 6F 70 69 63 61 6C 20 54 68 65
-6D 65 00 00 54 72 6F 70 69 63 61 6C 20 4E 69 67 68 74 20 54
-68 65 6D 65 00 00 00 00 4D 74 2E 20 50 61 6E 6F 72 61 6D 61
-20 54 68 65 6D 65 00 00 4D 74 2E 20 50 61 6E 6F 72 61 6D 61
-20 4E 69 67 68 74 20 54 68 65 6D 65 00 00 00 00 44 72 69 6C
-6C 20 54 75 6E 6E 65 6C 20 54 68 65 6D 65 00 00 4F 67 72 65
-20 46 6F 72 74 72 65 73 73 20 54 68 65 6D 65 00 4F 76 65 72
-64 65 6C 6C 20 43 65 6D 65 74 65 72 79 20 54 68 65 6D 65 00
-43 61 6E 79 6F 6E 20 54 68 65 6D 65 00 00 00 00 4F 67 72 65
-6D 6F 6E 20 54 68 65 6D 65 20 32 00 00 00 02 00 4D 6F 6E 6F
-63 72 6F 6D 6F 6E 20 53 68 6F 70 20 54 68 65 6D 65 00 00 00
-4F 67 72 65 6D 6F 6E 20 54 68 65 6D 65 20 33 00 00 00 00 00 
-4C 61 76 61
 
-14D71A49 to 14D71F1C
-Changed:
-43 61 76 65 20 54 68 65 6D 65 00 47 72 65 79 20 4C 6F 72 64 
-20 4D 61 6E 73 69 6F 6E 20 54 68 65 6D 65 00 00 00 00 00 00 
-05 00 00 55 6E 64 65 72 67 72 6F 75 6E 64 20 4C 61 62 20 54 
-68 65 6D 65 00 00 00 47 65 61 72 20 53 61 76 61 6E 6E 61 20 
-54 68 65 6D 65 00 00 47 65 61 72 20 53 61 76 61 6E 6E 61 20 
-4E 69 67 68 74 20 54 68 65 6D 65 00 00 00 00 4C 65 6F 6D 6F 
-6E 20 54 68 65 6D 65 00 00 00 00 41 6D 69 64 61 20 46 6F 72 
-65 73 74 20 54 68 65 6D 65 00 00 41 6D 69 64 61 20 46 6F 72 
-65 73 74 20 4E 69 67 68 74 20 54 68 65 6D 65 00 00 00 00 44 
-69 6E 6F 20 53 70 65 65 64 20 54 68 65 6D 65 00 00 00 00 00 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-00 00 00 00 00 00 00 05 00 00 00 44 69 6E 6F 20 53 70 65 65 
-64 20 4E 69 67 68 74 20 54 68 65 6D 65 00 00 00 00 00 00 05 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-00 00 00 00 00 05 00 44 69 6E 6F 20 47 6C 61 63 69 61 6C 20 
-54 68 65 6D 65 00 00 00 00 00 00 05 00 00 00 00 00 00 00 00 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 00 00 44 
-69 6E 6F 20 47 6C 61 63 69 61 6C 20 4E 69 67 68 74 20 54 68 
-65 6D 65 00 00 00 00 00 00 05 00 00 00 00 00 00 00 00 00 00 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 46 
-72 65 65 7A 65 6C 61 6E 64 20 54 68 65 6D 65 00 00 00 00 46 
-72 65 65 7A 65 6C 61 6E 64 20 4E 69 67 68 74 20 54 68 65 6D 
-65 00 00 49 67 6C 6F 6F 20 54 68 65 6D 65 00 43 75 72 6C 69 
-6E 67 20 54 68 65 6D 65 00 00 00 53 61 6E 63 74 75 61 72 79 
-20 54 68 65 6D 65 00 53 61 6E 63 74 75 61 72 79 20 53 65 63 
-72 65 74 20 54 68 65 6D 65 00 00 47 65 63 6B 6F 20 53 77 61 
-6D 70 20 54 68 65 6D 65 00 00 00 47 65 63 6B 6F 20 53 77 61 
-6D 70 20 4E 69 67 68 74 20 54 68 65 6D 65 00 4D 69 73 74 79 
-20 54 72 65 65 73 20 54 68 65 6D 65 00 00 00 4D 69 73 74 79 
-20 54 72 65 65 73 20 4E 69 67 68 74 20 54 68 65 6D 65 00 57 
-61 72 75 4D 6F 6E 7A 61 65 6D 6F 6E 20 54 68 65 6D 65 00 54 
-6F 79 20 54 6F 77 6E 20 54 68 65 6D 65 00 00 46 61 63 74 6F 
-72 69 61 6C 20 54 6F 77 6E 20 44 61 79 00 00 46 61 63 74 6F 
-72 69 61 6C 20 54 6F 77 6E 20 4E 69 67 68 74 20 00 00 00 53 
-65 77 65 72 20 54 68 65 6D 65 00 54 72 61 73 68 20 4D 6F 75 
-6E 74 61 69 6E 20 54 68 65 6D 65 00 00 00 00 54 72 61 73 68 
-20 4D 6F 75 6E 74 61 69 6E 20 4E 69 67 68 74 20 54 68 65 6D 
-65 00 00 42 65 74 74 6C 65 20 4C 61 6E 64 20 44 61 79 00 42 
-65 74 74 6C 65 20 4C 61 6E 64 20 4E 69 67 68 74 00 00 00 00 
-00 00 00 53 65 63 72 65 74 20 42 65 61 63 68 20 43 61 76 65 
-20 54 68 65 6D 65 00 4C 61 73 74 20 52 6F 6F 6D 20 54 68 65 
-6D 65 00 46 69 6C 65 20 43 69 74 79 20 54 68 65 6D 65 00 46 
-69 6C 65 20 43 69 74 79 20 4E 69 67 68 74 20 54 68 65 6D 65 
-00 00 00 54 6F 75 72 6E 61 6D 65 6E 74 20 53 74 61 72 74 20 
-54 68 65 6D 65 00 00 54 6F 75 72 6E 61 6D 65 6E 74 20 50 72 
-6F 67 72 65 73 73 20 54 68 65 6D 65 00 0D 00 54 6F 75 72 6E 
-61 6D 65 6E 74 20 43 68 61 6D 70 69 6F 6E 20 54 68 65 6D 65 
-00 00 05 00 00 00 00 50 61 72 74 6E 65 72 20 45 6E 74 72 61 
-6E 63 65 20 54 68 65 6D 65 00 00 00 00 00 00 4F 70 70 6F 6E 
-65 6E 74 20 45 6E 74 72 61 6E 63 65 20 54 68 65 6D 65 00 4D 
-74 2E 20 49 6E 66 69 6E 69 74 79 20 54 68 65 6D 65 00 00 00 
-00 00 00 41 72 65 6E 61 20 42 61 74 74 6C 65 20 54 68 65 6D 
-65 20 31 00 00 00 01 00 00 00 00 50 61 72 74 6E 65 72 20 57 
-69 6E 20 54 68 65 6D 65 00 00 00 50 61 72 74 6E 65 72 20 4C 
-6F 73 73 20 54 68 65 6D 65 00 00 00 00 00 00 41 72 65 6E 61 
-20 42 61 74 74 6C 65 20 54 68 65 6D 65 20 32 00 00 00 02 00 
-00 00 00 41 72 65 6E 61 20 42 61 74 74 6C 65 20 54 68 65 6D 
-65 20 33 00 00 00 03 00 00 00 00 45 76 65 6E 74 20 42 61 74 
-74 6C 65 20 54 68 65 6D 65 00 00 48 61 72 64 20 42 61 74 74 
-6C 65 20 54 68 65 6D 65 00 05 00 4E 6F 72 6D 61 6C 20 42 61 
-74 74 6C 65 20 54 68 65 6D 65 20 20 00 00 00 00 00 00 00 4C 
-61 73 74 20 42 61 74 74 6C 65 20 54 68 65 6D 65
+It is easy to see the text with a Hex editor
