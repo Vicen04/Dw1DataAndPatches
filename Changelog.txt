@@ -128,3 +128,9 @@ Version 1.0.9:
 - Added the "Recycling shop fix" to the hack.
 
 - Updated the "Giromon Jukebox Fix".
+
+Version 1.0.9 18/02/24:
+
+- "Filth Challenge" has been updated to 1.1.
+
+- Panjyamon now can enter the Cool cup as intended
