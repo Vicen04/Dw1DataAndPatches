@@ -25,5 +25,11 @@ If you only want the curling randomizer, you can download it here:
 A version of the curling randomizer for the JP version of the game:
 [Curling Randomizer JP version](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Curling_randomizer_JP)
 
+Hardmode vanilla version:
+[Harder bosses](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Hardmode_hack)
+
+Filth Challenge:
+[Filth Challenge](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Filth_challenge)
+
 
 This is being done during my free time; the hack has been finished, I'm not sure if I'll upload more of the original code.
