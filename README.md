@@ -28,7 +28,7 @@ A version of the curling randomizer for the JP version of the game:
 Hardmode vanilla version:
 [Harder bosses](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Hardmode_hack)
 
-Filth Challenge:
+Filth Challenge vanilla version:
 [Filth Challenge](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Filth_challenge)
 
 
