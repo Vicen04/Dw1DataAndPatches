@@ -10,7 +10,7 @@ Some emulators may need to regenerate the EDC/ECC in the bin before being able t
 [Check the wiki for more detailed information](https://github.com/Vicen04/Dw1DataAndPatches/wiki) 
 
 
-I have created a hack which mostly includes the changes shown in this repository (Last update 18/02/24).
+I have created a hack which mostly includes the changes shown in this repository (Last update 28/02/24).
 
 [Download my hack here](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack)
 

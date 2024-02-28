@@ -129,8 +129,16 @@ Version 1.0.9:
 
 - Updated the "Giromon Jukebox Fix".
 
-Version 1.0.9 18/02/24:
+Version 1.0.9b 18/02/24:
 
 - "Filth Challenge" has been updated to 1.1.
 
 - Panjyamon now can enter the Cool cup as intended
+
+Version 1.0.9c 28/02/24:
+
+- Fixed an error with the custom unlock areas for this hack, by my own mistake:
+ * The Ice Sanctuary was fully innaccesible unless you have recruited Angemon 
+ * The Mansion was accesible by all digimon without the need of the Mansion Key, the check was not only wrong, it would block you if you tried to access with a gold banana in your inventory.
+
+- Added an explanation inside the extra patches file to let users know which are compatible with vanilla/Maeson's hack too.
