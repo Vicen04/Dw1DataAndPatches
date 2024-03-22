@@ -142,3 +142,10 @@ Version 1.0.9c 28/02/24:
  * The Mansion was accesible by all digimon without the need of the Mansion Key, the check was not only wrong, it would block you if you tried to access with a gold banana in your inventory.
 
 - Added an explanation inside the extra patches file to let users know which are compatible with vanilla/Maeson's hack too.
+
+
+Version 1.0.10:
+
+- Added two new finishers: Ice Beast King Fist (Panjyamon) and Dark Thunder (Myotismon).
+
+- Updated the Myotismon patch and the Filth patch to match the changes.
