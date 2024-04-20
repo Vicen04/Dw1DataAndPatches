@@ -149,3 +149,7 @@ Version 1.0.10:
 - Added two new finishers: Ice Beast King Fist (Panjyamon) and Dark Thunder (Myotismon).
 
 - Updated the Myotismon patch and the Filth patch to match the changes.
+
+Update 20/04/24
+
+- Added to the extra patches the "Better Drops" and "New Stat Gains" patches.
