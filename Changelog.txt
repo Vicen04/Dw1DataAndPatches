@@ -1,3 +1,5 @@
+THIS ONLY FOR THE VICE HACK AND ITS EXTRA PATCHES, IT IS NOT RELATED TO THE MAESON VERSION IN ANY WAY, BOTH VERSIONS HAVE DIFFERENT CHANGES
+
 Version 1.0:
 
 - Added Panjamon, Gigadramon and Metal etemon as evolutions to certain digimons. The requirements are the same as their normal colour counterpart (Leomon, Megadramon and Etemon).
