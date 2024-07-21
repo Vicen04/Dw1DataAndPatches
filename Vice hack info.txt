@@ -493,7 +493,8 @@ MetalEtemon: Dynamite Kick has a 457 boost (193 -> 650)
 
   - The HP and MP recovery items names and descriptions have been changed to fit better the shop. 
 
-  - The piximon dialogue glitch which made the tournament change based on the time: This was actually a bigger error which involved more textboxes. Each time the player pressed "triangle" to exit a choice box (shops/bank not included), the game would continue the script execution at the second command of the first option od the box due to missing script, when you choose between the boxes with WaruMonzaemon and when you choose to wake up Meteoromon are other instances where the glitch can happen. Why it did not cause mayor glitches is a miracle.
+  - The piximon dialogue glitch which made the tournament change based on the time: This was actually a bigger error which involved how dialogue choice textboxes work. Each time the player pressed "triangle" to exit this choice box, the game would jump to an unintended place of the script of the box due to missing script for the "triangle press option", this means that the game would read the wrong values and execute the wrong commands or even read bytes intended as only values as commands.
+    This glitch can also trigger (with different results) when you choose between the small and big boxes in WaruMonzaemon's room and when you choose to wake up Meteoromon. Why it did not cause mayor glitches is a miracle (well, it can corrupt the game).
 
   - Tankmon had a wrong tech: It has in the data the tech "Fire Spit", but it is unable to use it, from looking at the data, the correct tech is "Prominence Beam". So, sometime you would see Tankmon make an animation without any sort of move coming from it. This has been fixed.
 
