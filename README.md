@@ -14,6 +14,8 @@ I have created a hack which mostly includes the changes shown in this repository
 
 [Download my hack here](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack)
 
+[Vice Hack info](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Vice%20hack%20info.txt)
+
 [Changelog](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Changelog.txt)
 
 
