@@ -155,3 +155,7 @@ Version 1.0.10:
 Update 20/04/24
 
 - Added to the extra patches the "Better Drops" and "New Stat Gains" patches.
+
+Update 25/07/24
+
+- Fixed an error in the Myotismon patch: Devimon was unable to be accepted to be remodeled due to an oversight.
