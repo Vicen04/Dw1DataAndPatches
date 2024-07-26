@@ -159,3 +159,4 @@ Update 20/04/24
 Update 25/07/24
 
 - Fixed an error in the Myotismon patch: Devimon was unable to be accepted to be remodeled due to an oversight.
+- Fixed an error with the "RemoveTechBoost" patch: I mixed the code to display the tech values at the top and bottom, so the gamewould display a 0 rather than the value and even crash. It has been fixed.
