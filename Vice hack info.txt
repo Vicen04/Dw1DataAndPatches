@@ -1,8 +1,6 @@
 This patch was possible thanks to the public data provided by SydMontague's Github and the spreadsheet with extracted data. It also uses some of the data used by the randomizer made by meekrhino (The higher chances for some of the digimons).
 
-ALL OF THE CHANGES FROM THE HACK HAVE BEEN LISTED HERE, MAKE SURE TO ALSO LOOK AT THE EXTRA PATCHES
-
-SHORT VERSION (litte to no spoilers):
+SHORT VERSION:
 
 - Added Panjamon, Gigadramon and Metal etemon as evolutions to certain digimons. The requirements are the same as their normal colour counterpart (Leomon, Megadramon and Etemon).
 
@@ -49,6 +47,10 @@ SHORT VERSION (litte to no spoilers):
 - New maps, new boss battles: be careful, since one of the maps may give visual issues to some people, it is very unlikely you enter the map by mistake. If you are worried, read the long version of this section.
 
 - Two new finishers for two digimon.
+
+- Improved Infinity Burn. (1.11 update)
+
+- New battles that also allows to learn all techs. (1.11 update)
 
 
 DETAILED VERSION (spoilers):
@@ -118,49 +120,49 @@ The requirement has been lowered from 3076 bits to 2304 bits.
 
 Champions:
 
-- Vegiemon: 2 techs more, a total of 11. Techs: Poop Spd Toss & Ult Poop Hell. Filth type added.
+- Vegiemon: 2 extra techs, a total of 11. Techs: Poop Spd Toss & Ult Poop Hell. Filth type added.
 
-- Panjyamon: 4 techs more for a total of 16. Listed in section 2.
+- Panjyamon: 4 extra techs for a total of 16. Listed in section 2.
 
 
 Ultimate:
 
-- MetalGreymon: 1 techs more, a total of 16. Techs: Aurora Freeze.
+- MetalGreymon: 1 extra tech, a total of 16. Techs: Aurora Freeze.
 
-- Mamemon: 2 techs more, a total of 16. Techs: Megalo Spark & Confused Storm. Added the Wind type.
+- Mamemon: 2 extra techs, a total of 16. Techs: Megalo Spark & Confused Storm. Added the Wind type.
 
-- Monzaemon: 2 techs more, a total of 16. Techs: Spinning shot & Ult Poop Hell.
+- Monzaemon: 2 extra techs, a total of 16. Techs: Spinning shot & Ult Poop Hell.
 
-- SkullGreymon: 2 techs more, a total of 16. Techs: Red Inferno & Fire Tower.
+- SkullGreymon: 2 extra techs, a total of 16. Techs: Red Inferno & Fire Tower.
 
-- MetalMamemon: 2 techs more, a total of 16. Techs: Full Potential & Power Crane.
+- MetalMamemon: 2 extra techs, a total of 16. Techs: Full Potential & Power Crane.
 
-- Vademon: 4 techs more, a total of 16. Techs: Insect Plague, Confused Storm, Hurricane & Megalo Spark.
+- Vademon: 4 extra techs, a total of 16. Techs: Insect Plague, Confused Storm, Hurricane & Megalo Spark.
 
-- Andromon: 1 techs more, a total of 16. Tech: Hurricane.
+- Andromon: 1 extra tech, a total of 16. Tech: Hurricane.
 
-- Giromon: 2 techs more, a total of 16. Techs: Counter & Spinning Shot.
+- Giromon: 2 extra techs, a total of 16. Techs: Counter & Spinning Shot.
 
-- Etemon: 2 techs more, a total of 16. Techs: Odor Spray & Confused Storm. 
+- Etemon: 2 extra techs, a total of 16. Techs: Odor Spray & Confused Storm. 
 
-- Megadramon: 2 techs more, a total of 16. Techs: Water Blit & Ice Needle.
+- Megadramon: 2 extra techs, a total of 16. Techs: Water Blit & Ice Needle.
 
-- Piximon: 3 techs more, a total of 16. Techs: Megalo Spark, Water Blit & Aqua Magic.
+- Piximon: 3 extra techs, a total of 16. Techs: Megalo Spark, Water Blit & Aqua Magic.
 
-- Phoenixmon: 2 techs more, a total of 16. Techs: Fire Tower & Heat Laser.
+- Phoenixmon: 2 extra techs, a total of 16. Techs: Fire Tower & Heat Laser.
 
-- H-Kabuterimon: 1 techs more, a total of 16. Tech: Meltdown.
+- H-Kabuterimon: 1 extra techs, a total of 16. Tech: Meltdown.
 
-- MegaSeadramon: 3 techs more, a total of 16. Techs: Spinning Shot, Red Inferno, Magma Bomb.
+- MegaSeadramon: 3 extra techs, a total of 16. Techs: Spinning Shot, Red Inferno, Magma Bomb.
 
-- Gigadramon: 2 techs more, a total of 16. Listed in section 2.
+- Gigadramon: 2 extra techs, a total of 16. Listed in section 2.
 
-- MetalEtemon: 2 techs more, a total of 16. Listed in section 2.
+- MetalEtemon: 2 extra techs, a total of 16. Listed in section 2.
 
 
-- Myotismon: 11 techs more, a total of 16. Techs: War Cry, Muscle Charge, Confused Storm, Aqua Magic, Spinning Shot, Ice Neddle, Counter, Megalo Spark, Winter Blast, Water Blit, Dark Thunder (brand new finisher, Air type, 250 power).
+- Myotismon: 11 extra techs, a total of 16. Techs: War Cry, Muscle Charge, Confused Storm, Aqua Magic, Spinning Shot, Ice Neddle, Counter, Megalo Spark, Winter Blast, Water Blit, Dark Thunder (brand new finisher, Air type, 250 power).
 
-- Machinedramon: 9 techs more, a total of 16. Techs: Meltdown, Hurricane, Winter Blast, DG Dimension, Poison Claw, Counter, Fire Tower, Ult Poop Hell, Poison Powder.
+- Machinedramon: 9 extra techs, a total of 16. Techs: Meltdown, Hurricane, Winter Blast, DG Dimension, Poison Claw, Counter, Fire Tower, Ult Poop Hell, Poison Powder.
 
 
 6) Added an extra companion digimon (can be changed with an extra patch)
@@ -428,20 +430,54 @@ MetalEtemon: Dynamite Kick has a 457 boost (193 -> 650)
 
   - The improvement: I removed the part that tries to screw you over completely, so the help remains there. 
 
-  - Difference with the randomizer version: The randomizer fully skips the step 2 and 3, while my patch only skips step 3.
+  - Difference with the randomizer version: The randomizer fully skips this process, while my patch only skips step 3.
 
 
 17) New maps, new boss battles:
 
-   - A map which can also act as a shortcut has been added to MT. Infinity. It only becomes accessible after defeating Machinedramon and the entrance will be invisible. The entrance is located at the first floor of MT. Infinity (the floor with the three annoying vermilimon), pretty close to the entrance (top right corner). 
+   - A map has been added to MT. Infinity, this map is the entrance to the next new map and a shorcut to the last room of Mt. Infinity. It only becomes accessible after defeating Machinedramon and the entrance will be invisible. 
+     The entrance is located at the first floor of MT. Infinity (the floor with the three annoying vermilimon), pretty close to the entrance (top right corner). 
+
 
    - BE CAREFUL, SINCE THIS MAP MAY CAUSE VISUAL RELATED ISSUES TO SOME PEOPLE: It is pretty much a rainbow mess. 
-  ABOUT THE MAP: A map that only unlocks if the Back Dimension is active has been added, you can only enter that map once and before you beat the Back Dimension, if you want to enter again, you have to wait for the next Back Dimension. The entrance is located in the new map that acts as a shortcut. Three boss battles will happen here, and the battles will differ depending on the location of the Back Dimension. 5 items (one which will change depending on the back dimension) and an item box can also be found here.
+  ABOUT THE MAP: A map that only unlocks if the Back Dimension is active has been added. The warp will be close after you enter the map once or if you beat Machinedramon, so make sure you do everything you can in the map before leaving. 
+  If you want to enter again, you have to wait for the next Back Dimension. The entrance is located in the new map that acts as a shortcut. Three boss battles will happen here, and the battles will differ depending on the location of the Back Dimension, you can also find 5 items (there will be an evolution item too which will change depending on the back dimension) and an item box can also be found here.
+   These are the possible differences in this map:
+     *Ice Sanctuary Back Dimension: Angemon will appear. 
+     *Mansion Back Dimension: Myotismon will appear.
+     *Ogre Fortress Back Dimension: MegaSeadramon will appear. (1.11 update, earlier versions have Andromon).
 
-   - An extra map before the Machinedramon Back Dimension battle has been added, the map and boss battle will differ depending on the Back Dimension location. If you reach 100 prosperity, these battles will change.
+  If you use the top right exit, you will be teleported to the entrance of the Back Dimension.
 
 
-18) Various bug fixes:
+   - An extra map before the Machinedramon Back Dimension battle has been added, the map and boss battle will differ depending on the Back Dimension location:
+     *Ice Sanctuary Back Dimension: Panjyamon will appear. This map is MGEN 17.
+     *Mansion Back Dimension: Gigadramon will appear. This map is MGEN 15.
+     *Ogre Fortress Back Dimension: MetalEtemon will appear. This map is MGEN 14.
+
+     If you reach 100 prosperity, these battles will change (The digimon will be the same).
+
+
+
+18) Improved Infinity Burn (it was an extremely bad tech)
+
+Infinity Burn now doesn't have a huge delay in its activation, it has 90 accuracy and a 30% chance of triggering Stun.
+
+
+
+19) New battles and techs(1.11)
+
+- A battle with Andromon has been added in Factorial Town, it will only trigger after you beat the game and have recruited Andromon. This Andromon uses "Pulse Laser", "Delete Program" and "DG Dimension".
+
+- Two battles at Gear Savanna, only when the shop is not present: 
+     * Phoenixmon can be battled during the daytime, it will teach you "Infinity burn" regardless of your digimon.
+     * Mega-Kabuterimon can be battled at nights.
+
+- The entrance of Mt. Infinity now have Tekkamon, these Tekkamon know the tech "Reverse Program".
+
+
+
+20) Various bug fixes (more detailed information can be found in the Github wiki):
 
   - Myotismon text fix: Now myotismon does explain that Greymon can evolve into SkullGraymon properly. The text after that has been changed too.
 
@@ -509,7 +545,7 @@ MetalEtemon: Dynamite Kick has a 457 boost (193 -> 650)
   - Fixed the text when you try to buy something from the Recycling shop (the glitch for infinite items/money is still there).
 
 
-19) 3 Minor glitches and a bug:
+21) 3 Minor glitches and a bug:
 
   - If you obtain Panyjamon before speaking with Jijimon about the recruitment of Agumon, the game will skip that dialogue. If you recruit Agumon and speak about Jijimon about it, the game will show Panyjamon in the chart even if you never obtained it.
 

@@ -163,3 +163,18 @@ Update 25/07/24
 
 Update 29/07/24
 - Fixed an issue in the "Filth Challenge" which made the extra digimon unplayable, it did affect the vanilla and the Vice hack version.
+
+
+Version 1.11 (I just decided to remove that "0"):
+
+- Three new boss battles, all techs now can be found in NPC that you can battle multiple times.
+
+- Improved Infinity Burn, added a way to learn it as a reward.
+
+- A change in "MIHA03" which is an extra map.
+
+- Release of the "Hardcore hack" as a vanilla standalone and another version for the Vice hack.
+
+- Multiple patches to enhance the experience with the "Hardcore" version.
+
+- Fixed a bug where applying the "hardmode" patch would remove the toiler animation from Myotismon.
