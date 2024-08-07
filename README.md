@@ -1,7 +1,7 @@
 # Dw1DataAndPatches
 A repository to add some info about the code from Digimon World 1 that I have not seen anywhere yet and some patches to fix some errors from the game, it also includes a hack made thanks to these changes.
 
-This was possible thanks to SydMontage repository providing information to be able to find/discover the location of the code. Also I want to give credit to Rommstar which did a lot of work and helped a lot to various people to obatin data form Digimon World.
+This was possible thanks to SydMontague repository providing information to be able to find/discover the location of the code. Also I want to give credit to Romsstar which did a lot of work and helped a lot to various people to obtain data from Digimon World.
 
 Some emulators may need to regenerate the EDC/ECC in the bin before being able to play.
 
