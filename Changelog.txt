@@ -178,3 +178,7 @@ Version 1.11 (I just decided to remove that "0"):
 - Multiple patches to enhance the experience with the "Hardcore" version.
 
 - Fixed a bug where applying the "hardmode" patch would remove the toiler animation from Myotismon.
+
+1.11.1
+
+- Added a way to unlock the bonus area of it was glitched without having to wait for another Back Dimension or lose to Machinedramon.
