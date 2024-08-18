@@ -118,7 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HardcoreHackInfoText.Text" xml:space="preserve">
-    <value>This version is only compatible with the vanilla/Maeson hack versions. A randomized vanilla should work too.
+    <value>Version 1.0.1 
+This version is only compatible with the vanilla/Maeson hack versions. A randomized vanilla should work too.
 
 This is a hack that tries to increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content. Some of the features are:
 

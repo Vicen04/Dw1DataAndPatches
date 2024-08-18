@@ -118,7 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ViceHackInfoText.Text" xml:space="preserve">
-    <value>This patch was possible thanks to the public data provided by SydMontague's Github and the spreadsheet with extracted data.
+    <value>Version 1.11.2
+
+This patch was possible thanks to the public data provided by SydMontague's Github and the spreadsheet with extracted data.
 It also uses some of the data used by the randomizer made by Meekrhino (the higher chances for some of the digimons).
 
 Features:
@@ -137,7 +139,7 @@ Features:
 
 - All of the new digimon will show in the chart.
 
-- The Electro Ring and the Moon Mirror have been changed, now the items can be properly used to evolve to certain digimon. an item that used to be food, has been changed and now is an evolution item, another has been changed to give the same effects as the earlier item.
+- The Electro Ring and the Moon Mirror have been changed, now the items can be properly used to evolve to certain digimon. The AS Decoder is now an evolution item.
 
 - Some digimon have changed the item dropped after battle.
 

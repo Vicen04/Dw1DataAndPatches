@@ -120,7 +120,8 @@ namespace DWViceSimpleInstaller
 
         private void HardcoreInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Vice hack version of the hardcore hack." + Environment.NewLine + Environment.NewLine +
+            string tempText = "Version 1.0.1" + Environment.NewLine + Environment.NewLine +
+                "Vice hack version of the hardcore hack." + Environment.NewLine + Environment.NewLine +
                 "It will increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content." + Environment.NewLine + Environment.NewLine +
                 "Some of the features are:" + Environment.NewLine + Environment.NewLine +
                 "- More stats for all the NPC digimon" + Environment.NewLine + Environment.NewLine +
@@ -443,7 +444,7 @@ namespace DWViceSimpleInstaller
                "- Its boosted technique is 'Hurricane' with 700 potency" + Environment.NewLine + Environment.NewLine +
                "- Myotismon can enter the normal cups as well as the zero, cool, humanoid and wind cup" + Environment.NewLine + Environment.NewLine +
                "- It has the same requirements as Machinedramon, and mostly the same behaviour" + Environment.NewLine + Environment.NewLine +
-               "- It has the same stat gains as Machinedramon and uses the Tainted Melon as its evolution item" + Environment.NewLine + Environment.NewLine +
+               "- It has the same stat gains as Machinedramon and uses the Devil Coder as its evolution item" + Environment.NewLine + Environment.NewLine +
                "- Factorial Town will have the following changes:" + Environment.NewLine + Environment.NewLine +
                " * Devimon now has a 50% chance to evolve to Myotismon" + Environment.NewLine + Environment.NewLine +
                " * Greymon now has a 10% chance to evolve to Myotismon" + Environment.NewLine + Environment.NewLine +
