@@ -182,3 +182,8 @@ Version 1.11 (I just decided to remove that "0"):
 1.11.1
 
 - Added a way to unlock the bonus area of it was glitched without having to wait for another Back Dimension or lose to Machinedramon.
+
+
+1.11.2
+
+- The Chained Melon and HappyMushroom have recovered their original uses, the AS Decoder is now an evolution item. This change will also affect the Maeson hack.
