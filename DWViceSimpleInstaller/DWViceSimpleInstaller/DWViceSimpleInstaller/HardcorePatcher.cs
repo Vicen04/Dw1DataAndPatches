@@ -322,6 +322,8 @@ namespace DWViceSimpleInstaller
         private void Myotismon_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetMyotismon(Myotismon.Checked);
+            if (Myotismon.Checked)
+                MyotismonMaeson2.Checked = false;
         }
 
         private void Vermillimon_CheckedChanged(object sender, EventArgs e)
@@ -331,7 +333,8 @@ namespace DWViceSimpleInstaller
 
         private void MyotismonInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "This patch only works with the Maeson hack, it will exchange Machinedramon with Myotismon as a playable partner." + Environment.NewLine + Environment.NewLine +
+            string tempText = "Only works with Maeson 1.0.9e or earlier versions." + Environment.NewLine + Environment.NewLine +
+               "This patch only works with the Maeson hack, it will exchange Machinedramon with Myotismon as a playable partner." + Environment.NewLine + Environment.NewLine +
                "Note that this has not been balanced by Maeson (just the raise data and stat gains, everything else is technically as how it should work) and it is just a representation of how Maeson's Myotismon would have worked. It is a fully playable patch and it has been tested. Now, about Myotismon:" + Environment.NewLine + Environment.NewLine +
                "-It has 4 techs: Giga Freeze, Megaton Punch, Thunder Justice and Hurricane(originally it had 5, but one of them had to be replaced to have a finisher)" + Environment.NewLine + Environment.NewLine +
                "-A finisher has been included: Glacial Blast. Panjyamon now has its original finisher(Fist of the Beast King)" + Environment.NewLine + Environment.NewLine +
@@ -652,6 +655,37 @@ namespace DWViceSimpleInstaller
         private void UnlockAreasVice_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetUnlockAreas(UnlockAreasVice.Enabled);
+        }
+
+        private void MyotismonMaeson2_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetMyotismon2(MyotismonMaeson2.Checked);
+            if (MyotismonMaeson2.Checked)
+                Myotismon.Checked = false;
+        }
+
+        private void MyotismonInfo2_Click(object sender, EventArgs e)
+        {
+            string tempText = "Only works with Maeson 1.0.10 or later versions." + Environment.NewLine + Environment.NewLine +
+               "This patch only works with the Maeson hack, it will exchange Machinedramon with Myotismon as a playable partner." + Environment.NewLine + Environment.NewLine +
+               "Note that this has not been balanced by Maeson (just the raise data and stat gains, everything else is technically as how it should work) and it is just a representation of how Maeson's Myotismon would have worked. It is a fully playable patch and it has been tested. Now, about Myotismon:" + Environment.NewLine + Environment.NewLine +
+               "-It has 4 techs: Giga Freeze, Megaton Punch, Thunder Justice and Hurricane(originally it had 5, but one of them had to be replaced to have a finisher)" + Environment.NewLine + Environment.NewLine +
+               "-A finisher has been included: Glacial Blast. Panjyamon now has its original finisher(Fist of the Beast King)" + Environment.NewLine + Environment.NewLine +
+               "-It has the exact same raise data as Machinedramon, so it will eat, sleep, poop and get tired in more or less the same way. The stats gains are also the same as Machinedramon.Maeson*probably* would have set this to be a bit different." + Environment.NewLine + Environment.NewLine +
+               "- The original Myotismon only had the 'Thunder' and 'Battle' types, I had to add the 'Ice' type which was missing." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+               "Other changes:" + Environment.NewLine + Environment.NewLine +
+               "-Factorial town now has different evolutions: Tyranommon now evolves to Panjyamon with a 10 % chance, Angemon can evolve to Myotismon with a 10 % chance." + Environment.NewLine + Environment.NewLine +
+               "- The evo item 'Analogizer' has been renamed 'Researcher', it is used to evolve to Myotismon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+               "Changes not visible:" + Environment.NewLine + Environment.NewLine +
+               "- Both Machinedramon and Myotismon have mini sprites set for when you enter a tournament / cup, but since Maeson never allowed Machinedramon to enter any(and Myotismon follows the same logic), it is not visible at all." + Environment.NewLine + Environment.NewLine +
+               "- Leomon and Panjyamon now share the same ID when it comes to check for techs enabled, originally Maeson decided to use a different one for Panjyamon." + Environment.NewLine + Environment.NewLine +
+               "- Cleaned some leftover code that would have made this patch use the wrong audio for Myotismon, luckily using MetalGreymon sounds is not out of place for Machinedramon... but it is supposed to use Megadramon sounds as the game itself does that when you fight it. Myotismon should share sounds with Devimon.";
+
+            ViceHackInfo infoDifficulty = new ViceHackInfo();
+            infoDifficulty.DisableLink();
+            infoDifficulty.ChangeTitle("Myotismon patch info");
+            infoDifficulty.ChangeText(tempText);
+            infoDifficulty.ShowDialog();
         }
     }
 }

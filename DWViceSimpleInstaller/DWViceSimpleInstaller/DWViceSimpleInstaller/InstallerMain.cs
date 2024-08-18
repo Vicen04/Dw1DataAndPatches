@@ -37,7 +37,7 @@ namespace DWViceSimpleInstaller
 
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, 
-             BGMpatch, curlingRandomizer;
+             BGMpatch, curlingRandomizer, myotismon2;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore;
@@ -196,6 +196,8 @@ namespace DWViceSimpleInstaller
 
             if (myotismon && currentPatcher != patchType.VICEHACK)
                 SetPatch(path + "MyotismonMaeson.ppf");
+            else if (myotismon2)
+                SetPatch(path + "MyotismonMaeson2.ppf");
 
             if (curlingRandomizer && currentPatcher != patchType.VICEHACK)
                 SetPatch(path + "DigimonWorldCurlingRandomizer 1.1.ppf");
@@ -428,6 +430,8 @@ namespace DWViceSimpleInstaller
         public void SetRecycling(bool enabled) { recycling = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
+        public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
+
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
         {
@@ -589,7 +593,12 @@ namespace DWViceSimpleInstaller
                 if(currentPatcher == patchType.VICEHACK)
                     txtWritter.Write("- Vice Myotismon");
                 else
-                    txtWritter.Write("- Myotismon for the Maeson hack");
+                    txtWritter.Write("- Myotismon for the Maeson hack version 1.0.9e");
+                txtWritter.WriteLine();
+            }
+            else if (myotismon2)
+            {
+                txtWritter.Write("- Myotismon for the Maeson hack version 1.0.10+");
                 txtWritter.WriteLine();
             }
 

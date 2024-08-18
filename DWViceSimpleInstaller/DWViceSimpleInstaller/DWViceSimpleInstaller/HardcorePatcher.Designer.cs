@@ -88,6 +88,7 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.UnlockAreasVice = new System.Windows.Forms.CheckBox();
             this.bonusTryFix = new System.Windows.Forms.CheckBox();
             this.BGMpatch = new System.Windows.Forms.CheckBox();
             this.sDirtReduction = new System.Windows.Forms.CheckBox();
@@ -102,7 +103,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.UnlockAreasVice = new System.Windows.Forms.CheckBox();
+            this.MyotismonMaeson2 = new System.Windows.Forms.CheckBox();
+            this.MyotismonInfo2 = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -403,6 +405,8 @@
             // 
             // DigimonGroup
             // 
+            this.DigimonGroup.Controls.Add(this.MyotismonInfo2);
+            this.DigimonGroup.Controls.Add(this.MyotismonMaeson2);
             this.DigimonGroup.Controls.Add(this.curlingRandomizerInfo);
             this.DigimonGroup.Controls.Add(this.curlingRandomizer);
             this.DigimonGroup.Controls.Add(this.Vermillimon);
@@ -422,7 +426,7 @@
             // 
             this.curlingRandomizerInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.curlingRandomizerInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.curlingRandomizerInfo.Location = new System.Drawing.Point(595, 137);
+            this.curlingRandomizerInfo.Location = new System.Drawing.Point(834, 137);
             this.curlingRandomizerInfo.Name = "curlingRandomizerInfo";
             this.curlingRandomizerInfo.Size = new System.Drawing.Size(35, 35);
             this.curlingRandomizerInfo.TabIndex = 24;
@@ -434,7 +438,7 @@
             // 
             this.curlingRandomizer.AutoSize = true;
             this.curlingRandomizer.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.curlingRandomizer.Location = new System.Drawing.Point(315, 138);
+            this.curlingRandomizer.Location = new System.Drawing.Point(553, 137);
             this.curlingRandomizer.Name = "curlingRandomizer";
             this.curlingRandomizer.Size = new System.Drawing.Size(263, 35);
             this.curlingRandomizer.TabIndex = 23;
@@ -458,7 +462,7 @@
             // 
             this.MyotismonInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.MyotismonInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.MyotismonInfo.Location = new System.Drawing.Point(315, 38);
+            this.MyotismonInfo.Location = new System.Drawing.Point(401, 34);
             this.MyotismonInfo.Name = "MyotismonInfo";
             this.MyotismonInfo.Size = new System.Drawing.Size(35, 35);
             this.MyotismonInfo.TabIndex = 21;
@@ -472,9 +476,9 @@
             this.Myotismon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Myotismon.Location = new System.Drawing.Point(33, 38);
             this.Myotismon.Name = "Myotismon";
-            this.Myotismon.Size = new System.Drawing.Size(265, 35);
+            this.Myotismon.Size = new System.Drawing.Size(346, 35);
             this.Myotismon.TabIndex = 0;
-            this.Myotismon.Text = "Myotismon Maeson";
+            this.Myotismon.Text = "Myotismon Maeson 1.0.9e";
             this.Myotismon.UseVisualStyleBackColor = true;
             this.Myotismon.CheckedChanged += new System.EventHandler(this.Myotismon_CheckedChanged);
             // 
@@ -893,6 +897,18 @@
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
             // 
+            // UnlockAreasVice
+            // 
+            this.UnlockAreasVice.AutoSize = true;
+            this.UnlockAreasVice.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.UnlockAreasVice.Location = new System.Drawing.Point(607, 427);
+            this.UnlockAreasVice.Name = "UnlockAreasVice";
+            this.UnlockAreasVice.Size = new System.Drawing.Size(256, 35);
+            this.UnlockAreasVice.TabIndex = 14;
+            this.UnlockAreasVice.Text = "Unlock Areas Vice";
+            this.UnlockAreasVice.UseVisualStyleBackColor = true;
+            this.UnlockAreasVice.CheckedChanged += new System.EventHandler(this.UnlockAreasVice_CheckedChanged);
+            // 
             // bonusTryFix
             // 
             this.bonusTryFix.AutoSize = true;
@@ -1063,17 +1079,29 @@
             this.betterDrops.UseVisualStyleBackColor = true;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // UnlockAreasVice
+            // MyotismonMaeson2
             // 
-            this.UnlockAreasVice.AutoSize = true;
-            this.UnlockAreasVice.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UnlockAreasVice.Location = new System.Drawing.Point(607, 427);
-            this.UnlockAreasVice.Name = "UnlockAreasVice";
-            this.UnlockAreasVice.Size = new System.Drawing.Size(256, 35);
-            this.UnlockAreasVice.TabIndex = 14;
-            this.UnlockAreasVice.Text = "Unlock Areas Vice";
-            this.UnlockAreasVice.UseVisualStyleBackColor = true;
-            this.UnlockAreasVice.CheckedChanged += new System.EventHandler(this.UnlockAreasVice_CheckedChanged);
+            this.MyotismonMaeson2.AutoSize = true;
+            this.MyotismonMaeson2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MyotismonMaeson2.Location = new System.Drawing.Point(33, 136);
+            this.MyotismonMaeson2.Name = "MyotismonMaeson2";
+            this.MyotismonMaeson2.Size = new System.Drawing.Size(346, 35);
+            this.MyotismonMaeson2.TabIndex = 25;
+            this.MyotismonMaeson2.Text = "Myotismon Maeson 1.0.10";
+            this.MyotismonMaeson2.UseVisualStyleBackColor = true;
+            this.MyotismonMaeson2.CheckedChanged += new System.EventHandler(this.MyotismonMaeson2_CheckedChanged);
+            // 
+            // MyotismonInfo2
+            // 
+            this.MyotismonInfo2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.MyotismonInfo2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MyotismonInfo2.Location = new System.Drawing.Point(401, 135);
+            this.MyotismonInfo2.Name = "MyotismonInfo2";
+            this.MyotismonInfo2.Size = new System.Drawing.Size(35, 35);
+            this.MyotismonInfo2.TabIndex = 26;
+            this.MyotismonInfo2.Text = "?";
+            this.MyotismonInfo2.UseVisualStyleBackColor = false;
+            this.MyotismonInfo2.Click += new System.EventHandler(this.MyotismonInfo2_Click);
             // 
             // HardcorePatcher
             // 
@@ -1195,5 +1223,7 @@
         private System.Windows.Forms.CheckBox recycling;
         private System.Windows.Forms.CheckBox bonusTryFix;
         private System.Windows.Forms.CheckBox UnlockAreasVice;
+        private System.Windows.Forms.CheckBox MyotismonMaeson2;
+        private System.Windows.Forms.Button MyotismonInfo2;
     }
 }
