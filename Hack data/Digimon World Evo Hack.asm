@@ -460,7 +460,7 @@ Disassembly:
 void HandleEvoItems(int EvoItemValue)
 
 {
-  ushort in_v0;
+  ushort evolutionTarget;
   
   if (EvoItemValue < 125) //Makes sure that is inside the normal items value
   {
@@ -476,12 +476,17 @@ void HandleEvoItems(int EvoItemValue)
       OldBrains = DigimonBrains;
       EvoItemValue = 114;  //it was overwritten before, so it has to be set again
     }
+	;//old code
     if (EvoItemValue == 70) //Chain Melon, exclusive to my hack, Maeson does not have this
-      in_v0 = 62;
+      evolutionTarget = 62;
+	  
+	;// new code
+	 if (EvoItemValue == 124) //AS decoder
+      evolutionTarget = 62;
     
     else 
     {
-      in_v0 = (&ItemsValues)[EvoItemValue];
+      evolutionTarget = (&ItemsValues)[EvoItemValue];
       if (((&DigimonLevel)[(&ItemsValues)[EvoItemValue] * 0x34] - 1) != (&DigimonLevel)[*EntityPtr * 0x34]) //checks that the digimon is 1 level lower than the digimon it has to evolve
         return;
       
@@ -490,17 +495,17 @@ void HandleEvoItems(int EvoItemValue)
   else 
   {
     if (EvoItemValue == 126) // Noble Mane
-      in_v0 = 63;
+      evolutionTarget = 63;
     
     if (EvoItemValue == 125) //Giga Hand
-      in_v0 = 64; //Maeson has a 62 here
+      evolutionTarget = 64; //Maeson has a 62 here
     
     if (EvoItemValue == 127) // Metal Banana
-      in_v0 = 65;
+      evolutionTarget = 65;
     
   }
   EvoItemFlag = 1; // disable stat gains
-  _DigimonEvoValue = in_v0;
+  _DigimonEvoValue = evolutionTarget;
   FUN_800c55fc(); //sets the item to be destroyed
   FUN_800db238();
   SetMenuState(6);
@@ -544,13 +549,13 @@ Disassembly:
         800c38a8 21 00 00 10     b          0x800c3930
         800c38ac 3e 00 02 24     _li        v0,0x3e
 
-//Maeson  
+//Vice 1.11.2 and Maeson 
                              LAB_800c389c       
-        800c389c 00 00 00 00     nop
-        800c38a0 00 00 00 00     nop
-        800c38a4 00 00 00 00     nop
-        800c38a8 00 00 00 00     nop
-        800c38ac 00 00 00 00     nop
+        800c389c 7c 00 01 24     _li        at,0x7c
+        800c38a0 03 00 81 14     bne        a0,at,0x800c38b0
+        800c38a4 00 00 00 00     _nop
+        800c38a8 21 00 00 10     b          0x800c3930
+        800c38ac 3e 00 02 24     _li        v0,0x3e
 
 
                              LAB_800c38b0                       
@@ -1785,11 +1790,11 @@ Changed:
 
 // Chain Melon change, exclusive to my hack
 
-//check the repository for the original code
+//check the repository for the original code, before 1.11.2
 HandleItemRejection()
 {
 //code ignored
-if (((69 < ItemBeingFeed) && (ItemBeingFeed < 115)) ||...  //check if this is an evo item
+if (((69 < ItemBeingFeed) && (ItemBeingFeed < 115)) ||...  //check if this is an edible item
                            
 
 // code ignored         
@@ -1800,24 +1805,6 @@ if (digimonTargetLevel == 3) //only the chain melon has this level
 // code ignored                     
 }
 
-
-
-//Check SydMontague repository for the original code of this function
-
-//Now the HappyMushroom has the effect of a Chain Melon
-void HandleFood(uint FoodType)
-{  
-
-  else if (FoodType == 70 || FoodType == 69) //Chain Melon or HappyMushroom, it has the old Chain Melon data
-  {
-    lifetime = 20;
-    energy = 50;
-    happiiness = 50;
-    tiredenessReduction = 50;
-    sicknessValue = 5;
-    weight = 3;
-  }
-}
 
 Disassembly:
 
@@ -1836,9 +1823,24 @@ Disassembly:
         800a74a4 00 00 00 00     _nop
         800a74a8 00 00 00 00     nop
         800a74ac 00 00 00 00     nop
+		
+		
+//Check SydMontague repository for the original code of this function
 
+//Now the HappyMushroom has the effect of a Chain Melon, this one is only before 1.11.2
+void HandleFood(uint FoodType)
+{  
 
-
+  else if (FoodType == 70 || FoodType == 69) //Chain Melon or HappyMushroom, it has the old Chain Melon data
+  {
+    lifetime = 20;
+    energy = 50;
+    happiiness = 50;
+    tiredenessReduction = 50;
+    sicknessValue = 5;
+    weight = 3;
+  }
+}
                                HandleFood
 
                              LAB_800c4250                                   
@@ -1883,6 +1885,48 @@ Disassembly:
 
 14D68CE8 Chain Melon pointer change: 6C 39 0C 80 to 60 38 0C 80 //this makes it call the evo item function rather than the food function
 
+
+
+//AS Decoder change, 1.11.2 onwards
+HandleItemRejection()
+{
+//code ignored
+if (((... ||ItemBeingFeed < 124)  //check if this is an edible item
+    (...||(124 < (int)ItemBeingFeed? && ((int)ItemBeingFeed? < 128)) //check if this is an evo item
+                           
+
+// code ignored         
+
+if (ItemBeingFeed == 124) //only the chain melon has this level
+    digimonTargetLevel = 5;  //use an Ultimate level
+
+// code ignored                     
+}
+
+
+Disassembly:
+
+                          HandleItemRejection
+
+         Offset       Hex         Command     
+        800a731c 7c 00 01 2a     slti       at,s0,0x7c
+		                               
+        800a7368 7c 00 01 2a     slti       at,s0,0x7c
+
+
+		
+		800a748c 7c 00 01 24     li         at,0x7c
+        800a7490 02 00 30 14     bne        at,s0,0x800a749c
+        800a7494 00 00 00 00     _nop
+        800a7498 05 00 02 24     li         v0,0x5
+                             LAB_800a749c                                   
+        800a749c 01 00 84 24     addiu      a0,a0,0x1
+        800a74a0 05 00 44 10     beq        v0,a0,0x800a74b8
+        800a74a4 00 00 00 00     _nop
+        800a74a8 00 00 00 00     nop
+        800a74ac 00 00 00 00     nop
+
+14D68DC0 AS Decoder pointer change: 00 00 00 00 to 60 38 0C 80 //this makes it call the evo item function rather than nothing
 
 //Improved lifetime when evolving to ultimate (Exclusive to my hack)
 //Check the repository for the original code
@@ -2044,7 +2088,7 @@ The goal is calculated with this formula: goal = (value + 1) * 256
 140007B1 Goal 2: from 0B to 08 //Join the city requirement (3072 to 2304)
 
 
-//Chain Melon text, exclusive to my hack
+//Chain Melon text, exclusive to my hack before 1.11.2
 
 14062678 and 14061188
 
@@ -2099,7 +2143,12 @@ Tournament A and B now accept Machinedramon, Panjamon, Gigadramon and MetalEtemo
 
 The "Electro Ring" was renamed to "King Crown", the description for this item changed
 The "Moon Mirror" was renamed to "Ugly Mirror", the description for this item changed
+
+//before 1.11.2
 The "Chain Melon" was renamed to "Tainted Melon", the description for this item changed
+
+//1.11.2 onwards
+The "AS Decoder" was renamed to "Machi Coder", the description for this item changed
 
 A few other items were renamed and/or the description was fixed/improved
 
