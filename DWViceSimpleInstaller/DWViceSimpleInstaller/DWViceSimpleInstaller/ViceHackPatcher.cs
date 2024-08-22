@@ -191,7 +191,7 @@ namespace DWViceSimpleInstaller
 
         private void Hardcore_CheckedChanged(object sender, EventArgs e)
         {
-            if (Hardcore.Checked == true)
+            if (Hardcore.Checked)
             {
                 ChallengePatch.Checked = false;
                 Hardmode.Checked = false;                
@@ -201,10 +201,9 @@ namespace DWViceSimpleInstaller
             else
             {
                 if (!Hardmode.Checked && !ChallengePatch.Checked)                
-                    parentForm.SetViceDifficulty(MainApp.viceDifficulty.NONE);
-                
+                    parentForm.SetViceDifficulty(MainApp.viceDifficulty.NONE);                
 
-                if (Hardmode.Checked == false)
+                if (!Hardmode.Checked)
                 {
                     ultraHardcore.Checked = false;
                     ultraHardcore.Enabled = false;
@@ -219,16 +218,13 @@ namespace DWViceSimpleInstaller
 
         private void FilthChanllenge_CheckedChanged(object sender, EventArgs e)
         {
-            if (FilthChanllenge.Checked)
-            {
-                restoreFilth.Enabled = true;
-                parentForm.SetFilth(true);
-            }
+            parentForm.SetFilth(FilthChanllenge.Checked);
+            if (FilthChanllenge.Checked)            
+                restoreFilth.Enabled = true;                         
             else
             {
                 restoreFilth.Checked = false;
                 restoreFilth.Enabled = false;
-                parentForm.SetFilth(false);
             }
         }
 
@@ -251,13 +247,10 @@ namespace DWViceSimpleInstaller
             {
                 removeTechBoost.Enabled = true;
 
-                if (Hardcore.Checked || Hardmode.Checked)
-                {
-                    hardcoreBattler.Enabled = true;
-                }
+                if (Hardcore.Checked || Hardmode.Checked)                
+                    hardcoreBattler.Enabled = true;                
                 else if (!ChallengePatch.Checked)
                     hardcoreBattler.Enabled = true;
-
             }
         }
 
@@ -615,8 +608,7 @@ namespace DWViceSimpleInstaller
         {
             parentForm.patchFinished -= EndPatchingApp;
             tempConfirm.FormClosed += new FormClosedEventHandler(CloseApp);
-            tempConfirm.ConfirmExit();
-            
+            tempConfirm.ConfirmExit();            
         }
 
         void CloseApp(object sender, EventArgs e) { this.Close(); }
