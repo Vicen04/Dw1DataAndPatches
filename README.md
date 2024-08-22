@@ -18,7 +18,7 @@ I have created a hack which mostly includes the changes shown in this repository
 
 [Standalone Hardcore hack](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_World_Hardcore)
 
-[Vice Hack info](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Vice%20hack%20info.txt)
+[Spreadsheets with info](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Information%20links.txt)
 
 [Changelog](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Changelog.txt)
 
