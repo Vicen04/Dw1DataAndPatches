@@ -189,3 +189,7 @@ Version 1.11 (I just decided to remove that "0"):
 1.11.2
 
 - The Chained Melon and HappyMushroom have recovered their original uses, the AS Decoder is now an evolution item. This small update will also be applied to the Maeson hack.
+
+1.11.3
+
+- Fixed the "Tech Boost" not activating for your partner in certain emulators, the boost would only work for NPC (hardcore/hardmode only).
