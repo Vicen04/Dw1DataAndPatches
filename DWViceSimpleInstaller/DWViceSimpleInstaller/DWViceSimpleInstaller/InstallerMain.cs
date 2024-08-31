@@ -119,7 +119,7 @@ namespace DWViceSimpleInstaller
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "/Patches/ViceHack/";
             //main patch
-            SetPatch(path + "DigimonWorldVice_1.11.3.ppf");
+            SetPatch(path + "DigimonWorldVice_1.11.4.ppf");
 
             //optional exclusive patches
             switch (currentViceDifficulty)

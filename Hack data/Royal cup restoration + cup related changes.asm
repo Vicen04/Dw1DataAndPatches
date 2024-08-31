@@ -163,23 +163,24 @@ Changed:
                              LAB_80057a08                                   
         80057a08 21 18 a4 02     addu       v1,s5,a0
         80057a0c 00 00 62 90     lbu        v0,0x0(v1)
-        80057a10 04 00 02 10     beq        zero,v0,0x80057a24
-        80057a14 00 00 00 00     _nop
-        80057a18 3e 00 01 24     li         at,0x3e
-        80057a1c 03 00 41 14     bne        v0,at,0x80057a2c
-        80057a20 00 00 00 00     _nop
+		80057a10 00 00 00 00     nop
+        80057a14 04 00 02 10     beq        zero,v0,0x80057a24   //check if the ID is 0
+        80057a18 00 00 00 00     _nop
+        80057a1c 3e 00 01 24     li         at,0x3e
+        80057a20 03 00 41 14     bne        v0,at,0x80057a2c  //check if the ID is 62
+        80057a24 00 00 00 00     _nop
                              LAB_80057a24                                    
-        80057a24 73 00 02 24     li         v0,0x73
-        80057a28 00 00 62 a0     sb         v0,0x0(v1)
+        80057a28 73 00 02 24     li         v0,0x73
+        80057a2c 00 00 62 a0     sb         v0,0x0(v1)
                              LAB_80057a2c                                 
-        80057a2c 01 00 84 20     addi       a0,a0,0x1
+        80057a30 01 00 84 20     addi       a0,a0,0x1
                              LAB_80057a30                                   
-        80057a30 08 00 81 28     slti       at,a0,0x8
-        80057a34 f4 ff 20 14     bne        at,zero,0x80057a08
-        80057a38 00 00 00 00     _nop
-        80057a3c 00 00 00 00     nop       //just some empty commands
-        80057a40 00 00 00 00     nop
-        80057a44 00 00 00 00     nop
+        80057a34 08 00 81 28     slti       at,a0,0x8
+        80057a38 f4 ff 20 14     bne        at,zero,0x80057a08
+        80057a3c 00 00 00 00     _nop
+        80057a3c 0a 00 00 10     b          0x80057a68
+        80057a40 00 00 00 00     _nop
+        80057a44 00 00 00 00     nop        //just some empty commands
         80057a48 00 00 00 00     nop
         80057a4c 00 00 00 00     nop
         80057a50 00 00 00 00     nop
@@ -233,7 +234,7 @@ void SetRival(int param_1,int param_2,int param_3)
 //code ignored
 
   StatDivisor = 1;
-  StatMultiplier = 4;
+  StatMultiplier = 4; //will be used by baby/in-training
 
  if (DigimonLevel == 5)
   {
