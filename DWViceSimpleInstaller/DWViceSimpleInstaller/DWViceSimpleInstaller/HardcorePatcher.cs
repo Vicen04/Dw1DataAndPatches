@@ -156,13 +156,19 @@ namespace DWViceSimpleInstaller
                 restoreFilth.Enabled = true;
                 UnlockAreasVice.Enabled = false;
                 UnlockAreasVice.Checked = false;
-                
+                Myotismon.Enabled = false;
+                MyotismonMaeson2.Enabled = false;
+                Myotismon.Checked = false;
+                MyotismonMaeson2.Checked = false;
+
             }
             else
             {
                 restoreFilth.Checked = false;
                 restoreFilth.Enabled = false;
                 UnlockAreasVice.Enabled = true;
+                Myotismon.Enabled = true;
+                MyotismonMaeson2.Enabled = true;
             }
         }
 

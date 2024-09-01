@@ -219,12 +219,17 @@ namespace DWViceSimpleInstaller
         private void FilthChanllenge_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetFilth(FilthChanllenge.Checked);
-            if (FilthChanllenge.Checked)            
-                restoreFilth.Enabled = true;                         
+            if (FilthChanllenge.Checked)
+            {
+                restoreFilth.Enabled = true;
+                Myotismon.Enabled = false;
+                Myotismon.Checked = false;
+            }
             else
             {
                 restoreFilth.Checked = false;
                 restoreFilth.Enabled = false;
+                Myotismon.Enabled = true;
             }
         }
 

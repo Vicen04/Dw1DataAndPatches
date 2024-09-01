@@ -49,8 +49,6 @@
             this.ViceHackInfoText.Size = new System.Drawing.Size(600, 550);
             this.ViceHackInfoText.TabIndex = 0;
             this.ViceHackInfoText.Text = resources.GetString("ViceHackInfoText.Text");
-            this.ViceHackInfoText.SelectionStart = 0;
-            this.ViceHackInfoText.SelectionLength = 0;
             // 
             // ViceHackInfoTitle
             // 
