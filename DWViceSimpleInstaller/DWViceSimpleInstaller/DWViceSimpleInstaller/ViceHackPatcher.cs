@@ -374,7 +374,9 @@ namespace DWViceSimpleInstaller
                "- Fully unlock areas: this patch will let you enter the Mansion, Sanctuary and Toy Town without any restrictions" + Environment.NewLine + Environment.NewLine +
                "- Restore chain melon: the HappyMushroom and the Chain Melon will have their original use" + Environment.NewLine + Environment.NewLine +
                "- Remove tech boost: this patch will remove the tech boost of all digimon (not available in challenge or ultra hardcore)" + Environment.NewLine + Environment.NewLine +
-               "- Restore ultimate extended lifetime: The extended lifetime of 8 days when becoming an ultimate, will go back to the original 4 days";
+               "- Restore ultimate extended lifetime: The extended lifetime of 8 days when becoming an ultimate, will go back to the original 4 days" + Environment.NewLine + Environment.NewLine +
+               "- Map colour fix: Fixes the coloring issue in the bonus map, showing the original intended texture and making it better for the eyes.";
+
 
             ViceHackInfo infoWindow = new ViceHackInfo();
             infoWindow.Text = "Info window";
@@ -618,6 +620,9 @@ namespace DWViceSimpleInstaller
 
         void CloseApp(object sender, EventArgs e) { this.Close(); }
 
-
+        private void colourFix_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetMapColour(colourFix.Checked);
+        }
     }
 }

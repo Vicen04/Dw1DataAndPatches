@@ -98,6 +98,7 @@
     </Compile>
     <EmbeddedResource Include="OptionalPatchesInfo.resx">
       <DependentUpon>OptionalPatchesInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="HardcoreHackInfo.resx">
       <DependentUpon>HardcoreHackInfo.cs</DependentUpon>
@@ -108,9 +109,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PatchConfirm.resx">
       <DependentUpon>PatchConfirm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Patching.resx">
       <DependentUpon>Patching.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ViceHackInfoForm.resx">
       <DependentUpon>ViceHackInfoForm.cs</DependentUpon>
@@ -126,6 +129,7 @@
     </Compile>
     <EmbeddedResource Include="HardcorePatcher.resx">
       <DependentUpon>HardcorePatcher.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ViceHackPatcher.resx">
       <DependentUpon>ViceHackPatcher.cs</DependentUpon>

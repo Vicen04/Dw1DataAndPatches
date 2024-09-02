@@ -237,7 +237,7 @@ namespace DWViceSimpleInstaller
         private void InfoDigimon_Click(object sender, EventArgs e)
         {
             string tempText = "Patches that change digimon:" + Environment.NewLine + Environment.NewLine +
-               "- Myotismon Maeson: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
+               "- Myotismon Maeson (Maeson hack only): click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
                "- Vermillimon patch: this patch changes the Monochromon texture to look like a Vermillimon, the chart also has a different texture" +Environment.NewLine + Environment.NewLine +
                "- Curling randomizer: click on the question mark next to it for detailed info";
 
@@ -250,11 +250,12 @@ namespace DWViceSimpleInstaller
 
         private void BugFixesInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Patches that fix bugs/glitches from the game. These patches are only made for vanilla or a vanilla randomizer game, some patches may not be compatible with the randomizer:" + Environment.NewLine + Environment.NewLine +
+            string tempText = "DO NOT APPLY THESE TO EITHER VICE OR MAESON, CHECK ALSO IF IT IS COMPATIBLE WITH THE RANDOMIZER HERE" + Environment.NewLine + Environment.NewLine + 
+               "Patches that fix bugs/glitches from the game. These patches are only made for vanilla or a vanilla randomizer game, some patches may not be compatible with the randomizer:" + Environment.NewLine + Environment.NewLine +
                "- Bank text fix: fixes the bank text dissapearing when scrolling" + Environment.NewLine + Environment.NewLine +
                "- Battle text fix: this patch fixes an issue with a Clear Agumon in 'Toy Town' and a Blue Meramon in the 'Back Dimension' only spamming their text and not triggering a battle" + Environment.NewLine + Environment.NewLine +
                "- Battle time fix: this patch fixes various issues that happen when an hour passes while you are in a battle" + Environment.NewLine + Environment.NewLine +
-               "- Evolution target fix (not compatible with the randomizer) :fixes an oversight in the code that makes some digimon harder to obtain" + Environment.NewLine + Environment.NewLine +
+               "- Evolution target fix (not compatible with the randomizer): fixes an oversight in the code that makes some digimon harder to obtain" + Environment.NewLine + Environment.NewLine +
                "- Evolution item flag fix: fixes an issue where the 'evolution item flag' is never deactivated after using an evolution item" + Environment.NewLine + Environment.NewLine +
                "- Evolution item rejection: fixes an issue where fresh/in-training can eat evo items, but not trigger the effect, when that's not intended" + Environment.NewLine + Environment.NewLine +
                "- Forget techs fix: this patch will fix the bug that deletes more techs than the intended ones when you forget techniques after losing all your lives" + Environment.NewLine + Environment.NewLine +

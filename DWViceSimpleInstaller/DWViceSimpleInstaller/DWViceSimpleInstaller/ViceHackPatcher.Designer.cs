@@ -90,6 +90,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
+            this.colourFix = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -537,6 +538,7 @@
             // 
             // miscPatches
             // 
+            this.miscPatches.Controls.Add(this.colourFix);
             this.miscPatches.Controls.Add(this.removeTechBoost);
             this.miscPatches.Controls.Add(this.restoreLifetime);
             this.miscPatches.Controls.Add(this.restoreChainMelon);
@@ -572,7 +574,7 @@
             // 
             this.restoreLifetime.AutoSize = true;
             this.restoreLifetime.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreLifetime.Location = new System.Drawing.Point(270, 427);
+            this.restoreLifetime.Location = new System.Drawing.Point(98, 426);
             this.restoreLifetime.Name = "restoreLifetime";
             this.restoreLifetime.Size = new System.Drawing.Size(455, 35);
             this.restoreLifetime.TabIndex = 26;
@@ -878,6 +880,18 @@
             this.betterDrops.UseVisualStyleBackColor = true;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
+            // colourFix
+            // 
+            this.colourFix.AutoSize = true;
+            this.colourFix.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.colourFix.Location = new System.Drawing.Point(579, 427);
+            this.colourFix.Name = "colourFix";
+            this.colourFix.Size = new System.Drawing.Size(206, 35);
+            this.colourFix.TabIndex = 28;
+            this.colourFix.Text = "Map colour fix";
+            this.colourFix.UseVisualStyleBackColor = true;
+            this.colourFix.CheckedChanged += new System.EventHandler(this.colourFix_CheckedChanged);
+            // 
             // ViceHackPatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -985,5 +999,6 @@
         private System.Windows.Forms.CheckBox restoreChainMelon;
         private System.Windows.Forms.CheckBox removeTechBoost;
         private System.Windows.Forms.CheckBox restoreLifetime;
+        private System.Windows.Forms.CheckBox colourFix;
     }
 }
