@@ -119,7 +119,7 @@ namespace DWViceSimpleInstaller
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "/Patches/ViceHack/";
             //main patch
-            SetPatch(path + "DigimonWorldVice_1.11.4.ppf");
+            SetPatch(path + "DigimonWorldVice_1.11.5.ppf");
 
             //optional exclusive patches
             switch (currentViceDifficulty)
@@ -147,7 +147,7 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "MyotismonPatchVice.ppf");
 
             if (filth)
-                SetPatch(path + "FilthChallengeViceHack 1.1.3.ppf");
+                SetPatch(path + "FilthChallengeViceHack 1.1.4.ppf");
 
             if (insaneBattle)
                 SetPatch(path + "InsaneBattle.ppf");

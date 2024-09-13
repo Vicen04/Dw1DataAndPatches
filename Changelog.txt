@@ -193,3 +193,12 @@ Version 1.11 (I just decided to remove that "0"):
 1.11.3
 
 - Fixed the "Tech Boost" not activating for your partner in certain emulators, the boost would only work for NPC (hardcore/hardmode only).
+
+1.11.4
+- Added a few unused events to the game.
+- Fixed a misplaced animation on Phoenixmon.
+- Expanded the rooster of digimon that can enter and appear in cups in the arena.
+
+1.11.5 (I was not planning to make this update...)
+- Added a new way to evolve in Factorial Town, only available after you beat the game. The filth challenge had to be updated for this patch.
+- Fixed a bug caused by the textbox patch, for some reason the fix was partially undone, making it freeze in real consoles with a few of the textboxes (not all of them).

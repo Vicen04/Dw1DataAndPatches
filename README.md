@@ -3,7 +3,7 @@ A repository to add some info about the code from Digimon World 1 that I have no
 
 This was possible thanks to SydMontague repository providing information to be able to find/discover the location of the code. Also I want to give credit to Romsstar which did a lot of work and helped a lot to various people to obtain data from Digimon World.
 
-I have created a hack which mostly includes the changes shown in this repository (Last update 31/08/24).
+I have created a hack which mostly includes the changes shown in this repository (Last update 13/09/24).
 
 [Hack installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer)
 
