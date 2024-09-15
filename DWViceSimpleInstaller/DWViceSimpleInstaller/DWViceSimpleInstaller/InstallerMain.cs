@@ -241,8 +241,9 @@ namespace DWViceSimpleInstaller
             if (betterDrop)
                 SetPatch(path + "Useful patches/BetterDrops.ppf");
 
-            if (bonusTry)
+            if (bonusTry || currentPatcher == patchType.VICEHACK)
             {
+                if (currentPatcher != patchType.VICEHACK)
                 SetPatch(path + "Useful patches/BonusTryFix 1.1.ppf");
 
                 if (superBonus)

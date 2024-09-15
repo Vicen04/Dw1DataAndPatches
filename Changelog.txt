@@ -200,5 +200,6 @@ Version 1.11 (I just decided to remove that "0"):
 - Expanded the rooster of digimon that can enter and appear in cups in the arena.
 
 1.11.5 (I was not planning to make this update...)
-- Added a new way to evolve in Factorial Town, only available after you beat the game. The filth challenge had to be updated for this patch.
+- Added a new way to evolve in Factorial Town, only available after you beat the game. The filth challenge had to be updated for this patch. Adapted the Myotismon patch for this version too.
 - Fixed a bug caused by the textbox patch, for some reason the fix was partially undone, making it freeze in real consoles with a few of the textboxes (not all of them).
+- Fixed an oversight in the installer, where the "super helpful/ultra lucky" versions of the bonus try did not work if you used the "Vice hack" installer.
