@@ -49,7 +49,7 @@
             // HardcoreHackInfoLink
             // 
             this.HardcoreHackInfoLink.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HardcoreHackInfoLink.Location = new System.Drawing.Point(0, 511);
+            this.HardcoreHackInfoLink.Location = new System.Drawing.Point(0, 611);
             this.HardcoreHackInfoLink.Name = "HardcoreHackInfoLink";
             this.HardcoreHackInfoLink.Size = new System.Drawing.Size(785, 26);
             this.HardcoreHackInfoLink.TabIndex = 3;
@@ -66,7 +66,7 @@
             this.HardcoreHackInfoText.Multiline = true;
             this.HardcoreHackInfoText.Name = "HardcoreHackInfoText";
             this.HardcoreHackInfoText.ReadOnly = true;
-            this.HardcoreHackInfoText.Size = new System.Drawing.Size(600, 420);
+            this.HardcoreHackInfoText.Size = new System.Drawing.Size(600, 520);
             this.HardcoreHackInfoText.TabIndex = 4;
             this.HardcoreHackInfoText.Text = resources.GetString("HardcoreHackInfoText.Text");
             // 
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(784, 661);
             this.Controls.Add(this.HardcoreHackInfoText);
             this.Controls.Add(this.HardcoreHackInfoLink);
             this.Controls.Add(this.HardcoreHackInfoTitle);

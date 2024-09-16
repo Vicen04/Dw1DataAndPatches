@@ -35,6 +35,10 @@ namespace DWViceSimpleInstaller
                 this.HarderBosses.Visible = true;
                 this.HarderBossesInfo.Enabled = true;
                 this.HarderBossesInfo.Visible = true;
+                this.bonusTryFix.Visible = true;
+                this.bonusTryFix.Enabled = true;
+                this.uBonustry.Visible = true;
+                this.sBonusTry.Visible = true;
                 this.Text = "Optional patches";
                 PatchButton.BackColor = Color.Goldenrod;
             }
@@ -287,16 +291,22 @@ namespace DWViceSimpleInstaller
 
         private void InfoUseful_Click(object sender, EventArgs e)
         {
-            string tempText = "These are patches that will help the player:" + Environment.NewLine + Environment.NewLine +              
+            string tempText = "These are patches that will help the player:" + Environment.NewLine + Environment.NewLine +
                "- New stats gains: the stats gains formula after you win a battle has been changed: stat gain = (1% of digimon with the highest stat x number of enemies)" + Environment.NewLine + Environment.NewLine +
                "- Super stats gains: Uses the new formula and duplicates the result" + Environment.NewLine + Environment.NewLine +
-               "- Ultra stats gains: Uses the new formula and multiplies the result by 10" + Environment.NewLine + Environment.NewLine + 
+               "- Ultra stats gains: Uses the new formula and multiplies the result by 10" + Environment.NewLine + Environment.NewLine +
                "- Stat gains evo item: Stat gains and extra lifespan are enabled when using an evolution item" + Environment.NewLine + Environment.NewLine +
                "- BGM patch: The background music will keep playing until you enter an area with different music rather than resetting in each map change." + Environment.NewLine + Environment.NewLine +
-               "- Short intro: Makes the introduction a lot shorter" + Environment.NewLine + Environment.NewLine +
-               "- Bonus try unrriged (not compatible with the randomizer version): The bonus try will no longer have the negative rigging" + Environment.NewLine + Environment.NewLine + 
-               "- Super useful rigging: The help from the bonus try now will make you always land in the right stop" + Environment.NewLine + Environment.NewLine +
-               "- Ultra lucky bonus try: The chances of triggering the help are now 90% + the effect from the super useful rigging patch" + Environment.NewLine + Environment.NewLine +
+               "- Short intro: Makes the introduction a lot shorter" + Environment.NewLine + Environment.NewLine;
+
+            if (parentForm.GetPatchType() == MainApp.patchType.NONE)
+            {
+                tempText = tempText +
+                   "- Bonus try unrriged (not compatible with the randomizer version): The bonus try will no longer have the negative rigging" + Environment.NewLine + Environment.NewLine +
+                   "- Super useful rigging: The help from the bonus try now will make you always land in the right stop" + Environment.NewLine + Environment.NewLine +
+                   "- Ultra lucky bonus try: The chances of triggering the help are now 90% (60% normal help + 30% golden poop) + the effect from the super useful rigging patch" + Environment.NewLine + Environment.NewLine;
+            }
+            tempText = tempText +
                "- Drimogemon dirt reduction: The removal of dirt will be reduced to only 5 times" + Environment.NewLine + Environment.NewLine +
                "- Super dirt reduction: The removal of dirt will be reduced to only 2 times" + Environment.NewLine + Environment.NewLine +
                "- Super low Monochromon goal: You will only need 1280 bits to recruit Monochromon" + Environment.NewLine + Environment.NewLine +

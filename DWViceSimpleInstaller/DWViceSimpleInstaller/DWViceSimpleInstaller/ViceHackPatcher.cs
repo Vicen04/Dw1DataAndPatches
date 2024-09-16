@@ -120,14 +120,16 @@ namespace DWViceSimpleInstaller
 
         private void HardcoreInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Version 1.0.1" + Environment.NewLine + Environment.NewLine +
-                "Vice hack version of the hardcore hack." + Environment.NewLine + Environment.NewLine +
+            string tempText = "Version 1.0.3" + Environment.NewLine + Environment.NewLine +
+                "Vice hack version of the hardcore hack. Applying this patch will disable the 'super useful' and 'ultra lucky' useful patches" + Environment.NewLine + Environment.NewLine +
                 "It will increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content." + Environment.NewLine + Environment.NewLine +
                 "Some of the features are:" + Environment.NewLine + Environment.NewLine +
                 "- More stats for all the NPC digimon" + Environment.NewLine + Environment.NewLine +
                 "- Different movesets for the NPC digimon (such as removing slow weak techs like 'static elec')." + Environment.NewLine + Environment.NewLine +
                 "- New boss battles" + Environment.NewLine + Environment.NewLine +
-                "- NPCs will now have the tech boost feature";
+                "- NPCs will now have the tech boost feature" + Environment.NewLine + Environment.NewLine +
+                "- 1.0.3 addition: The bonus try is now rigged again and it will force you to fail, if you want to unrig it, you can use the optional installer.";
+
 
             HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
             hardcoreHackInfo.Text = "Info window";
@@ -197,6 +199,10 @@ namespace DWViceSimpleInstaller
                 Hardmode.Checked = false;                
                 ultraHardcore.Enabled = true;
                 parentForm.SetViceDifficulty(MainApp.viceDifficulty.HARDCORE);
+                sBonusTry.Checked = false;
+                uBonustry.Checked = false;
+                sBonusTry.Enabled = false;
+                uBonustry.Enabled = false;
             }
             else
             {
@@ -208,6 +214,9 @@ namespace DWViceSimpleInstaller
                     ultraHardcore.Checked = false;
                     ultraHardcore.Enabled = false;
                 }
+
+                sBonusTry.Enabled = true;
+                uBonustry.Enabled = true;
             }
         }
 
@@ -395,7 +404,7 @@ namespace DWViceSimpleInstaller
                "- Stat gains evo item: Stat gains and extra lifespan are enabled when using an evolution item" + Environment.NewLine + Environment.NewLine +
                "- Short intro: Makes the introduction a lot shorter" + Environment.NewLine + Environment.NewLine +               
                "- Super useful rigging: The help from the bonus try now will make you always land in the right stop" + Environment.NewLine + Environment.NewLine +
-               "- Ultra lucky bonus try: The chances of triggering the help are now 90% + the effect from the super useful rigging patch" + Environment.NewLine + Environment.NewLine +
+               "- Ultra lucky bonus try: The chances of triggering the help are now 90% (60% normal help + 30% golden poop) + the effect from the super useful rigging patch" + Environment.NewLine + Environment.NewLine +
                "- Drimogemon dirt reduction: The removal of dirt will be reduced to only 5 times" + Environment.NewLine + Environment.NewLine +
                "- Super dirt reduction: The removal of dirt will be reduced to only 2 times" + Environment.NewLine + Environment.NewLine +
                "- Super low Monochromon goal: You will only need 1280 bits to recruit Monochromon" + Environment.NewLine + Environment.NewLine +

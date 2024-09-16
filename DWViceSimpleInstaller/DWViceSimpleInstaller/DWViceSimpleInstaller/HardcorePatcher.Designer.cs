@@ -52,6 +52,8 @@
             this.InfoUseful = new System.Windows.Forms.Button();
             this.InfoTechniques = new System.Windows.Forms.Button();
             this.DigimonGroup = new System.Windows.Forms.GroupBox();
+            this.MyotismonInfo2 = new System.Windows.Forms.Button();
+            this.MyotismonMaeson2 = new System.Windows.Forms.CheckBox();
             this.curlingRandomizerInfo = new System.Windows.Forms.Button();
             this.curlingRandomizer = new System.Windows.Forms.CheckBox();
             this.Vermillimon = new System.Windows.Forms.CheckBox();
@@ -103,8 +105,6 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.MyotismonMaeson2 = new System.Windows.Forms.CheckBox();
-            this.MyotismonInfo2 = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -421,6 +421,30 @@
             this.DigimonGroup.TabStop = false;
             this.DigimonGroup.Text = "Digimon patches";
             this.DigimonGroup.Visible = false;
+            // 
+            // MyotismonInfo2
+            // 
+            this.MyotismonInfo2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.MyotismonInfo2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MyotismonInfo2.Location = new System.Drawing.Point(401, 135);
+            this.MyotismonInfo2.Name = "MyotismonInfo2";
+            this.MyotismonInfo2.Size = new System.Drawing.Size(35, 35);
+            this.MyotismonInfo2.TabIndex = 26;
+            this.MyotismonInfo2.Text = "?";
+            this.MyotismonInfo2.UseVisualStyleBackColor = false;
+            this.MyotismonInfo2.Click += new System.EventHandler(this.MyotismonInfo2_Click);
+            // 
+            // MyotismonMaeson2
+            // 
+            this.MyotismonMaeson2.AutoSize = true;
+            this.MyotismonMaeson2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MyotismonMaeson2.Location = new System.Drawing.Point(33, 136);
+            this.MyotismonMaeson2.Name = "MyotismonMaeson2";
+            this.MyotismonMaeson2.Size = new System.Drawing.Size(346, 35);
+            this.MyotismonMaeson2.TabIndex = 25;
+            this.MyotismonMaeson2.Text = "Myotismon Maeson 1.0.10";
+            this.MyotismonMaeson2.UseVisualStyleBackColor = true;
+            this.MyotismonMaeson2.CheckedChanged += new System.EventHandler(this.MyotismonMaeson2_CheckedChanged);
             // 
             // curlingRandomizerInfo
             // 
@@ -912,6 +936,7 @@
             // bonusTryFix
             // 
             this.bonusTryFix.AutoSize = true;
+            this.bonusTryFix.Enabled = false;
             this.bonusTryFix.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.bonusTryFix.Location = new System.Drawing.Point(36, 195);
             this.bonusTryFix.Name = "bonusTryFix";
@@ -919,6 +944,7 @@
             this.bonusTryFix.TabIndex = 13;
             this.bonusTryFix.Text = "Bonus try unrigged";
             this.bonusTryFix.UseVisualStyleBackColor = true;
+            this.bonusTryFix.Visible = false;
             this.bonusTryFix.CheckedChanged += new System.EventHandler(this.bonusTryFix_CheckedChanged);
             // 
             // BGMpatch
@@ -1028,6 +1054,7 @@
             this.uBonustry.TabIndex = 4;
             this.uBonustry.Text = "Ultra lucky bonus try";
             this.uBonustry.UseVisualStyleBackColor = true;
+            this.uBonustry.Visible = false;
             this.uBonustry.CheckedChanged += new System.EventHandler(this.uBonustry_CheckedChanged);
             // 
             // statsGains
@@ -1065,6 +1092,7 @@
             this.sBonusTry.TabIndex = 1;
             this.sBonusTry.Text = "Super useful rigging";
             this.sBonusTry.UseVisualStyleBackColor = true;
+            this.sBonusTry.Visible = false;
             this.sBonusTry.CheckedChanged += new System.EventHandler(this.sBonusTry_CheckedChanged);
             // 
             // betterDrops
@@ -1078,30 +1106,6 @@
             this.betterDrops.Text = "Better item drops";
             this.betterDrops.UseVisualStyleBackColor = true;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
-            // 
-            // MyotismonMaeson2
-            // 
-            this.MyotismonMaeson2.AutoSize = true;
-            this.MyotismonMaeson2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MyotismonMaeson2.Location = new System.Drawing.Point(33, 136);
-            this.MyotismonMaeson2.Name = "MyotismonMaeson2";
-            this.MyotismonMaeson2.Size = new System.Drawing.Size(346, 35);
-            this.MyotismonMaeson2.TabIndex = 25;
-            this.MyotismonMaeson2.Text = "Myotismon Maeson 1.0.10";
-            this.MyotismonMaeson2.UseVisualStyleBackColor = true;
-            this.MyotismonMaeson2.CheckedChanged += new System.EventHandler(this.MyotismonMaeson2_CheckedChanged);
-            // 
-            // MyotismonInfo2
-            // 
-            this.MyotismonInfo2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.MyotismonInfo2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.MyotismonInfo2.Location = new System.Drawing.Point(401, 135);
-            this.MyotismonInfo2.Name = "MyotismonInfo2";
-            this.MyotismonInfo2.Size = new System.Drawing.Size(35, 35);
-            this.MyotismonInfo2.TabIndex = 26;
-            this.MyotismonInfo2.Text = "?";
-            this.MyotismonInfo2.UseVisualStyleBackColor = false;
-            this.MyotismonInfo2.Click += new System.EventHandler(this.MyotismonInfo2_Click);
             // 
             // HardcorePatcher
             // 
