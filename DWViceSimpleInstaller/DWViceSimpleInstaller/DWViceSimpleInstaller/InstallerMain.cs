@@ -280,7 +280,7 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "Useful patches/BGMPatch.ppf");
 
             if (unlockAreas && patchType.VICEHACK != currentPatcher)
-                SetPatch(path + "Useful patches/DigimonWorldUnlockAreasVice_fixed.ppf");
+                SetPatch(path + "Useful patches/DigimonWorldUnlockAreasVice_fixed2.ppf");
 
 
             bin.Close();
