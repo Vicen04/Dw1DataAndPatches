@@ -85,8 +85,8 @@ Changed:
 
         800fee5c 18 00 05 24     li         a1,0x18
 
-    Old //800ff048 10 00 05 24     li         a1,0x10
-	New //800ff048 0C 00 05 24     li         a1,0xc
+  Old //800ff048 10 00 05 24     li         a1,0x10
+  New //800ff048 0C 00 05 24     li         a1,0xc
 		
 
         8010aaf4 0c 00 05 24     li         a1,0xc

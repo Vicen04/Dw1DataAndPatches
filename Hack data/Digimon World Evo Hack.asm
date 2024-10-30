@@ -2069,7 +2069,7 @@ Changed:
 Script changes (Most of these may be different in the Maeson version):
 
 
-//Factorial town evolution text
+//Factorial town evolution text before 1.11.5
 
 140545A4 & 140549A2 Metal Mamemon text
 Original: 82 94 82 95 82 92 82 8E 82 85 82 84 81 40 82 89 82 8E 82 94 82 8F 0D 00 82 6C 82 85 82 94 82 81 82 8C 82 6C 82 81 82 8D 82 85 82 8D 82 8F 82 8E 81 49 0D 00 // "Wow, it turned into MetalMamemon!"
