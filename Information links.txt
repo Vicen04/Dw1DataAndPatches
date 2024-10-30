@@ -1,10 +1,11 @@
 All these links only apply to the patches from the installer, none of them apply to Maeson.
 
-Vice hack info:
-https://docs.google.com/spreadsheets/d/17-Xsd4rshCH_MenzfCeV3TdKIFyfvxLPL4Q1eebMezQ/edit?usp=sharing
+Vice hack 2.0 info (the Myotismon info is included here):
+https://docs.google.com/spreadsheets/d/1lG3aLJsLiCwcZXo5-OS18o21GngTVuyAiKA0liV_kpM/edit?usp=sharing
 
-Myotismon Vice info:
-https://docs.google.com/spreadsheets/d/17-Xsd4rshCH_MenzfCeV3TdKIFyfvxLPL4Q1eebMezQ/edit?gid=1550903355#gid=1550903355
+
+Old Vice hack info (the Myotismon info is included here):
+https://docs.google.com/spreadsheets/d/17-Xsd4rshCH_MenzfCeV3TdKIFyfvxLPL4Q1eebMezQ/edit?usp=sharing
 
 
 Hardcore hack info:
@@ -19,7 +20,7 @@ Filth challenge:
 https://docs.google.com/spreadsheets/d/1I0rPMIKg5Q7H1EwDlyiOBTGRkKlFxaXM_O4I5mxMdfg/edit?usp=sharing
 
 
-Better item drops:
+Optional patches:
 https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing
 
 
