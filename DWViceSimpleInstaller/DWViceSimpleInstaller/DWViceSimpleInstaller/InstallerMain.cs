@@ -36,11 +36,11 @@ namespace DWViceSimpleInstaller
         patchType currentPatcher;
 
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
-             ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, 
-             BGMpatch, curlingRandomizer, myotismon2;
+             ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
+             BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling;
 
         //Vice exclusive
-        bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore;
+        bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore, restorePanjyamon, starters2, kunemon;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -95,10 +95,12 @@ namespace DWViceSimpleInstaller
         {
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
-            = helpfulItems = lessMono = BGMpatch = curlingRandomizer = false;
+            = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
+            drimogemon = fishing = merit = cards = nerfIce = false;
 
             //Vice exclusive
-            insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore = false;
+            insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
+            restorePanjyamon = kunemon = starters2 = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -119,7 +121,7 @@ namespace DWViceSimpleInstaller
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "/Patches/ViceHack/";
             //main patch
-            SetPatch(path + "DigimonWorldVice_1.11.5.ppf");
+            SetPatch(path + "DigimonWorldVice_2.0.ppf");
 
             //optional exclusive patches
             switch (currentViceDifficulty)
@@ -131,7 +133,7 @@ namespace DWViceSimpleInstaller
                     SetPatch(path + "DigimonWorldViceHardmode.ppf");
                     break;
                 case viceDifficulty.HARDCORE:
-                    SetPatch(path + "HardcoreVice 1.0.3.ppf");                    
+                    SetPatch(path + "HardcoreVice 1.0.4.ppf");                    
                     break;
                 default:
                     break;
@@ -140,14 +142,24 @@ namespace DWViceSimpleInstaller
             if (ultraHardcore)
                 SetPatch(path + "UltraHardcoreEnabler.ppf");
 
-            if (curlingRandomizer)
-                SetPatch(path + "CurlingRandomizerViceHack.ppf");            
+            if (curlingRandomizer && restorePanjyamon)
+                SetPatch(path + "CurlingRandomizerViceP.ppf");   
+            else if (curlingRandomizer && !restorePanjyamon)
+                SetPatch(path + "CurlingRandomizerViceHack2.ppf");
+
+            if (restorePanjyamon)
+                SetPatch(path + "RestorePanjyamon.ppf");
+
+            if (starters2)
+                SetPatch(path + "Starter2.ppf");
+            else if (kunemon)
+                SetPatch(path + "KunemonStart.ppf");
 
             if (myotismon)
-                SetPatch(path + "MyotismonPatchVice.ppf");
+                SetPatch(path + "MyotismonPatchVice2.ppf");
 
             if (filth)
-                SetPatch(path + "FilthChallengeViceHack 1.1.4.ppf");
+                SetPatch(path + "FilthChallengeViceHack 1.2.ppf");
 
             if (insaneBattle)
                 SetPatch(path + "InsaneBattle.ppf");
@@ -155,23 +167,23 @@ namespace DWViceSimpleInstaller
             if (restoreLifetime)
                 SetPatch(path + "RemoveExtraLifetimeEvo.ppf");
 
-            if (restoreMelon)
-                SetPatch(path + "RestoreChainMelon.ppf");
+           // if (restoreMelon)
+               // SetPatch(path + "RestoreChainMelon.ppf");
 
             if (removeTechBoost)
                 SetPatch(path + "RemoveTechBoost.ppf");
 
-            if (deRandoFactTown)
-                SetPatch(path + "DerandomizeFactorialTown.ppf");
+          //  if (deRandoFactTown)
+            //    SetPatch(path + "DerandomizeFactorialTown.ppf");
 
-            if (randoCompatible)
-                SetPatch(path + "RandomizerCompatibilityPatch.ppf");
+          //  if (randoCompatible)
+              //  SetPatch(path + "RandomizerCompatibilityPatch.ppf");
 
             if (unlockAreas)
                 SetPatch(path + "FullyUnlockAreas.ppf");
 
             if (mapColour)
-                SetPatch(path + "MapColourFix.ppf");
+                SetPatch(path + "BreakColour.ppf");
 
             InstallOptionalPatches();
         }
@@ -179,7 +191,7 @@ namespace DWViceSimpleInstaller
         public void InstallHardcore()
         {
             //main patch
-            SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.3.ppf");
+            SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.4.ppf");
             //Run other patches
             ExtraInstall();
         }
@@ -211,6 +223,9 @@ namespace DWViceSimpleInstaller
                     SetPatch(path + "Difficulty patches/RestoreFilthDigimon.ppf");
             }
 
+            if (progression)
+                SetPatch(path + "Difficulty patches/ProgressionPatch.ppf");
+
             if (vermillimon)
                 SetPatch(path + "MonochromonToVermilimon.ppf");
 
@@ -237,6 +252,9 @@ namespace DWViceSimpleInstaller
 
             if (multipleTechs)
                 SetPatch(path + "Tech patches/LearnMoreTechs.ppf");
+
+            if (nerfIce)
+                SetPatch(path + "Tech patches/NerfIceStatue.ppf");
 
             if (betterDrop)
                 SetPatch(path + "Useful patches/BetterDrops.ppf");
@@ -281,6 +299,33 @@ namespace DWViceSimpleInstaller
 
             if (unlockAreas && patchType.VICEHACK != currentPatcher)
                 SetPatch(path + "Useful patches/DigimonWorldUnlockAreasVice_fixed2.ppf");
+
+            if (betterRestaurant)
+                SetPatch(path + "Useful patches/BetterRestaurant.ppf");
+
+            if (drimogemon)
+                SetPatch(path + "Useful patches/BetterDrimogemon.ppf");
+
+            if (fishing)
+                SetPatch(path + "Useful patches/BetterFishing.ppf");
+
+            if (cards)
+                SetPatch(path + "Useful patches/BetterCards.ppf");
+
+            if (merit)
+                SetPatch(path + "Useful patches/BetterMeritShop.ppf");
+
+            if (usefulItems2)
+                SetPatch(path + "Useful patches/UsefulItems2.ppf");
+
+            if (curling)
+                SetPatch(path + "Useful patches/BetterCurlingRewards.ppf");
+
+            if (raise)
+                SetPatch(path + "Useful patches/BetterRaise.ppf");
+
+            if (itemSpawns)
+                SetPatch(path + "Useful patches/BetterItemSpawns.ppf");
 
 
             bin.Close();
@@ -429,6 +474,21 @@ namespace DWViceSimpleInstaller
         public void SetProsperity(bool enabled) { prosperity = enabled; }
         public void SetUltraHardcore(bool enabled) { ultraHardcore = enabled; }
         public void SetRecycling(bool enabled) { recycling = enabled; }
+        public void SetRestaurant(bool enabled) { betterRestaurant = enabled; }
+        public void SetCurling(bool enabled) { curling = enabled; }
+        public void SetRaise(bool enabled) { raise = enabled; }
+        public void SetCards(bool enabled) { cards = enabled; }
+        public void SetMerit(bool enabled) { merit = enabled; }
+        public void SetUseful2(bool enabled) { usefulItems2 = enabled; }
+        public void SetDrimogemon(bool enabled) { drimogemon = enabled; }
+        public void SetItemSpawns(bool enabled) { itemSpawns = enabled; }
+        public void SetFishing(bool enabled) { fishing = enabled; }
+        public void SetProgression(bool enabled) { progression = enabled; }
+        public void SetRestorePanjya(bool enabled) { restorePanjyamon = enabled; }
+        public void SetStarters2(bool enabled) { starters2 = enabled; }
+        public void SetKunemon(bool enabled) { kunemon = enabled; }
+
+        public void SetIceNerf(bool enabled) { nerfIce = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
@@ -585,6 +645,12 @@ namespace DWViceSimpleInstaller
                 txtWritter.WriteLine();               
             }
 
+            if (progression)
+            {
+                txtWritter.Write("- Progression mode");
+                txtWritter.WriteLine();
+            }
+
             txtWritter.WriteLine();
             txtWritter.Write("Digimon patches:");
             txtWritter.WriteLine();
@@ -615,6 +681,18 @@ namespace DWViceSimpleInstaller
             if (vermillimon)
             {
                 txtWritter.Write("- Vermillimon");
+                txtWritter.WriteLine();
+            }
+
+            if (starters2)
+            {
+                txtWritter.Write("- Starters 2");
+                txtWritter.WriteLine();
+            }
+
+            if (kunemon)
+            {
+                txtWritter.Write("- Kunemon start");
                 txtWritter.WriteLine();
             }
 
@@ -668,7 +746,7 @@ namespace DWViceSimpleInstaller
 
                 if (mapColour)
                 {
-                    txtWritter.Write("- Map colour fix");
+                    txtWritter.Write("- Map colour break");
                     txtWritter.WriteLine();
                 }
             }
@@ -755,6 +833,60 @@ namespace DWViceSimpleInstaller
             {
                 txtWritter.Write("- BGM patch");
                 txtWritter.WriteLine();
+            }            
+
+            if (cards)
+            {
+                txtWritter.Write("- Better cards");
+                txtWritter.WriteLine();
+            }
+
+            if (curling)
+            {
+                txtWritter.Write("- Better curling rewards");
+                txtWritter.WriteLine();
+            }
+
+            if (drimogemon)
+            {
+                txtWritter.Write("- Better drimogemon treasure");
+                txtWritter.WriteLine();
+            }
+
+            if (fishing)
+            {
+                txtWritter.Write("- Better fishing");
+                txtWritter.WriteLine();
+            }
+
+            if (itemSpawns)
+            {
+                txtWritter.Write("- Better item spawns");
+                txtWritter.WriteLine();
+            }
+
+            if (merit)
+            {
+                txtWritter.Write("- Better merit shop");
+                txtWritter.WriteLine();
+            }
+
+            if (raise)
+            {
+                txtWritter.Write("- Better raise");
+                txtWritter.WriteLine();
+            }
+
+            if (betterRestaurant)
+            {
+                txtWritter.Write("- Better restaurant");
+                txtWritter.WriteLine();
+            }
+
+            if (usefulItems2)
+            {
+                txtWritter.Write("- Useful items 2");
+                txtWritter.WriteLine();
             }
 
             txtWritter.WriteLine();
@@ -782,6 +914,12 @@ namespace DWViceSimpleInstaller
             if (multipleTechs)
             {
                 txtWritter.Write("- Learn multiple techs");
+                txtWritter.WriteLine();
+            }
+
+            if (nerfIce)
+            {
+                txtWritter.Write("- Nerf Ice Statue");
                 txtWritter.WriteLine();
             }
 

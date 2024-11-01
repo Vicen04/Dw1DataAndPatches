@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.DifficultyPatchesContainer = new System.Windows.Forms.GroupBox();
+            this.ProgressionInfo = new System.Windows.Forms.Button();
+            this.ProgressionMode = new System.Windows.Forms.CheckBox();
             this.restoreFilth = new System.Windows.Forms.CheckBox();
             this.FlithInfo = new System.Windows.Forms.Button();
             this.ChallengeInfo = new System.Windows.Forms.Button();
@@ -58,12 +60,16 @@
             this.InfoUseful = new System.Windows.Forms.Button();
             this.InfoTechniques = new System.Windows.Forms.Button();
             this.DigimonGroup = new System.Windows.Forms.GroupBox();
+            this.Starters2 = new System.Windows.Forms.CheckBox();
+            this.Panjyamon = new System.Windows.Forms.CheckBox();
+            this.Kunemon = new System.Windows.Forms.CheckBox();
             this.curlingRandomizerInfo = new System.Windows.Forms.Button();
             this.curlingRandomizer = new System.Windows.Forms.CheckBox();
             this.Vermillimon = new System.Windows.Forms.CheckBox();
             this.MyotismonInfo = new System.Windows.Forms.Button();
             this.Myotismon = new System.Windows.Forms.CheckBox();
             this.miscPatches = new System.Windows.Forms.GroupBox();
+            this.colourBreak = new System.Windows.Forms.CheckBox();
             this.removeTechBoost = new System.Windows.Forms.CheckBox();
             this.restoreLifetime = new System.Windows.Forms.CheckBox();
             this.restoreChainMelon = new System.Windows.Forms.CheckBox();
@@ -74,10 +80,22 @@
             this.deRandoFact = new System.Windows.Forms.CheckBox();
             this.UnlockAreas = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
+            this.NerfIce = new System.Windows.Forms.CheckBox();
             this.multipleTechs = new System.Windows.Forms.CheckBox();
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.RightButton = new System.Windows.Forms.Button();
+            this.LeftButton = new System.Windows.Forms.Button();
+            this.BetterItemSpawns = new System.Windows.Forms.CheckBox();
+            this.BetterRaise = new System.Windows.Forms.CheckBox();
+            this.UsefulItems2 = new System.Windows.Forms.CheckBox();
+            this.BetterRestaurant = new System.Windows.Forms.CheckBox();
+            this.BetterCards = new System.Windows.Forms.CheckBox();
+            this.BetterMerit = new System.Windows.Forms.CheckBox();
+            this.BetterDrimogemon = new System.Windows.Forms.CheckBox();
+            this.BetterCurling = new System.Windows.Forms.CheckBox();
+            this.BetterFishing = new System.Windows.Forms.CheckBox();
             this.sDirtReduction = new System.Windows.Forms.CheckBox();
             this.dirtReduction = new System.Windows.Forms.CheckBox();
             this.uStatsGains = new System.Windows.Forms.CheckBox();
@@ -90,7 +108,6 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.colourFix = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -100,6 +117,8 @@
             // 
             // DifficultyPatchesContainer
             // 
+            this.DifficultyPatchesContainer.Controls.Add(this.ProgressionInfo);
+            this.DifficultyPatchesContainer.Controls.Add(this.ProgressionMode);
             this.DifficultyPatchesContainer.Controls.Add(this.restoreFilth);
             this.DifficultyPatchesContainer.Controls.Add(this.FlithInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.ChallengeInfo);
@@ -125,6 +144,29 @@
             this.DifficultyPatchesContainer.TabStop = false;
             this.DifficultyPatchesContainer.Text = "Difficulty patches";
             this.DifficultyPatchesContainer.Visible = false;
+            // 
+            // ProgressionInfo
+            // 
+            this.ProgressionInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.ProgressionInfo.Location = new System.Drawing.Point(306, 267);
+            this.ProgressionInfo.Name = "ProgressionInfo";
+            this.ProgressionInfo.Size = new System.Drawing.Size(35, 35);
+            this.ProgressionInfo.TabIndex = 16;
+            this.ProgressionInfo.Text = "?";
+            this.ProgressionInfo.UseVisualStyleBackColor = true;
+            this.ProgressionInfo.Click += new System.EventHandler(this.ProgressionInfo_Click);
+            // 
+            // ProgressionMode
+            // 
+            this.ProgressionMode.AutoSize = true;
+            this.ProgressionMode.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProgressionMode.Location = new System.Drawing.Point(38, 268);
+            this.ProgressionMode.Name = "ProgressionMode";
+            this.ProgressionMode.Size = new System.Drawing.Size(251, 35);
+            this.ProgressionMode.TabIndex = 15;
+            this.ProgressionMode.Text = "Progression mode";
+            this.ProgressionMode.UseVisualStyleBackColor = true;
+            this.ProgressionMode.CheckedChanged += new System.EventHandler(this.ProgressionMode_CheckedChanged);
             // 
             // restoreFilth
             // 
@@ -336,62 +378,67 @@
             // 
             // GameplayPatches
             // 
+            this.GameplayPatches.BackColor = System.Drawing.Color.Tomato;
             this.GameplayPatches.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.GameplayPatches.Location = new System.Drawing.Point(79, 95);
             this.GameplayPatches.Name = "GameplayPatches";
             this.GameplayPatches.Size = new System.Drawing.Size(200, 50);
             this.GameplayPatches.TabIndex = 2;
             this.GameplayPatches.Text = "Difficulty";
-            this.GameplayPatches.UseVisualStyleBackColor = true;
+            this.GameplayPatches.UseVisualStyleBackColor = false;
             this.GameplayPatches.Click += new System.EventHandler(this.GameplayPatches_Click);
             // 
             // DigimonPatches
             // 
+            this.DigimonPatches.BackColor = System.Drawing.Color.Yellow;
             this.DigimonPatches.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.DigimonPatches.Location = new System.Drawing.Point(285, 95);
             this.DigimonPatches.Name = "DigimonPatches";
             this.DigimonPatches.Size = new System.Drawing.Size(200, 50);
             this.DigimonPatches.TabIndex = 3;
             this.DigimonPatches.Text = "Digimon";
-            this.DigimonPatches.UseVisualStyleBackColor = true;
+            this.DigimonPatches.UseVisualStyleBackColor = false;
             this.DigimonPatches.Click += new System.EventHandler(this.DigimonPatches_Click);
             // 
             // MiscellaneousPatches
             // 
+            this.MiscellaneousPatches.BackColor = System.Drawing.Color.Orange;
             this.MiscellaneousPatches.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.MiscellaneousPatches.Location = new System.Drawing.Point(491, 95);
             this.MiscellaneousPatches.Name = "MiscellaneousPatches";
             this.MiscellaneousPatches.Size = new System.Drawing.Size(200, 50);
             this.MiscellaneousPatches.TabIndex = 4;
             this.MiscellaneousPatches.Text = "Miscellaneous";
-            this.MiscellaneousPatches.UseVisualStyleBackColor = true;
+            this.MiscellaneousPatches.UseVisualStyleBackColor = false;
             this.MiscellaneousPatches.Click += new System.EventHandler(this.MiscellaneousPatches_Click);
             // 
             // UsefulPatches
             // 
+            this.UsefulPatches.BackColor = System.Drawing.Color.PaleGreen;
             this.UsefulPatches.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.UsefulPatches.Location = new System.Drawing.Point(697, 95);
             this.UsefulPatches.Name = "UsefulPatches";
             this.UsefulPatches.Size = new System.Drawing.Size(200, 50);
             this.UsefulPatches.TabIndex = 5;
             this.UsefulPatches.Text = "Useful";
-            this.UsefulPatches.UseVisualStyleBackColor = true;
+            this.UsefulPatches.UseVisualStyleBackColor = false;
             this.UsefulPatches.Click += new System.EventHandler(this.UsefulPatches_Click);
             // 
             // TechPatches
             // 
+            this.TechPatches.BackColor = System.Drawing.Color.Plum;
             this.TechPatches.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TechPatches.Location = new System.Drawing.Point(903, 95);
             this.TechPatches.Name = "TechPatches";
             this.TechPatches.Size = new System.Drawing.Size(200, 50);
             this.TechPatches.TabIndex = 6;
             this.TechPatches.Text = "Techniques";
-            this.TechPatches.UseVisualStyleBackColor = true;
+            this.TechPatches.UseVisualStyleBackColor = false;
             this.TechPatches.Click += new System.EventHandler(this.TechPatches_Click);
             // 
             // InfoDifficulty
             // 
-            this.InfoDifficulty.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.InfoDifficulty.BackColor = System.Drawing.Color.Tomato;
             this.InfoDifficulty.Enabled = false;
             this.InfoDifficulty.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.InfoDifficulty.Location = new System.Drawing.Point(1110, 370);
@@ -405,7 +452,7 @@
             // 
             // InfoDigimon
             // 
-            this.InfoDigimon.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.InfoDigimon.BackColor = System.Drawing.Color.Yellow;
             this.InfoDigimon.Enabled = false;
             this.InfoDigimon.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.InfoDigimon.Location = new System.Drawing.Point(1110, 370);
@@ -419,7 +466,7 @@
             // 
             // InfoMiscellaneous
             // 
-            this.InfoMiscellaneous.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.InfoMiscellaneous.BackColor = System.Drawing.Color.Orange;
             this.InfoMiscellaneous.Enabled = false;
             this.InfoMiscellaneous.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.InfoMiscellaneous.Location = new System.Drawing.Point(1110, 370);
@@ -433,7 +480,7 @@
             // 
             // InfoUseful
             // 
-            this.InfoUseful.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.InfoUseful.BackColor = System.Drawing.Color.PaleGreen;
             this.InfoUseful.Enabled = false;
             this.InfoUseful.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.InfoUseful.Location = new System.Drawing.Point(1110, 370);
@@ -447,7 +494,7 @@
             // 
             // InfoTechniques
             // 
-            this.InfoTechniques.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.InfoTechniques.BackColor = System.Drawing.Color.Thistle;
             this.InfoTechniques.Enabled = false;
             this.InfoTechniques.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.InfoTechniques.Location = new System.Drawing.Point(1110, 370);
@@ -461,6 +508,9 @@
             // 
             // DigimonGroup
             // 
+            this.DigimonGroup.Controls.Add(this.Starters2);
+            this.DigimonGroup.Controls.Add(this.Panjyamon);
+            this.DigimonGroup.Controls.Add(this.Kunemon);
             this.DigimonGroup.Controls.Add(this.curlingRandomizerInfo);
             this.DigimonGroup.Controls.Add(this.curlingRandomizer);
             this.DigimonGroup.Controls.Add(this.Vermillimon);
@@ -470,17 +520,53 @@
             this.DigimonGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DigimonGroup.Location = new System.Drawing.Point(90, 160);
             this.DigimonGroup.Name = "DigimonGroup";
-            this.DigimonGroup.Size = new System.Drawing.Size(1000, 200);
+            this.DigimonGroup.Size = new System.Drawing.Size(1000, 300);
             this.DigimonGroup.TabIndex = 20;
             this.DigimonGroup.TabStop = false;
             this.DigimonGroup.Text = "Digimon patches";
             this.DigimonGroup.Visible = false;
             // 
+            // Starters2
+            // 
+            this.Starters2.AutoSize = true;
+            this.Starters2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.Starters2.Location = new System.Drawing.Point(33, 136);
+            this.Starters2.Name = "Starters2";
+            this.Starters2.Size = new System.Drawing.Size(156, 35);
+            this.Starters2.TabIndex = 27;
+            this.Starters2.Text = "Starters 2";
+            this.Starters2.UseVisualStyleBackColor = true;
+            this.Starters2.CheckedChanged += new System.EventHandler(this.Starters2_CheckedChanged);
+            // 
+            // Panjyamon
+            // 
+            this.Panjyamon.AutoSize = true;
+            this.Panjyamon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.Panjyamon.Location = new System.Drawing.Point(33, 225);
+            this.Panjyamon.Name = "Panjyamon";
+            this.Panjyamon.Size = new System.Drawing.Size(267, 35);
+            this.Panjyamon.TabIndex = 26;
+            this.Panjyamon.Text = "Restore Panjyamon";
+            this.Panjyamon.UseVisualStyleBackColor = true;
+            this.Panjyamon.CheckedChanged += new System.EventHandler(this.Panjyamon_CheckedChanged);
+            // 
+            // Kunemon
+            // 
+            this.Kunemon.AutoSize = true;
+            this.Kunemon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.Kunemon.Location = new System.Drawing.Point(553, 136);
+            this.Kunemon.Name = "Kunemon";
+            this.Kunemon.Size = new System.Drawing.Size(213, 35);
+            this.Kunemon.TabIndex = 25;
+            this.Kunemon.Text = "Kunemon start";
+            this.Kunemon.UseVisualStyleBackColor = true;
+            this.Kunemon.CheckedChanged += new System.EventHandler(this.Kunemon_CheckedChanged);
+            // 
             // curlingRandomizerInfo
             // 
             this.curlingRandomizerInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.curlingRandomizerInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.curlingRandomizerInfo.Location = new System.Drawing.Point(595, 137);
+            this.curlingRandomizerInfo.Location = new System.Drawing.Point(834, 225);
             this.curlingRandomizerInfo.Name = "curlingRandomizerInfo";
             this.curlingRandomizerInfo.Size = new System.Drawing.Size(35, 35);
             this.curlingRandomizerInfo.TabIndex = 24;
@@ -492,7 +578,7 @@
             // 
             this.curlingRandomizer.AutoSize = true;
             this.curlingRandomizer.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.curlingRandomizer.Location = new System.Drawing.Point(315, 138);
+            this.curlingRandomizer.Location = new System.Drawing.Point(553, 225);
             this.curlingRandomizer.Name = "curlingRandomizer";
             this.curlingRandomizer.Size = new System.Drawing.Size(263, 35);
             this.curlingRandomizer.TabIndex = 23;
@@ -538,7 +624,7 @@
             // 
             // miscPatches
             // 
-            this.miscPatches.Controls.Add(this.colourFix);
+            this.miscPatches.Controls.Add(this.colourBreak);
             this.miscPatches.Controls.Add(this.removeTechBoost);
             this.miscPatches.Controls.Add(this.restoreLifetime);
             this.miscPatches.Controls.Add(this.restoreChainMelon);
@@ -552,17 +638,29 @@
             this.miscPatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.miscPatches.Location = new System.Drawing.Point(90, 160);
             this.miscPatches.Name = "miscPatches";
-            this.miscPatches.Size = new System.Drawing.Size(1000, 500);
+            this.miscPatches.Size = new System.Drawing.Size(1000, 350);
             this.miscPatches.TabIndex = 21;
             this.miscPatches.TabStop = false;
             this.miscPatches.Text = "Miscellaneous patches";
             this.miscPatches.Visible = false;
             // 
+            // colourBreak
+            // 
+            this.colourBreak.AutoSize = true;
+            this.colourBreak.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.colourBreak.Location = new System.Drawing.Point(113, 193);
+            this.colourBreak.Name = "colourBreak";
+            this.colourBreak.Size = new System.Drawing.Size(245, 35);
+            this.colourBreak.TabIndex = 28;
+            this.colourBreak.Text = "Map colour break";
+            this.colourBreak.UseVisualStyleBackColor = true;
+            this.colourBreak.CheckedChanged += new System.EventHandler(this.colourFix_CheckedChanged);
+            // 
             // removeTechBoost
             // 
             this.removeTechBoost.AutoSize = true;
             this.removeTechBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.removeTechBoost.Location = new System.Drawing.Point(579, 355);
+            this.removeTechBoost.Location = new System.Drawing.Point(590, 193);
             this.removeTechBoost.Name = "removeTechBoost";
             this.removeTechBoost.Size = new System.Drawing.Size(264, 35);
             this.removeTechBoost.TabIndex = 27;
@@ -574,7 +672,7 @@
             // 
             this.restoreLifetime.AutoSize = true;
             this.restoreLifetime.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreLifetime.Location = new System.Drawing.Point(98, 426);
+            this.restoreLifetime.Location = new System.Drawing.Point(109, 264);
             this.restoreLifetime.Name = "restoreLifetime";
             this.restoreLifetime.Size = new System.Drawing.Size(455, 35);
             this.restoreLifetime.TabIndex = 26;
@@ -585,20 +683,22 @@
             // restoreChainMelon
             // 
             this.restoreChainMelon.AutoSize = true;
+            this.restoreChainMelon.Enabled = false;
             this.restoreChainMelon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreChainMelon.Location = new System.Drawing.Point(102, 355);
+            this.restoreChainMelon.Location = new System.Drawing.Point(587, 264);
             this.restoreChainMelon.Name = "restoreChainMelon";
             this.restoreChainMelon.Size = new System.Drawing.Size(282, 35);
             this.restoreChainMelon.TabIndex = 25;
             this.restoreChainMelon.Text = "Restore chain melon";
             this.restoreChainMelon.UseVisualStyleBackColor = true;
+            this.restoreChainMelon.Visible = false;
             this.restoreChainMelon.CheckedChanged += new System.EventHandler(this.restoreChainMelon_CheckedChanged);
             // 
             // MiscTitle2
             // 
             this.MiscTitle2.AutoSize = true;
             this.MiscTitle2.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.MiscTitle2.Location = new System.Drawing.Point(357, 200);
+            this.MiscTitle2.Location = new System.Drawing.Point(368, 38);
             this.MiscTitle2.Name = "MiscTitle2";
             this.MiscTitle2.Size = new System.Drawing.Size(265, 45);
             this.MiscTitle2.TabIndex = 24;
@@ -607,18 +707,20 @@
             // MiscTitle1
             // 
             this.MiscTitle1.AutoSize = true;
+            this.MiscTitle1.Enabled = false;
             this.MiscTitle1.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.MiscTitle1.Location = new System.Drawing.Point(261, 38);
             this.MiscTitle1.Name = "MiscTitle1";
             this.MiscTitle1.Size = new System.Drawing.Size(464, 45);
             this.MiscTitle1.TabIndex = 23;
             this.MiscTitle1.Text = "Randomizer compatibility";
+            this.MiscTitle1.Visible = false;
             // 
             // insaneBattle
             // 
             this.insaneBattle.AutoSize = true;
             this.insaneBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneBattle.Location = new System.Drawing.Point(102, 280);
+            this.insaneBattle.Location = new System.Drawing.Point(113, 118);
             this.insaneBattle.Name = "insaneBattle";
             this.insaneBattle.Size = new System.Drawing.Size(194, 35);
             this.insaneBattle.TabIndex = 3;
@@ -629,6 +731,7 @@
             // randoAdaptor
             // 
             this.randoAdaptor.AutoSize = true;
+            this.randoAdaptor.Enabled = false;
             this.randoAdaptor.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.randoAdaptor.Location = new System.Drawing.Point(102, 120);
             this.randoAdaptor.Name = "randoAdaptor";
@@ -636,11 +739,13 @@
             this.randoAdaptor.TabIndex = 2;
             this.randoAdaptor.Text = "Randomizer adaptor";
             this.randoAdaptor.UseVisualStyleBackColor = true;
+            this.randoAdaptor.Visible = false;
             this.randoAdaptor.CheckedChanged += new System.EventHandler(this.randoAdaptor_CheckedChanged);
             // 
             // deRandoFact
             // 
             this.deRandoFact.AutoSize = true;
+            this.deRandoFact.Enabled = false;
             this.deRandoFact.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
             this.deRandoFact.Location = new System.Drawing.Point(579, 120);
             this.deRandoFact.Name = "deRandoFact";
@@ -648,13 +753,14 @@
             this.deRandoFact.TabIndex = 1;
             this.deRandoFact.Text = "Factorial Town fix";
             this.deRandoFact.UseVisualStyleBackColor = true;
+            this.deRandoFact.Visible = false;
             this.deRandoFact.CheckedChanged += new System.EventHandler(this.deRandoFact_CheckedChanged);
             // 
             // UnlockAreas
             // 
             this.UnlockAreas.AutoSize = true;
             this.UnlockAreas.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UnlockAreas.Location = new System.Drawing.Point(579, 280);
+            this.UnlockAreas.Location = new System.Drawing.Point(590, 118);
             this.UnlockAreas.Name = "UnlockAreas";
             this.UnlockAreas.Size = new System.Drawing.Size(254, 35);
             this.UnlockAreas.TabIndex = 0;
@@ -664,6 +770,7 @@
             // 
             // techContainer
             // 
+            this.techContainer.Controls.Add(this.NerfIce);
             this.techContainer.Controls.Add(this.multipleTechs);
             this.techContainer.Controls.Add(this.betterTechsBrains);
             this.techContainer.Controls.Add(this.bettertechBattle);
@@ -677,11 +784,23 @@
             this.techContainer.Text = "Techniques patches";
             this.techContainer.Visible = false;
             // 
+            // NerfIce
+            // 
+            this.NerfIce.AutoSize = true;
+            this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NerfIce.Location = new System.Drawing.Point(578, 120);
+            this.NerfIce.Name = "NerfIce";
+            this.NerfIce.Size = new System.Drawing.Size(220, 35);
+            this.NerfIce.TabIndex = 3;
+            this.NerfIce.Text = "Nerf Ice Statue";
+            this.NerfIce.UseVisualStyleBackColor = true;
+            this.NerfIce.CheckedChanged += new System.EventHandler(this.NerfIce_CheckedChanged);
+            // 
             // multipleTechs
             // 
             this.multipleTechs.AutoSize = true;
             this.multipleTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.multipleTechs.Location = new System.Drawing.Point(348, 128);
+            this.multipleTechs.Location = new System.Drawing.Point(55, 120);
             this.multipleTechs.Name = "multipleTechs";
             this.multipleTechs.Size = new System.Drawing.Size(284, 35);
             this.multipleTechs.TabIndex = 2;
@@ -715,6 +834,17 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.RightButton);
+            this.usefulContainer.Controls.Add(this.LeftButton);
+            this.usefulContainer.Controls.Add(this.BetterItemSpawns);
+            this.usefulContainer.Controls.Add(this.BetterRaise);
+            this.usefulContainer.Controls.Add(this.UsefulItems2);
+            this.usefulContainer.Controls.Add(this.BetterRestaurant);
+            this.usefulContainer.Controls.Add(this.BetterCards);
+            this.usefulContainer.Controls.Add(this.BetterMerit);
+            this.usefulContainer.Controls.Add(this.BetterDrimogemon);
+            this.usefulContainer.Controls.Add(this.BetterCurling);
+            this.usefulContainer.Controls.Add(this.BetterFishing);
             this.usefulContainer.Controls.Add(this.sDirtReduction);
             this.usefulContainer.Controls.Add(this.dirtReduction);
             this.usefulContainer.Controls.Add(this.uStatsGains);
@@ -735,6 +865,156 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // RightButton
+            // 
+            this.RightButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightButton.Location = new System.Drawing.Point(535, 417);
+            this.RightButton.Name = "RightButton";
+            this.RightButton.Size = new System.Drawing.Size(50, 50);
+            this.RightButton.TabIndex = 22;
+            this.RightButton.Text = ">";
+            this.RightButton.UseVisualStyleBackColor = true;
+            this.RightButton.Click += new System.EventHandler(this.RightButton_Click);
+            // 
+            // LeftButton
+            // 
+            this.LeftButton.Enabled = false;
+            this.LeftButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftButton.Location = new System.Drawing.Point(435, 417);
+            this.LeftButton.Name = "LeftButton";
+            this.LeftButton.Size = new System.Drawing.Size(50, 50);
+            this.LeftButton.TabIndex = 21;
+            this.LeftButton.Text = "<";
+            this.LeftButton.UseVisualStyleBackColor = true;
+            this.LeftButton.Visible = false;
+            this.LeftButton.Click += new System.EventHandler(this.LeftButton_Click);
+            // 
+            // BetterItemSpawns
+            // 
+            this.BetterItemSpawns.AutoSize = true;
+            this.BetterItemSpawns.Enabled = false;
+            this.BetterItemSpawns.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterItemSpawns.Location = new System.Drawing.Point(607, 282);
+            this.BetterItemSpawns.Name = "BetterItemSpawns";
+            this.BetterItemSpawns.Size = new System.Drawing.Size(270, 35);
+            this.BetterItemSpawns.TabIndex = 20;
+            this.BetterItemSpawns.Text = "Better item spawns";
+            this.BetterItemSpawns.UseVisualStyleBackColor = true;
+            this.BetterItemSpawns.Visible = false;
+            this.BetterItemSpawns.CheckedChanged += new System.EventHandler(this.BetterItemSpawns_CheckedChanged);
+            // 
+            // BetterRaise
+            // 
+            this.BetterRaise.AutoSize = true;
+            this.BetterRaise.Enabled = false;
+            this.BetterRaise.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterRaise.Location = new System.Drawing.Point(36, 355);
+            this.BetterRaise.Name = "BetterRaise";
+            this.BetterRaise.Size = new System.Drawing.Size(177, 35);
+            this.BetterRaise.TabIndex = 19;
+            this.BetterRaise.Text = "Better raise";
+            this.BetterRaise.UseVisualStyleBackColor = true;
+            this.BetterRaise.Visible = false;
+            this.BetterRaise.CheckedChanged += new System.EventHandler(this.BetterRaise_CheckedChanged);
+            // 
+            // UsefulItems2
+            // 
+            this.UsefulItems2.AutoSize = true;
+            this.UsefulItems2.Enabled = false;
+            this.UsefulItems2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.UsefulItems2.Location = new System.Drawing.Point(607, 355);
+            this.UsefulItems2.Name = "UsefulItems2";
+            this.UsefulItems2.Size = new System.Drawing.Size(206, 35);
+            this.UsefulItems2.TabIndex = 18;
+            this.UsefulItems2.Text = "Useful items 2";
+            this.UsefulItems2.UseVisualStyleBackColor = true;
+            this.UsefulItems2.Visible = false;
+            this.UsefulItems2.CheckedChanged += new System.EventHandler(this.UsefulItems2_CheckedChanged);
+            // 
+            // BetterRestaurant
+            // 
+            this.BetterRestaurant.AutoSize = true;
+            this.BetterRestaurant.Enabled = false;
+            this.BetterRestaurant.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterRestaurant.Location = new System.Drawing.Point(607, 35);
+            this.BetterRestaurant.Name = "BetterRestaurant";
+            this.BetterRestaurant.Size = new System.Drawing.Size(245, 35);
+            this.BetterRestaurant.TabIndex = 17;
+            this.BetterRestaurant.Text = "Better restaurant";
+            this.BetterRestaurant.UseVisualStyleBackColor = true;
+            this.BetterRestaurant.Visible = false;
+            this.BetterRestaurant.CheckedChanged += new System.EventHandler(this.BetterRestaurant_CheckedChanged);
+            // 
+            // BetterCards
+            // 
+            this.BetterCards.AutoSize = true;
+            this.BetterCards.Enabled = false;
+            this.BetterCards.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterCards.Location = new System.Drawing.Point(36, 114);
+            this.BetterCards.Name = "BetterCards";
+            this.BetterCards.Size = new System.Drawing.Size(186, 35);
+            this.BetterCards.TabIndex = 16;
+            this.BetterCards.Text = "Better cards";
+            this.BetterCards.UseVisualStyleBackColor = true;
+            this.BetterCards.Visible = false;
+            this.BetterCards.CheckedChanged += new System.EventHandler(this.BetterCards_CheckedChanged);
+            // 
+            // BetterMerit
+            // 
+            this.BetterMerit.AutoSize = true;
+            this.BetterMerit.Enabled = false;
+            this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterMerit.Location = new System.Drawing.Point(607, 114);
+            this.BetterMerit.Name = "BetterMerit";
+            this.BetterMerit.Size = new System.Drawing.Size(181, 35);
+            this.BetterMerit.TabIndex = 15;
+            this.BetterMerit.Text = "Better merit";
+            this.BetterMerit.UseVisualStyleBackColor = true;
+            this.BetterMerit.Visible = false;
+            this.BetterMerit.CheckedChanged += new System.EventHandler(this.BetterMerit_CheckedChanged);
+            // 
+            // BetterDrimogemon
+            // 
+            this.BetterDrimogemon.AutoSize = true;
+            this.BetterDrimogemon.Enabled = false;
+            this.BetterDrimogemon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterDrimogemon.Location = new System.Drawing.Point(36, 197);
+            this.BetterDrimogemon.Name = "BetterDrimogemon";
+            this.BetterDrimogemon.Size = new System.Drawing.Size(270, 35);
+            this.BetterDrimogemon.TabIndex = 14;
+            this.BetterDrimogemon.Text = "Better Drimogemon";
+            this.BetterDrimogemon.UseVisualStyleBackColor = true;
+            this.BetterDrimogemon.Visible = false;
+            this.BetterDrimogemon.CheckedChanged += new System.EventHandler(this.BetterDrimogemon_CheckedChanged);
+            // 
+            // BetterCurling
+            // 
+            this.BetterCurling.AutoSize = true;
+            this.BetterCurling.Enabled = false;
+            this.BetterCurling.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterCurling.Location = new System.Drawing.Point(607, 197);
+            this.BetterCurling.Name = "BetterCurling";
+            this.BetterCurling.Size = new System.Drawing.Size(202, 35);
+            this.BetterCurling.TabIndex = 13;
+            this.BetterCurling.Text = "Better curling";
+            this.BetterCurling.UseVisualStyleBackColor = true;
+            this.BetterCurling.Visible = false;
+            this.BetterCurling.CheckedChanged += new System.EventHandler(this.BetterCurling_CheckedChanged);
+            // 
+            // BetterFishing
+            // 
+            this.BetterFishing.AutoSize = true;
+            this.BetterFishing.Enabled = false;
+            this.BetterFishing.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterFishing.Location = new System.Drawing.Point(36, 277);
+            this.BetterFishing.Name = "BetterFishing";
+            this.BetterFishing.Size = new System.Drawing.Size(198, 35);
+            this.BetterFishing.TabIndex = 12;
+            this.BetterFishing.Text = "Better fishing";
+            this.BetterFishing.UseVisualStyleBackColor = true;
+            this.BetterFishing.Visible = false;
+            this.BetterFishing.CheckedChanged += new System.EventHandler(this.BetterFishing_CheckedChanged);
             // 
             // sDirtReduction
             // 
@@ -871,26 +1151,16 @@
             // betterDrops
             // 
             this.betterDrops.AutoSize = true;
+            this.betterDrops.Enabled = false;
             this.betterDrops.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.betterDrops.Location = new System.Drawing.Point(382, 427);
+            this.betterDrops.Location = new System.Drawing.Point(36, 32);
             this.betterDrops.Name = "betterDrops";
             this.betterDrops.Size = new System.Drawing.Size(246, 35);
             this.betterDrops.TabIndex = 0;
             this.betterDrops.Text = "Better item drops";
             this.betterDrops.UseVisualStyleBackColor = true;
+            this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
-            // 
-            // colourFix
-            // 
-            this.colourFix.AutoSize = true;
-            this.colourFix.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.colourFix.Location = new System.Drawing.Point(579, 427);
-            this.colourFix.Name = "colourFix";
-            this.colourFix.Size = new System.Drawing.Size(206, 35);
-            this.colourFix.TabIndex = 28;
-            this.colourFix.Text = "Map colour fix";
-            this.colourFix.UseVisualStyleBackColor = true;
-            this.colourFix.CheckedChanged += new System.EventHandler(this.colourFix_CheckedChanged);
             // 
             // ViceHackPatcher
             // 
@@ -999,6 +1269,23 @@
         private System.Windows.Forms.CheckBox restoreChainMelon;
         private System.Windows.Forms.CheckBox removeTechBoost;
         private System.Windows.Forms.CheckBox restoreLifetime;
-        private System.Windows.Forms.CheckBox colourFix;
+        private System.Windows.Forms.CheckBox colourBreak;
+        private System.Windows.Forms.CheckBox Starters2;
+        private System.Windows.Forms.CheckBox Panjyamon;
+        private System.Windows.Forms.CheckBox Kunemon;
+        private System.Windows.Forms.Button ProgressionInfo;
+        private System.Windows.Forms.CheckBox ProgressionMode;
+        private System.Windows.Forms.CheckBox NerfIce;
+        private System.Windows.Forms.Button RightButton;
+        private System.Windows.Forms.Button LeftButton;
+        private System.Windows.Forms.CheckBox BetterItemSpawns;
+        private System.Windows.Forms.CheckBox BetterRaise;
+        private System.Windows.Forms.CheckBox UsefulItems2;
+        private System.Windows.Forms.CheckBox BetterRestaurant;
+        private System.Windows.Forms.CheckBox BetterCards;
+        private System.Windows.Forms.CheckBox BetterMerit;
+        private System.Windows.Forms.CheckBox BetterDrimogemon;
+        private System.Windows.Forms.CheckBox BetterCurling;
+        private System.Windows.Forms.CheckBox BetterFishing;
     }
 }

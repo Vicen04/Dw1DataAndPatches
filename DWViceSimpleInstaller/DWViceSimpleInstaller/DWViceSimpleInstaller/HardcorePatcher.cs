@@ -98,9 +98,7 @@ namespace DWViceSimpleInstaller
         {
             ChangeButtonColours(GameplayPatches);
             EnableContainer(DifficultyPatchesContainer);
-            EnableInfo(InfoDifficulty);
-
-            
+            EnableInfo(InfoDifficulty);            
         }
 
         private void DigimonPatches_Click(object sender, EventArgs e)
@@ -198,7 +196,8 @@ namespace DWViceSimpleInstaller
                "EXTRA DIFFICULTY PATCHES" + Environment.NewLine + Environment.NewLine +
                "- Fair battles: you will be unable to run from battle and unable to use items in battle" + Environment.NewLine + Environment.NewLine +
                "- Hardcore Monochromon: The bits requirement to recruit Monochromon is increased to 4096" + Environment.NewLine + Environment.NewLine +
-               "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine;
+               "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine +
+               "- Progression mode: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine;
 
             if (parentForm.GetPatchType() == MainApp.patchType.NONE)
             {
@@ -206,6 +205,7 @@ namespace DWViceSimpleInstaller
             }
             else
                 tempText = tempText + Environment.NewLine;
+           
 
                tempText = tempText + "FILTH CHALLENGE" + Environment.NewLine + Environment.NewLine +
                "- Vice filth challenge: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
@@ -314,10 +314,19 @@ namespace DWViceSimpleInstaller
                " * The 'Steak' will now reduce the lifespan of a digimon to 0" + Environment.NewLine + Environment.NewLine +
                " * The vending machine at the 'Dragon Eye Lake' will sell 'Steaks' and 'Prickly Pears'" + Environment.NewLine + Environment.NewLine +
                "- Better drops: Digimon have better chances to drop an item, some digimon now drop different items" + Environment.NewLine + Environment.NewLine +
-               "- Unlock Areas Vice: As long as you have the 'Mansion Key' in your inventory, any digimon will be able to enter the mansion. After recruiting Angemon, any digimon will be able to enter the Ice Sanctuary.";
+               "- Unlock Areas Vice: As long as you have the 'Mansion Key' in your inventory, any digimon will be able to enter the mansion. After recruiting Angemon, any digimon will be able to enter the Ice Sanctuary." + Environment.NewLine + Environment.NewLine +
+               "- Better restaurant: the restaurant will give better stats, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
+               "- Better drimogemon: Drimogemon will give better rewards and lower the time it requires to find treasure, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
+               "- Better cards: Rare cards will be more frequent and the card merit value will be higher, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better merit: The merit shop will have more items and better prices, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better fishing: Fishing will become easier, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better item spawns: The items that randomly spawn will be more frequent, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better curling: The curling rewards will be better, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
-            infoDifficulty.ChangeLink("Better item drops spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
+            infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
             infoDifficulty.ChangeTitle("Useful patches info");
             infoDifficulty.ChangeText(tempText);
             infoDifficulty.ShowDialog();
@@ -329,7 +338,8 @@ namespace DWViceSimpleInstaller
                "- Better infinity burn: this patch will increase the activation speed of 'Infinity Burn' by one second as well as increase accuracy to a 90% and the stun chance to a 30%" + Environment.NewLine + Environment.NewLine +
                "- Better learn tech battle: this will improve the chances of learning a technique after a battle" + Environment.NewLine + Environment.NewLine +
                "- Better learn tech brains: this will improve the chances of learning a technique while training brains" + Environment.NewLine + Environment.NewLine +
-               "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle";
+               "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle" + Environment.NewLine + Environment.NewLine +
+               "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun";
 
             HardcoreHackInfo infoWindow = new HardcoreHackInfo();
             infoWindow.Text = "Info window";
@@ -706,6 +716,208 @@ namespace DWViceSimpleInstaller
             infoDifficulty.ChangeTitle("Myotismon patch info");
             infoDifficulty.ChangeText(tempText);
             infoDifficulty.ShowDialog();
+        }
+
+        private void ProgressionInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "A patch that only lets you learn techniques from recruits." + Environment.NewLine + Environment.NewLine +
+                              "Features:" + Environment.NewLine + Environment.NewLine +
+                              "- You can only learn the weakest techniques and 2 filth techs naturally" + Environment.NewLine + Environment.NewLine +
+                              "- Recruitments and some boss battles will teach you techniques.";
+
+            HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
+            hardcoreHackInfo.Text = "Info window";
+            hardcoreHackInfo.ChangeTitle("Progression info");
+            hardcoreHackInfo.ChangeText(tempText);
+            hardcoreHackInfo.ChangeLink("https://docs.google.com/spreadsheets/d/147dr8Uq_LT1X0STYwuvS59PwbZ_l4hK97GsVCvzJISU/edit?usp=sharing", "Spreadsheet with detailed information");
+            hardcoreHackInfo.ShowDialog();
+        }
+
+        private void Progression_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetProgression(Progression.Checked);
+            if (Progression.Checked)
+            {
+                bettertechBattle.Enabled = false;
+                betterTechsBrains.Enabled = false;
+                betterTechsBrains.Checked = false;
+                bettertechBattle.Checked = false;
+            }
+            else
+            {
+                bettertechBattle.Enabled = true;
+                betterTechsBrains.Enabled = true;
+            }
+        }
+
+        private void LeftUseful_Click(object sender, EventArgs e)
+        {
+            RightUseful.Enabled = true;
+            RightUseful.Visible = true;
+            statsGains.Enabled = true;
+            statsGains.Visible = true;
+            sStatsGains.Visible = true;
+            uStatsGains.Visible = true;
+            statsGains.Enabled = true;
+            uStatsGains.Enabled = true;
+            evoItem.Enabled = true;
+            evoItem.Visible = true;
+            BGMpatch.Visible = true;
+            BGMpatch.Enabled = true;
+            ShortIntro.Visible = true;
+            ShortIntro.Enabled = true;
+            dirtReduction.Visible = true;
+            dirtReduction.Enabled = true;
+            sDirtReduction.Visible = true;
+            sDirtReduction.Enabled = true;
+            lessMono.Visible = true;
+            lessMono.Enabled = true;
+            helpfulItems.Visible = true;
+            helpfulItems.Enabled = true;
+
+            if (parentForm.GetPatchType() == MainApp.patchType.NONE)
+            {
+                bonusTryFix.Enabled = true;
+                bonusTryFix.Visible = true;
+                uBonustry.Visible = true;
+                uBonustry.Enabled = true;
+                sBonusTry.Visible = true;
+                sBonusTry.Enabled = true;
+            }
+
+            LeftUseful.Enabled = false;
+            LeftUseful.Visible = false;
+            betterDrops.Visible = false;
+            betterDrops.Enabled = false;
+            UnlockAreasVice.Visible = false;
+            UnlockAreasVice.Enabled = false;
+            betterDrimogemon.Visible = false;
+            betterDrimogemon.Enabled = false;
+            UsefulItems2.Enabled = false;
+            UsefulItems2.Visible = false;
+            BetterRestaurant.Visible = false;
+            BetterRestaurant.Enabled = false;
+            BetterCurling.Visible = false;
+            BetterCurling.Enabled = false;
+            BetterMerit.Visible = false;
+            BetterMerit.Enabled = false;
+            BetterCards.Enabled = false;
+            BetterCards.Visible = false;
+            BetterFishing.Visible = false;
+            BetterFishing.Enabled = false;
+            BetterRaise.Enabled = false;
+            BetterRaise.Visible = false;
+            BetterItemSpawns.Visible = false;
+            BetterItemSpawns.Enabled = false;
+
+        }
+
+        private void RightUseful_Click(object sender, EventArgs e)
+        {
+            LeftUseful.Enabled = true;
+            LeftUseful.Visible = true;
+            betterDrops.Visible = true;
+            betterDrops.Enabled = true;
+            UnlockAreasVice.Visible = true;
+            UnlockAreasVice.Enabled = true;
+            betterDrimogemon.Visible = true;
+            betterDrimogemon.Enabled = true;
+            UsefulItems2.Enabled = true;
+            UsefulItems2.Visible = true;
+            BetterRestaurant.Visible = true;
+            BetterRestaurant.Enabled = true;
+            BetterCurling.Visible = true;
+            BetterCurling.Enabled = true;
+            BetterMerit.Visible = true;
+            BetterMerit.Enabled = true;
+            BetterCards.Enabled = true;
+            BetterCards.Visible = true;
+            BetterFishing.Visible = true;
+            BetterFishing.Enabled = true;
+            BetterRaise.Enabled = true;
+            BetterRaise.Visible = true;
+            BetterItemSpawns.Visible = true;
+            BetterItemSpawns.Enabled = true;
+
+
+            RightUseful.Enabled= false;
+            RightUseful.Visible = false;
+            statsGains.Enabled = false;
+            statsGains.Visible = false;
+            sStatsGains.Visible = false;
+            uStatsGains.Visible = false;
+            statsGains.Enabled = false;
+            uStatsGains.Enabled = false;
+            evoItem.Enabled = false;
+            evoItem.Visible = false;
+            BGMpatch.Visible = false;
+            BGMpatch.Enabled = false;
+            ShortIntro.Visible = false;
+            ShortIntro.Enabled = false;
+            bonusTryFix.Enabled = false;
+            bonusTryFix.Visible = false;
+            uBonustry.Visible = false;
+            uBonustry.Enabled = false;
+            sBonusTry.Visible = false;
+            sBonusTry.Enabled = false;
+            dirtReduction.Visible = false;
+            dirtReduction.Enabled = false;
+            sDirtReduction.Visible = false;
+            sDirtReduction.Enabled = false;
+            lessMono.Visible = false;
+            lessMono.Enabled = false;
+            helpfulItems.Visible = false;
+            helpfulItems.Enabled = false;
+        }
+
+        private void BetterRestaurant_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRestaurant(BetterRestaurant.Checked);
+        }
+
+        private void BetterCards_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetCards(BetterCards.Checked);
+        }
+
+        private void BetterFishing_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetFishing(BetterFishing.Checked);
+        }
+
+        private void betterDrimogemon_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetDrimogemon(betterDrimogemon.Checked);
+        }
+
+        private void BetterCurling_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetCurling(BetterCurling.Checked);
+        }
+
+        private void BetterRaise_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRaise(BetterRaise.Checked);
+        }
+
+        private void BetterMerit_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetMerit(BetterMerit.Checked);
+        }
+
+        private void UsefulItems2_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetUseful2(UsefulItems2.Checked);
+        }
+
+        private void BetterItemSpawns_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetItemSpawns(BetterItemSpawns.Checked);
+        }
+
+        private void NerfIce_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetIceNerf(NerfIce.Checked);
         }
     }
 }

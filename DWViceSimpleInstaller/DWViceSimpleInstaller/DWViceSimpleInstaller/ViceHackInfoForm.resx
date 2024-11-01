@@ -118,34 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ViceHackInfoText.Text" xml:space="preserve">
-    <value>Version 1.11.4
+    <value>Version 2.0
 
 This patch was possible thanks to the public data provided by SydMontague's Github and the spreadsheet with extracted data.
 It also uses some of the data used by the randomizer made by Meekrhino (the higher chances for some of the digimons).
 
 Features:
 
-- Added Panjamon, Gigadramon and Metal Etemon as evolutions to certain digimons. the requirements are the same as their normal colour counterpart (Leomon, Megadramon and Etemon).
+- Added WereGarurumon, Gigadramon and Metal Etemon as evolutions to certain digimons. they have its own requirements.
 
-- The three earlier mentioned digimon have different techniques and types than in the original game. 
+- The three earlier mentioned digimon have its own techniques and types. 
 
 - Higher chances to find Piximon, Metal Mamemon and Mamemon in the map.
 
 - The Monochromon shop minigame now has a lower profit requirement.
 
-- Certain digimon now have extra techiques.
+- Most digimon now have extra techiques.
 
 - Added an extra companion digimon.
 
 - All of the new digimon will show in the chart.
 
-- The Electro Ring and the Moon Mirror have been changed, now the items can be properly used to evolve to certain digimon. The AS Decoder is now an evolution item.
+- The Electro Ring and the Noble Mane have been changed, now the items can be properly used to evolve to certain digimon. The AS Decoder is now an evolution item.
 
 - Some digimon have changed the item dropped after battle.
 
 - Factorial Town now accepts more digimon to be upgraded.
 
-- Rore digimon accepted in tournaments, bettter regenaration in tournaments.
+- More digimon accepted in tournaments, bettter regenaration in tournaments.
 
 - Royal cup restored.
 
@@ -163,11 +163,11 @@ Features:
 
 - Various bug fixes that improve the game.
 
-- 3 minor glitches added due to the changes and a bug (the bug should not trigger unless you cheat).
+- A bug (should never happen unless you force an evolution with a certain digimon).
 
 - The bgm will keep playing rather than resetting even if you change the map as long as the bgm on the new map is the same.
 
-- New maps, new boss battles: be careful, since one of the maps may give visual issues to some people, it is very unlikely you will enter the map by mistake. If you are worried, check my youtube channel (Digimonworldvice04) to see the map.
+- New maps, new boss battles.
 
 - Two new finishers for two digimon.
 

@@ -12,7 +12,7 @@ namespace DWViceSimpleInstaller
 {
     public partial class ViceHackInfo : Form
     {
-        string originalLink = "https://docs.google.com/spreadsheets/d/17-Xsd4rshCH_MenzfCeV3TdKIFyfvxLPL4Q1eebMezQ/edit?usp=sharing";
+        string originalLink = "https://docs.google.com/spreadsheets/d/1lG3aLJsLiCwcZXo5-OS18o21GngTVuyAiKA0liV_kpM/edit?usp=sharing";
 
         public ViceHackInfo()
         {

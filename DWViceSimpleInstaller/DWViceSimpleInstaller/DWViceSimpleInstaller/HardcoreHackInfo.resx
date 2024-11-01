@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HardcoreHackInfoText.Text" xml:space="preserve">
-    <value>Version 1.0.3 
+    <value>Version 1.0.4 
 This version is only compatible with the vanilla/Maeson hack versions. A randomized vanilla should work too.
 
 This is a hack that tries to increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content. Some of the features are:
@@ -131,6 +131,8 @@ This is a hack that tries to increase the difficulty of the game by modifying th
 
 - Some techs that were originally locked behind only 1 boss battle (like "Infinity Burn" being only used by MetalGreymon) now can be found in some NPCs.
 
-- 1.0.3 feature: The bonus try now will always make you fail, if you truly want the bonus try, you can change this using the optional patch installer.</value>
+- 1.0.3 feature: The bonus try now will always make you fail, if you truly want the bonus try, you can change this using the optional patch installer.
+
+- 1.0.4 addition: Disabled a lot of the debug mode.</value>
   </data>
 </root>

@@ -27,7 +27,7 @@ namespace DWViceSimpleInstaller
             {
                 Description = "Select a folder to save the new file"                
             };
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK);
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 directory.Text = folderBrowserDialog1.SelectedPath;
         }
 
