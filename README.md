@@ -9,11 +9,15 @@ For anyone who wants to ask questions or want help with modding:
 
 I have created a hack which mostly includes the changes shown in this repository (Last update 15/09/24).
 
-[Hack installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer)
+[Hack installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack_2.0)
+
+[Hack installer for the old version](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer)
 
 [Spreadsheets links](https://github.com/Vicen04/Dw1DataAndPatches/blob/main/Information%20links.txt)
 
-[Standalone Vice hack](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack)
+[Standalone Vice hack 2.0](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack_2.0)
+
+[Standalone Vice hack old version](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack)
 
 [Standalone Hardcore hack](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_World_Hardcore)
 
