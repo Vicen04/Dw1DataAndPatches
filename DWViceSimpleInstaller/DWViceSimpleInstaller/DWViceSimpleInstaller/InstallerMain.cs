@@ -288,9 +288,6 @@ namespace DWViceSimpleInstaller
             if (evoItem)
                 SetPatch(path + "Useful patches/EnableStatGainsEvoItems.ppf");
 
-            if (helpfulItems)
-                SetPatch(path + "Useful patches/HelpfulItems.ppf");
-
             if (lessMono)
                 SetPatch(path + "Useful patches/LowerMonochromonBits.ppf");
 
@@ -326,6 +323,9 @@ namespace DWViceSimpleInstaller
 
             if (itemSpawns)
                 SetPatch(path + "Useful patches/BetterItemSpawns.ppf");
+
+            if (helpfulItems)
+                SetPatch(path + "Useful patches/HelpfulItems.ppf");
 
 
             bin.Close();
