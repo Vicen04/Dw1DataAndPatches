@@ -33,6 +33,7 @@ int GetRookieEvoValue(int digimonType)
 
     iVar1 = *targetType;
 
+//old version
     if (iVar1 == 63) //Change the digimon data Panjyamon uses as target data
       iVar1 = 48; //Maeson has a 62 here
     
@@ -41,6 +42,16 @@ int GetRookieEvoValue(int digimonType)
     
     if (iVar1 == 65) //Change the digimon data MetalEtemon uses as target data
       iVar1 = 42; //Maeson has a 62 here
+	  
+//in 2.0
+    if (iVar1 == 63) //Change the digimon data Panjyamon uses as target data
+      iVar1 = 01; //Maeson has a 62 here
+    
+    if (iVar1 == 64) //Change the digimon data Gigadramon  uses as target data
+      iVar1 = 15; //Maeson has a 62 here
+    
+    if (iVar1 == 65) //Change the digimon data MetalEtemon uses as target data
+      iVar1 = 29; //Maeson has a 62 here
 
 //this is actually done after checking the (iVar1 != -1), but to make it easier to read, I left it here
     requirementScore = CalculateRequirementScoreEvo(digimonType,iVar1,
@@ -52,6 +63,7 @@ int GetRookieEvoValue(int digimonType)
     {
       iVar1 = *targetType;
 
+//old version
       if (iVar1 == 63) //Change the digimon data Panyjamon uses as stats requirement data
         iVar1 = 48; //Maeson has a 62 here
     
@@ -60,6 +72,16 @@ int GetRookieEvoValue(int digimonType)
      
       if (iVar1 == 65) //Change the digimon data MetalEtemon uses as stats requirement data
         iVar1 = 42; //Maeson has a 62 here
+		
+//in 2.0
+      if (iVar1 == 63) //Change the digimon data Panjyamon uses as target data
+        iVar1 = 01; //Maeson has a 62 here
+    
+      if (iVar1 == 64) //Change the digimon data Gigadramon  uses as target data
+        iVar1 = 15; //Maeson has a 62 here
+    
+      if (iVar1 == 65) //Change the digimon data MetalEtemon uses as target data
+        iVar1 = 29; //Maeson has a 62 here
 
       if ((&TargetHP)[iVar1 * 14] != -1) 
         points = MaxDigimonHP / 10 ;   
@@ -166,24 +188,30 @@ Disassembly:
         800e2f10 3f 00 01 24     li         at,0x3f
         800e2f14 02 00 22 14     bne        at,v0,0x800e2f20
         800e2f18 00 00 00 00     _nop
-//Vice
+//Vice old or Restore Panjyamon
         800e2f1c 30 00 02 24     li         v0,0x30 
+//Vice 2.0
+        800e2f1c 01 00 02 24     li         v0,0x1 		
 //Maeson 
         800e2f1c 3e 00 02 24     li         v0,0x3e
                              LAB_800e2f20                                     
         800e2f20 40 00 01 24     li         at,0x40
         800e2f24 02 00 22 14     bne        at,v0,0x800e2f30
         800e2f28 00 00 00 00     _nop
-//Vice
+//Vice old
         800e2f2c 36 00 02 24     li         v0,0x36 
+//Vice 2.0
+        800e2f2c 0f 00 02 24     li         v0,0x0f 
 //Maeson 
         800e2f2c 3e 00 02 24     li         v0,0x3e
                              LAB_800e2f30                                   
         800e2f30 41 00 01 24     li         at,0x41
         800e2f34 02 00 22 14     bne        at,v0,0x800e2f40
         800e2f38 00 00 00 00     _nop
-//Vice
+//Vice old
         800e2f3c 2a 00 02 24     li         v0,0x2a 
+//Vice 2.0
+        800e2f3c 1d 00 02 24     li         v0,0x1d 
 //Maeson 
         800e2f3c 3e 00 02 24     li         v0,0x3e
                              LAB_800e2f40                                  
@@ -196,24 +224,30 @@ Disassembly:
         800e2f54 3f 00 01 24     li         at,0x3f 
         800e2f58 02 00 24 14     bne        at,a0,0x800e2f64
         800e2f5c 00 00 00 00     _nop
-//Vice
+// Vice old or Restore Panjyamon
         800e2f60 30 00 04 24     li         a0,0x30 
+//Vice 2.0
+        800e2f60 01 00 04 24     li         a0,0x1 
 //Maeson 
         800e2f60 3e 00 04 24     li         a0,0x3e 
                              LAB_800e2f64                                    
         800e2f64 40 00 01 24     li         at,0x40
         800e2f68 02 00 24 14     bne        at,a0,0x800e2f74
         800e2f6c 00 00 00 00     _nop
-//Vice
+//Vice old
         800e2f70 36 00 04 24     li         a0,0x36
+//Vice 2.0
+        800e2f70 0f 00 04 24     li         a0,0xf
 //Maeson 
         800e2f70 3e 00 04 24     li         a0,0x3e 
                              LAB_800e2f74                                  
         800e2f74 41 00 01 24     li         at,0x41
         800e2f78 02 00 24 14     bne        at,a0,LAB_800e2f84
         800e2f7c 00 00 00 00     _nop
-//Vice
+//Vice old
         800e2f80 2a 00 04 24     li         a0,0x2a 
+//Vice 2.0
+        800e2f80 1d 00 04 24     li         a0,0x1d 
 //Maeson 
         800e2f80 3e 00 04 24     li         a0,0x3e 
                              LAB_800e2f84                                  
@@ -464,7 +498,7 @@ void HandleEvoItems(int EvoItemValue)
   
   if (EvoItemValue < 125) //Makes sure that is inside the normal items value
   {
-    if (EvoItemValue == 114) // Moon Mirror, Maeson has a 83 (Electro Ring) here; this is read if you evolve to Sukamon using an item
+    if (EvoItemValue == 83) // Electro Ring, Maeson has a 114 (Moon Mirror) here; this is read if you evolve to Sukamon using an item
     {
       EvoItemValue = 5;
       WritePStat(EvoItemValue,DigimonType); //Store the old digimon in case the player interacts with King Sukamon
@@ -474,7 +508,7 @@ void HandleEvoItems(int EvoItemValue)
       OldDef = DigimonDef;
       OldSpeed = DigimonSpeed;
       OldBrains = DigimonBrains;
-      EvoItemValue = 114;  //it was overwritten before, so it has to be set again
+      EvoItemValue = 83;  //it was overwritten before, so it has to be set again
     }
 	;//old code
     if (EvoItemValue == 70) //Chain Melon, exclusive to my hack, Maeson does not have this
@@ -494,8 +528,14 @@ void HandleEvoItems(int EvoItemValue)
   }
   else 
   {
+  
+// Vice old or Restore Panjyamon
     if (EvoItemValue == 126) // Noble Mane
       evolutionTarget = 63;
+	  
+//Vice 2.0	  
+    if (EvoItemValue == 126) // Weird Slime
+      evolutionTarget = 11;
     
     if (EvoItemValue == 125) //Giga Hand
       evolutionTarget = 64; //Maeson has a 62 here
@@ -527,7 +567,10 @@ Disassembly:
         800c3870 7e 00 01 24     li         at,0x7e
         800c3874 02 00 81 14     bne        a0,at,0x800c3880
         800c3878 7d 00 01 24     _li        at,0x7d
+//Vice old or Restore Panjyamon
         800c387c 3f 00 02 24     li         v0,0x3f
+//Vice 2.0
+        800c387c 0b 00 02 24     li         v0,0xB
                              LAB_800c3880                                   
         800c3880 02 00 81 14     bne        a0,at,0x800c388c
         800c3884 7f 00 01 24     _li        at,0x7f
@@ -541,7 +584,7 @@ Disassembly:
 
 //jumps back here if the item is lower than 125
 
-//Vice
+//Vice old
                              LAB_800c389c                                  
         800c389c 46 00 01 24     _li        at,0x46
         800c38a0 03 00 81 14     bne        a0,at,0x800c38b0
@@ -549,7 +592,7 @@ Disassembly:
         800c38a8 21 00 00 10     b          0x800c3930
         800c38ac 3e 00 02 24     _li        v0,0x3e
 
-//Vice 1.11.2 and Maeson 
+//from Vice 1.11.2 and Maeson 1.0.10
                              LAB_800c389c       
         800c389c 7c 00 01 24     _li        at,0x7c
         800c38a0 03 00 81 14     bne        a0,at,0x800c38b0
@@ -612,7 +655,10 @@ Disassembly:
 
 
 //jumps here if the item is lower than 125
-                             LAB_800e2fdc                                   
+                             LAB_800e2fdc  
+//Vice                              
+        800e2fdc 53 00 01 24     li         at,0x53							 
+//Maeson                            
         800e2fdc 72 00 01 24     li         at,0x72
         800e2fe0 2e 82 24 14     bne        at,a0,0x800c389c
         800e2fe4 00 00 00 00     _nop
@@ -640,6 +686,9 @@ Disassembly:
         800e303c 14 80 01 3c     lui        at,0x8014
         800e3040 de 84 22 a4     sh         v0,-0x7b22(at) //OldSpeed
         800e3044 e0 84 23 a4     sh         v1,-0x7b20(at) //OldBrains
+//Vice
+        800e3048 53 00 04 24     li         a0,0x53
+//Maeson
         800e3048 72 00 04 24     li         a0,0x72
         800e304c 13 82 00 10     b          0x800c389c
         800e3050 21 18 00 00     _clear     v1
@@ -1357,7 +1406,8 @@ Changed:
 
 
 
-//Factorial town changes
+//Factorial town changes, only in versions prior to Vice 1.11.5
+
 //This is a function that compares data in the script, only the part with the change is shown
 
 Original:
@@ -1674,9 +1724,9 @@ Changed:
 int FUN_80060620(int param_1,int param_2)
 {
 //code ignored
-  CurrentHP = CurrentHP + (MaxHP / 5) * 4 //Maeson multiplies it by 2 rather than 4
+  CurrentHP = CurrentHP + (MaxHP / 5) * 4 //
 
-  CurrentMP = CurrentMP + (MaxMP / 5) * 4 //Maeson multiplies it by 2 rather than 4
+  CurrentMP = CurrentMP + (MaxMP / 5) * 4 //
 
 //code ignored
 }
@@ -1711,7 +1761,7 @@ Vice:
         8006091c 16 00 43 84     lh         v1,0x16(v0)
         80060920 43 24 04 00     sra        a0,a0,0x1
 
-Maeson:
+Maeson (or it was supposed to be like this):
 
 //HP
         800608e8 C0 24 04 00     sll        a0,a0,0x3

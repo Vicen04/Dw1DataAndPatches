@@ -133,7 +133,10 @@ namespace DWViceSimpleInstaller
                     SetPatch(path + "DigimonWorldViceHardmode.ppf");
                     break;
                 case viceDifficulty.HARDCORE:
-                    SetPatch(path + "HardcoreVice 1.0.4.ppf");                    
+                    if (!progression)
+                        SetPatch(path + "HardcoreVice 1.0.4.ppf");
+                    else
+                        SetPatch(path + "HardcoreViceP.ppf");
                     break;
                 default:
                     break;
@@ -191,7 +194,10 @@ namespace DWViceSimpleInstaller
         public void InstallHardcore()
         {
             //main patch
-            SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.4.ppf");
+            if (!progression)
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.4.ppf");
+            else
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/HardcoreP.ppf");
             //Run other patches
             ExtraInstall();
         }
@@ -223,7 +229,7 @@ namespace DWViceSimpleInstaller
                     SetPatch(path + "Difficulty patches/RestoreFilthDigimon.ppf");
             }
 
-            if (progression)
+            if (progression && currentPatcher == patchType.NONE)
                 SetPatch(path + "Difficulty patches/ProgressionPatch.ppf");
 
             if (vermillimon)
