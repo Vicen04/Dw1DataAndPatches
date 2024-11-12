@@ -207,3 +207,54 @@ Version 1.11 (I just decided to remove that "0"):
 
 Version 2.0:
 - Check the spreadsheet to see all of the changes for that version, a link can be found in the "informations links txt"
+
+
+- Added Weregarurumon, Gigadramon and Metal etemon as evolutions to certain digimons.
+
+- The three earlier mentioned digimon have their own techniques and types. 
+
+- Higher chances to find piximon, metal mamemon and mamemon in the map.
+
+- The Monochromon shop minigame now has a lower profit requirement.
+
+- Almost all digimons now have an extra techs.
+
+- Added an extra companion digimon.
+
+- All of the added digimon will show in the chart.
+
+- The electro ring and the noble mane have been changed, now the items can be properly used to evolve to certain digimon. The AS Decoder is now an evolution item.
+
+- Some digimon have changed the item dropped after battle.
+
+- Factorial Town now accepts more digimon to be upgraded.
+
+- More digimon accepted in tournaments, bettter regenaration in tournaments.
+
+- Royal Cup restored.
+
+- Improved lifetime extension after evolving to ultimate (from 4 days to 8 days).
+
+- Fixed some text not rendering, changed the name and description of some items to align them better.
+
+- A brand new mechanic which boost a specific tech for each partner digimon, it only affects your partner, NPC are not affected.
+
+- All of the extra digimon have an evolution item that can be obtained multiple times in the game.
+
+- The Grey Lord Mansion and the Ice Sanctuary will accept any digimon under certain conditions. This makes the game incompatible with the "unlock areas" from the randomizer.
+
+- The bonus try has been improved (in a different way that the randomizer does it).
+
+- Various bug fixes that improve the game.
+
+- A bug (the bug should not trigger unless you cheat an evolution).
+
+- The BGM will keep playing rather than resetting even if you change the map as long as the BGM on the new map is the same.
+
+- New maps, new boss battles: be careful, since one of the maps may give visual issues to some people, it is very unlikely you enter the map by mistake. If you are worried, read the long version of this section.
+
+- Two new finishers for two digimon.
+
+- Improved Infinity Burn.
+
+- New battles that also allows to learn all techs.
