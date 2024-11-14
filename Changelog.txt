@@ -247,11 +247,11 @@ Version 2.0:
 
 - Various bug fixes that improve the game.
 
-- A bug (the bug should not trigger unless you cheat an evolution).
+- A bug (the bug should not trigger unless you force an evolution with a certain digimon).
 
 - The BGM will keep playing rather than resetting even if you change the map as long as the BGM on the new map is the same.
 
-- New maps, new boss battles: be careful, since one of the maps may give visual issues to some people, it is very unlikely you enter the map by mistake. If you are worried, read the long version of this section.
+- New maps with new boss battles.
 
 - Two new finishers for two digimon.
 
