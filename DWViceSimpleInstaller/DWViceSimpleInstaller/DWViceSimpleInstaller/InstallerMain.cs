@@ -37,10 +37,12 @@ namespace DWViceSimpleInstaller
 
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
-             BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling;
+             BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
+            trainingBoost, insaneDamage;
 
         //Vice exclusive
-        bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore, restorePanjyamon, starters2, kunemon;
+        bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
+             restorePanjyamon, starters2, kunemon, removeTelephone;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -96,11 +98,11 @@ namespace DWViceSimpleInstaller
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
-            drimogemon = fishing = merit = cards = nerfIce = false;
+            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -121,7 +123,7 @@ namespace DWViceSimpleInstaller
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "/Patches/ViceHack/";
             //main patch
-            SetPatch(path + "DigimonWorldVice_2.0.ppf");
+            SetPatch(path + "DigimonWorldVice_2.0.1.ppf");
 
             //optional exclusive patches
             switch (currentViceDifficulty)
@@ -187,6 +189,10 @@ namespace DWViceSimpleInstaller
 
             if (mapColour)
                 SetPatch(path + "BreakColour.ppf");
+
+            if (removeTelephone)
+                SetPatch(path + "NoTelephoneOgre.ppf");
+
 
             InstallOptionalPatches();
         }
@@ -262,6 +268,9 @@ namespace DWViceSimpleInstaller
             if (nerfIce)
                 SetPatch(path + "Tech patches/NerfIceStatue.ppf");
 
+            if (insaneDamage)
+                SetPatch(path + "Tech patches/InsaneDamage.ppf");
+
             if (betterDrop)
                 SetPatch(path + "Useful patches/BetterDrops.ppf");
 
@@ -332,6 +341,10 @@ namespace DWViceSimpleInstaller
 
             if (helpfulItems)
                 SetPatch(path + "Useful patches/HelpfulItems.ppf");
+
+            if (trainingBoost)
+                SetPatch(path + "Useful patches/TrainingBoostB.ppf");
+
 
 
             bin.Close();
@@ -493,8 +506,10 @@ namespace DWViceSimpleInstaller
         public void SetRestorePanjya(bool enabled) { restorePanjyamon = enabled; }
         public void SetStarters2(bool enabled) { starters2 = enabled; }
         public void SetKunemon(bool enabled) { kunemon = enabled; }
-
         public void SetIceNerf(bool enabled) { nerfIce = enabled; }
+        public void SetTrainingBoost(bool enabled) { trainingBoost = enabled; }
+        public void SetInsaneDamage(bool enabled) { insaneDamage = enabled; }
+        public void SetTelephone(bool enabled) {removeTelephone = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
@@ -722,7 +737,7 @@ namespace DWViceSimpleInstaller
 
                 if (insaneBattle)
                 {
-                    txtWritter.Write("- Insane battle");
+                    txtWritter.Write("- Insane battles");
                     txtWritter.WriteLine();
                 }
 
@@ -753,6 +768,13 @@ namespace DWViceSimpleInstaller
                 if (mapColour)
                 {
                     txtWritter.Write("- Map colour break");
+                    txtWritter.WriteLine();
+                }
+
+
+                if (removeTelephone)
+                {
+                    txtWritter.Write("- Remove Ogremon telephone");
                     txtWritter.WriteLine();
                 }
             }
@@ -895,6 +917,12 @@ namespace DWViceSimpleInstaller
                 txtWritter.WriteLine();
             }
 
+            if (trainingBoost)
+            {
+                txtWritter.Write("- Training boost fix");
+                txtWritter.WriteLine();
+            }
+
             txtWritter.WriteLine();
             txtWritter.Write("Techniques patches:");
             txtWritter.WriteLine();
@@ -926,6 +954,12 @@ namespace DWViceSimpleInstaller
             if (nerfIce)
             {
                 txtWritter.Write("- Nerf Ice Statue");
+                txtWritter.WriteLine();
+            }
+
+            if (insaneDamage)
+            {
+                txtWritter.Write("- Insane technique damage");
                 txtWritter.WriteLine();
             }
 

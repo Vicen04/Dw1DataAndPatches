@@ -85,6 +85,7 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.trainingBoost = new System.Windows.Forms.CheckBox();
             this.RightButton = new System.Windows.Forms.Button();
             this.LeftButton = new System.Windows.Forms.Button();
             this.BetterItemSpawns = new System.Windows.Forms.CheckBox();
@@ -108,6 +109,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
+            this.insaneTechs = new System.Windows.Forms.CheckBox();
+            this.removeTelephone = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -624,6 +627,7 @@
             // 
             // miscPatches
             // 
+            this.miscPatches.Controls.Add(this.removeTelephone);
             this.miscPatches.Controls.Add(this.colourBreak);
             this.miscPatches.Controls.Add(this.removeTechBoost);
             this.miscPatches.Controls.Add(this.restoreLifetime);
@@ -648,7 +652,7 @@
             // 
             this.colourBreak.AutoSize = true;
             this.colourBreak.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.colourBreak.Location = new System.Drawing.Point(113, 193);
+            this.colourBreak.Location = new System.Drawing.Point(109, 193);
             this.colourBreak.Name = "colourBreak";
             this.colourBreak.Size = new System.Drawing.Size(245, 35);
             this.colourBreak.TabIndex = 28;
@@ -685,7 +689,7 @@
             this.restoreChainMelon.AutoSize = true;
             this.restoreChainMelon.Enabled = false;
             this.restoreChainMelon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreChainMelon.Location = new System.Drawing.Point(587, 264);
+            this.restoreChainMelon.Location = new System.Drawing.Point(6, 305);
             this.restoreChainMelon.Name = "restoreChainMelon";
             this.restoreChainMelon.Size = new System.Drawing.Size(282, 35);
             this.restoreChainMelon.TabIndex = 25;
@@ -720,11 +724,11 @@
             // 
             this.insaneBattle.AutoSize = true;
             this.insaneBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneBattle.Location = new System.Drawing.Point(113, 118);
+            this.insaneBattle.Location = new System.Drawing.Point(109, 120);
             this.insaneBattle.Name = "insaneBattle";
-            this.insaneBattle.Size = new System.Drawing.Size(194, 35);
+            this.insaneBattle.Size = new System.Drawing.Size(207, 35);
             this.insaneBattle.TabIndex = 3;
-            this.insaneBattle.Text = "Insane battle";
+            this.insaneBattle.Text = "Insane battles";
             this.insaneBattle.UseVisualStyleBackColor = true;
             this.insaneBattle.CheckedChanged += new System.EventHandler(this.insaneBattle_CheckedChanged);
             // 
@@ -733,7 +737,7 @@
             this.randoAdaptor.AutoSize = true;
             this.randoAdaptor.Enabled = false;
             this.randoAdaptor.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.randoAdaptor.Location = new System.Drawing.Point(102, 120);
+            this.randoAdaptor.Location = new System.Drawing.Point(307, 305);
             this.randoAdaptor.Name = "randoAdaptor";
             this.randoAdaptor.Size = new System.Drawing.Size(278, 35);
             this.randoAdaptor.TabIndex = 2;
@@ -747,7 +751,7 @@
             this.deRandoFact.AutoSize = true;
             this.deRandoFact.Enabled = false;
             this.deRandoFact.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.deRandoFact.Location = new System.Drawing.Point(579, 120);
+            this.deRandoFact.Location = new System.Drawing.Point(617, 305);
             this.deRandoFact.Name = "deRandoFact";
             this.deRandoFact.Size = new System.Drawing.Size(252, 35);
             this.deRandoFact.TabIndex = 1;
@@ -770,6 +774,7 @@
             // 
             // techContainer
             // 
+            this.techContainer.Controls.Add(this.insaneTechs);
             this.techContainer.Controls.Add(this.NerfIce);
             this.techContainer.Controls.Add(this.multipleTechs);
             this.techContainer.Controls.Add(this.betterTechsBrains);
@@ -778,7 +783,7 @@
             this.techContainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.techContainer.Location = new System.Drawing.Point(90, 160);
             this.techContainer.Name = "techContainer";
-            this.techContainer.Size = new System.Drawing.Size(1000, 200);
+            this.techContainer.Size = new System.Drawing.Size(1000, 300);
             this.techContainer.TabIndex = 22;
             this.techContainer.TabStop = false;
             this.techContainer.Text = "Techniques patches";
@@ -834,6 +839,7 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.trainingBoost);
             this.usefulContainer.Controls.Add(this.RightButton);
             this.usefulContainer.Controls.Add(this.LeftButton);
             this.usefulContainer.Controls.Add(this.BetterItemSpawns);
@@ -865,6 +871,20 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // trainingBoost
+            // 
+            this.trainingBoost.AutoSize = true;
+            this.trainingBoost.Enabled = false;
+            this.trainingBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.trainingBoost.Location = new System.Drawing.Point(36, 426);
+            this.trainingBoost.Name = "trainingBoost";
+            this.trainingBoost.Size = new System.Drawing.Size(245, 35);
+            this.trainingBoost.TabIndex = 23;
+            this.trainingBoost.Text = "Training boost fix";
+            this.trainingBoost.UseVisualStyleBackColor = true;
+            this.trainingBoost.Visible = false;
+            this.trainingBoost.CheckedChanged += new System.EventHandler(this.TrainingBoost_CheckedChanged);
             // 
             // RightButton
             // 
@@ -1080,7 +1100,7 @@
             // 
             this.sStatsGains.AutoSize = true;
             this.sStatsGains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.sStatsGains.Location = new System.Drawing.Point(357, 32);
+            this.sStatsGains.Location = new System.Drawing.Point(344, 35);
             this.sStatsGains.Name = "sStatsGains";
             this.sStatsGains.Size = new System.Drawing.Size(244, 35);
             this.sStatsGains.TabIndex = 6;
@@ -1161,6 +1181,30 @@
             this.betterDrops.UseVisualStyleBackColor = true;
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
+            // 
+            // insaneTechs
+            // 
+            this.insaneTechs.AutoSize = true;
+            this.insaneTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.insaneTechs.Location = new System.Drawing.Point(327, 197);
+            this.insaneTechs.Name = "insaneTechs";
+            this.insaneTechs.Size = new System.Drawing.Size(286, 35);
+            this.insaneTechs.TabIndex = 4;
+            this.insaneTechs.Text = "Insane Tech damage";
+            this.insaneTechs.UseVisualStyleBackColor = true;
+            this.insaneTechs.CheckedChanged += new System.EventHandler(this.insaneTechs_CheckedChanged);
+            // 
+            // removeTelephone
+            // 
+            this.removeTelephone.AutoSize = true;
+            this.removeTelephone.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.removeTelephone.Location = new System.Drawing.Point(590, 264);
+            this.removeTelephone.Name = "removeTelephone";
+            this.removeTelephone.Size = new System.Drawing.Size(321, 35);
+            this.removeTelephone.TabIndex = 29;
+            this.removeTelephone.Text = "Remove Ogre telephone";
+            this.removeTelephone.UseVisualStyleBackColor = true;
+            this.removeTelephone.CheckedChanged += new System.EventHandler(this.removeTelephone_CheckedChanged);
             // 
             // ViceHackPatcher
             // 
@@ -1287,5 +1331,8 @@
         private System.Windows.Forms.CheckBox BetterDrimogemon;
         private System.Windows.Forms.CheckBox BetterCurling;
         private System.Windows.Forms.CheckBox BetterFishing;
+        private System.Windows.Forms.CheckBox trainingBoost;
+        private System.Windows.Forms.CheckBox insaneTechs;
+        private System.Windows.Forms.CheckBox removeTelephone;
     }
 }

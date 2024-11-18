@@ -382,11 +382,12 @@ namespace DWViceSimpleInstaller
                "RANDOMIZER COMPATIBILITY" + Environment.NewLine + Environment.NewLine +
                "Removed due to the differences between vanilla and this hack" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                "OTHER PATCHES" + Environment.NewLine + Environment.NewLine +
-               "- Insane battle: this patch makes the Metal Etemon battle work in a weird way" + Environment.NewLine + Environment.NewLine +
+               "- Insane battles: this patch makes the back dimension battles work in a weird way" + Environment.NewLine + Environment.NewLine +
                "- Fully unlock areas: this patch will let you enter the Mansion, Sanctuary and Toy Town without any restrictions" + Environment.NewLine + Environment.NewLine +
                "- Remove tech boost: this patch will remove the tech boost of all digimon (not available in challenge or ultra hardcore)" + Environment.NewLine + Environment.NewLine +
                "- Restore ultimate extended lifetime: The extended lifetime of 8 days when becoming an ultimate, will go back to the original 4 days" + Environment.NewLine + Environment.NewLine +
-               "- Map colour break: It breaks the colour of two extra maps, making them look unpleasant.";
+               "- Map colour break: It breaks the colour of two extra maps, making them look unpleasant." + Environment.NewLine + Environment.NewLine +
+               "- Remove telephone: Removes the collision for the telephone in the Ogre Fortress (why did I even make this?).";
 
 
             ViceHackInfo infoWindow = new ViceHackInfo();
@@ -422,7 +423,8 @@ namespace DWViceSimpleInstaller
                "- Better item spawns: The items that randomly spawn will be more frequent, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better curling: The curling rewards will be better, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
-               "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym.";
+               "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym." + Environment.NewLine + Environment.NewLine +
+               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Better item drops spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -437,7 +439,8 @@ namespace DWViceSimpleInstaller
                "- Better learn tech battle: this will improve the chances of learning a technique after a battle" + Environment.NewLine + Environment.NewLine +
                "- Better learn tech brains: this will improve the chances of learning a technique while training brains" + Environment.NewLine + Environment.NewLine +
                "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle" + Environment.NewLine + Environment.NewLine +
-               "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun";
+               "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun" + Environment.NewLine + Environment.NewLine +
+               "- Insane Tech damage: this patch will change the range of the techniques damage from '90% - 110%' to '10% - 190%', finishers are not affected by this patch.";
 
             HardcoreHackInfo infoWindow = new HardcoreHackInfo();
             infoWindow.Text = "Info window";
@@ -727,6 +730,8 @@ namespace DWViceSimpleInstaller
             BetterRaise.Visible = true;
             BetterItemSpawns.Visible = true;
             BetterItemSpawns.Enabled = true;
+            trainingBoost.Visible = true;
+            trainingBoost.Enabled = true;
 
 
             RightButton.Enabled = false;
@@ -809,6 +814,8 @@ namespace DWViceSimpleInstaller
             BetterRaise.Visible = false;
             BetterItemSpawns.Visible = false;
             BetterItemSpawns.Enabled = false;
+            trainingBoost.Visible = false;
+            trainingBoost.Enabled = false;
 
         }
 
@@ -855,6 +862,21 @@ namespace DWViceSimpleInstaller
         private void BetterRestaurant_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetRestaurant(BetterRestaurant.Checked);
+        }
+
+        private void TrainingBoost_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetTrainingBoost(trainingBoost.Checked);
+        }
+
+        private void insaneTechs_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetInsaneDamage(insaneTechs.Checked);
+        }
+
+        private void removeTelephone_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetTelephone(removeTelephone.Checked);
         }
     }
 }

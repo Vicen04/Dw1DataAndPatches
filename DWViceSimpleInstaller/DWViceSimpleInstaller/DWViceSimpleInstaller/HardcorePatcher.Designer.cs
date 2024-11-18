@@ -87,11 +87,22 @@
             this.ForgetTechs = new System.Windows.Forms.CheckBox();
             this.missingText = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
+            this.NerfIce = new System.Windows.Forms.CheckBox();
             this.betterInfinity = new System.Windows.Forms.CheckBox();
             this.multipleTechs = new System.Windows.Forms.CheckBox();
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.trainingBoost = new System.Windows.Forms.CheckBox();
+            this.BetterItemSpawns = new System.Windows.Forms.CheckBox();
+            this.UsefulItems2 = new System.Windows.Forms.CheckBox();
+            this.BetterMerit = new System.Windows.Forms.CheckBox();
+            this.BetterRaise = new System.Windows.Forms.CheckBox();
+            this.BetterCurling = new System.Windows.Forms.CheckBox();
+            this.betterDrimogemon = new System.Windows.Forms.CheckBox();
+            this.BetterFishing = new System.Windows.Forms.CheckBox();
+            this.BetterCards = new System.Windows.Forms.CheckBox();
+            this.BetterRestaurant = new System.Windows.Forms.CheckBox();
             this.RightUseful = new System.Windows.Forms.Button();
             this.LeftUseful = new System.Windows.Forms.Button();
             this.UnlockAreasVice = new System.Windows.Forms.CheckBox();
@@ -109,16 +120,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.BetterRestaurant = new System.Windows.Forms.CheckBox();
-            this.BetterCards = new System.Windows.Forms.CheckBox();
-            this.BetterFishing = new System.Windows.Forms.CheckBox();
-            this.betterDrimogemon = new System.Windows.Forms.CheckBox();
-            this.BetterCurling = new System.Windows.Forms.CheckBox();
-            this.BetterRaise = new System.Windows.Forms.CheckBox();
-            this.BetterMerit = new System.Windows.Forms.CheckBox();
-            this.UsefulItems2 = new System.Windows.Forms.CheckBox();
-            this.BetterItemSpawns = new System.Windows.Forms.CheckBox();
-            this.NerfIce = new System.Windows.Forms.CheckBox();
+            this.insaneDamage = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -878,6 +880,7 @@
             // 
             // techContainer
             // 
+            this.techContainer.Controls.Add(this.insaneDamage);
             this.techContainer.Controls.Add(this.NerfIce);
             this.techContainer.Controls.Add(this.betterInfinity);
             this.techContainer.Controls.Add(this.multipleTechs);
@@ -892,6 +895,18 @@
             this.techContainer.TabStop = false;
             this.techContainer.Text = "Techniques patches";
             this.techContainer.Visible = false;
+            // 
+            // NerfIce
+            // 
+            this.NerfIce.AutoSize = true;
+            this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NerfIce.Location = new System.Drawing.Point(55, 169);
+            this.NerfIce.Name = "NerfIce";
+            this.NerfIce.Size = new System.Drawing.Size(220, 35);
+            this.NerfIce.TabIndex = 4;
+            this.NerfIce.Text = "Nerf Ice Statue";
+            this.NerfIce.UseVisualStyleBackColor = true;
+            this.NerfIce.CheckedChanged += new System.EventHandler(this.NerfIce_CheckedChanged);
             // 
             // betterInfinity
             // 
@@ -943,6 +958,7 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.trainingBoost);
             this.usefulContainer.Controls.Add(this.BetterItemSpawns);
             this.usefulContainer.Controls.Add(this.UsefulItems2);
             this.usefulContainer.Controls.Add(this.BetterMerit);
@@ -977,6 +993,146 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // trainingBoost
+            // 
+            this.trainingBoost.AutoSize = true;
+            this.trainingBoost.Enabled = false;
+            this.trainingBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.trainingBoost.Location = new System.Drawing.Point(36, 437);
+            this.trainingBoost.Name = "trainingBoost";
+            this.trainingBoost.Size = new System.Drawing.Size(247, 35);
+            this.trainingBoost.TabIndex = 26;
+            this.trainingBoost.Text = "Training Boost fix";
+            this.trainingBoost.UseVisualStyleBackColor = true;
+            this.trainingBoost.Visible = false;
+            this.trainingBoost.CheckedChanged += new System.EventHandler(this.TrainingBoost_CheckedChanged);
+            // 
+            // BetterItemSpawns
+            // 
+            this.BetterItemSpawns.AutoSize = true;
+            this.BetterItemSpawns.Enabled = false;
+            this.BetterItemSpawns.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterItemSpawns.Location = new System.Drawing.Point(36, 277);
+            this.BetterItemSpawns.Name = "BetterItemSpawns";
+            this.BetterItemSpawns.Size = new System.Drawing.Size(270, 35);
+            this.BetterItemSpawns.TabIndex = 25;
+            this.BetterItemSpawns.Text = "Better item spawns";
+            this.BetterItemSpawns.UseVisualStyleBackColor = true;
+            this.BetterItemSpawns.Visible = false;
+            this.BetterItemSpawns.CheckedChanged += new System.EventHandler(this.BetterItemSpawns_CheckedChanged);
+            // 
+            // UsefulItems2
+            // 
+            this.UsefulItems2.AutoSize = true;
+            this.UsefulItems2.Enabled = false;
+            this.UsefulItems2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.UsefulItems2.Location = new System.Drawing.Point(607, 277);
+            this.UsefulItems2.Name = "UsefulItems2";
+            this.UsefulItems2.Size = new System.Drawing.Size(206, 35);
+            this.UsefulItems2.TabIndex = 24;
+            this.UsefulItems2.Text = "Useful items 2";
+            this.UsefulItems2.UseVisualStyleBackColor = true;
+            this.UsefulItems2.Visible = false;
+            this.UsefulItems2.CheckedChanged += new System.EventHandler(this.UsefulItems2_CheckedChanged);
+            // 
+            // BetterMerit
+            // 
+            this.BetterMerit.AutoSize = true;
+            this.BetterMerit.Enabled = false;
+            this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterMerit.Location = new System.Drawing.Point(607, 195);
+            this.BetterMerit.Name = "BetterMerit";
+            this.BetterMerit.Size = new System.Drawing.Size(246, 35);
+            this.BetterMerit.TabIndex = 23;
+            this.BetterMerit.Text = "Better merit shop";
+            this.BetterMerit.UseVisualStyleBackColor = true;
+            this.BetterMerit.Visible = false;
+            this.BetterMerit.CheckedChanged += new System.EventHandler(this.BetterMerit_CheckedChanged);
+            // 
+            // BetterRaise
+            // 
+            this.BetterRaise.AutoSize = true;
+            this.BetterRaise.Enabled = false;
+            this.BetterRaise.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterRaise.Location = new System.Drawing.Point(678, 114);
+            this.BetterRaise.Name = "BetterRaise";
+            this.BetterRaise.Size = new System.Drawing.Size(177, 35);
+            this.BetterRaise.TabIndex = 22;
+            this.BetterRaise.Text = "Better raise";
+            this.BetterRaise.UseVisualStyleBackColor = true;
+            this.BetterRaise.Visible = false;
+            this.BetterRaise.CheckedChanged += new System.EventHandler(this.BetterRaise_CheckedChanged);
+            // 
+            // BetterCurling
+            // 
+            this.BetterCurling.AutoSize = true;
+            this.BetterCurling.Enabled = false;
+            this.BetterCurling.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterCurling.Location = new System.Drawing.Point(357, 114);
+            this.BetterCurling.Name = "BetterCurling";
+            this.BetterCurling.Size = new System.Drawing.Size(202, 35);
+            this.BetterCurling.TabIndex = 21;
+            this.BetterCurling.Text = "Better curling";
+            this.BetterCurling.UseVisualStyleBackColor = true;
+            this.BetterCurling.Visible = false;
+            this.BetterCurling.CheckedChanged += new System.EventHandler(this.BetterCurling_CheckedChanged);
+            // 
+            // betterDrimogemon
+            // 
+            this.betterDrimogemon.AutoSize = true;
+            this.betterDrimogemon.Enabled = false;
+            this.betterDrimogemon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.betterDrimogemon.Location = new System.Drawing.Point(36, 195);
+            this.betterDrimogemon.Name = "betterDrimogemon";
+            this.betterDrimogemon.Size = new System.Drawing.Size(270, 35);
+            this.betterDrimogemon.TabIndex = 20;
+            this.betterDrimogemon.Text = "Better Drimogemon";
+            this.betterDrimogemon.UseVisualStyleBackColor = true;
+            this.betterDrimogemon.Visible = false;
+            this.betterDrimogemon.CheckedChanged += new System.EventHandler(this.betterDrimogemon_CheckedChanged);
+            // 
+            // BetterFishing
+            // 
+            this.BetterFishing.AutoSize = true;
+            this.BetterFishing.Enabled = false;
+            this.BetterFishing.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterFishing.Location = new System.Drawing.Point(357, 32);
+            this.BetterFishing.Name = "BetterFishing";
+            this.BetterFishing.Size = new System.Drawing.Size(198, 35);
+            this.BetterFishing.TabIndex = 19;
+            this.BetterFishing.Text = "Better fishing";
+            this.BetterFishing.UseVisualStyleBackColor = true;
+            this.BetterFishing.Visible = false;
+            this.BetterFishing.CheckedChanged += new System.EventHandler(this.BetterFishing_CheckedChanged);
+            // 
+            // BetterCards
+            // 
+            this.BetterCards.AutoSize = true;
+            this.BetterCards.Enabled = false;
+            this.BetterCards.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterCards.Location = new System.Drawing.Point(678, 32);
+            this.BetterCards.Name = "BetterCards";
+            this.BetterCards.Size = new System.Drawing.Size(186, 35);
+            this.BetterCards.TabIndex = 18;
+            this.BetterCards.Text = "Better cards";
+            this.BetterCards.UseVisualStyleBackColor = true;
+            this.BetterCards.Visible = false;
+            this.BetterCards.CheckedChanged += new System.EventHandler(this.BetterCards_CheckedChanged);
+            // 
+            // BetterRestaurant
+            // 
+            this.BetterRestaurant.AutoSize = true;
+            this.BetterRestaurant.Enabled = false;
+            this.BetterRestaurant.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BetterRestaurant.Location = new System.Drawing.Point(36, 114);
+            this.BetterRestaurant.Name = "BetterRestaurant";
+            this.BetterRestaurant.Size = new System.Drawing.Size(245, 35);
+            this.BetterRestaurant.TabIndex = 17;
+            this.BetterRestaurant.Text = "Better restaurant";
+            this.BetterRestaurant.UseVisualStyleBackColor = true;
+            this.BetterRestaurant.Visible = false;
+            this.BetterRestaurant.CheckedChanged += new System.EventHandler(this.BetterRestaurant_CheckedChanged);
             // 
             // RightUseful
             // 
@@ -1194,143 +1350,17 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // BetterRestaurant
+            // insaneDamage
             // 
-            this.BetterRestaurant.AutoSize = true;
-            this.BetterRestaurant.Enabled = false;
-            this.BetterRestaurant.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRestaurant.Location = new System.Drawing.Point(36, 114);
-            this.BetterRestaurant.Name = "BetterRestaurant";
-            this.BetterRestaurant.Size = new System.Drawing.Size(245, 35);
-            this.BetterRestaurant.TabIndex = 17;
-            this.BetterRestaurant.Text = "Better restaurant";
-            this.BetterRestaurant.UseVisualStyleBackColor = true;
-            this.BetterRestaurant.Visible = false;
-            this.BetterRestaurant.CheckedChanged += new System.EventHandler(this.BetterRestaurant_CheckedChanged);
-            // 
-            // BetterCards
-            // 
-            this.BetterCards.AutoSize = true;
-            this.BetterCards.Enabled = false;
-            this.BetterCards.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterCards.Location = new System.Drawing.Point(678, 32);
-            this.BetterCards.Name = "BetterCards";
-            this.BetterCards.Size = new System.Drawing.Size(186, 35);
-            this.BetterCards.TabIndex = 18;
-            this.BetterCards.Text = "Better cards";
-            this.BetterCards.UseVisualStyleBackColor = true;
-            this.BetterCards.Visible = false;
-            this.BetterCards.CheckedChanged += new System.EventHandler(this.BetterCards_CheckedChanged);
-            // 
-            // BetterFishing
-            // 
-            this.BetterFishing.AutoSize = true;
-            this.BetterFishing.Enabled = false;
-            this.BetterFishing.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterFishing.Location = new System.Drawing.Point(357, 32);
-            this.BetterFishing.Name = "BetterFishing";
-            this.BetterFishing.Size = new System.Drawing.Size(198, 35);
-            this.BetterFishing.TabIndex = 19;
-            this.BetterFishing.Text = "Better fishing";
-            this.BetterFishing.UseVisualStyleBackColor = true;
-            this.BetterFishing.Visible = false;
-            this.BetterFishing.CheckedChanged += new System.EventHandler(this.BetterFishing_CheckedChanged);
-            // 
-            // betterDrimogemon
-            // 
-            this.betterDrimogemon.AutoSize = true;
-            this.betterDrimogemon.Enabled = false;
-            this.betterDrimogemon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.betterDrimogemon.Location = new System.Drawing.Point(36, 195);
-            this.betterDrimogemon.Name = "betterDrimogemon";
-            this.betterDrimogemon.Size = new System.Drawing.Size(270, 35);
-            this.betterDrimogemon.TabIndex = 20;
-            this.betterDrimogemon.Text = "Better Drimogemon";
-            this.betterDrimogemon.UseVisualStyleBackColor = true;
-            this.betterDrimogemon.Visible = false;
-            this.betterDrimogemon.CheckedChanged += new System.EventHandler(this.betterDrimogemon_CheckedChanged);
-            // 
-            // BetterCurling
-            // 
-            this.BetterCurling.AutoSize = true;
-            this.BetterCurling.Enabled = false;
-            this.BetterCurling.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterCurling.Location = new System.Drawing.Point(357, 114);
-            this.BetterCurling.Name = "BetterCurling";
-            this.BetterCurling.Size = new System.Drawing.Size(202, 35);
-            this.BetterCurling.TabIndex = 21;
-            this.BetterCurling.Text = "Better curling";
-            this.BetterCurling.UseVisualStyleBackColor = true;
-            this.BetterCurling.Visible = false;
-            this.BetterCurling.CheckedChanged += new System.EventHandler(this.BetterCurling_CheckedChanged);
-            // 
-            // BetterRaise
-            // 
-            this.BetterRaise.AutoSize = true;
-            this.BetterRaise.Enabled = false;
-            this.BetterRaise.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRaise.Location = new System.Drawing.Point(678, 114);
-            this.BetterRaise.Name = "BetterRaise";
-            this.BetterRaise.Size = new System.Drawing.Size(177, 35);
-            this.BetterRaise.TabIndex = 22;
-            this.BetterRaise.Text = "Better raise";
-            this.BetterRaise.UseVisualStyleBackColor = true;
-            this.BetterRaise.Visible = false;
-            this.BetterRaise.CheckedChanged += new System.EventHandler(this.BetterRaise_CheckedChanged);
-            // 
-            // BetterMerit
-            // 
-            this.BetterMerit.AutoSize = true;
-            this.BetterMerit.Enabled = false;
-            this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterMerit.Location = new System.Drawing.Point(607, 195);
-            this.BetterMerit.Name = "BetterMerit";
-            this.BetterMerit.Size = new System.Drawing.Size(246, 35);
-            this.BetterMerit.TabIndex = 23;
-            this.BetterMerit.Text = "Better merit shop";
-            this.BetterMerit.UseVisualStyleBackColor = true;
-            this.BetterMerit.Visible = false;
-            this.BetterMerit.CheckedChanged += new System.EventHandler(this.BetterMerit_CheckedChanged);
-            // 
-            // UsefulItems2
-            // 
-            this.UsefulItems2.AutoSize = true;
-            this.UsefulItems2.Enabled = false;
-            this.UsefulItems2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UsefulItems2.Location = new System.Drawing.Point(607, 277);
-            this.UsefulItems2.Name = "UsefulItems2";
-            this.UsefulItems2.Size = new System.Drawing.Size(206, 35);
-            this.UsefulItems2.TabIndex = 24;
-            this.UsefulItems2.Text = "Useful items 2";
-            this.UsefulItems2.UseVisualStyleBackColor = true;
-            this.UsefulItems2.Visible = false;
-            this.UsefulItems2.CheckedChanged += new System.EventHandler(this.UsefulItems2_CheckedChanged);
-            // 
-            // BetterItemSpawns
-            // 
-            this.BetterItemSpawns.AutoSize = true;
-            this.BetterItemSpawns.Enabled = false;
-            this.BetterItemSpawns.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterItemSpawns.Location = new System.Drawing.Point(36, 277);
-            this.BetterItemSpawns.Name = "BetterItemSpawns";
-            this.BetterItemSpawns.Size = new System.Drawing.Size(270, 35);
-            this.BetterItemSpawns.TabIndex = 25;
-            this.BetterItemSpawns.Text = "Better item spawns";
-            this.BetterItemSpawns.UseVisualStyleBackColor = true;
-            this.BetterItemSpawns.Visible = false;
-            this.BetterItemSpawns.CheckedChanged += new System.EventHandler(this.BetterItemSpawns_CheckedChanged);
-            // 
-            // NerfIce
-            // 
-            this.NerfIce.AutoSize = true;
-            this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NerfIce.Location = new System.Drawing.Point(381, 183);
-            this.NerfIce.Name = "NerfIce";
-            this.NerfIce.Size = new System.Drawing.Size(220, 35);
-            this.NerfIce.TabIndex = 4;
-            this.NerfIce.Text = "Nerf Ice Statue";
-            this.NerfIce.UseVisualStyleBackColor = true;
-            this.NerfIce.CheckedChanged += new System.EventHandler(this.NerfIce_CheckedChanged);
+            this.insaneDamage.AutoSize = true;
+            this.insaneDamage.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.insaneDamage.Location = new System.Drawing.Point(578, 178);
+            this.insaneDamage.Name = "insaneDamage";
+            this.insaneDamage.Size = new System.Drawing.Size(219, 35);
+            this.insaneDamage.TabIndex = 5;
+            this.insaneDamage.Text = "Insane damage";
+            this.insaneDamage.UseVisualStyleBackColor = true;
+            this.insaneDamage.CheckedChanged += new System.EventHandler(this.insaneDamage_CheckedChanged);
             // 
             // HardcorePatcher
             // 
@@ -1468,5 +1498,7 @@
         private System.Windows.Forms.CheckBox BetterItemSpawns;
         private System.Windows.Forms.CheckBox UsefulItems2;
         private System.Windows.Forms.CheckBox NerfIce;
+        private System.Windows.Forms.CheckBox trainingBoost;
+        private System.Windows.Forms.CheckBox insaneDamage;
     }
 }

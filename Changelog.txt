@@ -258,3 +258,14 @@ Version 2.0:
 - Improved Infinity Burn.
 
 - New battles that also allows to learn all techs.
+
+* 2.0.1 :
+
+- Fixed an issue where the Kokatorimon text loops
+
+- Made the "MP Reduction Bonus" text a lot shorter.
+
+- Fixed various extra bugs
+
+- Added a few optional patches
+>>>>>>> Stashed changes

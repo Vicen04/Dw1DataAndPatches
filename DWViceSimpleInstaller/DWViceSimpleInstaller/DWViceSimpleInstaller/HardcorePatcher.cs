@@ -323,7 +323,8 @@ namespace DWViceSimpleInstaller
                "- Better item spawns: The items that randomly spawn will be more frequent, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better curling: The curling rewards will be better, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
-               "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym.";
+               "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym." + Environment.NewLine + Environment.NewLine +
+               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -339,7 +340,8 @@ namespace DWViceSimpleInstaller
                "- Better learn tech battle: this will improve the chances of learning a technique after a battle" + Environment.NewLine + Environment.NewLine +
                "- Better learn tech brains: this will improve the chances of learning a technique while training brains" + Environment.NewLine + Environment.NewLine +
                "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle" + Environment.NewLine + Environment.NewLine +
-               "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun";
+               "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun" + Environment.NewLine + Environment.NewLine +
+               "- Insane Tech damage: this patch will change the range of the techniques damage from '90% - 110%' to '10% - 190%', finishers are not affected by this patch.";
 
             HardcoreHackInfo infoWindow = new HardcoreHackInfo();
             infoWindow.Text = "Info window";
@@ -779,10 +781,13 @@ namespace DWViceSimpleInstaller
             {
                 bonusTryFix.Enabled = true;
                 bonusTryFix.Visible = true;
-                uBonustry.Visible = true;
-                uBonustry.Enabled = true;
+                uBonustry.Visible = true;            
                 sBonusTry.Visible = true;
-                sBonusTry.Enabled = true;
+                if (bonusTryFix.Checked)
+                {
+                    uBonustry.Enabled = true;
+                    sBonusTry.Enabled = true;
+                }
             }
 
             LeftUseful.Enabled = false;
@@ -809,6 +814,8 @@ namespace DWViceSimpleInstaller
             BetterRaise.Visible = false;
             BetterItemSpawns.Visible = false;
             BetterItemSpawns.Enabled = false;
+            trainingBoost.Enabled = false;
+            trainingBoost.Visible = false;
 
         }
 
@@ -838,6 +845,8 @@ namespace DWViceSimpleInstaller
             BetterRaise.Visible = true;
             BetterItemSpawns.Visible = true;
             BetterItemSpawns.Enabled = true;
+            trainingBoost.Enabled = true;
+            trainingBoost.Visible = true;
 
 
             RightUseful.Enabled= false;
@@ -918,6 +927,16 @@ namespace DWViceSimpleInstaller
         private void NerfIce_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetIceNerf(NerfIce.Checked);
+        }
+
+        private void TrainingBoost_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetTrainingBoost(trainingBoost.Checked);
+        }
+
+        private void insaneDamage_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetInsaneDamage(insaneDamage.Checked);
         }
     }
 }
