@@ -89,10 +89,10 @@ void SlotsHelp(int currentSlot,int slotDataPtr)
         if (Slot2 != 7) //is not gold poop
         {
           iVar1 = 1;
-          while (iVar1 < 13 && (Slot1 != (&SlotsValues3)[(currentSlotValue + 13 - iVar1) % 13]))  //Now it will try to do a full loop to the slots values        
+          while (iVar1 < 14 && (Slot1 != (&SlotsValues3)[(currentSlotValue + 13 - iVar1) % 13]))  //Now it will try to do a full loop to the slots values        
             iVar1++;
 
-        if ((iVar1 != 13) && (iVar1 != 0)) 
+        if ((iVar1 != 14) && (iVar1 != 0)) 
         {
           //code ignored
         }
@@ -115,9 +115,9 @@ void SlotsHelp(int currentSlot,int slotDataPtr)
       if (Slot1 != 7) 
       {
         iVar1 = 1;
-        while (iVar1 < 13 && (Slot0 != (&SlotsValues2)[(currentSlotValue + 13 - iVar1) % 13]))  //Now it will try to do a full loop to the slots values 
+        while (iVar1 < 14 && (Slot0 != (&SlotsValues2)[(currentSlotValue + 13 - iVar1) % 13]))  //Now it will try to do a full loop to the slots values 
           iVar1++;
-        if ((iVar1 != 13) && (iVar1 != 0)) 
+        if ((iVar1 != 14) && (iVar1 != 0)) 
         {
           //code ignored
         }
@@ -143,18 +143,26 @@ Original:
         8008eab8 03 00 41 28     slti       at,v0,0x3
 
         8008eac4 03 00 01 24     li         at,0x3
+		
+		
+        8008e994 03 00 41 28     slti       at,v0,0x3 //I forgot to add these two to the document.
+
+        8008e9a0 03 00 01 24     li         at,0x3
 
 
 
 Changed:
-        8008ec5c 0d 00 41 28     slti       at,v0,0xd
+        8008ec5c 0d 00 41 28     slti       at,v0,0xe  //updated value, so it never fails
  
-        8008ec68 0d 00 01 24     li         at,0xd
+        8008ec68 0d 00 01 24     li         at,0xe
 
+        8008eab8 0d 00 41 28     slti       at,v0,0xe
 
-        8008eab8 0d 00 41 28     slti       at,v0,0xd
+        8008eac4 0d 00 01 24     li         at,0xe
+		
+        8008e994 03 00 41 28     slti       at,v0,0xe
 
-        8008eac4 0d 00 01 24     li         at,0xd
+        8008e9a0 03 00 01 24     li         at,0xe
 
 
 

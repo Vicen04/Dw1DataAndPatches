@@ -204,6 +204,7 @@ namespace DWViceSimpleInstaller
                 uBonustry.Checked = false;
                 sBonusTry.Enabled = false;
                 uBonustry.Enabled = false;
+                trueHardcore.Enabled = true;
             }
             else
             {
@@ -218,6 +219,8 @@ namespace DWViceSimpleInstaller
 
                 sBonusTry.Enabled = true;
                 uBonustry.Enabled = true;
+                trueHardcore.Enabled = false;
+                trueHardcore.Checked = false;
             }
         }
 
@@ -293,6 +296,7 @@ namespace DWViceSimpleInstaller
                "- Hardcore Monochromon: The bits requirement to recruit Monochromon is increased to 4096" + Environment.NewLine + Environment.NewLine +
                "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine +
                "- Ultra hardcore mode: you will be unable to run from battle and unable to use items in battle, on top of that, the tech boost for your digimon will be disabled and all of the NPCs will have a tech boost applied to all the normal techs" + Environment.NewLine + Environment.NewLine +
+               "- True hardcore: makes hardcore even more difficult but without imposing restrictions, can be mixed with other patches." + Environment.NewLine + Environment.NewLine +
                "- Progression mode: technically a main patch but it can be mixed, click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                "FILTH CHALLENGE" + Environment.NewLine + Environment.NewLine +
                "Can be mixed with other patches or applied as a standalone:" + Environment.NewLine + Environment.NewLine +
@@ -877,6 +881,11 @@ namespace DWViceSimpleInstaller
         private void removeTelephone_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetTelephone(removeTelephone.Checked);
+        }
+
+        private void trueHardcore_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetTrueHardcore(trueHardcore.Checked);    
         }
     }
 }

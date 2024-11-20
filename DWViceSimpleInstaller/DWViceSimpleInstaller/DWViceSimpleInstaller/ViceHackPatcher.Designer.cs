@@ -69,6 +69,7 @@
             this.MyotismonInfo = new System.Windows.Forms.Button();
             this.Myotismon = new System.Windows.Forms.CheckBox();
             this.miscPatches = new System.Windows.Forms.GroupBox();
+            this.removeTelephone = new System.Windows.Forms.CheckBox();
             this.colourBreak = new System.Windows.Forms.CheckBox();
             this.removeTechBoost = new System.Windows.Forms.CheckBox();
             this.restoreLifetime = new System.Windows.Forms.CheckBox();
@@ -80,6 +81,7 @@
             this.deRandoFact = new System.Windows.Forms.CheckBox();
             this.UnlockAreas = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
+            this.insaneTechs = new System.Windows.Forms.CheckBox();
             this.NerfIce = new System.Windows.Forms.CheckBox();
             this.multipleTechs = new System.Windows.Forms.CheckBox();
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
@@ -109,8 +111,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.insaneTechs = new System.Windows.Forms.CheckBox();
-            this.removeTelephone = new System.Windows.Forms.CheckBox();
+            this.trueHardcore = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -120,6 +121,7 @@
             // 
             // DifficultyPatchesContainer
             // 
+            this.DifficultyPatchesContainer.Controls.Add(this.trueHardcore);
             this.DifficultyPatchesContainer.Controls.Add(this.ProgressionInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.ProgressionMode);
             this.DifficultyPatchesContainer.Controls.Add(this.restoreFilth);
@@ -648,6 +650,18 @@
             this.miscPatches.Text = "Miscellaneous patches";
             this.miscPatches.Visible = false;
             // 
+            // removeTelephone
+            // 
+            this.removeTelephone.AutoSize = true;
+            this.removeTelephone.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.removeTelephone.Location = new System.Drawing.Point(590, 264);
+            this.removeTelephone.Name = "removeTelephone";
+            this.removeTelephone.Size = new System.Drawing.Size(321, 35);
+            this.removeTelephone.TabIndex = 29;
+            this.removeTelephone.Text = "Remove Ogre telephone";
+            this.removeTelephone.UseVisualStyleBackColor = true;
+            this.removeTelephone.CheckedChanged += new System.EventHandler(this.removeTelephone_CheckedChanged);
+            // 
             // colourBreak
             // 
             this.colourBreak.AutoSize = true;
@@ -788,6 +802,18 @@
             this.techContainer.TabStop = false;
             this.techContainer.Text = "Techniques patches";
             this.techContainer.Visible = false;
+            // 
+            // insaneTechs
+            // 
+            this.insaneTechs.AutoSize = true;
+            this.insaneTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.insaneTechs.Location = new System.Drawing.Point(327, 197);
+            this.insaneTechs.Name = "insaneTechs";
+            this.insaneTechs.Size = new System.Drawing.Size(286, 35);
+            this.insaneTechs.TabIndex = 4;
+            this.insaneTechs.Text = "Insane Tech damage";
+            this.insaneTechs.UseVisualStyleBackColor = true;
+            this.insaneTechs.CheckedChanged += new System.EventHandler(this.insaneTechs_CheckedChanged);
             // 
             // NerfIce
             // 
@@ -1182,29 +1208,18 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // insaneTechs
+            // trueHardcore
             // 
-            this.insaneTechs.AutoSize = true;
-            this.insaneTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneTechs.Location = new System.Drawing.Point(327, 197);
-            this.insaneTechs.Name = "insaneTechs";
-            this.insaneTechs.Size = new System.Drawing.Size(286, 35);
-            this.insaneTechs.TabIndex = 4;
-            this.insaneTechs.Text = "Insane Tech damage";
-            this.insaneTechs.UseVisualStyleBackColor = true;
-            this.insaneTechs.CheckedChanged += new System.EventHandler(this.insaneTechs_CheckedChanged);
-            // 
-            // removeTelephone
-            // 
-            this.removeTelephone.AutoSize = true;
-            this.removeTelephone.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.removeTelephone.Location = new System.Drawing.Point(590, 264);
-            this.removeTelephone.Name = "removeTelephone";
-            this.removeTelephone.Size = new System.Drawing.Size(321, 35);
-            this.removeTelephone.TabIndex = 29;
-            this.removeTelephone.Text = "Remove Ogre telephone";
-            this.removeTelephone.UseVisualStyleBackColor = true;
-            this.removeTelephone.CheckedChanged += new System.EventHandler(this.removeTelephone_CheckedChanged);
+            this.trueHardcore.AutoSize = true;
+            this.trueHardcore.Enabled = false;
+            this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trueHardcore.Location = new System.Drawing.Point(38, 323);
+            this.trueHardcore.Name = "trueHardcore";
+            this.trueHardcore.Size = new System.Drawing.Size(207, 35);
+            this.trueHardcore.TabIndex = 17;
+            this.trueHardcore.Text = "True hardcore";
+            this.trueHardcore.UseVisualStyleBackColor = true;
+            this.trueHardcore.CheckedChanged += new System.EventHandler(this.trueHardcore_CheckedChanged);
             // 
             // ViceHackPatcher
             // 
@@ -1334,5 +1349,6 @@
         private System.Windows.Forms.CheckBox trainingBoost;
         private System.Windows.Forms.CheckBox insaneTechs;
         private System.Windows.Forms.CheckBox removeTelephone;
+        private System.Windows.Forms.CheckBox trueHardcore;
     }
 }

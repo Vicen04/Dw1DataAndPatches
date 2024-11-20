@@ -38,7 +38,7 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage;
+            trainingBoost, insaneDamage, trueHardcore;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
@@ -98,7 +98,7 @@ namespace DWViceSimpleInstaller
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
-            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = false;
+            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
@@ -139,6 +139,9 @@ namespace DWViceSimpleInstaller
                         SetPatch(path + "HardcoreVice 1.0.4.ppf");
                     else
                         SetPatch(path + "HardcoreViceP.ppf");
+
+                    if (trueHardcore)
+                        SetPatch(path + "TrueHardcoreVice.ppf");
                     break;
                 default:
                     break;
@@ -193,6 +196,9 @@ namespace DWViceSimpleInstaller
             if (removeTelephone)
                 SetPatch(path + "NoTelephoneOgre.ppf");
 
+            if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/OptionalPatches/Difficulty patches/ProgressionPatch.ppf");
+
 
             InstallOptionalPatches();
         }
@@ -204,6 +210,9 @@ namespace DWViceSimpleInstaller
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.4.ppf");
             else
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/HardcoreP.ppf");
+
+            if (trueHardcore)
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/TrueHardcore.ppf");
             //Run other patches
             ExtraInstall();
         }
@@ -280,9 +289,9 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "Useful patches/BonusTryFix 1.1.ppf");
 
                 if (superBonus)
-                    SetPatch(path + "Useful patches/BonusTrySuperHelpful 1.1.ppf");
+                    SetPatch(path + "Useful patches/BonusTrySuperHelpful 1.2.ppf");
                 else if (ultraBonus)
-                    SetPatch(path + "Useful patches/BonusTryUltraLucky 1.1.ppf");
+                    SetPatch(path + "Useful patches/BonusTryUltraLucky 1.2.ppf");
             }
 
             if (dirtReduction)
@@ -514,6 +523,8 @@ namespace DWViceSimpleInstaller
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
 
+        public void SetTrueHardcore(bool enabled) { trueHardcore = enabled; }
+
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
         {
@@ -669,6 +680,15 @@ namespace DWViceSimpleInstaller
             if (progression)
             {
                 txtWritter.Write("- Progression mode");
+                txtWritter.WriteLine();
+            }
+
+            if (trueHardcore)
+            {
+                if (currentPatcher == patchType.VICEHACK)
+                    txtWritter.Write("- True hardcore Vice");
+                else
+                    txtWritter.Write("- True hardcore");
                 txtWritter.WriteLine();
             }
 

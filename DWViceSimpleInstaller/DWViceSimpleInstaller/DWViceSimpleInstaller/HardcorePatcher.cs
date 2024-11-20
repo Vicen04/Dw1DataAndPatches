@@ -197,7 +197,8 @@ namespace DWViceSimpleInstaller
                "- Fair battles: you will be unable to run from battle and unable to use items in battle" + Environment.NewLine + Environment.NewLine +
                "- Hardcore Monochromon: The bits requirement to recruit Monochromon is increased to 4096" + Environment.NewLine + Environment.NewLine +
                "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine +
-               "- Progression mode: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine;
+               "- Progression mode: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
+               "- True hardcore: makes hardcore even more difficult but without imposing restrictions, can be mixed with other patches." + Environment.NewLine + Environment.NewLine;
 
             if (parentForm.GetPatchType() == MainApp.patchType.NONE)
             {
@@ -937,6 +938,11 @@ namespace DWViceSimpleInstaller
         private void insaneDamage_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetInsaneDamage(insaneDamage.Checked);
+        }
+
+        private void trueHardcore_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetTrueHardcore(trueHardcore.Checked);
         }
     }
 }

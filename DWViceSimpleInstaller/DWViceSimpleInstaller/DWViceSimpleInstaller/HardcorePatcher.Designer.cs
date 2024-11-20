@@ -87,6 +87,7 @@
             this.ForgetTechs = new System.Windows.Forms.CheckBox();
             this.missingText = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
+            this.insaneDamage = new System.Windows.Forms.CheckBox();
             this.NerfIce = new System.Windows.Forms.CheckBox();
             this.betterInfinity = new System.Windows.Forms.CheckBox();
             this.multipleTechs = new System.Windows.Forms.CheckBox();
@@ -120,7 +121,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.insaneDamage = new System.Windows.Forms.CheckBox();
+            this.trueHardcore = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -130,6 +131,7 @@
             // 
             // DifficultyPatchesContainer
             // 
+            this.DifficultyPatchesContainer.Controls.Add(this.trueHardcore);
             this.DifficultyPatchesContainer.Controls.Add(this.ProgressionInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.Progression);
             this.DifficultyPatchesContainer.Controls.Add(this.HarderBossesInfo);
@@ -896,6 +898,18 @@
             this.techContainer.Text = "Techniques patches";
             this.techContainer.Visible = false;
             // 
+            // insaneDamage
+            // 
+            this.insaneDamage.AutoSize = true;
+            this.insaneDamage.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.insaneDamage.Location = new System.Drawing.Point(578, 178);
+            this.insaneDamage.Name = "insaneDamage";
+            this.insaneDamage.Size = new System.Drawing.Size(219, 35);
+            this.insaneDamage.TabIndex = 5;
+            this.insaneDamage.Text = "Insane damage";
+            this.insaneDamage.UseVisualStyleBackColor = true;
+            this.insaneDamage.CheckedChanged += new System.EventHandler(this.insaneDamage_CheckedChanged);
+            // 
             // NerfIce
             // 
             this.NerfIce.AutoSize = true;
@@ -1350,17 +1364,18 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // insaneDamage
+            // trueHardcore
             // 
-            this.insaneDamage.AutoSize = true;
-            this.insaneDamage.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneDamage.Location = new System.Drawing.Point(578, 178);
-            this.insaneDamage.Name = "insaneDamage";
-            this.insaneDamage.Size = new System.Drawing.Size(219, 35);
-            this.insaneDamage.TabIndex = 5;
-            this.insaneDamage.Text = "Insane damage";
-            this.insaneDamage.UseVisualStyleBackColor = true;
-            this.insaneDamage.CheckedChanged += new System.EventHandler(this.insaneDamage_CheckedChanged);
+            this.trueHardcore.AutoSize = true;
+            this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trueHardcore.Location = new System.Drawing.Point(588, 265);
+            this.trueHardcore.Name = "trueHardcore";
+            this.trueHardcore.Size = new System.Drawing.Size(207, 35);
+            this.trueHardcore.TabIndex = 19;
+            this.trueHardcore.Text = "True hardcore";
+            this.trueHardcore.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.trueHardcore.UseVisualStyleBackColor = true;
+            this.trueHardcore.CheckedChanged += new System.EventHandler(this.trueHardcore_CheckedChanged);
             // 
             // HardcorePatcher
             // 
@@ -1500,5 +1515,6 @@
         private System.Windows.Forms.CheckBox NerfIce;
         private System.Windows.Forms.CheckBox trainingBoost;
         private System.Windows.Forms.CheckBox insaneDamage;
+        private System.Windows.Forms.CheckBox trueHardcore;
     }
 }
