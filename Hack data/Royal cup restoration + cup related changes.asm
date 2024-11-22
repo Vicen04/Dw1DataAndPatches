@@ -157,7 +157,7 @@ Original:
 
 
 Changed:
-        800579fc 0a 00 00 10     b          0x80057a28
+        800579fc 0d 00 00 10     b          0x80057a34
         80057a00 01 00 04 24     _li        a0,0x1
         80057a04 00 00 00 00     nop
                              LAB_80057a08                                   
@@ -169,12 +169,12 @@ Changed:
         80057a1c 3e 00 01 24     li         at,0x3e
         80057a20 03 00 41 14     bne        v0,at,0x80057a2c  //check if the ID is 62
         80057a24 00 00 00 00     _nop
-                             LAB_80057a24                                    
+                             LAB_80057a28                                    
         80057a28 73 00 02 24     li         v0,0x73
         80057a2c 00 00 62 a0     sb         v0,0x0(v1)
-                             LAB_80057a2c                                 
+                             LAB_80057a30                                 
         80057a30 01 00 84 20     addi       a0,a0,0x1
-                             LAB_80057a30                                   
+                             LAB_80057a34                                   
         80057a34 08 00 81 28     slti       at,a0,0x8
         80057a38 f4 ff 20 14     bne        at,zero,0x80057a08
         80057a3c 00 00 00 00     _nop
