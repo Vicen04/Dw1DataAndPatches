@@ -120,7 +120,7 @@ namespace DWViceSimpleInstaller
 
         private void HardcoreInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Version 1.0.4" + Environment.NewLine + Environment.NewLine +
+            string tempText = "Version 1.0.5" + Environment.NewLine + Environment.NewLine +
                 "Vice hack version of the hardcore hack. Applying this patch will disable the 'super useful' and 'ultra lucky' useful patches" + Environment.NewLine + Environment.NewLine +
                 "It will increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content." + Environment.NewLine + Environment.NewLine +
                 "Some of the features are:" + Environment.NewLine + Environment.NewLine +
@@ -129,7 +129,8 @@ namespace DWViceSimpleInstaller
                 "- New boss battles" + Environment.NewLine + Environment.NewLine +
                 "- NPCs will now have the tech boost feature" + Environment.NewLine + Environment.NewLine +
                 "- 1.0.3 addition: The bonus try is now rigged again and it will force you to fail, if you want to unrig it, you can use the optional installer." + Environment.NewLine + Environment.NewLine +
-                "- 1.0.4 addition: The debug mode will not be friendly.";
+                "- 1.0.4 addition: The debug mode will not be friendly." + Environment.NewLine + Environment.NewLine +
+                "- 1.0.5 addition: Fixed an error that can happen after the bettle land battles, addition of 'True Hardcore'.";
 
 
             HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();

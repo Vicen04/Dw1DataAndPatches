@@ -136,7 +136,7 @@ namespace DWViceSimpleInstaller
                     break;
                 case viceDifficulty.HARDCORE:
                     if (!progression)
-                        SetPatch(path + "HardcoreVice 1.0.4.ppf");
+                        SetPatch(path + "HardcoreVice 1.0.5.ppf");
                     else
                         SetPatch(path + "HardcoreViceP.ppf");
 
@@ -207,7 +207,7 @@ namespace DWViceSimpleInstaller
         {
             //main patch
             if (!progression)
-                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.4.ppf");
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.5.ppf");
             else
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/HardcoreP.ppf");
 
