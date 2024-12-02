@@ -138,14 +138,14 @@ MoveAdd()
 
                                MoveAdd                
         800a2a8c f0 ff bd 27     addiu      sp,sp,-0x10
-        800a2a90 00 00 00 00     nop
-        800a2a94 21 18 73 00     addu       v1,v1,s3
-        800a2a98 00 00 66 84     lh         a2,0x0(v1)
-        800a2a9c 00 00 00 00     nop
-        800a2aa0 13 80 01 3c     lui        at,0x8013
-        800a2aa4 48 f3 21 8c     lw         at,-0xcb8(at) //PartnerPtr
-        800a2aa8 00 00 00 00     nop
-        800a2aac 0f 00 41 12     beq        s2,at,0x800a2aec
+        800a2a90 21 18 73 00     addu       v1,v1,s3
+        800a2a94 00 00 66 84     lh         a2,0x0(v1) //MoveDamage
+        800a2a98 00 00 00 00     nop
+        800a2a9c 13 80 01 3c     lui        at,0x8013
+        800a2aa0 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
+        800a2aa4 00 00 00 00     nop
+        800a2aa8 10 00 41 12     beq        s2,at,0x800a2aec
+        800a2aac 00 00 00 00     _nop
         800a2ab0 00 00 00 00     _nop
         800a2ab4 8c 94 83 8f     lw         v1,-0x6b74(gp)
         800a2ab8 00 00 00 00     nop

@@ -173,7 +173,7 @@ Changed:
         800a2a9c 13 80 01 3c     lui        at,0x8013
         800a2aa0 48 f3 21 8c     lw         at,-0xcb8(at) //EntityPtr
         800a2aa4 00 00 00 00     nop
-        800a2aa8 0f 00 41 16     bne        s2,at,0x800a2aec
+        800a2aa8 10 00 41 16     bne        s2,at,0x800a2aec
         800a2aac 00 00 00 00     _nop
         800a2ab0 00 00 23 8c     lw         v1,0x0(at)
         800a2ab4 00 00 00 00     nop
