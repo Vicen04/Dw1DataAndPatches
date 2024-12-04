@@ -342,7 +342,8 @@ namespace DWViceSimpleInstaller
                "- Better learn tech brains: this will improve the chances of learning a technique while training brains" + Environment.NewLine + Environment.NewLine +
                "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle" + Environment.NewLine + Environment.NewLine +
                "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun" + Environment.NewLine + Environment.NewLine +
-               "- Insane Tech damage: this patch will change the range of the techniques damage from '90% - 110%' to '10% - 190%', finishers are not affected by this patch.";
+               "- Insane Tech damage: this patch will change the range of the techniques damage from '90% - 110%' to '10% - 190%', finishers are not affected by this patch." + Environment.NewLine + Environment.NewLine +
+               "- Skip orders text: this patch will skip the text when you learn new orders during brains training and in exchange, give you a chance to learn a technique.";
 
             HardcoreHackInfo infoWindow = new HardcoreHackInfo();
             infoWindow.Text = "Info window";
@@ -943,6 +944,11 @@ namespace DWViceSimpleInstaller
         private void trueHardcore_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetTrueHardcore(trueHardcore.Checked);
+        }
+
+        private void noOrders_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetOrders(noOrders.Checked);
         }
     }
 }

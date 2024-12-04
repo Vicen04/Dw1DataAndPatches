@@ -38,7 +38,7 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage, trueHardcore;
+            trainingBoost, insaneDamage, trueHardcore, noOrders;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
@@ -98,7 +98,7 @@ namespace DWViceSimpleInstaller
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
-            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = false;
+            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
@@ -279,6 +279,9 @@ namespace DWViceSimpleInstaller
 
             if (insaneDamage)
                 SetPatch(path + "Tech patches/InsaneDamage.ppf");
+
+            if (noOrders)
+                SetPatch(path + "Tech patches/BrainsNoOrders.ppf");
 
             if (betterDrop)
                 SetPatch(path + "Useful patches/BetterDrops.ppf");
@@ -519,6 +522,7 @@ namespace DWViceSimpleInstaller
         public void SetTrainingBoost(bool enabled) { trainingBoost = enabled; }
         public void SetInsaneDamage(bool enabled) { insaneDamage = enabled; }
         public void SetTelephone(bool enabled) {removeTelephone = enabled; }
+        public void SetOrders(bool enabled) { noOrders = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
@@ -980,6 +984,12 @@ namespace DWViceSimpleInstaller
             if (insaneDamage)
             {
                 txtWritter.Write("- Insane technique damage");
+                txtWritter.WriteLine();
+            }
+
+            if (noOrders)
+            {
+                txtWritter.Write("- Skip Brains training new orders text");
                 txtWritter.WriteLine();
             }
 

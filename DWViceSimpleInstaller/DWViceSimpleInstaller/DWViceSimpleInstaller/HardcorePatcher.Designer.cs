@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.DifficultyPatchesContainer = new System.Windows.Forms.GroupBox();
+            this.trueHardcore = new System.Windows.Forms.CheckBox();
             this.ProgressionInfo = new System.Windows.Forms.Button();
             this.Progression = new System.Windows.Forms.CheckBox();
             this.HarderBossesInfo = new System.Windows.Forms.Button();
@@ -121,7 +122,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.trueHardcore = new System.Windows.Forms.CheckBox();
+            this.noOrders = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -153,6 +154,19 @@
             this.DifficultyPatchesContainer.TabStop = false;
             this.DifficultyPatchesContainer.Text = "Difficulty patches";
             this.DifficultyPatchesContainer.Visible = false;
+            // 
+            // trueHardcore
+            // 
+            this.trueHardcore.AutoSize = true;
+            this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trueHardcore.Location = new System.Drawing.Point(588, 265);
+            this.trueHardcore.Name = "trueHardcore";
+            this.trueHardcore.Size = new System.Drawing.Size(207, 35);
+            this.trueHardcore.TabIndex = 19;
+            this.trueHardcore.Text = "True hardcore";
+            this.trueHardcore.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.trueHardcore.UseVisualStyleBackColor = true;
+            this.trueHardcore.CheckedChanged += new System.EventHandler(this.trueHardcore_CheckedChanged);
             // 
             // ProgressionInfo
             // 
@@ -882,6 +896,7 @@
             // 
             // techContainer
             // 
+            this.techContainer.Controls.Add(this.noOrders);
             this.techContainer.Controls.Add(this.insaneDamage);
             this.techContainer.Controls.Add(this.NerfIce);
             this.techContainer.Controls.Add(this.betterInfinity);
@@ -892,7 +907,7 @@
             this.techContainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.techContainer.Location = new System.Drawing.Point(90, 160);
             this.techContainer.Name = "techContainer";
-            this.techContainer.Size = new System.Drawing.Size(1000, 250);
+            this.techContainer.Size = new System.Drawing.Size(1000, 300);
             this.techContainer.TabIndex = 22;
             this.techContainer.TabStop = false;
             this.techContainer.Text = "Techniques patches";
@@ -902,7 +917,7 @@
             // 
             this.insaneDamage.AutoSize = true;
             this.insaneDamage.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneDamage.Location = new System.Drawing.Point(578, 178);
+            this.insaneDamage.Location = new System.Drawing.Point(578, 184);
             this.insaneDamage.Name = "insaneDamage";
             this.insaneDamage.Size = new System.Drawing.Size(219, 35);
             this.insaneDamage.TabIndex = 5;
@@ -914,7 +929,7 @@
             // 
             this.NerfIce.AutoSize = true;
             this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NerfIce.Location = new System.Drawing.Point(55, 169);
+            this.NerfIce.Location = new System.Drawing.Point(51, 184);
             this.NerfIce.Name = "NerfIce";
             this.NerfIce.Size = new System.Drawing.Size(220, 35);
             this.NerfIce.TabIndex = 4;
@@ -1364,18 +1379,17 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // trueHardcore
+            // noOrders
             // 
-            this.trueHardcore.AutoSize = true;
-            this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trueHardcore.Location = new System.Drawing.Point(588, 265);
-            this.trueHardcore.Name = "trueHardcore";
-            this.trueHardcore.Size = new System.Drawing.Size(207, 35);
-            this.trueHardcore.TabIndex = 19;
-            this.trueHardcore.Text = "True hardcore";
-            this.trueHardcore.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.trueHardcore.UseVisualStyleBackColor = true;
-            this.trueHardcore.CheckedChanged += new System.EventHandler(this.trueHardcore_CheckedChanged);
+            this.noOrders.AutoSize = true;
+            this.noOrders.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.noOrders.Location = new System.Drawing.Point(51, 246);
+            this.noOrders.Name = "noOrders";
+            this.noOrders.Size = new System.Drawing.Size(229, 35);
+            this.noOrders.TabIndex = 6;
+            this.noOrders.Text = "Skip orders text";
+            this.noOrders.UseVisualStyleBackColor = true;
+            this.noOrders.CheckedChanged += new System.EventHandler(this.noOrders_CheckedChanged);
             // 
             // HardcorePatcher
             // 
@@ -1516,5 +1530,6 @@
         private System.Windows.Forms.CheckBox trainingBoost;
         private System.Windows.Forms.CheckBox insaneDamage;
         private System.Windows.Forms.CheckBox trueHardcore;
+        private System.Windows.Forms.CheckBox noOrders;
     }
 }
