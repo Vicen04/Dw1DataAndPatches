@@ -268,3 +268,15 @@ Version 2.0:
 - Fixed various extra bugs
 
 - Added a few optional patches
+
+* 2.0.2:
+
+- New destinations with Birdramon
+
+- A way to skip a year
+
+- Two medals have been updated to match the new stuff in the hack
+
+- Some more bug fixes
+
+- A new secret
