@@ -325,7 +325,14 @@ namespace DWViceSimpleInstaller
                "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better curling: The curling rewards will be better, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym." + Environment.NewLine + Environment.NewLine +
-               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training.";
+               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training." + Environment.NewLine + Environment.NewLine +
+               "- Easy medals: Some medals will become easier to obtain, these are:" + Environment.NewLine + Environment.NewLine +
+               " * Fishing medal requires only 30 fish" + Environment.NewLine + Environment.NewLine +
+               " * Tournament wins require only 30 wins" + Environment.NewLine + Environment.NewLine +
+               " * Years medal requires to reach year 6" + Environment.NewLine + Environment.NewLine +
+               " * Curling requires only 5 score" + Environment.NewLine + Environment.NewLine +
+               "- Guaranteed rare spawns: Piximon, Mamemon, MetalMamemon and Otamamon will always appear." + Environment.NewLine + Environment.NewLine +
+               "- Full time Seadramon: Seadramon appears at any time in the lake.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -778,6 +785,11 @@ namespace DWViceSimpleInstaller
             lessMono.Enabled = true;
             helpfulItems.Visible = true;
             helpfulItems.Enabled = true;
+            medals.Visible = true;
+            medals.Enabled = true;
+            rareSpawn.Visible = true;
+            rareSpawn.Enabled = true;
+
 
             if (parentForm.GetPatchType() == MainApp.patchType.NONE)
             {
@@ -818,7 +830,8 @@ namespace DWViceSimpleInstaller
             BetterItemSpawns.Enabled = false;
             trainingBoost.Enabled = false;
             trainingBoost.Visible = false;
-
+            Seadramon.Visible = false;
+            Seadramon.Enabled = false;
         }
 
         private void RightUseful_Click(object sender, EventArgs e)
@@ -849,6 +862,8 @@ namespace DWViceSimpleInstaller
             BetterItemSpawns.Enabled = true;
             trainingBoost.Enabled = true;
             trainingBoost.Visible = true;
+            Seadramon.Visible = true;
+            Seadramon.Enabled = true;
 
 
             RightUseful.Enabled= false;
@@ -879,6 +894,11 @@ namespace DWViceSimpleInstaller
             lessMono.Enabled = false;
             helpfulItems.Visible = false;
             helpfulItems.Enabled = false;
+            medals.Visible = false;
+            medals.Enabled = false;
+            rareSpawn.Visible = false;
+            rareSpawn.Enabled = false;
+
         }
 
         private void BetterRestaurant_CheckedChanged(object sender, EventArgs e)
@@ -949,6 +969,21 @@ namespace DWViceSimpleInstaller
         private void noOrders_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetOrders(noOrders.Checked);
+        }
+
+        private void Seadramon_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetSeadramon(Seadramon.Checked);
+        }
+
+        private void rareSpawn_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRareSpawns(rareSpawn.Checked);
+        }
+
+        private void medals_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEasyMedals(medals.Checked);
         }
     }
 }

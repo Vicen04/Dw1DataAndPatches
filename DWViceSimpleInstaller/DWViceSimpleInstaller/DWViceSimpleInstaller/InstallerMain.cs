@@ -38,11 +38,11 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage, trueHardcore, noOrders;
+            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone;
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -98,11 +98,11 @@ namespace DWViceSimpleInstaller
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
-            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = false;
+            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon  = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -195,6 +195,9 @@ namespace DWViceSimpleInstaller
 
             if (removeTelephone)
                 SetPatch(path + "NoTelephoneOgre.ppf");
+
+            if (easyTechs)
+                SetPatch(path + "TelepathyBattle.ppf");
 
             if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/OptionalPatches/Difficulty patches/ProgressionPatch.ppf");
@@ -356,6 +359,15 @@ namespace DWViceSimpleInstaller
 
             if (trainingBoost)
                 SetPatch(path + "Useful patches/TrainingBoostB.ppf");
+
+            if (rareSpawns)
+                SetPatch(path + "Useful patches/RareSpawns.ppf");
+
+            if (seadramon)
+                SetPatch(path + "Useful patches/FullSeadramon.ppf");
+
+            if (medals)
+                SetPatch(path + "Useful patches/EasierMedals.ppf");
 
 
 
@@ -523,6 +535,10 @@ namespace DWViceSimpleInstaller
         public void SetInsaneDamage(bool enabled) { insaneDamage = enabled; }
         public void SetTelephone(bool enabled) {removeTelephone = enabled; }
         public void SetOrders(bool enabled) { noOrders = enabled; }
+        public void SetSeadramon(bool enabled) { seadramon = enabled; }
+        public void SetRareSpawns(bool enabled) { rareSpawns = enabled; }
+        public void SetEasyMedals(bool enabled) { medals = enabled; }
+        public void SetEasyTech(bool enabled) { easyTechs = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
@@ -947,6 +963,24 @@ namespace DWViceSimpleInstaller
                 txtWritter.WriteLine();
             }
 
+            if (medals)
+            {
+                txtWritter.Write("- Easier medals");
+                txtWritter.WriteLine();
+            }
+
+            if (seadramon)
+            {
+                txtWritter.Write("- Full time Seadramon");
+                txtWritter.WriteLine();
+            }
+
+            if (rareSpawns)
+            {
+                txtWritter.Write("- Guaranteed rare spawns");
+                txtWritter.WriteLine();
+            }
+
             txtWritter.WriteLine();
             txtWritter.Write("Techniques patches:");
             txtWritter.WriteLine();
@@ -990,6 +1024,12 @@ namespace DWViceSimpleInstaller
             if (noOrders)
             {
                 txtWritter.Write("- Skip Brains training new orders text");
+                txtWritter.WriteLine();
+            }
+
+            if (easyTechs)
+            {
+                txtWritter.Write("- Telepathy");
                 txtWritter.WriteLine();
             }
 

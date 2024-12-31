@@ -279,4 +279,6 @@ Version 2.0:
 
 - Some more bug fixes
 
-- A new secret
+- Two new secrets
+
+- 4 new optional patches

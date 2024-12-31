@@ -88,6 +88,7 @@
             this.ForgetTechs = new System.Windows.Forms.CheckBox();
             this.missingText = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
+            this.noOrders = new System.Windows.Forms.CheckBox();
             this.insaneDamage = new System.Windows.Forms.CheckBox();
             this.NerfIce = new System.Windows.Forms.CheckBox();
             this.betterInfinity = new System.Windows.Forms.CheckBox();
@@ -95,6 +96,8 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.rareSpawn = new System.Windows.Forms.CheckBox();
+            this.Seadramon = new System.Windows.Forms.CheckBox();
             this.trainingBoost = new System.Windows.Forms.CheckBox();
             this.BetterItemSpawns = new System.Windows.Forms.CheckBox();
             this.UsefulItems2 = new System.Windows.Forms.CheckBox();
@@ -122,7 +125,7 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.noOrders = new System.Windows.Forms.CheckBox();
+            this.medals = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -913,6 +916,18 @@
             this.techContainer.Text = "Techniques patches";
             this.techContainer.Visible = false;
             // 
+            // noOrders
+            // 
+            this.noOrders.AutoSize = true;
+            this.noOrders.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.noOrders.Location = new System.Drawing.Point(51, 246);
+            this.noOrders.Name = "noOrders";
+            this.noOrders.Size = new System.Drawing.Size(229, 35);
+            this.noOrders.TabIndex = 6;
+            this.noOrders.Text = "Skip orders text";
+            this.noOrders.UseVisualStyleBackColor = true;
+            this.noOrders.CheckedChanged += new System.EventHandler(this.noOrders_CheckedChanged);
+            // 
             // insaneDamage
             // 
             this.insaneDamage.AutoSize = true;
@@ -987,6 +1002,9 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.medals);
+            this.usefulContainer.Controls.Add(this.rareSpawn);
+            this.usefulContainer.Controls.Add(this.Seadramon);
             this.usefulContainer.Controls.Add(this.trainingBoost);
             this.usefulContainer.Controls.Add(this.BetterItemSpawns);
             this.usefulContainer.Controls.Add(this.UsefulItems2);
@@ -1022,6 +1040,32 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // rareSpawn
+            // 
+            this.rareSpawn.AutoSize = true;
+            this.rareSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.rareSpawn.Location = new System.Drawing.Point(36, 437);
+            this.rareSpawn.Name = "rareSpawn";
+            this.rareSpawn.Size = new System.Drawing.Size(332, 35);
+            this.rareSpawn.TabIndex = 28;
+            this.rareSpawn.Text = "Guaranteed rare spawns";
+            this.rareSpawn.UseVisualStyleBackColor = true;
+            this.rareSpawn.CheckedChanged += new System.EventHandler(this.rareSpawn_CheckedChanged);
+            // 
+            // Seadramon
+            // 
+            this.Seadramon.AutoSize = true;
+            this.Seadramon.Enabled = false;
+            this.Seadramon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.Seadramon.Location = new System.Drawing.Point(607, 355);
+            this.Seadramon.Name = "Seadramon";
+            this.Seadramon.Size = new System.Drawing.Size(283, 35);
+            this.Seadramon.TabIndex = 27;
+            this.Seadramon.Text = "Full time Seadramon";
+            this.Seadramon.UseVisualStyleBackColor = true;
+            this.Seadramon.Visible = false;
+            this.Seadramon.CheckedChanged += new System.EventHandler(this.Seadramon_CheckedChanged);
             // 
             // trainingBoost
             // 
@@ -1178,7 +1222,7 @@
             // 
             this.LeftUseful.Enabled = false;
             this.LeftUseful.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LeftUseful.Location = new System.Drawing.Point(435, 437);
+            this.LeftUseful.Location = new System.Drawing.Point(450, 437);
             this.LeftUseful.Name = "LeftUseful";
             this.LeftUseful.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LeftUseful.Size = new System.Drawing.Size(50, 50);
@@ -1379,17 +1423,17 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // noOrders
+            // medals
             // 
-            this.noOrders.AutoSize = true;
-            this.noOrders.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.noOrders.Location = new System.Drawing.Point(51, 246);
-            this.noOrders.Name = "noOrders";
-            this.noOrders.Size = new System.Drawing.Size(229, 35);
-            this.noOrders.TabIndex = 6;
-            this.noOrders.Text = "Skip orders text";
-            this.noOrders.UseVisualStyleBackColor = true;
-            this.noOrders.CheckedChanged += new System.EventHandler(this.noOrders_CheckedChanged);
+            this.medals.AutoSize = true;
+            this.medals.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.medals.Location = new System.Drawing.Point(607, 437);
+            this.medals.Name = "medals";
+            this.medals.Size = new System.Drawing.Size(203, 35);
+            this.medals.TabIndex = 29;
+            this.medals.Text = "Easier medals";
+            this.medals.UseVisualStyleBackColor = true;
+            this.medals.CheckedChanged += new System.EventHandler(this.medals_CheckedChanged);
             // 
             // HardcorePatcher
             // 
@@ -1531,5 +1575,8 @@
         private System.Windows.Forms.CheckBox insaneDamage;
         private System.Windows.Forms.CheckBox trueHardcore;
         private System.Windows.Forms.CheckBox noOrders;
+        private System.Windows.Forms.CheckBox Seadramon;
+        private System.Windows.Forms.CheckBox rareSpawn;
+        private System.Windows.Forms.CheckBox medals;
     }
 }

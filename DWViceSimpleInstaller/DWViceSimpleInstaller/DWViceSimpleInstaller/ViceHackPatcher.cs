@@ -429,7 +429,14 @@ namespace DWViceSimpleInstaller
                "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better curling: The curling rewards will be better, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Useful items 2: Kuwagamon and Kabuterimon will sell items at the Gym." + Environment.NewLine + Environment.NewLine +
-               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training.";
+               "- Training boost fix: This will make food not override the training boost, this means you can eat a meat after a supercarrot and you will still keep the boost to your training." + Environment.NewLine + Environment.NewLine +
+               "- Easy medals: Some medals will become easier to obtain, these are:" + Environment.NewLine + Environment.NewLine +
+               " * Fishing medal requires only 30 fish" + Environment.NewLine + Environment.NewLine +
+               " * Tournament wins require only 30 wins" + Environment.NewLine + Environment.NewLine +
+               " * Years medal requires to reach year 6" + Environment.NewLine + Environment.NewLine +
+               " * Curling requires only 5 score" + Environment.NewLine + Environment.NewLine +
+               "- Guaranteed rare spawns: Piximon, Mamemon, MetalMamemon and Otamamon will always appear." + Environment.NewLine + Environment.NewLine +
+               "- Full time Seadramon: Seadramon appears at any time in the lake.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Better item drops spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -446,7 +453,8 @@ namespace DWViceSimpleInstaller
                "- Learn multiple techs: this patch allows a player to learn more than one technique after a battle" + Environment.NewLine + Environment.NewLine +
                "- Nerf Ice Statue: this patch will lower Ice Statue power, accuracy and chance of trigger stun" + Environment.NewLine + Environment.NewLine +
                "- Insane Tech damage: this patch will change the range of the techniques damage from '90% - 110%' to '10% - 190%', finishers are not affected by this patch." + Environment.NewLine + Environment.NewLine +
-               "- Skip orders text: this patch will skip the text when you learn new orders during brains training and in exchange, give you a chance to learn a technique.";
+               "- Skip orders text: this patch will skip the text when you learn new orders during brains training and in exchange, give you a chance to learn a technique." + Environment.NewLine + Environment.NewLine +
+               "- Telepathy: You no longer are required to see a digimon perform a technique to learn it.";
 
             HardcoreHackInfo infoWindow = new HardcoreHackInfo();
             infoWindow.Text = "Info window";
@@ -738,6 +746,8 @@ namespace DWViceSimpleInstaller
             BetterItemSpawns.Enabled = true;
             trainingBoost.Visible = true;
             trainingBoost.Enabled = true;
+            Seadramon.Visible = true;
+            Seadramon.Enabled = true;
 
 
             RightButton.Enabled = false;
@@ -764,6 +774,10 @@ namespace DWViceSimpleInstaller
             lessMono.Enabled = false;
             helpfulItems.Visible = false;
             helpfulItems.Enabled = false;
+            medals.Visible = false;
+            medals.Enabled = false;
+            rareSpawn.Visible = false;
+            rareSpawn.Enabled = false;
         }
 
         private void LeftButton_Click(object sender, EventArgs e)
@@ -788,6 +802,10 @@ namespace DWViceSimpleInstaller
             lessMono.Enabled = true;
             helpfulItems.Visible = true;
             helpfulItems.Enabled = true;
+            medals.Visible = true;
+            medals.Enabled = true;
+            rareSpawn.Visible = true;
+            rareSpawn.Enabled = true;
 
             if (!Hardcore.Checked)
             {
@@ -822,7 +840,8 @@ namespace DWViceSimpleInstaller
             BetterItemSpawns.Enabled = false;
             trainingBoost.Visible = false;
             trainingBoost.Enabled = false;
-
+            Seadramon.Visible = false;
+            Seadramon.Enabled = false;
         }
 
         private void UsefulItems2_CheckedChanged(object sender, EventArgs e)
@@ -893,6 +912,26 @@ namespace DWViceSimpleInstaller
         private void noOrders_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetOrders(noOrders.Checked);
+        }
+
+        private void Seadramon_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetSeadramon(Seadramon.Checked);
+        }
+
+        private void rareSpawn_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRareSpawns(rareSpawn.Checked);
+        }
+
+        private void medals_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEasyMedals(medals.Checked);
+        }
+
+        private void easyTech_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEasyTech(easyTech.Checked);
         }
     }
 }

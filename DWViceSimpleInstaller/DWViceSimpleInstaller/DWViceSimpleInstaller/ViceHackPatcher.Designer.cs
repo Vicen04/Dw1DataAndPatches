@@ -81,13 +81,10 @@
             this.randoAdaptor = new System.Windows.Forms.CheckBox();
             this.deRandoFact = new System.Windows.Forms.CheckBox();
             this.UnlockAreas = new System.Windows.Forms.CheckBox();
-            this.techContainer = new System.Windows.Forms.GroupBox();
-            this.insaneTechs = new System.Windows.Forms.CheckBox();
-            this.NerfIce = new System.Windows.Forms.CheckBox();
-            this.multipleTechs = new System.Windows.Forms.CheckBox();
-            this.betterTechsBrains = new System.Windows.Forms.CheckBox();
-            this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.medals = new System.Windows.Forms.CheckBox();
+            this.rareSpawn = new System.Windows.Forms.CheckBox();
+            this.Seadramon = new System.Windows.Forms.CheckBox();
             this.trainingBoost = new System.Windows.Forms.CheckBox();
             this.RightButton = new System.Windows.Forms.Button();
             this.LeftButton = new System.Windows.Forms.Button();
@@ -112,12 +109,19 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
+            this.bettertechBattle = new System.Windows.Forms.CheckBox();
+            this.betterTechsBrains = new System.Windows.Forms.CheckBox();
+            this.multipleTechs = new System.Windows.Forms.CheckBox();
+            this.NerfIce = new System.Windows.Forms.CheckBox();
+            this.insaneTechs = new System.Windows.Forms.CheckBox();
             this.noOrders = new System.Windows.Forms.CheckBox();
+            this.techContainer = new System.Windows.Forms.GroupBox();
+            this.easyTech = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
-            this.techContainer.SuspendLayout();
             this.usefulContainer.SuspendLayout();
+            this.techContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // DifficultyPatchesContainer
@@ -800,86 +804,11 @@
             this.UnlockAreas.UseVisualStyleBackColor = true;
             this.UnlockAreas.CheckedChanged += new System.EventHandler(this.UnlockAreas_CheckedChanged);
             // 
-            // techContainer
-            // 
-            this.techContainer.Controls.Add(this.noOrders);
-            this.techContainer.Controls.Add(this.insaneTechs);
-            this.techContainer.Controls.Add(this.NerfIce);
-            this.techContainer.Controls.Add(this.multipleTechs);
-            this.techContainer.Controls.Add(this.betterTechsBrains);
-            this.techContainer.Controls.Add(this.bettertechBattle);
-            this.techContainer.Enabled = false;
-            this.techContainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.techContainer.Location = new System.Drawing.Point(90, 160);
-            this.techContainer.Name = "techContainer";
-            this.techContainer.Size = new System.Drawing.Size(1000, 300);
-            this.techContainer.TabIndex = 22;
-            this.techContainer.TabStop = false;
-            this.techContainer.Text = "Techniques patches";
-            this.techContainer.Visible = false;
-            // 
-            // insaneTechs
-            // 
-            this.insaneTechs.AutoSize = true;
-            this.insaneTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneTechs.Location = new System.Drawing.Point(55, 197);
-            this.insaneTechs.Name = "insaneTechs";
-            this.insaneTechs.Size = new System.Drawing.Size(286, 35);
-            this.insaneTechs.TabIndex = 4;
-            this.insaneTechs.Text = "Insane Tech damage";
-            this.insaneTechs.UseVisualStyleBackColor = true;
-            this.insaneTechs.CheckedChanged += new System.EventHandler(this.insaneTechs_CheckedChanged);
-            // 
-            // NerfIce
-            // 
-            this.NerfIce.AutoSize = true;
-            this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NerfIce.Location = new System.Drawing.Point(578, 120);
-            this.NerfIce.Name = "NerfIce";
-            this.NerfIce.Size = new System.Drawing.Size(220, 35);
-            this.NerfIce.TabIndex = 3;
-            this.NerfIce.Text = "Nerf Ice Statue";
-            this.NerfIce.UseVisualStyleBackColor = true;
-            this.NerfIce.CheckedChanged += new System.EventHandler(this.NerfIce_CheckedChanged);
-            // 
-            // multipleTechs
-            // 
-            this.multipleTechs.AutoSize = true;
-            this.multipleTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.multipleTechs.Location = new System.Drawing.Point(55, 120);
-            this.multipleTechs.Name = "multipleTechs";
-            this.multipleTechs.Size = new System.Drawing.Size(284, 35);
-            this.multipleTechs.TabIndex = 2;
-            this.multipleTechs.Text = "Learn multiple techs";
-            this.multipleTechs.UseVisualStyleBackColor = true;
-            this.multipleTechs.CheckedChanged += new System.EventHandler(this.multipleTechs_CheckedChanged);
-            // 
-            // betterTechsBrains
-            // 
-            this.betterTechsBrains.AutoSize = true;
-            this.betterTechsBrains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.betterTechsBrains.Location = new System.Drawing.Point(578, 39);
-            this.betterTechsBrains.Name = "betterTechsBrains";
-            this.betterTechsBrains.Size = new System.Drawing.Size(343, 35);
-            this.betterTechsBrains.TabIndex = 1;
-            this.betterTechsBrains.Text = "Learn better techs brains";
-            this.betterTechsBrains.UseVisualStyleBackColor = true;
-            this.betterTechsBrains.CheckedChanged += new System.EventHandler(this.betterTechsBrains_CheckedChanged);
-            // 
-            // bettertechBattle
-            // 
-            this.bettertechBattle.AutoSize = true;
-            this.bettertechBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.bettertechBattle.Location = new System.Drawing.Point(55, 38);
-            this.bettertechBattle.Name = "bettertechBattle";
-            this.bettertechBattle.Size = new System.Drawing.Size(340, 35);
-            this.bettertechBattle.TabIndex = 0;
-            this.bettertechBattle.Text = "Learn better techs battle";
-            this.bettertechBattle.UseVisualStyleBackColor = true;
-            this.bettertechBattle.CheckedChanged += new System.EventHandler(this.bettertechBattle_CheckedChanged);
-            // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.medals);
+            this.usefulContainer.Controls.Add(this.rareSpawn);
+            this.usefulContainer.Controls.Add(this.Seadramon);
             this.usefulContainer.Controls.Add(this.trainingBoost);
             this.usefulContainer.Controls.Add(this.RightButton);
             this.usefulContainer.Controls.Add(this.LeftButton);
@@ -913,6 +842,44 @@
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
             // 
+            // medals
+            // 
+            this.medals.AutoSize = true;
+            this.medals.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.medals.Location = new System.Drawing.Point(607, 426);
+            this.medals.Name = "medals";
+            this.medals.Size = new System.Drawing.Size(203, 35);
+            this.medals.TabIndex = 26;
+            this.medals.Text = "Easier medals";
+            this.medals.UseVisualStyleBackColor = true;
+            this.medals.CheckedChanged += new System.EventHandler(this.medals_CheckedChanged);
+            // 
+            // rareSpawn
+            // 
+            this.rareSpawn.AutoSize = true;
+            this.rareSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.rareSpawn.Location = new System.Drawing.Point(36, 427);
+            this.rareSpawn.Name = "rareSpawn";
+            this.rareSpawn.Size = new System.Drawing.Size(332, 35);
+            this.rareSpawn.TabIndex = 25;
+            this.rareSpawn.Text = "Guaranteed rare spawns";
+            this.rareSpawn.UseVisualStyleBackColor = true;
+            this.rareSpawn.CheckedChanged += new System.EventHandler(this.rareSpawn_CheckedChanged);
+            // 
+            // Seadramon
+            // 
+            this.Seadramon.AutoSize = true;
+            this.Seadramon.Enabled = false;
+            this.Seadramon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.Seadramon.Location = new System.Drawing.Point(607, 426);
+            this.Seadramon.Name = "Seadramon";
+            this.Seadramon.Size = new System.Drawing.Size(283, 35);
+            this.Seadramon.TabIndex = 24;
+            this.Seadramon.Text = "Full time Seadramon";
+            this.Seadramon.UseVisualStyleBackColor = true;
+            this.Seadramon.Visible = false;
+            this.Seadramon.CheckedChanged += new System.EventHandler(this.Seadramon_CheckedChanged);
+            // 
             // trainingBoost
             // 
             this.trainingBoost.AutoSize = true;
@@ -930,7 +897,7 @@
             // RightButton
             // 
             this.RightButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RightButton.Location = new System.Drawing.Point(535, 417);
+            this.RightButton.Location = new System.Drawing.Point(514, 427);
             this.RightButton.Name = "RightButton";
             this.RightButton.Size = new System.Drawing.Size(50, 50);
             this.RightButton.TabIndex = 22;
@@ -942,7 +909,7 @@
             // 
             this.LeftButton.Enabled = false;
             this.LeftButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LeftButton.Location = new System.Drawing.Point(435, 417);
+            this.LeftButton.Location = new System.Drawing.Point(458, 427);
             this.LeftButton.Name = "LeftButton";
             this.LeftButton.Size = new System.Drawing.Size(50, 50);
             this.LeftButton.TabIndex = 21;
@@ -1223,6 +1190,66 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
+            // bettertechBattle
+            // 
+            this.bettertechBattle.AutoSize = true;
+            this.bettertechBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.bettertechBattle.Location = new System.Drawing.Point(55, 38);
+            this.bettertechBattle.Name = "bettertechBattle";
+            this.bettertechBattle.Size = new System.Drawing.Size(340, 35);
+            this.bettertechBattle.TabIndex = 0;
+            this.bettertechBattle.Text = "Learn better techs battle";
+            this.bettertechBattle.UseVisualStyleBackColor = true;
+            this.bettertechBattle.CheckedChanged += new System.EventHandler(this.bettertechBattle_CheckedChanged);
+            // 
+            // betterTechsBrains
+            // 
+            this.betterTechsBrains.AutoSize = true;
+            this.betterTechsBrains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.betterTechsBrains.Location = new System.Drawing.Point(578, 39);
+            this.betterTechsBrains.Name = "betterTechsBrains";
+            this.betterTechsBrains.Size = new System.Drawing.Size(343, 35);
+            this.betterTechsBrains.TabIndex = 1;
+            this.betterTechsBrains.Text = "Learn better techs brains";
+            this.betterTechsBrains.UseVisualStyleBackColor = true;
+            this.betterTechsBrains.CheckedChanged += new System.EventHandler(this.betterTechsBrains_CheckedChanged);
+            // 
+            // multipleTechs
+            // 
+            this.multipleTechs.AutoSize = true;
+            this.multipleTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.multipleTechs.Location = new System.Drawing.Point(55, 120);
+            this.multipleTechs.Name = "multipleTechs";
+            this.multipleTechs.Size = new System.Drawing.Size(284, 35);
+            this.multipleTechs.TabIndex = 2;
+            this.multipleTechs.Text = "Learn multiple techs";
+            this.multipleTechs.UseVisualStyleBackColor = true;
+            this.multipleTechs.CheckedChanged += new System.EventHandler(this.multipleTechs_CheckedChanged);
+            // 
+            // NerfIce
+            // 
+            this.NerfIce.AutoSize = true;
+            this.NerfIce.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NerfIce.Location = new System.Drawing.Point(578, 120);
+            this.NerfIce.Name = "NerfIce";
+            this.NerfIce.Size = new System.Drawing.Size(220, 35);
+            this.NerfIce.TabIndex = 3;
+            this.NerfIce.Text = "Nerf Ice Statue";
+            this.NerfIce.UseVisualStyleBackColor = true;
+            this.NerfIce.CheckedChanged += new System.EventHandler(this.NerfIce_CheckedChanged);
+            // 
+            // insaneTechs
+            // 
+            this.insaneTechs.AutoSize = true;
+            this.insaneTechs.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.insaneTechs.Location = new System.Drawing.Point(55, 197);
+            this.insaneTechs.Name = "insaneTechs";
+            this.insaneTechs.Size = new System.Drawing.Size(286, 35);
+            this.insaneTechs.TabIndex = 4;
+            this.insaneTechs.Text = "Insane Tech damage";
+            this.insaneTechs.UseVisualStyleBackColor = true;
+            this.insaneTechs.CheckedChanged += new System.EventHandler(this.insaneTechs_CheckedChanged);
+            // 
             // noOrders
             // 
             this.noOrders.AutoSize = true;
@@ -1234,6 +1261,37 @@
             this.noOrders.Text = "Skip orders text";
             this.noOrders.UseVisualStyleBackColor = true;
             this.noOrders.CheckedChanged += new System.EventHandler(this.noOrders_CheckedChanged);
+            // 
+            // techContainer
+            // 
+            this.techContainer.Controls.Add(this.easyTech);
+            this.techContainer.Controls.Add(this.noOrders);
+            this.techContainer.Controls.Add(this.insaneTechs);
+            this.techContainer.Controls.Add(this.NerfIce);
+            this.techContainer.Controls.Add(this.multipleTechs);
+            this.techContainer.Controls.Add(this.betterTechsBrains);
+            this.techContainer.Controls.Add(this.bettertechBattle);
+            this.techContainer.Enabled = false;
+            this.techContainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.techContainer.Location = new System.Drawing.Point(90, 160);
+            this.techContainer.Name = "techContainer";
+            this.techContainer.Size = new System.Drawing.Size(1000, 350);
+            this.techContainer.TabIndex = 22;
+            this.techContainer.TabStop = false;
+            this.techContainer.Text = "Techniques patches";
+            this.techContainer.Visible = false;
+            // 
+            // easyTech
+            // 
+            this.easyTech.AutoSize = true;
+            this.easyTech.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.easyTech.Location = new System.Drawing.Point(55, 277);
+            this.easyTech.Name = "easyTech";
+            this.easyTech.Size = new System.Drawing.Size(153, 35);
+            this.easyTech.TabIndex = 6;
+            this.easyTech.Text = "Telepathy";
+            this.easyTech.UseVisualStyleBackColor = true;
+            this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
             // ViceHackPatcher
             // 
@@ -1269,10 +1327,10 @@
             this.DigimonGroup.PerformLayout();
             this.miscPatches.ResumeLayout(false);
             this.miscPatches.PerformLayout();
-            this.techContainer.ResumeLayout(false);
-            this.techContainer.PerformLayout();
             this.usefulContainer.ResumeLayout(false);
             this.usefulContainer.PerformLayout();
+            this.techContainer.ResumeLayout(false);
+            this.techContainer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1320,10 +1378,6 @@
         private System.Windows.Forms.GroupBox miscPatches;
         private System.Windows.Forms.Label MiscTitle2;
         private System.Windows.Forms.Label MiscTitle1;
-        private System.Windows.Forms.GroupBox techContainer;
-        private System.Windows.Forms.CheckBox multipleTechs;
-        private System.Windows.Forms.CheckBox betterTechsBrains;
-        private System.Windows.Forms.CheckBox bettertechBattle;
         private System.Windows.Forms.GroupBox usefulContainer;
         private System.Windows.Forms.CheckBox sDirtReduction;
         private System.Windows.Forms.CheckBox dirtReduction;
@@ -1348,7 +1402,6 @@
         private System.Windows.Forms.CheckBox Kunemon;
         private System.Windows.Forms.Button ProgressionInfo;
         private System.Windows.Forms.CheckBox ProgressionMode;
-        private System.Windows.Forms.CheckBox NerfIce;
         private System.Windows.Forms.Button RightButton;
         private System.Windows.Forms.Button LeftButton;
         private System.Windows.Forms.CheckBox BetterItemSpawns;
@@ -1361,9 +1414,18 @@
         private System.Windows.Forms.CheckBox BetterCurling;
         private System.Windows.Forms.CheckBox BetterFishing;
         private System.Windows.Forms.CheckBox trainingBoost;
-        private System.Windows.Forms.CheckBox insaneTechs;
         private System.Windows.Forms.CheckBox removeTelephone;
         private System.Windows.Forms.CheckBox trueHardcore;
+        private System.Windows.Forms.CheckBox Seadramon;
+        private System.Windows.Forms.CheckBox rareSpawn;
+        private System.Windows.Forms.CheckBox medals;
+        private System.Windows.Forms.CheckBox bettertechBattle;
+        private System.Windows.Forms.CheckBox betterTechsBrains;
+        private System.Windows.Forms.CheckBox multipleTechs;
+        private System.Windows.Forms.CheckBox NerfIce;
+        private System.Windows.Forms.CheckBox insaneTechs;
         private System.Windows.Forms.CheckBox noOrders;
+        private System.Windows.Forms.GroupBox techContainer;
+        private System.Windows.Forms.CheckBox easyTech;
     }
 }
