@@ -9,7 +9,7 @@ For anyone who wants to ask questions or want help with modding:
 
 I have created a hack which mostly includes the changes shown in this repository (Last update 22/12/24).
 
-[Hack installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Vice_hack_2.0)
+[Hack installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer_2)
 
 [Hack installer for the old version](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer)
 
