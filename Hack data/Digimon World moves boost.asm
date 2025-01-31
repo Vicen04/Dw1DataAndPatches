@@ -75,7 +75,7 @@ Changed:
 
 Original:
 
-int * CalculateMovementDamage(int DigimonPointer,int *DigimonID,int MoveID)
+int * CalculateMovementDamage(int AttackerPtr,int *DefenderPtr,int MoveID)
 
 {
  iVar3 = *(DigimonID + 58); //Get the opponent defense

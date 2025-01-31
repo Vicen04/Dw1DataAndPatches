@@ -1947,7 +1947,7 @@ if (((... ||ItemBeingFeed < 124)  //check if this is an edible item
 
 // code ignored         
 
-if (ItemBeingFeed == 124) //only the chain melon has this level
+if (ItemBeingFeed == 124) //AS Decoder item ID
     digimonTargetLevel = 5;  //use an Ultimate level
 
 // code ignored                     

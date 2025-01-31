@@ -20,7 +20,7 @@ HandleItemRejection(void)
   RandomValue = ReturnRandom(10);
   itemFeedValue = ItemBeingFeed;
   if ((((ItemBeingFeed < 115) || (ItemBeingFeed == 121)) || (ItemBeingFeed == 122)) ||
-     (124 < (int)ItemBeingFeed)) { // check if item  is an item that can be eaten
+     (124 < ItemBeingFeed)) { // check if the item is an item that can be eaten
     if ((ItemBeingFeed? < 33) || (37 < ItemBeingFeed)) { // Another check for items that can be eaten
       if (((70 < ItemBeingFeed) && (ItemBeingFeed < 115)) ||
          ((124 < ItemBeingFeed && (ItemBeingFeed < 128)))) { // evo items
@@ -43,8 +43,9 @@ HandleItemRejection(void)
           }
         }
       }
-      if (DAT_ffff912d == 2) {
-        DAT_ffff912d = 0;
+      if (rejectionFlag == 2) //succesful scold
+	  {
+        rejectionFlag = 0;
         returnValue = 0;
       }
       else {
@@ -52,7 +53,7 @@ HandleItemRejection(void)
           iVar1 = ReturnRandom(100);
           iVar2 = ReturnRandom(10);
           if (iVar1 < 110 - (Discipline + iVar2 + 10)) { //Chance of eating healing item
-            DAT_ffff912d = 1;
+            rejectionFlag = 1;
             return 1;
           }
         }
@@ -63,7 +64,7 @@ HandleItemRejection(void)
         returnValue = 0;
         if (FavouriteItemRejected != 0) {
           if (hungryFlag != 0) { // this should allow scolding, but it is never triggered 
-            DAT_ffff912d = '\x01';
+            rejectionFlag = 1;
           }
           returnValue = 1;
         }

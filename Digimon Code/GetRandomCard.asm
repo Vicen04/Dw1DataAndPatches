@@ -45,6 +45,8 @@ byte GetRandomCard(void)
 
 Disassembly:
                              GetRandomCard
+							
+		Offset      Hex               Commands
                            
         80106e0c e0 ff bd 27     addiu      sp,sp,-0x20
         80106e10 1c 00 bf af     sw         ra,local_4(sp)

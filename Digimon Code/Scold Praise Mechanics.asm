@@ -1,37 +1,43 @@
-void Scold/PraiseMechanics(int scold/praiseValue) // checks if the scold or the praise has been used and adds happiness and/or discipline
+void Scold/PraiseMechanics(int interactionValue) // checks if the scold or the praise has been used and adds happiness and/or discipline
 {
   short addedDiscipline;
   short addedHappiness;
-  int discipline;
+  short discipline;
   short happiness;
   
   happiness = DigimonHappiness;
   discipline = DigimonDiscipline;
-  if (scold/praiseValue == 4) { // scold value
-    if (DAT_ffff912d == '\x01') { // has done something that requires a scold
+  if (interactionValue == 4) // scold value
+  { 
+    if (ScoldFlag == '\x01') // has done something that requires a scold
+	{ 
       addedDiscipline = 8;
-      DAT_ffff912d = '\x02';
+      ScoldFlag = '\x02'; //Next item will not be rejected
+	  //note that here the "addedHappiness" is never set, so it uses a value carried from a different function
+      //This is equivalent to "addedHappiness = 3", the happiness added by a positive scold is actually unintended
     }
-    else {
+    else 
+	{
       addedDiscipline = 2;
       addedHappiness = -10;
     }
     FavouriteItemRejected = 0; 
     ConditionFlag = ConditionFlag & 0xffffffef;
-    if (_DAT_ffff9128 == 0) {
-      UnsetButterfly(_DAT_ffff9134);
-      _DAT_ffff9128 = -1;
+    if (ButteflyFlag == 0)
+	{
+      UnsetButterfly(ButterflyInstance);
+      ButteflyFlag = -1;
     }
   }
-  else {  // praise has been used
+  else //praise has been used, the interaction value here is "11"
+  {  
     addedDiscipline = -5;
     addedHappiness = (discipline / 10 + 2);
   }
-  if ((((scold/praiseValue == 4) &&
-       (NanimonEvoFlag = 0, DigimonLevel == 3)) && (discipline == 0)) &&
-     (Happiness == -100)) { //nanimon evo check
+  if (((interactionValue == 4) && (NanimonEvoFlag = 0) && (DigimonLevel == 3)) && 
+        ((discipline == 0) && (Happiness == -100))) //nanimon evo check
     NanimonEvoFlag = 1;
-  }
+  
   DigimonDiscipline = DigimonDiscipline + addedDiscipline;
   DigimonHappiness = DigimonHappiness + addedHappiness;
   return;
@@ -52,19 +58,19 @@ Disassembly:
         800a6250 14 80 01 3c     lui        at,0x8014
         800a6254 8a 84 34 84     lh         s4,-0x7b76(at)                     
         800a6258 10 00 b0 af     sw         s0,0x10(sp)
-        800a625c 21 98 80 00     move       s3,param_1
+        800a625c 21 98 80 00     move       s3,a0
         800a6260 04 00 01 24     li         at,0x4
-        800a6264 23 00 61 16     bne        s3,at,LAB_800a62f4
+        800a6264 23 00 61 16     bne        s3,at,0x800a62f4
         800a6268 21 18 40 02     _move      v1,s2
         800a626c 2d 91 82 83     lb         v0,-0x6ed3(gp)
         800a6270 01 00 01 24     li         at,0x1
-        800a6274 07 00 41 14     bne        v0,at,LAB_800a6294
+        800a6274 07 00 41 14     bne        v0,at,0x800a6294
         800a6278 00 00 00 00     _nop
         800a627c 08 00 02 24     li         v0,0x8
         800a6280 00 84 02 00     sll        s0,v0,0x10
         800a6284 02 00 02 24     li         v0,0x2
         800a6288 03 84 10 00     sra        s0,s0,0x10
-        800a628c 07 00 00 10     b          LAB_800a62ac
+        800a628c 07 00 00 10     b          0x800a62ac
         800a6290 2d 91 82 a3     _sb        v0,-0x6ed3(gp)
                              LAB_800a6294                                     
         800a6294 02 00 02 24     li         v0,0x2
@@ -84,13 +90,13 @@ Disassembly:
         800a62c8 60 84 22 ac     sw         v0,-0x7ba0(at)                    
         800a62cc 28 91 82 8f     lw         v0,-0x6ed8(gp)
         800a62d0 00 00 00 00     nop
-        800a62d4 14 00 40 14     bne        v0,zero,LAB_800a6328
+        800a62d4 14 00 40 14     bne        v0,zero,0x800a6328
         800a62d8 00 00 00 00     _nop
-        800a62dc 34 91 84 8f     lw         param_1,-0x6ecc(gp)
-        800a62e0 ed a7 03 0c     jal        FUN_800e9fb4                                    
+        800a62dc 34 91 84 8f     lw         a0,-0x6ecc(gp)
+        800a62e0 ed a7 03 0c     jal        0x800e9fb4  //UnsetButterfly                                
         800a62e4 00 00 00 00     _nop
         800a62e8 ff ff 02 24     li         v0,-0x1
-        800a62ec 0e 00 00 10     b          LAB_800a6328
+        800a62ec 0e 00 00 10     b          0x800a6328 
         800a62f0 28 91 82 af     _sw        v0,-0x6ed8(gp)
                              LAB_800a62f4                                     
         800a62f4 fb ff 02 24     li         v0,-0x5
@@ -116,11 +122,11 @@ Disassembly:
         800a6340 14 80 01 3c     lui        at,0x8014
         800a6344 8a 84 22 84     lh         v0,-0x7b76(at)                    
         800a6348 00 00 00 00     nop
-        800a634c 20 10 51 00     add        v0,v0,s1
+        800a634c 20 10 51 00     add        v0,v0,s1   
         800a6350 14 80 01 3c     lui        at,0x8014
         800a6354 8a 84 22 a4     sh         v0,-0x7b76(at)                     
         800a6358 04 00 01 24     li         at,0x4
-        800a635c 17 00 61 16     bne        s3,at,LAB_800a63bc
+        800a635c 17 00 61 16     bne        s3,at,0x800a63bc
         800a6360 00 00 00 00     _nop
         800a6364 15 80 01 3c     lui        at,0x8015
         800a6368 a8 57 23 8c     lw         v1,0x57a8(at)                       
@@ -135,12 +141,12 @@ Disassembly:
         800a638c 21 10 43 00     addu       v0,v0,v1
         800a6390 00 00 42 90     lbu        v0,0x0(v0)
         800a6394 03 00 01 24     li         at,0x3
-        800a6398 08 00 41 14     bne        v0,at,LAB_800a63bc
+        800a6398 08 00 41 14     bne        v0,at,0x800a63bc
         800a639c 00 00 00 00     _nop
-        800a63a0 06 00 40 16     bne        s2,zero,LAB_800a63bc
+        800a63a0 06 00 40 16     bne        s2,zero,0x800a63bc
         800a63a4 00 00 00 00     _nop
         800a63a8 9c ff 01 24     li         at,-0x64
-        800a63ac 03 00 81 16     bne        s4,at,LAB_800a63bc
+        800a63ac 03 00 81 16     bne        s4,at,0x800a63bc
         800a63b0 00 00 00 00     _nop
         800a63b4 01 00 02 24     li         v0,0x1
         800a63b8 38 91 82 af     sw         v0,-0x6ec8(gp)
