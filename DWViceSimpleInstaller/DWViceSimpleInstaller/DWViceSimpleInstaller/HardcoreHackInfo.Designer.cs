@@ -69,6 +69,8 @@
             this.HardcoreHackInfoText.Size = new System.Drawing.Size(600, 580);
             this.HardcoreHackInfoText.TabIndex = 4;
             this.HardcoreHackInfoText.Text = resources.GetString("HardcoreHackInfoText.Text");
+            this.HardcoreHackInfoText.SelectionLength = 0;
+            this.HardcoreHackInfoText.SelectionStart = 0;
             // 
             // HardcoreHackInfo
             // 

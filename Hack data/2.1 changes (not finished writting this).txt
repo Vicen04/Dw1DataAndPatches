@@ -1,0 +1,733 @@
+//Updated most of the custom code from the hack
+
+
+//Pretty much the same function, but without jumps to other adresses
+int GetRookieEvoValue(int digimonType)
+
+{
+  uint requirementeScore/division;
+  int iVar1;
+  short sVar2;
+  int points;
+  char *targetType;
+  short sVar3;
+  int targetDigimon;
+  int iVar4;
+  
+  targetDigimon = digimonType + -1;
+  if (digimonType == 63) //make Panyjamon use the evolution targets of Weregarurumon (only activates with the Panjyamon patch)
+    targetDigimon = 61;
+  
+  targetType = &DataForTargetDigimon + targetDigimon * 11;
+  targetDigimon = -1;
+  sVar3 = 0;
+
+  for (iVar4 = 0; iVar4 < 6; iVar4 = iVar4 + 1)
+  {
+    points = 0 //Set the points to 0 each start of the loop
+
+    iVar1 = *targetType;
+
+    if (iVar1 == 63) //Change the digimon data Panjyamon uses as target data
+      iVar1 = 01; //Maeson has a 62 here
+    
+    if (iVar1 == 64) //Change the digimon data Gigadramon  uses as target data
+      iVar1 = 15; //Maeson has a 62 here
+    
+    if (iVar1 == 65) //Change the digimon data MetalEtemon uses as target data
+      iVar1 = 29; //Maeson has a 62 here
+
+//this is actually done after checking the (iVar1 != -1), but to make it easier to read, I left it here
+    requirementScore = CalculateRequirementScoreEvo(digimonType,iVar1,
+                        (((&DataFromDigimonRaise)[iVar1 * 28] & 16) / 16),   //Get the care mistake flag
+                        ((&DataFromDigimonRaise)[iVar1 * 28] & 1),  //Get the battles flag
+                         targetDigimon)
+    
+    if ((iVar1 != -1) && (2 < requirementScore))
+    {
+      iVar1 = *targetType;
+      if (iVar1 == 63) //Change the digimon data Panjyamon uses as target data
+        iVar1 = 01; 
+    
+      if (iVar1 == 64) //Change the digimon data Gigadramon  uses as target data
+        iVar1 = 15; 
+    
+      if (iVar1 == 65) //Change the digimon data MetalEtemon uses as target data
+        iVar1 = 29; 
+
+      if ((&TargetHP)[iVar1 * 14] != -1) 
+        points = MaxDigimonHP / 10 ;   
+      
+      division = (&TargetHP)[iVar1 * 14] != -1; //sets the division to 0 if the HP is not a required stat, else is set to 1
+
+      if ((&TargetMP)[iVar1 * 14] != -1) 
+      {
+        points = points + MaxDigimonMP / 10;
+        division = division + 1;
+      }
+      if ((&TargetOff)[iVar1 * 14] != -1) 
+      {
+        points = points + DigimonOff;
+        division = division + 1;
+      }
+      if ((&TargetDef)[iVar1 * 14] != -1)
+      {
+        points = points + DigimonDef;
+        division = division + 1;
+      }
+      if ((&TargetSpeed)[iVar1 * 14] != -1) 
+      {
+        points = points + DigimonSpeed;
+        division = division + 1;
+      }
+      if ((&TargetBrains)[iVar1 * 14] != -1) 
+      {
+        points = points + DigimonBrains;
+        division = division + 1;
+      }
+      sVar2 = (points / division);
+
+      if (sVar3 < sVar2) 
+      {
+        targetDigimon = *targetType;
+        sVar3 = sVar2;
+      }
+    }
+    targetType = targetType + 1;
+  }
+  if (((targetDigimon == -1) && (95 < EvoTimer))
+        && ((&DigimonLevel)[digimonType * 0x34] == 03)) //check if rookie
+    targetDigimon = 11; //set numemon
+  
+  return targetDigimon;
+}
+
+
+
+Disassembly
+
+                             GetRookieEvoValue                              
+        800e2bb4 c8 ff bd 27     addiu      sp,sp,-0x38
+        800e2bb8 34 00 bf af     sw         ra,local_4(sp)
+        800e2bbc 30 00 b6 af     sw         s6,local_8(sp)
+        800e2bc0 2c 00 b5 af     sw         s5,local_c(sp)
+        800e2bc4 28 00 b4 af     sw         s4,local_10(sp)
+        800e2bc8 24 00 b3 af     sw         s3,local_14(sp)
+        800e2bcc 21 b0 04 00     move       s6,digimonType
+        800e2bd0 3f 00 01 24     li         at,0x3f
+        800e2bd4 02 00 24 14     bne        at,digimonType,0x800e2be0
+        800e2bd8 ff ff c3 22     _addi      v1,s6,-0x1
+        800e2bdc ff ff 63 20     addi       v1,v1,-0x1
+                             LAB_800e2be0                                    
+        800e2be0 80 10 03 00     sll        v0,v1,0x2
+        800e2be4 20 10 43 00     add        v0,v0,v1
+        800e2be8 40 10 02 00     sll        v0,v0,0x1
+        800e2bec 20 00 b2 af     sw         s2,0x20(sp)
+        800e2bf0 1c 00 b1 af     sw         s1,0x1c(sp)
+        800e2bf4 20 18 43 00     add        v1,v0,v1
+        800e2bf8 13 80 02 3c     lui        v0,0x8013
+        800e2bfc 18 00 b0 af     sw         s0,0x18(sp)
+        800e2c00 6c b6 42 24     addiu      v0,v0,-0x4994
+        800e2c04 21 10 43 00     addu       v0,v0,v1
+        800e2c08 00 84 00 00     sll        s0,zero,0x10
+        800e2c0c 00 9c 00 00     sll        s3,zero,0x10
+        800e2c10 05 00 52 24     addiu      targetType,v0,0x5
+        800e2c14 ff ff 14 24     li         targetDigimon,-0x1
+        800e2c18 21 88 00 00     clear      s1
+        800e2c1c 03 84 10 00     sra        s0,s0,0x10
+        800e2c20 03 9c 13 00     sra        s3,s3,0x10
+        800e2c24 b6 00 00 10     b          LAB_800e2f00
+        800e2c28 21 a8 00 00     _clear     s5
+                             LAB_800e2c2c                                 
+        800e2c2c 00 00 42 82     lb         v0,0x0(targetType) //DataForTargetDigimon      
+        800e2c30 00 00 00 00     nop
+        800e2c34 3f 00 01 24     li         at,0x3f
+        800e2c38 02 00 22 14     bne        at,v0,LAB_800e2c44
+        800e2c3c 40 00 01 24     _li        at,0x40
+        800e2c40 01 00 02 24     li         v0,0x1
+                             LAB_800e2c44                                   
+        800e2c44 02 00 22 14     bne        at,v0,LAB_800e2c50
+        800e2c48 41 00 01 24     _li        at,0x41
+        800e2c4c 0f 00 02 24     li         v0,0xf
+                             LAB_800e2c50                                    
+        800e2c50 02 00 22 14     bne        at,v0,LAB_800e2c5c
+        800e2c54 ff ff 01 24     _li        at,-0x1
+        800e2c58 1d 00 02 24     li         v0,0x1d
+                             LAB_800e2c5c                                   
+        800e2c5c 03 00 41 14     bne        v0,at,LAB_800e2c6c
+        800e2c60 21 28 40 00     _move      a1,v0
+        800e2c64 a5 00 00 10     b          LAB_800e2efc
+        800e2c68 01 00 52 26     _addiu     targetType,targetType,0x1
+                             LAB_800e2c6c                                   
+        800e2c6c c0 10 05 00     sll        v0,a1,0x3
+        800e2c70 22 10 45 00     sub        v0,v0,a1
+        800e2c74 80 18 02 00     sll        v1,v0,0x2
+        800e2c78 13 80 02 3c     lui        v0,0x8013
+        800e2c7c 06 ac 42 24     addiu      v0,v0,-0x53fa
+        800e2c80 21 10 43 00     addu       reqScore/division,reqScore/division,v1
+        800e2c84 00 00 43 80     lb         v1,0x0(reqScore/division)=>DAT_8012af6a
+        800e2c88 21 20 c0 02     move       digimonType,s6
+        800e2c8c 00 16 14 00     sll        reqScore/division,targetDigimon,0x18
+        800e2c90 03 16 02 00     sra        reqScore/division,reqScore/division,0x18
+        800e2c94 10 00 a2 af     sw         reqScore/division,0x10(sp)
+        800e2c98 10 00 62 30     andi       reqScore/division,v1,0x10
+        800e2c9c 03 11 02 00     sra        reqScore/division,reqScore/division,0x4
+        800e2ca0 00 36 02 00     sll        a2,reqScore/division,0x18
+        800e2ca4 01 00 62 30     andi       reqScore/division,v1,0x1
+        800e2ca8 00 3e 02 00     sll        a3,reqScore/division,0x18
+        800e2cac 03 36 06 00     sra        a2,a2,0x18
+        800e2cb0 ae 89 03 0c     jal        CalculateRequirementScoreEvo                    
+        800e2cb4 03 3e 07 00     _sra       a3,a3,0x18
+        800e2cb8 03 00 41 28     slti       at,reqScore/division,0x3
+        800e2cbc 8b 00 20 14     bne        at,zero,LAB_800e2eec
+        800e2cc0 00 00 00 00     _nop
+        800e2cc4 00 00 44 82     lb         digimonType,0x0(targetType)=>DataForTargetDigi  
+        800e2cc8 00 00 00 00     nop
+        800e2ccc 3f 00 01 24     li         at,0x3f
+        800e2cd0 02 00 24 14     bne        at,digimonType,LAB_800e2cdc
+        800e2cd4 40 00 01 24     _li        at,0x40
+        800e2cd8 01 00 04 24     li         digimonType,0x1
+                             LAB_800e2cdc                                   
+        800e2cdc 02 00 24 14     bne        at,digimonType,LAB_800e2ce8
+        800e2ce0 41 00 01 24     _li        at,0x41
+        800e2ce4 0f 00 04 24     li         digimonType,0xf
+                             LAB_800e2ce8                                    
+        800e2ce8 02 00 24 14     bne        at,digimonType,LAB_800e2cf4
+        800e2cec ff ff 01 24     _li        at,-0x1
+        800e2cf0 1d 00 04 24     li         digimonType,0x1d
+                             LAB_800e2cf4                                 
+        800e2cf4 c0 10 04 00     sll        reqScore/division,digimonType,0x3
+        800e2cf8 22 10 44 00     sub        reqScore/division,reqScore/division,digimonType
+        800e2cfc 21 18 80 00     move       v1,digimonType
+        800e2d00 13 80 04 3c     lui        digimonType,0x8013
+        800e2d04 80 28 02 00     sll        a1,reqScore/division,0x2
+        800e2d08 ee ab 84 24     addiu      digimonType,digimonType,-0x5412
+        800e2d0c 21 20 85 00     addu       digimonType,digimonType,a1
+        800e2d10 00 00 84 84     lh         digimonType,0x0(digimonType)=>TargetHP          
+        800e2d14 00 00 00 00     nop
+        800e2d18 12 00 81 10     beq        digimonType,at,LAB_800e2d64
+        800e2d1c 21 10 a0 00     _move      reqScore/division,a1
+        800e2d20 15 80 01 3c     lui        at,0x8015
+        800e2d24 66 66 04 3c     lui        digimonType,0x6666
+        800e2d28 f0 57 25 84     lh         a1,offset MaxDigimonHP(at)                      
+        800e2d2c 67 66 84 34     ori        digimonType,digimonType,0x6667
+        800e2d30 18 00 85 00     mult       digimonType,a1
+        800e2d34 10 20 00 00     mfhi       digimonType
+        800e2d38 c2 2f 05 00     srl        a1,a1,0x1f
+        800e2d3c 83 20 04 00     sra        digimonType,digimonType,0x2
+        800e2d40 21 20 85 00     addu       digimonType,digimonType,a1
+        800e2d44 00 24 04 00     sll        digimonType,digimonType,0x10
+        800e2d48 03 24 04 00     sra        digimonType,digimonType,0x10
+        800e2d4c 20 20 04 02     add        digimonType,points,digimonType
+        800e2d50 00 84 04 00     sll        points,digimonType,0x10
+        800e2d54 01 00 24 22     addi       digimonType,s1,0x1
+        800e2d58 00 8c 04 00     sll        s1,digimonType,0x10
+        800e2d5c 03 84 10 00     sra        points,points,0x10
+        800e2d60 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2d64                                   
+        800e2d64 13 80 04 3c     lui        digimonType,0x8013
+        800e2d68 f0 ab 84 24     addiu      digimonType,digimonType,-0x5410
+        800e2d6c 21 20 82 00     addu       digimonType,digimonType,reqScore/division
+        800e2d70 00 00 84 84     lh         digimonType,0x0(digimonType)=>TargetMP           
+        800e2d74 ff ff 01 24     li         at,-0x1
+        800e2d78 12 00 81 10     beq        digimonType,at,LAB_800e2dc4
+        800e2d7c 00 00 00 00     _nop
+        800e2d80 15 80 01 3c     lui        at,0x8015
+        800e2d84 66 66 04 3c     lui        digimonType,0x6666
+        800e2d88 f2 57 25 84     lh         a1,offset MaxDigimonMP(at)                      
+        800e2d8c 67 66 84 34     ori        digimonType,digimonType,0x6667
+        800e2d90 18 00 85 00     mult       digimonType,a1
+        800e2d94 10 20 00 00     mfhi       digimonType
+        800e2d98 c2 2f 05 00     srl        a1,a1,0x1f
+        800e2d9c 83 20 04 00     sra        digimonType,digimonType,0x2
+        800e2da0 21 20 85 00     addu       digimonType,digimonType,a1
+        800e2da4 00 24 04 00     sll        digimonType,digimonType,0x10
+        800e2da8 03 24 04 00     sra        digimonType,digimonType,0x10
+        800e2dac 20 20 04 02     add        digimonType,points,digimonType
+        800e2db0 00 84 04 00     sll        points,digimonType,0x10
+        800e2db4 01 00 24 22     addi       digimonType,s1,0x1
+        800e2db8 00 8c 04 00     sll        s1,digimonType,0x10
+        800e2dbc 03 84 10 00     sra        points,points,0x10
+        800e2dc0 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2dc4                                   
+        800e2dc4 13 80 04 3c     lui        digimonType,0x8013
+        800e2dc8 f2 ab 84 24     addiu      digimonType,digimonType,-0x540e
+        800e2dcc 21 20 82 00     addu       digimonType,digimonType,reqScore/division
+        800e2dd0 00 00 84 84     lh         digimonType,0x0(digimonType)=>TargetOff                                                                                                     
+        800e2dd4 ff ff 01 24     li         at,-0x1
+        800e2dd8 0a 00 81 10     beq        digimonType,at,LAB_800e2e04
+        800e2ddc 00 00 00 00     _nop
+        800e2de0 15 80 01 3c     lui        at,0x8015
+        800e2de4 e0 57 24 84     lh         digimonType,offset DigimonOff(at)              
+        800e2de8 00 00 00 00     nop
+        800e2dec 20 20 04 02     add        digimonType,points,digimonType
+        800e2df0 00 84 04 00     sll        points,digimonType,0x10
+        800e2df4 01 00 24 22     addi       digimonType,s1,0x1
+        800e2df8 00 8c 04 00     sll        s1,digimonType,0x10
+        800e2dfc 03 84 10 00     sra        points,points,0x10
+        800e2e00 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2e04                                    
+        800e2e04 13 80 04 3c     lui        digimonType,0x8013
+        800e2e08 f4 ab 84 24     addiu      digimonType,digimonType,-0x540c
+        800e2e0c 21 20 82 00     addu       digimonType,digimonType,reqScore/division
+        800e2e10 00 00 84 84     lh         digimonType,0x0(digimonType)=>TargetDef          
+                                                                                           
+        800e2e14 ff ff 01 24     li         at,-0x1
+        800e2e18 0a 00 81 10     beq        digimonType,at,LAB_800e2e44
+        800e2e1c 00 00 00 00     _nop
+        800e2e20 15 80 01 3c     lui        at,0x8015
+        800e2e24 e2 57 24 84     lh         digimonType,offset DigimonDef(at)              
+        800e2e28 00 00 00 00     nop
+        800e2e2c 20 20 04 02     add        digimonType,points,digimonType
+        800e2e30 00 84 04 00     sll        points,digimonType,0x10
+        800e2e34 01 00 24 22     addi       digimonType,s1,0x1
+        800e2e38 00 8c 04 00     sll        s1,digimonType,0x10
+        800e2e3c 03 84 10 00     sra        points,points,0x10
+        800e2e40 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2e44                                 
+        800e2e44 13 80 04 3c     lui        digimonType,0x8013
+        800e2e48 f6 ab 84 24     addiu      digimonType,digimonType,-0x540a
+        800e2e4c 21 20 82 00     addu       digimonType,digimonType,reqScore/division
+        800e2e50 00 00 84 84     lh         digimonType,0x0(digimonType)=>TargetSpeed      
+        800e2e54 ff ff 01 24     li         at,-0x1
+        800e2e58 0a 00 81 10     beq        digimonType,at,LAB_800e2e84
+        800e2e5c 00 00 00 00     _nop
+        800e2e60 15 80 01 3c     lui        at,0x8015
+        800e2e64 e4 57 24 84     lh         digimonType,offset DigimonSpeed(at)             
+        800e2e68 00 00 00 00     nop
+        800e2e6c 20 20 04 02     add        digimonType,points,digimonType
+        800e2e70 00 84 04 00     sll        points,digimonType,0x10
+        800e2e74 01 00 24 22     addi       digimonType,s1,0x1
+        800e2e78 00 8c 04 00     sll        s1,digimonType,0x10
+        800e2e7c 03 84 10 00     sra        points,points,0x10
+        800e2e80 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2e84                                  
+        800e2e84 13 80 04 3c     lui        digimonType,0x8013
+        800e2e88 f8 ab 84 24     addiu      digimonType,digimonType,-0x5408
+        800e2e8c 21 10 82 00     addu       reqScore/division,digimonType,reqScore/division
+        800e2e90 00 00 42 84     lh         reqScore/division,0x0(reqScore/division)=>Targ                                                                                                
+        800e2e94 ff ff 01 24     li         at,-0x1
+        800e2e98 0a 00 41 10     beq        reqScore/division,at,LAB_800e2ec4
+        800e2e9c 00 00 00 00     _nop
+        800e2ea0 15 80 01 3c     lui        at,0x8015
+        800e2ea4 e6 57 22 84     lh         reqScore/division,offset DigimonBrains(at)       
+        800e2ea8 00 00 00 00     nop
+        800e2eac 20 10 02 02     add        reqScore/division,points,reqScore/division
+        800e2eb0 00 84 02 00     sll        points,reqScore/division,0x10
+        800e2eb4 01 00 22 22     addi       reqScore/division,s1,0x1
+        800e2eb8 00 8c 02 00     sll        s1,reqScore/division,0x10
+        800e2ebc 03 84 10 00     sra        points,points,0x10
+        800e2ec0 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800e2ec4                                   
+        800e2ec4 1a 00 11 02     div        points,s1
+        800e2ec8 12 10 00 00     mflo       reqScore/division
+        800e2ecc 00 84 02 00     sll        points,reqScore/division,0x10
+        800e2ed0 03 84 10 00     sra        points,points,0x10
+        800e2ed4 2a 08 70 02     slt        at,s3,points
+        800e2ed8 04 00 20 10     beq        at,zero,LAB_800e2eec
+        800e2edc 00 00 00 00     _nop
+        800e2ee0 00 9c 10 00     sll        s3,points,0x10
+        800e2ee4 00 00 54 82     lb         targetDigimon,0x0(targetType)=>DataForTargetDi   
+                                                                                             
+        800e2ee8 03 9c 13 00     sra        s3,s3,0x10
+                             LAB_800e2eec                                   
+        800e2eec 00 84 00 00     sll        points,zero,0x10
+        800e2ef0 21 88 00 00     clear      s1
+        800e2ef4 03 84 10 00     sra        points,points,0x10
+        800e2ef8 01 00 52 26     addiu      targetType,targetType,0x1
+                             LAB_800e2efc                                    
+        800e2efc 01 00 b5 22     addi       s5,s5,0x1
+                             LAB_800e2f00                                    
+        800e2f00 06 00 a1 2a     slti       at,s5,0x6
+        800e2f04 49 ff 20 14     bne        at,zero,LAB_800e2c2c
+        800e2f08 00 00 00 00     _nop
+        800e2f0c 40 20 16 00     sll        a0,s6,0x1
+        800e2f10 20 20 96 00     add        a0,a0,s6
+        800e2f14 80 20 04 00     sll        a0,a0,0x2
+        800e2f18 20 20 96 00     add        a0,a0,s6
+        800e2f1c 80 08 04 00     sll        at,a0,0x2
+        800e2f20 13 80 04 3c     lui        a0,0x8013
+        800e2f24 d1 ce 84 24     addiu      a0,a0,-0x312f
+        800e2f28 21 20 81 00     addu       a0,a0,at
+        800e2f2c 00 00 84 90     lbu        a0,0x0(a0)=>DigimonLevel
+        800e2f30 03 00 01 24     li         at,0x3
+        800e2f34 0b 00 81 14     bne        a0,at,LAB_800e2f64
+        800e2f38 00 00 00 00     _nop
+        800e2f3c 14 80 01 3c     lui        at,0x8014
+        800e2f40 b6 84 22 84     lh         v0,-0x7b4a(at)=>EvoTimer                    
+        800e2f44 00 00 00 00     nop
+        800e2f48 60 00 41 28     slti       at,v0,0x60
+        800e2f4c 05 00 20 14     bne        at,zero,LAB_800e2f64
+        800e2f50 00 00 00 00     _nop
+        800e2f54 ff ff 01 24     li         at,-0x1
+        800e2f58 02 00 81 16     bne        s4,at,LAB_800e2f64
+        800e2f5c 00 00 00 00     _nop
+        800e2f60 0b 00 14 24     li         s4,0xb
+                             LAB_800e2f64                                  
+        800e2f64 00 14 14 00     sll        v0,s4,0x10
+        800e2f68 34 00 bf 8f     lw         ra,0x34(sp)
+        800e2f6c 30 00 b6 8f     lw         s6,0x30(sp)
+        800e2f70 2c 00 b5 8f     lw         s5,0x2c(sp)
+        800e2f74 28 00 b4 8f     lw         s4,0x28(sp)
+        800e2f78 24 00 b3 8f     lw         s3,0x24(sp)
+        800e2f7c 20 00 b2 8f     lw         s2,0x20(sp)
+        800e2f80 1c 00 b1 8f     lw         s1,0x1c(sp)
+        800e2f84 18 00 b0 8f     lw         s0,0x18(sp)
+        800e2f88 03 14 02 00     sra        v0,v0,0x10
+        800e2f8c 08 00 e0 03     jr         ra
+        800e2f90 38 00 bd 27     _addiu     sp,sp,0x38
+
+
+
+
+                             LAB_800e2f94                                   
+        800e2f94 53 00 01 24     li         at,0x53
+        800e2f98 45 82 24 14     bne        at,a0,HandleEvoItems::HandleNormalEvoItems
+        800e2f9c 00 00 00 00     _nop
+        800e2fa0 15 80 01 3c     lui        at,0x8015
+        800e2fa4 a8 57 23 8c     lw         v1,offset DigimonType(at)                     
+        800e2fa8 00 00 00 00     nop
+        800e2fac ff 00 65 30     andi       a1,v1,0xff
+        800e2fb0 1d 19 04 0c     jal        WritePStat                                     
+        800e2fb4 05 00 04 24     _li        a0,0x5
+        800e2fb8 15 80 01 3c     lui        at,0x8015
+        800e2fbc f0 57 22 84     lh         v0,offset MaxDigimonHP(at)                     
+        800e2fc0 f2 57 23 84     lh         v1,offset MaxDigimonMP(at)                     
+        800e2fc4 14 80 01 3c     lui        at,0x8014
+        800e2fc8 d6 84 22 a4     sh         v0,-0x7b2a(at)=>OldHp                          
+        800e2fcc d8 84 23 a4     sh         v1,-0x7b28(at)=>OldMP                           
+        800e2fd0 15 80 01 3c     lui        at,0x8015
+        800e2fd4 e0 57 22 84     lh         v0,offset DigimonOff(at)                        
+        800e2fd8 e2 57 23 84     lh         v1,offset DigimonDef(at)                       
+        800e2fdc 14 80 01 3c     lui        at,0x8014
+        800e2fe0 da 84 22 a4     sh         v0,-0x7b26(at)=>OldOff                          
+        800e2fe4 dc 84 23 a4     sh         v1,-0x7b24(at)=>OldDef                           
+        800e2fe8 15 80 01 3c     lui        at,0x8015
+        800e2fec e4 57 22 84     lh         v0,offset DigimonSpeed(at)                       
+        800e2ff0 e6 57 23 84     lh         v1,offset DigimonBrains(at)                      
+        800e2ff4 14 80 01 3c     lui        at,0x8014
+        800e2ff8 de 84 22 a4     sh         v0,-0x7b22(at)=>OldSpeed                        
+        800e2ffc e0 84 23 a4     sh         v1,-0x7b20(at)=>OldBrains                       
+        800e3000 53 00 04 24     li         a0,0x53
+        800e3004 2a 82 00 10     b          HandleEvoItems::HandleNormalEvoItems
+        800e3008 21 18 00 00     _clear     v1
+
+
+                             LAB_800e300c                                
+        800e300c 0e 80 04 3c     lui        a0,0x800e
+        800e3010 40 30 84 24     addiu      a0,a0,0x3040
+        800e3014 04 00 05 24     li         a1,0x4
+        800e3018 d8 e0 02 0c     jal        FUN_800b8360                                     
+        800e301c 05 00 06 24     _li        a2,0x5
+        800e3020 12 80 04 3c     lui        a0,0x8012
+        800e3024 54 47 84 24     addiu      a0=>MedalRenderData2,a0,0x4754              
+        800e3028 f1 f7 02 08     j          LAB_800bdfc4
+        800e302c 00 00 00 00     _nop
+
+                             PanjyamonPreEvoTargets                      
+        800e3030 ff              db         FFh
+        800e3031 ff              db         FFh
+        800e3032 11              db         11h
+        800e3033 ff              db         FFh
+        800e3034 ff              db         FFh
+                             GigadramonPreEvoTargets
+        800e3035 ff              db         FFh
+        800e3036 3f              db         3Fh
+        800e3037 ff              db         FFh
+        800e3038 15              db         15h
+        800e3039 ff              db         FFh
+                             EtemonPreEvoTargets
+        800e303a ff              db         FFh
+        800e303b 09              db         9h
+        800e303c ff              db         FFh
+        800e303d 3f              db         3Fh
+        800e303e ff              db         FFh
+        800e303f 00              db         0h
+                             MedalRenderData                              
+        800e3040 6e              db         6Eh
+        800e3041 ff              db         FFh
+        800e3042 bd              db         BDh
+        800e3043 ff              db         FFh
+        800e3044 92              db         92h
+        800e3045 00              db         0h
+        800e3046 bd              db         BDh
+        800e3047 ff              db         FFh
+        800e3048 00              db         0h
+        800e3049 00              db         0h
+        800e304a 6d              db         6Dh
+        800e304b ff              db         FFh
+        800e304c be              db         BEh
+        800e304d ff              db         FFh
+        800e304e 93              db         93h
+        800e304f 00              db         0h
+        800e3050 be              db         BEh
+        800e3051 ff              db         FFh
+        800e3052 01              db         1h
+        800e3053 00              db         0h
+        800e3054 6e              db         6Eh
+        800e3055 ff              db         FFh
+        800e3056 bf              db         BFh
+        800e3057 ff              db         FFh
+        800e3058 92              db         92h
+        800e3059 00              db         0h
+        800e305a bf              db         BFh
+        800e305b ff              db         FFh
+        800e305c 00              db         0h
+        800e305d 00              db         0h
+        800e305e 47              db         47h
+        800e305f 00              db         0h
+        800e3060 bf              db         BFh
+        800e3061 ff              db         FFh
+        800e3062 92              db         92h
+        800e3063 00              db         0h
+        800e3064 bf              db         BFh
+        800e3065 ff              db         FFh
+        800e3066 00              db         0h
+        800e3067 00              db         0h
+
+                             GiveRandomItem                                  
+        800e3068 66 19 04 0c     jal        GetByteFromScript                                
+        800e306c 24 00 a4 27     _addiu     commandID,sp,0x24
+        800e3070 22 00 a4 27     addiu      commandID,sp,0x22
+        800e3074 a5 19 04 0c     jal        GetTwoBytesFromScript                          
+        800e3078 20 00 a5 27     _addiu     a1,sp,0x20
+        800e307c 22 00 a4 93     lbu        commandID,0x22(sp)
+        800e3080 b5 8d 02 0c     jal        ReturnRandom                                    
+        800e3084 00 00 00 00     _nop
+        800e3088 24 00 a4 93     lbu        commandID,0x24(sp)
+        800e308c 20 00 a5 93     lbu        a1,0x20(sp)
+        800e3090 20 20 44 00     add        commandID,v0,commandID
+        800e3094 90 14 03 0c     jal        AddInventoryItem                                 
+        800e3098 00 00 00 00     _nop
+        800e309c 05 00 40 14     bne        v0,zero,LAB_800e30b4
+        800e30a0 00 00 00 00     _nop
+        800e30a4 70 19 04 0c     jal        SetTrigger                                      
+        800e30a8 21 20 00 00     _clear     commandID
+        800e30ac 03 00 00 10     b          LAB_800e30bc
+        800e30b0 00 00 00 00     _nop
+                             LAB_800e30b4                                   
+        800e30b4 7f 19 04 0c     jal        UnsetTrigger                                   
+        800e30b8 21 20 00 00     _clear     commandID
+                             LAB_800e30bc                                   
+        800e30bc 4e 7f 00 10     b          switchD_80102948::caseD_11
+        800e30c0 00 00 00 00     _nop
+
+                             SetStarter3                                      
+        800e30c4 fe 00 04 24     li         a0,0xfe
+        800e30c8 1d 19 04 0c     jal        WritePStat                                     
+        800e30cc 02 00 05 24     _li        a1,0x2
+        800e30d0 11 00 02 24     li         v0,0x11
+        800e30d4 ca 32 04 08     j          switchD_8010c7d8::caseD_1
+        800e30d8 ce 94 82 a7     _sh        v0,-0x6b32(gp)=>DAT_80134ffa   
+                
+                             SetStarter4                                   
+        800e30dc fe 00 04 24     li         a0,0xfe
+        800e30e0 1d 19 04 0c     jal        WritePStat                                      
+        800e30e4 03 00 05 24     _li        a1,0x3
+        800e30e8 11 00 02 24     li         v0,0x11
+        800e30ec ca 32 04 08     j          switchD_8010c7d8::caseD_1
+        800e30f0 ce 94 82 a7     _sh        v0,-0x6b32(gp)=>DAT_80134ffa 
+
+                   
+                             SetStarterTech3                                 
+        800e30f4 03 00 01 24     li         at,0x3
+        800e30f8 08 00 22 14     bne        at,v0,SetStarterTech4
+        800e30fc 00 00 00 00     _nop
+        800e3100 31 00 04 24     li         a0,0x31
+        800e3104 15 80 01 3c     lui        at,0x8015
+        800e3108 ec 57 24 a0     sb         a0,offset Technique1?(at)                        
+        800e310c c5 97 03 0c     jal        LearnMove                                     
+        800e3110 13 00 04 24     _li        a0,0x13
+        800e3114 31 2e 00 10     b          LAB_800ee9dc
+        800e3118 04 00 10 24     _li        s0,0x4
+                             SetStarterTech4                               
+        800e311c 01 00 01 24     li         at,0x1
+        800e3120 07 00 22 14     bne        at,v0,LAB_800e3140
+        800e3124 00 00 00 00     _nop
+        800e3128 31 00 04 24     li         a0,0x31
+        800e312c 15 80 01 3c     lui        at,0x8015
+        800e3130 ec 57 24 a0     sb         a0,offset Technique1?(at)                      
+        800e3134 c5 97 03 0c     jal        LearnMove                                       
+        800e3138 0c 00 04 24     _li        a0,0xc
+        800e313c 12 00 10 24     li         s0,0x12
+                             LAB_800e3140                                   
+        800e3140 26 2e 00 10     b          LAB_800ee9dc
+        800e3144 00 00 00 00     _nop
+
+
+//Kunemon Start
+
+      if ((iVar1 == 3) || (iVar1 == 1)) {
+        Technique1? = uVar2;
+        LearnMove(0x25);
+        DigimonID = 0x20;
+      }
+      else {
+        Technique1? = 0x2e;
+        LearnMove(0xc);
+        DigimonID = 0x20;
+      }
+                             SetStarterTech3                     
+        800e30f4 03 00 01 24     li         at,0x3
+        800e30f8 0b 00 22 10     beq        at,v0,LAB_800e3128
+        800e30fc 00 00 00 00     _nop
+        800e3100 01 00 01 24     li         at,0x1
+        800e3104 08 00 22 10     beq        at,v0,LAB_800e3128
+        800e3108 00 00 00 00     _nop
+        800e310c 2e 00 04 24     li         a0,0x2e
+        800e3110 15 80 01 3c     lui        at,0x8015
+        800e3114 ec 57 24 a0     sb         a0,offset Technique1?(at)                   
+        800e3118 c5 97 03 0c     jal        LearnMove                                                   
+        800e311c 0c 00 04 24     _li        a0,0xc
+        800e3120 2e 2e 00 10     b          LAB_800ee9dc
+        800e3124 20 00 10 24     _li        s0,0x20
+                             SetStarterTech4                                   
+        800e3128 31 00 10 24     li         s0,0x31
+        800e312c 15 80 01 3c     lui        at,0x8015
+        800e3130 ec 57 24 a0     sb         a0,offset Technique1?(at)                  
+        800e3134 c5 97 03 0c     jal        LearnMove                                     
+        800e3138 25 00 04 24     _li        a0,0x25
+        800e313c 20 00 10 24     li         s0,0x20
+        800e3140 26 2e 00 10     b          LAB_800ee9dc
+        800e3144 00 00 00 00     _nop
+
+
+
+                             UnloadDoor                                     
+        800e3148 66 19 04 0c     jal        GetByteFromScript                              
+        800e314c 33 00 a4 27     _addiu     param_1,sp,0x33
+        800e3150 33 00 a2 83     lb         v0,0x33(sp)
+        800e3154 00 00 00 00     nop
+        800e3158 04 00 40 14     bne        v0,zero,LAB_800e316c
+        800e315c 00 00 00 00     _nop
+        800e3160 a9 0f 04 24     li         param_1,0xfa9
+        800e3164 02 8c 02 0c     jal        UnsetObject                                    
+        800e3168 21 28 00 00     _clear     a1
+                             LAB_800e316c                                   
+        800e316c 61 0d 04 08     j          switchD_80102e50::caseD_18
+        800e3170 00 00 00 00     _nop
+
+
+                             GetEvoTargetScript                             
+        800e3174 66 19 04 0c     jal        GetByteFromScript                              
+        800e3178 33 00 a4 27     _addiu     param_1,sp,0x33
+        800e317c 15 80 04 3c     lui        param_1,0x8015
+        800e3180 a8 57 84 8c     lw         param_1,offset DigimonType(param_1)            
+        800e3184 ff 00 05 24     li         a1,0xff
+        800e3188 40 10 04 00     sll        v0,param_1,0x1
+        800e318c 20 10 44 00     add        v0,v0,param_1
+        800e3190 80 10 02 00     sll        v0,v0,0x2
+        800e3194 20 10 44 00     add        v0,v0,param_1
+        800e3198 80 18 02 00     sll        v1,v0,0x2
+        800e319c 13 80 02 3c     lui        v0,0x8013
+        800e31a0 d1 ce 42 24     addiu      v0,v0,-0x312f
+        800e31a4 21 10 43 00     addu       v0,v0,v1
+        800e31a8 00 00 42 90     lbu        v0,0x0(v0)=>DigimonLevel
+        800e31ac 05 00 01 24     li         at,0x5
+        800e31b0 11 00 41 10     beq        v0,at,LAB_800e31f8
+        800e31b4 01 00 01 24     _li        at,0x1
+        800e31b8 05 00 41 14     bne        v0,at,LAB_800e31d0
+        800e31bc 34 00 a2 a3     _sb        v0,0x34(sp)
+        800e31c0 51 89 03 0c     jal        GetFreshEvoValue                                
+        800e31c4 00 00 00 00     _nop
+        800e31c8 0b 00 00 10     b          LAB_800e31f8
+        800e31cc 21 28 02 00     _move      a1,v0
+                             LAB_800e31d0                                  
+        800e31d0 ed 8a 03 0c     jal        GetRookieEvoValue                                
+        800e31d4 00 00 00 00     _nop
+        800e31d8 34 00 a4 83     lb         param_1,0x34(sp)
+        800e31dc 03 00 01 24     li         at,0x3
+        800e31e0 05 00 81 14     bne        param_1,at,LAB_800e31f8
+        800e31e4 21 28 02 00     _move      a1,v0
+        800e31e8 ff 00 01 24     li         at,0xff
+        800e31ec 02 00 22 14     bne        at,v0,LAB_800e31f8
+        800e31f0 00 00 00 00     _nop
+        800e31f4 0b 00 05 24     li         a1,0xb
+                             LAB_800e31f8                                    
+        800e31f8 1d 19 04 0c     jal        WritePStat                                      
+        800e31fc 6e 00 04 24     _li        param_1,0x6e
+        800e3200 61 0d 04 08     j          switchD_80102e50::caseD_18
+        800e3204 00 00 00 00     _nop
+
+
+
+                             WereGarurumonNodes
+        800e3208 ff ff           dw         FFFFh
+        800e320a ff 00           dw         FFh
+        800e320c 00 01           dw         100h
+        800e320e 01 02           dw         201h
+        800e3210 02 03           dw         302h
+        800e3212 03 02           dw         203h
+        800e3214 04 05           dw         504h
+        800e3216 05 06           dw         605h
+        800e3218 06 02           dw         206h
+        800e321a 07 08           dw         807h
+        800e321c 08 09           dw         908h
+        800e321e 09 01           dw         109h
+        800e3220 0a 0b           dw         B0Ah
+        800e3222 0b 0c           dw         C0Bh
+        800e3224 0c 0d           dw         D0Ch
+        800e3226 0d 0e           dw         E0Dh
+        800e3228 0e 0b           dw         B0Eh
+        800e322a 0f 10           dw         100Fh
+        800e322c 10 11           dw         1110h
+        800e322e 11 12           dw         1211h
+        800e3230 00 00           dw         0h
+        800e3232 00 00           dw         0h
+
+
+
+//Add the care mistakes and battles to the menu, fix some visual issues
+
+void RenderStatsMenu(void)
+{
+  //code ignored
+
+    renderSpriteFromVRAM(0,-0x6d,-0x42,0x48,0xc,'\0','<',5,0);
+    iVar10 = strlen("main character" + *EntityPtr * 0x34);
+    iVar10 = (short)iVar10 * 0xa0000 >> 0x10;
+    if (0x78 < iVar10) {
+      iVar10 = 0x78;
+    }
+    renderSpriteFromVRAM(0,-0x6c,-0x32,(short)iVar10,0xc,'\0','H',5,0);
+
+  //code ignored
+
+    psVar6 = &DigimonOff;
+    sVar8 = 0x1f;
+    iVar10 = 0;
+    do 
+    {
+      renderNumber(0,0x23,sVar8,4,(uint *)(int)*psVar6,5);
+      RenderSegmentedStatsBar((int)*psVar6,999,0x32,0x24,sVar8 + 0xb);
+      psVar6 = psVar6 + 1;
+      sVar8 = sVar8 + 0xf;
+      bVar2 = iVar10 < 3;
+      iVar10 = iVar10 + 1;
+    } while (bVar2);
+    renderNumber(0,0x23,-0x22,2,(uint *)(int)CareMistake,5);
+    renderNumber(0,0x6d,-0x22,2,(uint *)(int)Battles,5);
+    RenderSquare(0xb0,0x54,0x1a,0xe,5);
+    RenderSquare(0x100,0x54,0x1a,0xe,5);
+
+    RenderSegmenedtBar(-0x54,0x52,VirusBar * 3,6,200,200,0x3c,0,5);
+
+  //code ignored
+}
+
+
+
+//Fix some visual issues in the overworld UI
+
+        800a9414 4b 00 06 24     li         a2,0x4b
+
+
+        800a9450 4b 00 06 24     li         a2,0x4b
+
+        800a97a4 04 00 06 24     li         a2,0x4
+
+        800a97a4 02 00 06 24     li         a2,0x2
+
+
+
+

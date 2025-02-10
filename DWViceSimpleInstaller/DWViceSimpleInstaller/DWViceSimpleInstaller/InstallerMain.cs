@@ -38,7 +38,7 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns;
+            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
@@ -98,7 +98,8 @@ namespace DWViceSimpleInstaller
             myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = infinityBurn = betterBattleTech = betterBrainTechs = betterDrop 
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
-            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon  = false;
+            drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon = 
+            hyperMono = extraInput = removeEvoInfo = originalType = newMono = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
@@ -123,7 +124,7 @@ namespace DWViceSimpleInstaller
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "/Patches/ViceHack/";
             //main patch
-            SetPatch(path + "DigimonWorldVice_2.0.2.ppf");
+            SetPatch(path + "DigimonWorldVice_2.1.ppf");
 
             //optional exclusive patches
             switch (currentViceDifficulty)
@@ -136,12 +137,12 @@ namespace DWViceSimpleInstaller
                     break;
                 case viceDifficulty.HARDCORE:
                     if (!progression)
-                        SetPatch(path + "HardcoreVice 1.0.5.ppf");
+                        SetPatch(path + "HardcoreVice 1.1.ppf");
                     else
-                        SetPatch(path + "HardcoreViceP.ppf");
+                        SetPatch(path + "HardcoreViceP 1.1.ppf");
 
                     if (trueHardcore)
-                        SetPatch(path + "TrueHardcoreVice.ppf");
+                        SetPatch(path + "TrueHardcoreVice 1.1.ppf");
                     break;
                 default:
                     break;
@@ -167,7 +168,7 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "MyotismonPatchVice2.ppf");
 
             if (filth)
-                SetPatch(path + "FilthChallengeViceHack 1.3.ppf");
+                SetPatch(path + "FilthChallengeViceHack 1.4.ppf");
 
             if (insaneBattle)
                 SetPatch(path + "InsaneBattle.ppf");
@@ -197,7 +198,21 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "NoTelephoneOgre.ppf");
 
             if (easyTechs)
-                SetPatch(path + "TelepathyBattle.ppf");
+            {
+                if (currentViceDifficulty != viceDifficulty.HARDCORE)
+                    SetPatch(path + "TelepathyBattle.ppf");
+                else
+                    SetPatch(path + "TelepathyBattleHard.ppf");
+            }
+
+            if (removeEvoInfo)
+                SetPatch(path + "RemoveEvoInfo.ppf");
+
+            if (originalType)
+                SetPatch(path + "RestoreTypes.ppf");
+
+            if (extraInput)
+                SetPatch(path + "ExtraInput.ppf");
 
             if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/OptionalPatches/Difficulty patches/ProgressionPatch.ppf");
@@ -210,12 +225,12 @@ namespace DWViceSimpleInstaller
         {
             //main patch
             if (!progression)
-                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.0.5.ppf");
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/DigimonWorldHardcore 1.1.ppf");
             else
-                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/HardcoreP.ppf");
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/HardcoreP 1.1.ppf");
 
             if (trueHardcore)
-                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/TrueHardcore.ppf");
+                SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/Hardcore/TrueHardcore 1.1.ppf");
             //Run other patches
             ExtraInstall();
         }
@@ -264,6 +279,9 @@ namespace DWViceSimpleInstaller
 
             if (hardTourney)
                 SetPatch(path + "Difficulty patches/MoreDifficultTournaments.ppf");
+
+            if (hyperMono)
+                SetPatch(path + "Difficulty patches/8KMono.ppf");
 
             if (infinityBurn)
                 SetPatch(path + "Tech patches/BetterInfinityBurn.ppf");
@@ -368,6 +386,9 @@ namespace DWViceSimpleInstaller
 
             if (medals)
                 SetPatch(path + "Useful patches/EasierMedals.ppf");
+
+            if (newMono)
+                SetPatch(path + "Useful patches/NewMonochromon.ppf");
 
 
 
@@ -539,6 +560,11 @@ namespace DWViceSimpleInstaller
         public void SetRareSpawns(bool enabled) { rareSpawns = enabled; }
         public void SetEasyMedals(bool enabled) { medals = enabled; }
         public void SetEasyTech(bool enabled) { easyTechs = enabled; }
+        public void SetNewMono(bool enabled) { newMono = enabled; }
+        public void SetOriginalType(bool enabled) { originalType = enabled; }
+        public void Set8kMono(bool enabled) { hyperMono = enabled; }
+        public void SetExtraInput(bool enabled) { extraInput = enabled; }
+        public void SetEvoInfo(bool enabled) { removeEvoInfo = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
 
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
@@ -625,7 +651,7 @@ namespace DWViceSimpleInstaller
             switch (currentPatcher)
             {
                 case patchType.VICEHACK:
-                    txtWritter.Write("Vice hack main patch");
+                    txtWritter.Write("Vice hack 2.1 main patch");
                     txtWritter.WriteLine();
                     txtWritter.WriteLine();
                     txtWritter.Write("Difficulty patches:");
@@ -639,7 +665,7 @@ namespace DWViceSimpleInstaller
                             txtWritter.Write("- Vice hardmode");
                             break;
                         case viceDifficulty.HARDCORE:
-                            txtWritter.Write("- Vice hardcore");
+                            txtWritter.Write("- Vice hardcore 1.1");
                             break;
                         default:
                             break;
@@ -657,6 +683,15 @@ namespace DWViceSimpleInstaller
             }
 
             txtWritter.WriteLine();
+
+            if (trueHardcore)
+            {
+                if (currentPatcher == patchType.VICEHACK)
+                    txtWritter.Write("- True hardcore Vice 1.1");
+                else
+                    txtWritter.Write("- True hardcore 1.1");
+                txtWritter.WriteLine();
+            }
 
             if (filth)
             {
@@ -703,12 +738,9 @@ namespace DWViceSimpleInstaller
                 txtWritter.WriteLine();
             }
 
-            if (trueHardcore)
+            if (hyperMono)
             {
-                if (currentPatcher == patchType.VICEHACK)
-                    txtWritter.Write("- True hardcore Vice");
-                else
-                    txtWritter.Write("- True hardcore");
+                txtWritter.Write("- 8K Monochromon (just why?)");
                 txtWritter.WriteLine();
             }
 
@@ -815,6 +847,24 @@ namespace DWViceSimpleInstaller
                 if (removeTelephone)
                 {
                     txtWritter.Write("- Remove Ogremon telephone");
+                    txtWritter.WriteLine();
+                }
+
+                if (originalType)
+                {
+                    txtWritter.Write("- Original type damage");
+                    txtWritter.WriteLine();
+                }
+
+                if (extraInput)
+                {
+                    txtWritter.Write("- Extra input: auto text and fast reset");
+                    txtWritter.WriteLine();
+                }
+
+                if (removeEvoInfo)
+                {
+                    txtWritter.Write("- Remove evolution information");
                     txtWritter.WriteLine();
                 }
             }
@@ -1030,6 +1080,12 @@ namespace DWViceSimpleInstaller
             if (easyTechs)
             {
                 txtWritter.Write("- Telepathy");
+                txtWritter.WriteLine();
+            }
+
+            if (newMono)
+            {
+                txtWritter.Write("- New Monochromon shop minigame");
                 txtWritter.WriteLine();
             }
 

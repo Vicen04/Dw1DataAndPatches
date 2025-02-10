@@ -282,3 +282,24 @@ Version 2.0:
 - Two new secrets
 
 - 4 new optional patches
+
+
+* 2.1:
+
+- Multiple UI improvements
+
+- Longer names allowed for the player and digimon (up to 12 characters).
+
+- Added a way to repeat the Monochromon shop minigame
+
+- Gekomon will sell fish after it joins the arena
+
+- Type damage rebalance, mech is a lot more powerful now
+
+- Hurricane, Reverse Prog and Giromon's finisher have been improved
+
+- Removed "All Range Beam" from Machinedramon to avoid unintentional game crashes
+
+- More optional patches.
+
+- "Hardcore" small rebalance and "True Hardcore" rework

@@ -832,6 +832,10 @@ namespace DWViceSimpleInstaller
             trainingBoost.Visible = false;
             Seadramon.Visible = false;
             Seadramon.Enabled = false;
+            NewMono.Enabled = false;
+            NewMono.Visible = false;
+            NewMonoInfo.Visible = false;
+            NewMonoInfo.Enabled = false;
         }
 
         private void RightUseful_Click(object sender, EventArgs e)
@@ -864,6 +868,10 @@ namespace DWViceSimpleInstaller
             trainingBoost.Visible = true;
             Seadramon.Visible = true;
             Seadramon.Enabled = true;
+            NewMono.Enabled = true;
+            NewMono.Visible = true;
+            NewMonoInfo.Visible = true;
+            NewMonoInfo.Enabled = true;
 
 
             RightUseful.Enabled= false;
@@ -984,6 +992,28 @@ namespace DWViceSimpleInstaller
         private void medals_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetEasyMedals(medals.Checked);
+        }
+
+        private void NewMono_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetNewMono(NewMono.Checked);
+        }
+
+        private void NewMonoInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "New Monochromon minigame" + Environment.NewLine + Environment.NewLine +
+    "This patch should make the Monochromon minigame a bit more fair." + Environment.NewLine + Environment.NewLine +
+    "Some of the features are:" + Environment.NewLine + Environment.NewLine +
+    "- You can now choose which price to give to an item" + Environment.NewLine + Environment.NewLine +
+    "- A new item has been added, which can greatly help with the goal" + Environment.NewLine + Environment.NewLine +
+    "- The faces will now help to know your chance to sell the item";
+
+            HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
+            hardcoreHackInfo.Text = "Info window";
+            hardcoreHackInfo.ChangeTitle("New Monochromon info");
+            hardcoreHackInfo.ChangeLink("https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?gid=207048170#gid=207048170", "Spreadsheet with detailed information");
+            hardcoreHackInfo.ChangeText(tempText);
+            hardcoreHackInfo.ShowDialog();
         }
     }
 }

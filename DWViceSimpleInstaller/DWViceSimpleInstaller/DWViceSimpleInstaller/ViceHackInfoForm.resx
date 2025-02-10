@@ -118,10 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ViceHackInfoText.Text" xml:space="preserve">
-    <value>Version 2.0.2
+    <value>Version 2.1
 
 This patch was possible thanks to the public data provided by SydMontague's Github and the spreadsheet with extracted data.
 It also uses some of the data used by the randomizer made by Meekrhino (the higher chances for some of the digimons).
+
+2.1:
+
+- Better UI: now you can see the care mistakes, battles and tiredness of your digimon.
+
+- Updates to some techniques.
+
+- New type damage balance, can be removed if necessary.
+
+- You know can know to which digimon you will evolve by speaking to Poyomon in the bank.
+
+- Gekomon in the city, literally.
+
+- Two more secrets, one will help with the shop.
+
+- Removed "All Range Beam" from Machinedramon to avoid unintentional game crashes, substituted with "Power Crane".
+
+- The Monochromon minigame now can be repeated by speaking with the Monochromon in Ancient Dino Region.
+
+- More updates a bit more subtle...
 
 Features:
 

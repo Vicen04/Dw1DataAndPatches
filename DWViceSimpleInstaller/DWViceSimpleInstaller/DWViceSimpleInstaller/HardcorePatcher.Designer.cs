@@ -96,6 +96,7 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.medals = new System.Windows.Forms.CheckBox();
             this.rareSpawn = new System.Windows.Forms.CheckBox();
             this.Seadramon = new System.Windows.Forms.CheckBox();
             this.trainingBoost = new System.Windows.Forms.CheckBox();
@@ -125,7 +126,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.medals = new System.Windows.Forms.CheckBox();
+            this.NewMono = new System.Windows.Forms.CheckBox();
+            this.NewMonoInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -1002,6 +1004,8 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.NewMonoInfo);
+            this.usefulContainer.Controls.Add(this.NewMono);
             this.usefulContainer.Controls.Add(this.medals);
             this.usefulContainer.Controls.Add(this.rareSpawn);
             this.usefulContainer.Controls.Add(this.Seadramon);
@@ -1040,6 +1044,18 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // medals
+            // 
+            this.medals.AutoSize = true;
+            this.medals.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.medals.Location = new System.Drawing.Point(607, 437);
+            this.medals.Name = "medals";
+            this.medals.Size = new System.Drawing.Size(203, 35);
+            this.medals.TabIndex = 29;
+            this.medals.Text = "Easier medals";
+            this.medals.UseVisualStyleBackColor = true;
+            this.medals.CheckedChanged += new System.EventHandler(this.medals_CheckedChanged);
             // 
             // rareSpawn
             // 
@@ -1423,17 +1439,33 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // medals
+            // NewMono
             // 
-            this.medals.AutoSize = true;
-            this.medals.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.medals.Location = new System.Drawing.Point(607, 437);
-            this.medals.Name = "medals";
-            this.medals.Size = new System.Drawing.Size(203, 35);
-            this.medals.TabIndex = 29;
-            this.medals.Text = "Easier medals";
-            this.medals.UseVisualStyleBackColor = true;
-            this.medals.CheckedChanged += new System.EventHandler(this.medals_CheckedChanged);
+            this.NewMono.AutoSize = true;
+            this.NewMono.Enabled = false;
+            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMono.Location = new System.Drawing.Point(607, 437);
+            this.NewMono.Name = "NewMono";
+            this.NewMono.Size = new System.Drawing.Size(267, 35);
+            this.NewMono.TabIndex = 30;
+            this.NewMono.Text = "New Monochromon";
+            this.NewMono.UseVisualStyleBackColor = true;
+            this.NewMono.Visible = false;
+            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
+            // 
+            // NewMonoInfo
+            // 
+            this.NewMonoInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.NewMonoInfo.Enabled = false;
+            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
+            this.NewMonoInfo.Location = new System.Drawing.Point(887, 431);
+            this.NewMonoInfo.Name = "NewMonoInfo";
+            this.NewMonoInfo.Size = new System.Drawing.Size(40, 40);
+            this.NewMonoInfo.TabIndex = 24;
+            this.NewMonoInfo.Text = "?";
+            this.NewMonoInfo.UseVisualStyleBackColor = false;
+            this.NewMonoInfo.Visible = false;
+            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
             // 
             // HardcorePatcher
             // 
@@ -1578,5 +1610,7 @@
         private System.Windows.Forms.CheckBox Seadramon;
         private System.Windows.Forms.CheckBox rareSpawn;
         private System.Windows.Forms.CheckBox medals;
+        private System.Windows.Forms.CheckBox NewMono;
+        private System.Windows.Forms.Button NewMonoInfo;
     }
 }

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HardcoreHackInfoText.Text" xml:space="preserve">
-    <value>Version 1.0.5 
+    <value>Version 1.1 
 This version is only compatible with the vanilla/Maeson hack versions. A randomized vanilla should work too.
 
 This is a hack that tries to increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content. Some of the features are:
@@ -131,10 +131,10 @@ This is a hack that tries to increase the difficulty of the game by modifying th
 
 - Some techs that were originally locked behind only 1 boss battle (like "Infinity Burn" being only used by MetalGreymon) now can be found in some NPCs.
 
-- 1.0.3 feature: The bonus try now will always make you fail, if you truly want the bonus try, you can change this using the optional patch installer.
+- The bonus try now will always make you fail, if you truly want the bonus try, you can change this using the optional patch installer.
 
-- 1.0.4 addition: Disabled a lot of the debug mode.
+- Disabled a lot of the debug mode.
 
-- 1.0.5 addition: Fixed an issue that can happen after the battles in Bettle Land, added the 'True Hardcore' option.</value>
+- 1.1: Fixed issues, more damage from NPC finishers, reworked some stats, all the NPC now have infinite MP.</value>
   </data>
 </root>

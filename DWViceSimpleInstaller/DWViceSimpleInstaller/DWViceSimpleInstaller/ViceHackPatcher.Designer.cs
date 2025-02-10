@@ -117,6 +117,13 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
+            this.trueHardcoreInfo = new System.Windows.Forms.Button();
+            this.HyperMono = new System.Windows.Forms.CheckBox();
+            this.NewMono = new System.Windows.Forms.CheckBox();
+            this.extraInput = new System.Windows.Forms.CheckBox();
+            this.EvoInfo = new System.Windows.Forms.CheckBox();
+            this.RestoreTypes = new System.Windows.Forms.CheckBox();
+            this.NewMonoInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -126,6 +133,8 @@
             // 
             // DifficultyPatchesContainer
             // 
+            this.DifficultyPatchesContainer.Controls.Add(this.HyperMono);
+            this.DifficultyPatchesContainer.Controls.Add(this.trueHardcoreInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.trueHardcore);
             this.DifficultyPatchesContainer.Controls.Add(this.ProgressionInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.ProgressionMode);
@@ -162,9 +171,9 @@
             this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trueHardcore.Location = new System.Drawing.Point(38, 323);
             this.trueHardcore.Name = "trueHardcore";
-            this.trueHardcore.Size = new System.Drawing.Size(207, 35);
+            this.trueHardcore.Size = new System.Drawing.Size(263, 35);
             this.trueHardcore.TabIndex = 17;
-            this.trueHardcore.Text = "True hardcore";
+            this.trueHardcore.Text = "Vice true hardcore";
             this.trueHardcore.UseVisualStyleBackColor = true;
             this.trueHardcore.CheckedChanged += new System.EventHandler(this.trueHardcore_CheckedChanged);
             // 
@@ -196,7 +205,7 @@
             this.restoreFilth.AutoSize = true;
             this.restoreFilth.Enabled = false;
             this.restoreFilth.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.restoreFilth.Location = new System.Drawing.Point(588, 427);
+            this.restoreFilth.Location = new System.Drawing.Point(588, 437);
             this.restoreFilth.Name = "restoreFilth";
             this.restoreFilth.Size = new System.Drawing.Size(293, 35);
             this.restoreFilth.TabIndex = 14;
@@ -207,7 +216,7 @@
             // FlithInfo
             // 
             this.FlithInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.FlithInfo.Location = new System.Drawing.Point(306, 426);
+            this.FlithInfo.Location = new System.Drawing.Point(306, 436);
             this.FlithInfo.Name = "FlithInfo";
             this.FlithInfo.Size = new System.Drawing.Size(35, 35);
             this.FlithInfo.TabIndex = 13;
@@ -252,7 +261,7 @@
             // 
             this.FilthChallengeTitle.AutoSize = true;
             this.FilthChallengeTitle.Font = new System.Drawing.Font("Arial Black", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.FilthChallengeTitle.Location = new System.Drawing.Point(375, 355);
+            this.FilthChallengeTitle.Location = new System.Drawing.Point(362, 376);
             this.FilthChallengeTitle.Name = "FilthChallengeTitle";
             this.FilthChallengeTitle.Size = new System.Drawing.Size(239, 38);
             this.FilthChallengeTitle.TabIndex = 10;
@@ -273,7 +282,7 @@
             this.ultraHardcore.AutoSize = true;
             this.ultraHardcore.Enabled = false;
             this.ultraHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ultraHardcore.Location = new System.Drawing.Point(588, 268);
+            this.ultraHardcore.Location = new System.Drawing.Point(588, 323);
             this.ultraHardcore.Name = "ultraHardcore";
             this.ultraHardcore.Size = new System.Drawing.Size(285, 35);
             this.ultraHardcore.TabIndex = 8;
@@ -285,7 +294,7 @@
             // 
             this.tournaments.AutoSize = true;
             this.tournaments.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tournaments.Location = new System.Drawing.Point(588, 210);
+            this.tournaments.Location = new System.Drawing.Point(588, 268);
             this.tournaments.Name = "tournaments";
             this.tournaments.Size = new System.Drawing.Size(310, 35);
             this.tournaments.TabIndex = 7;
@@ -322,7 +331,7 @@
             // 
             this.FilthChanllenge.AutoSize = true;
             this.FilthChanllenge.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilthChanllenge.Location = new System.Drawing.Point(38, 427);
+            this.FilthChanllenge.Location = new System.Drawing.Point(38, 437);
             this.FilthChanllenge.Name = "FilthChanllenge";
             this.FilthChanllenge.Size = new System.Drawing.Size(268, 35);
             this.FilthChanllenge.TabIndex = 4;
@@ -647,6 +656,11 @@
             // 
             // miscPatches
             // 
+            this.miscPatches.Controls.Add(this.NewMonoInfo);
+            this.miscPatches.Controls.Add(this.RestoreTypes);
+            this.miscPatches.Controls.Add(this.EvoInfo);
+            this.miscPatches.Controls.Add(this.extraInput);
+            this.miscPatches.Controls.Add(this.NewMono);
             this.miscPatches.Controls.Add(this.removeTelephone);
             this.miscPatches.Controls.Add(this.colourBreak);
             this.miscPatches.Controls.Add(this.removeTechBoost);
@@ -662,7 +676,7 @@
             this.miscPatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.miscPatches.Location = new System.Drawing.Point(90, 160);
             this.miscPatches.Name = "miscPatches";
-            this.miscPatches.Size = new System.Drawing.Size(1000, 350);
+            this.miscPatches.Size = new System.Drawing.Size(1000, 460);
             this.miscPatches.TabIndex = 21;
             this.miscPatches.TabStop = false;
             this.miscPatches.Text = "Miscellaneous patches";
@@ -721,7 +735,7 @@
             this.restoreChainMelon.AutoSize = true;
             this.restoreChainMelon.Enabled = false;
             this.restoreChainMelon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreChainMelon.Location = new System.Drawing.Point(6, 305);
+            this.restoreChainMelon.Location = new System.Drawing.Point(17, 49);
             this.restoreChainMelon.Name = "restoreChainMelon";
             this.restoreChainMelon.Size = new System.Drawing.Size(282, 35);
             this.restoreChainMelon.TabIndex = 25;
@@ -769,7 +783,7 @@
             this.randoAdaptor.AutoSize = true;
             this.randoAdaptor.Enabled = false;
             this.randoAdaptor.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.randoAdaptor.Location = new System.Drawing.Point(307, 305);
+            this.randoAdaptor.Location = new System.Drawing.Point(713, 25);
             this.randoAdaptor.Name = "randoAdaptor";
             this.randoAdaptor.Size = new System.Drawing.Size(278, 35);
             this.randoAdaptor.TabIndex = 2;
@@ -783,7 +797,7 @@
             this.deRandoFact.AutoSize = true;
             this.deRandoFact.Enabled = false;
             this.deRandoFact.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.deRandoFact.Location = new System.Drawing.Point(617, 305);
+            this.deRandoFact.Location = new System.Drawing.Point(713, 66);
             this.deRandoFact.Name = "deRandoFact";
             this.deRandoFact.Size = new System.Drawing.Size(252, 35);
             this.deRandoFact.TabIndex = 1;
@@ -1293,6 +1307,89 @@
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
+            // trueHardcoreInfo
+            // 
+            this.trueHardcoreInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.trueHardcoreInfo.Location = new System.Drawing.Point(306, 323);
+            this.trueHardcoreInfo.Name = "trueHardcoreInfo";
+            this.trueHardcoreInfo.Size = new System.Drawing.Size(35, 35);
+            this.trueHardcoreInfo.TabIndex = 18;
+            this.trueHardcoreInfo.Text = "?";
+            this.trueHardcoreInfo.UseVisualStyleBackColor = true;
+            this.trueHardcoreInfo.Click += new System.EventHandler(this.trueHardcoreInfo_Click);
+            // 
+            // HyperMono
+            // 
+            this.HyperMono.AutoSize = true;
+            this.HyperMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HyperMono.Location = new System.Drawing.Point(588, 209);
+            this.HyperMono.Name = "HyperMono";
+            this.HyperMono.Size = new System.Drawing.Size(243, 35);
+            this.HyperMono.TabIndex = 19;
+            this.HyperMono.Text = "8k Monochromon";
+            this.HyperMono.UseVisualStyleBackColor = true;
+            this.HyperMono.CheckedChanged += new System.EventHandler(this.HyperMono_CheckedChanged);
+            // 
+            // NewMono
+            // 
+            this.NewMono.AutoSize = true;
+            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMono.Location = new System.Drawing.Point(109, 409);
+            this.NewMono.Name = "NewMono";
+            this.NewMono.Size = new System.Drawing.Size(267, 35);
+            this.NewMono.TabIndex = 30;
+            this.NewMono.Text = "New Monochromon";
+            this.NewMono.UseVisualStyleBackColor = true;
+            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
+            // 
+            // extraInput
+            // 
+            this.extraInput.AutoSize = true;
+            this.extraInput.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.extraInput.Location = new System.Drawing.Point(590, 339);
+            this.extraInput.Name = "extraInput";
+            this.extraInput.Size = new System.Drawing.Size(168, 35);
+            this.extraInput.TabIndex = 31;
+            this.extraInput.Text = "Extra input";
+            this.extraInput.UseVisualStyleBackColor = true;
+            this.extraInput.CheckedChanged += new System.EventHandler(this.extraInput_CheckedChanged);
+            // 
+            // EvoInfo
+            // 
+            this.EvoInfo.AutoSize = true;
+            this.EvoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.EvoInfo.Location = new System.Drawing.Point(109, 339);
+            this.EvoInfo.Name = "EvoInfo";
+            this.EvoInfo.Size = new System.Drawing.Size(228, 35);
+            this.EvoInfo.TabIndex = 32;
+            this.EvoInfo.Text = "Remove evo info";
+            this.EvoInfo.UseVisualStyleBackColor = true;
+            this.EvoInfo.CheckedChanged += new System.EventHandler(this.EvoInfo_CheckedChanged);
+            // 
+            // RestoreTypes
+            // 
+            this.RestoreTypes.AutoSize = true;
+            this.RestoreTypes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.RestoreTypes.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RestoreTypes.Location = new System.Drawing.Point(587, 409);
+            this.RestoreTypes.Name = "RestoreTypes";
+            this.RestoreTypes.Size = new System.Drawing.Size(291, 35);
+            this.RestoreTypes.TabIndex = 33;
+            this.RestoreTypes.Text = "Original type balance";
+            this.RestoreTypes.UseVisualStyleBackColor = true;
+            this.RestoreTypes.CheckedChanged += new System.EventHandler(this.RestoreTypes_CheckedChanged);
+            // 
+            // NewMonoInfo
+            // 
+            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMonoInfo.Location = new System.Drawing.Point(401, 409);
+            this.NewMonoInfo.Name = "NewMonoInfo";
+            this.NewMonoInfo.Size = new System.Drawing.Size(35, 35);
+            this.NewMonoInfo.TabIndex = 34;
+            this.NewMonoInfo.Text = "?";
+            this.NewMonoInfo.UseVisualStyleBackColor = true;
+            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
+            // 
             // ViceHackPatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1427,5 +1524,12 @@
         private System.Windows.Forms.CheckBox noOrders;
         private System.Windows.Forms.GroupBox techContainer;
         private System.Windows.Forms.CheckBox easyTech;
+        private System.Windows.Forms.Button trueHardcoreInfo;
+        private System.Windows.Forms.CheckBox HyperMono;
+        private System.Windows.Forms.CheckBox EvoInfo;
+        private System.Windows.Forms.CheckBox extraInput;
+        private System.Windows.Forms.CheckBox NewMono;
+        private System.Windows.Forms.CheckBox RestoreTypes;
+        private System.Windows.Forms.Button NewMonoInfo;
     }
 }

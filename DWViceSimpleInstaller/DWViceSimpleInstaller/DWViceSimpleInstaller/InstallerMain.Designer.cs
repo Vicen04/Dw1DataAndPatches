@@ -60,7 +60,7 @@
             this.VicePatchButton.Name = "VicePatchButton";
             this.VicePatchButton.Size = new System.Drawing.Size(400, 75);
             this.VicePatchButton.TabIndex = 1;
-            this.VicePatchButton.Text = "Vice hack 2.0.2 patcher";
+            this.VicePatchButton.Text = "Vice hack 2.1 patcher";
             this.VicePatchButton.UseVisualStyleBackColor = false;
             this.VicePatchButton.Click += new System.EventHandler(this.VicePatchButton_Click);
             // 

@@ -120,7 +120,7 @@ namespace DWViceSimpleInstaller
 
         private void HardcoreInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Version 1.0.5" + Environment.NewLine + Environment.NewLine +
+            string tempText = "Version 1.1" + Environment.NewLine + Environment.NewLine +
                 "Vice hack version of the hardcore hack. Applying this patch will disable the 'super useful' and 'ultra lucky' useful patches" + Environment.NewLine + Environment.NewLine +
                 "It will increase the difficulty of the game by modifying the stats and moveset of the NPC in the game and add some new content." + Environment.NewLine + Environment.NewLine +
                 "Some of the features are:" + Environment.NewLine + Environment.NewLine +
@@ -128,14 +128,17 @@ namespace DWViceSimpleInstaller
                 "- Different movesets for the NPC digimon (such as removing slow weak techs like 'static elec')." + Environment.NewLine + Environment.NewLine +
                 "- New boss battles" + Environment.NewLine + Environment.NewLine +
                 "- NPCs will now have the tech boost feature" + Environment.NewLine + Environment.NewLine +
-                "- 1.0.3 addition: The bonus try is now rigged again and it will force you to fail, if you want to unrig it, you can use the optional installer." + Environment.NewLine + Environment.NewLine +
+                "- 1.0.3 addition: The bonus try is fully rigged against you, if you want to unrig it, you can use the optional installer." + Environment.NewLine + Environment.NewLine +
                 "- 1.0.4 addition: The debug mode will not be friendly." + Environment.NewLine + Environment.NewLine +
-                "- 1.0.5 addition: Fixed an error that can happen after the bettle land battles, addition of 'True Hardcore'.";
+                "- 1.0.5 addition: Fixed an error that can happen after the bettle land battles, addition of 'True Hardcore'." + Environment.NewLine + Environment.NewLine +
+                "- 1.1: Adjusted some stats, more damage from NPC finishers, reduced the MP of all the digimon and fixed some stats.";
 
 
-            HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
+
+            ViceHackInfo hardcoreHackInfo = new ViceHackInfo();
             hardcoreHackInfo.Text = "Info window";
             hardcoreHackInfo.ChangeTitle("Vice hardcore info");
+            hardcoreHackInfo.ChangeLink("spreadsheet with detailed information", "https://docs.google.com/spreadsheets/d/13hKiq2UGXikMRRLJfKpkudDk9RZ4BRvlCYma1Sof11A/edit?usp=sharing");
             hardcoreHackInfo.ChangeText(tempText);
             hardcoreHackInfo.ShowDialog();
         }
@@ -291,13 +294,14 @@ namespace DWViceSimpleInstaller
                "- Challenge patch: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
                "- Vice hardmode: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
                "- Vice hardcore: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+               "- True hardcore: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
                "EXTRA DIFFICULTY PATCHES" + Environment.NewLine + Environment.NewLine +
                "Can be mixed with other patches or applied as a standalone:" + Environment.NewLine + Environment.NewLine +
                "- Fair battles: you will be unable to run from battle and unable to use items in battle" + Environment.NewLine + Environment.NewLine +
                "- Hardcore Monochromon: The bits requirement to recruit Monochromon is increased to 4096" + Environment.NewLine + Environment.NewLine +
+               "- 8k Monochromon: The bits requirement to recruit Monochromon is increased to 8192 (Why would you choose this?)" + Environment.NewLine + Environment.NewLine +
                "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine +
                "- Ultra hardcore mode: you will be unable to run from battle and unable to use items in battle, on top of that, the tech boost for your digimon will be disabled and all of the NPCs will have a tech boost applied to all the normal techs" + Environment.NewLine + Environment.NewLine +
-               "- True hardcore: makes hardcore even more difficult but without imposing restrictions, can be mixed with other patches." + Environment.NewLine + Environment.NewLine +
                "- Progression mode: technically a main patch but it can be mixed, click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                "FILTH CHALLENGE" + Environment.NewLine + Environment.NewLine +
                "Can be mixed with other patches or applied as a standalone:" + Environment.NewLine + Environment.NewLine +
@@ -371,7 +375,7 @@ namespace DWViceSimpleInstaller
                "- Vermillimon patch: this patch changes the Monochromon texture to look like a Vermillimon, the chart also has a different texture" +Environment.NewLine + Environment.NewLine +
                "- Starters 2: Changes the starters to Palmon, Biyomon, Patamon and Penguinmon" + Environment.NewLine + Environment.NewLine +
                "- Kunemon start: All the startes choices will give you a Kunemon." + Environment.NewLine + Environment.NewLine +
-               "- Restore Panjyamon: Removes Weregarurumon and puts back Panjyamon, any change related to this is undone." + Environment.NewLine + Environment.NewLine +
+               "- Restore Panjyamon: Removes Weregarurumon and puts back Panjyamon, any game change related to WereGarurumon will be undone." + Environment.NewLine + Environment.NewLine +
                "- Curling randomizer: click on the question mark next to it for detailed info";
 
             OptionalPatchesInfo infoWindow = new OptionalPatchesInfo();
@@ -392,7 +396,14 @@ namespace DWViceSimpleInstaller
                "- Remove tech boost: this patch will remove the tech boost of all digimon (not available in challenge or ultra hardcore)" + Environment.NewLine + Environment.NewLine +
                "- Restore ultimate extended lifetime: The extended lifetime of 8 days when becoming an ultimate, will go back to the original 4 days" + Environment.NewLine + Environment.NewLine +
                "- Map colour break: It breaks the colour of two extra maps, making them look unpleasant." + Environment.NewLine + Environment.NewLine +
-               "- Remove telephone: Removes the collision for the telephone in the Ogre Fortress (why did I even make this?).";
+               "- Remove telephone: Removes the collision for the telephone in the Ogre Fortress (why did I even make this?)." + Environment.NewLine + Environment.NewLine +
+               "- Original type balance: Sets back the game to its original type damage." + Environment.NewLine + Environment.NewLine +
+               "- New Monochromon: Changes how the shop minigame works. Click on the question mark for more info." + Environment.NewLine + Environment.NewLine +
+               "- Remove evo info: Removes the option to know to which digimon you will evolve." + Environment.NewLine + Environment.NewLine +
+               "- Extra input: Adds two features linked to button combinations (thanks to the randomizer and SydMontague for the code): " + Environment.NewLine + Environment.NewLine +
+               " * Auto text by holding L1, press L1 + select to toggle the auto text on/off" + Environment.NewLine + Environment.NewLine +
+               " * Reset the game by pressing 'Select + Start + Triangle + Square + Circle + Cross'.";
+
 
 
             ViceHackInfo infoWindow = new ViceHackInfo();
@@ -932,6 +943,65 @@ namespace DWViceSimpleInstaller
         private void easyTech_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetEasyTech(easyTech.Checked);
+        }
+
+        private void trueHardcoreInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "Version 1.1" + Environment.NewLine + Environment.NewLine +
+                           "Vice hack version of true hardcore, to be used with 'hardcore'." + Environment.NewLine + Environment.NewLine +
+                           "It will increase the difficulty of the game even more and add more bosses." + Environment.NewLine + Environment.NewLine +
+                           "Some of the features are:" + Environment.NewLine + Environment.NewLine +
+                           "- Insane finisher damage from NPC" + Environment.NewLine + Environment.NewLine +
+                           "- Different movesets from hardcore for some of the NPC digimon." + Environment.NewLine + Environment.NewLine +
+                           "- Even more new boss battles";
+
+            HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
+            hardcoreHackInfo.Text = "Info window";
+            hardcoreHackInfo.ChangeTitle("Vice true hardcore info");
+            hardcoreHackInfo.ChangeText(tempText);
+            hardcoreHackInfo.ShowDialog();
+        }
+
+        private void HyperMono_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.Set8kMono(HyperMono.Checked);
+        }
+
+        private void NewMono_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetNewMono(NewMono.Checked);
+        }
+
+        private void extraInput_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetExtraInput(extraInput.Checked);
+        }
+
+        private void EvoInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEvoInfo(EvoInfo.Checked);
+        }
+
+        private void RestoreTypes_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetOriginalType(RestoreTypes.Checked);
+        }
+
+        private void NewMonoInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "New Monochromon minigame" + Environment.NewLine + Environment.NewLine +
+                "This patch should make the Monochromon minigame a bit more fair." + Environment.NewLine + Environment.NewLine +
+                "Some of the features are:" + Environment.NewLine + Environment.NewLine +
+                "- You can now choose which price to give to an item" + Environment.NewLine + Environment.NewLine +
+                "- A new item has been added, which can greatly help with the goal" + Environment.NewLine + Environment.NewLine +
+                "- The faces will now help to know your chance to sell the item";
+
+            HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
+            hardcoreHackInfo.Text = "Info window";
+            hardcoreHackInfo.ChangeTitle("New Monochromon info");
+            hardcoreHackInfo.ChangeLink("https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?gid=207048170#gid=207048170", "Spreadsheet with detailed information");
+            hardcoreHackInfo.ChangeText(tempText);
+            hardcoreHackInfo.ShowDialog();
         }
     }
 }
