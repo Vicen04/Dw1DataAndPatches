@@ -244,7 +244,8 @@ namespace DWViceSimpleInstaller
             string tempText = "Patches that change digimon:" + Environment.NewLine + Environment.NewLine +
                "- Myotismon Maeson (Maeson hack only): click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
                "- Vermillimon patch: this patch changes the Monochromon texture to look like a Vermillimon, the chart also has a different texture" +Environment.NewLine + Environment.NewLine +
-               "- Curling randomizer: click on the question mark next to it for detailed info";
+               "- Curling randomizer: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
+               "- Real MetalGreymon: A skin for MetalGreymon, click on the question mark next to it for detailed info";
 
             OptionalPatchesInfo infoWindow = new OptionalPatchesInfo();
             infoWindow.Text = "Info window";
@@ -1002,11 +1003,11 @@ namespace DWViceSimpleInstaller
         private void NewMonoInfo_Click(object sender, EventArgs e)
         {
             string tempText = "New Monochromon minigame" + Environment.NewLine + Environment.NewLine +
-    "This patch should make the Monochromon minigame a bit more fair." + Environment.NewLine + Environment.NewLine +
-    "Some of the features are:" + Environment.NewLine + Environment.NewLine +
-    "- You can now choose which price to give to an item" + Environment.NewLine + Environment.NewLine +
-    "- A new item has been added, which can greatly help with the goal" + Environment.NewLine + Environment.NewLine +
-    "- The faces will now help to know your chance to sell the item";
+                              "This patch should make the Monochromon minigame a bit more fair." + Environment.NewLine + Environment.NewLine +
+                              "Some of the features are:" + Environment.NewLine + Environment.NewLine +
+                              "- You can now choose which price to give to an item" + Environment.NewLine + Environment.NewLine +
+                              "- A new item has been added, which can greatly help with the goal" + Environment.NewLine + Environment.NewLine +
+                              "- The faces will now help to know your chance to sell the item";
 
             HardcoreHackInfo hardcoreHackInfo = new HardcoreHackInfo();
             hardcoreHackInfo.Text = "Info window";
@@ -1014,6 +1015,30 @@ namespace DWViceSimpleInstaller
             hardcoreHackInfo.ChangeLink("https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?gid=207048170#gid=207048170", "Spreadsheet with detailed information");
             hardcoreHackInfo.ChangeText(tempText);
             hardcoreHackInfo.ShowDialog();
+        }
+
+        private void RMetalGInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "VANILLA ONLY. MAY WORK WITH MAESON" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "This patch changes the colour and types of MetalGreymon to resemble more the vaccine MetalGreymon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "Features: " + Environment.NewLine + Environment.NewLine +
+                              "- The texture and model have been changed to be able to recolor it to match the vaccine colours better." + Environment.NewLine + Environment.NewLine +
+                              "- It has exchanged its Fire type for the Air type, now it uses: Thunder Justice, Megalo Spark and Hurricane." + Environment.NewLine + Environment.NewLine +
+                              "- It is now a vaccine digimon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "Other changes:" + Environment.NewLine + Environment.NewLine +
+                              "- The MetalGreymon at the arena will be named: MetalGreymon?." + Environment.NewLine + Environment.NewLine +
+                              "- RealMetalGreymon is real.";
+
+            ViceHackInfo infoDifficulty = new ViceHackInfo();
+            infoDifficulty.DisableLink();
+            infoDifficulty.ChangeTitle("Real MetalGreymon patch info");
+            infoDifficulty.ChangeText(tempText);
+            infoDifficulty.ShowDialog();
+        }
+
+        private void RMetalG_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRMetal(RMetalG.Checked);
         }
     }
 }

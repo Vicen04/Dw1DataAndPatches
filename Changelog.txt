@@ -303,3 +303,9 @@ Version 2.0:
 - More optional patches.
 
 - "Hardcore" small rebalance and "True Hardcore" rework
+
+27/02/25
+
+- Added "RealMetalGreymon" and "BlackWereGarurumon"
+
+- Multiple bug fixes

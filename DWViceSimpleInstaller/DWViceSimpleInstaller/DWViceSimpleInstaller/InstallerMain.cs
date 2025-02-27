@@ -38,11 +38,11 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono;
+            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs;
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -99,11 +99,11 @@ namespace DWViceSimpleInstaller
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
             drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon = 
-            hyperMono = extraInput = removeEvoInfo = originalType = newMono = false;
+            hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -168,7 +168,7 @@ namespace DWViceSimpleInstaller
                 SetPatch(path + "MyotismonPatchVice2.ppf");
 
             if (filth)
-                SetPatch(path + "FilthChallengeViceHack 1.4.ppf");
+                SetPatch(path + "FilthChallengeViceHack 1.4.1.ppf");
 
             if (insaneBattle)
                 SetPatch(path + "InsaneBattle.ppf");
@@ -217,6 +217,9 @@ namespace DWViceSimpleInstaller
             if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
                 SetPatch(System.IO.Directory.GetCurrentDirectory() + "/Patches/OptionalPatches/Difficulty patches/ProgressionPatch.ppf");
 
+            if (BlackWere)
+                SetPatch(path + "BWereGaru.ppf");
+
 
             InstallOptionalPatches();
         }
@@ -256,7 +259,7 @@ namespace DWViceSimpleInstaller
             if (filth)
             {
                 if (currentPatcher != patchType.VICEHACK)
-                    SetPatch(path + "Difficulty patches/FilthChallengePatch 1.1.1.ppf");
+                    SetPatch(path + "Difficulty patches/FilthChallengePatch 1.1.2.ppf");
 
                 if (restoreFilth)
                     SetPatch(path + "Difficulty patches/RestoreFilthDigimon.ppf");
@@ -267,6 +270,14 @@ namespace DWViceSimpleInstaller
 
             if (vermillimon)
                 SetPatch(path + "MonochromonToVermilimon.ppf");
+
+            if (realMetal)
+            {
+                if (currentPatcher != patchType.VICEHACK)
+                    SetPatch(path + "RealMTGR.ppf");
+                else
+                    SetPatch(path + "RealMTGRVice.ppf");
+            }
 
             if (hardmode)
                 SetPatch(path + "Difficulty patches/DigimonWorldHarderBossesVice.ppf");
@@ -317,6 +328,8 @@ namespace DWViceSimpleInstaller
                 else if (ultraBonus)
                     SetPatch(path + "Useful patches/BonusTryUltraLucky 1.2.ppf");
             }
+
+
 
             if (dirtReduction)
                 SetPatch(path + "Useful patches/DirtReductionHalf.ppf");
@@ -566,10 +579,10 @@ namespace DWViceSimpleInstaller
         public void SetExtraInput(bool enabled) { extraInput = enabled; }
         public void SetEvoInfo(bool enabled) { removeEvoInfo = enabled; }
         public patchType GetPatchType() { return currentPatcher; }
-
         public void SetMyotismon2(bool enabled) { myotismon2 = enabled; }
-
         public void SetTrueHardcore(bool enabled) { trueHardcore = enabled; }
+        public void SetBWere(bool enabled) { BlackWere = enabled; }
+        public void SetRMetal(bool enabled) { realMetal = enabled; }
 
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
@@ -786,6 +799,18 @@ namespace DWViceSimpleInstaller
             if (kunemon)
             {
                 txtWritter.Write("- Kunemon start");
+                txtWritter.WriteLine();
+            }
+
+            if (realMetal)
+            {
+                txtWritter.Write("- Real MetalGreymon");
+                txtWritter.WriteLine();
+            }
+
+            if (BlackWere)
+            {
+                txtWritter.Write("- Black WereGarurumon");
                 txtWritter.WriteLine();
             }
 

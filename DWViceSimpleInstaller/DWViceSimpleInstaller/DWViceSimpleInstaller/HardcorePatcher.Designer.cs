@@ -96,6 +96,8 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.NewMonoInfo = new System.Windows.Forms.Button();
+            this.NewMono = new System.Windows.Forms.CheckBox();
             this.medals = new System.Windows.Forms.CheckBox();
             this.rareSpawn = new System.Windows.Forms.CheckBox();
             this.Seadramon = new System.Windows.Forms.CheckBox();
@@ -126,8 +128,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.NewMono = new System.Windows.Forms.CheckBox();
-            this.NewMonoInfo = new System.Windows.Forms.Button();
+            this.RMetalG = new System.Windows.Forms.CheckBox();
+            this.RMetalGInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -473,6 +475,8 @@
             // 
             // DigimonGroup
             // 
+            this.DigimonGroup.Controls.Add(this.RMetalGInfo);
+            this.DigimonGroup.Controls.Add(this.RMetalG);
             this.DigimonGroup.Controls.Add(this.MyotismonInfo2);
             this.DigimonGroup.Controls.Add(this.MyotismonMaeson2);
             this.DigimonGroup.Controls.Add(this.curlingRandomizerInfo);
@@ -484,7 +488,7 @@
             this.DigimonGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DigimonGroup.Location = new System.Drawing.Point(90, 160);
             this.DigimonGroup.Name = "DigimonGroup";
-            this.DigimonGroup.Size = new System.Drawing.Size(1000, 200);
+            this.DigimonGroup.Size = new System.Drawing.Size(1000, 300);
             this.DigimonGroup.TabIndex = 20;
             this.DigimonGroup.TabStop = false;
             this.DigimonGroup.Text = "Digimon patches";
@@ -1045,6 +1049,34 @@
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
             // 
+            // NewMonoInfo
+            // 
+            this.NewMonoInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.NewMonoInfo.Enabled = false;
+            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
+            this.NewMonoInfo.Location = new System.Drawing.Point(887, 431);
+            this.NewMonoInfo.Name = "NewMonoInfo";
+            this.NewMonoInfo.Size = new System.Drawing.Size(40, 40);
+            this.NewMonoInfo.TabIndex = 24;
+            this.NewMonoInfo.Text = "?";
+            this.NewMonoInfo.UseVisualStyleBackColor = false;
+            this.NewMonoInfo.Visible = false;
+            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
+            // 
+            // NewMono
+            // 
+            this.NewMono.AutoSize = true;
+            this.NewMono.Enabled = false;
+            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMono.Location = new System.Drawing.Point(607, 437);
+            this.NewMono.Name = "NewMono";
+            this.NewMono.Size = new System.Drawing.Size(267, 35);
+            this.NewMono.TabIndex = 30;
+            this.NewMono.Text = "New Monochromon";
+            this.NewMono.UseVisualStyleBackColor = true;
+            this.NewMono.Visible = false;
+            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
+            // 
             // medals
             // 
             this.medals.AutoSize = true;
@@ -1439,33 +1471,29 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // NewMono
+            // RMetalG
             // 
-            this.NewMono.AutoSize = true;
-            this.NewMono.Enabled = false;
-            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMono.Location = new System.Drawing.Point(607, 437);
-            this.NewMono.Name = "NewMono";
-            this.NewMono.Size = new System.Drawing.Size(267, 35);
-            this.NewMono.TabIndex = 30;
-            this.NewMono.Text = "New Monochromon";
-            this.NewMono.UseVisualStyleBackColor = true;
-            this.NewMono.Visible = false;
-            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
+            this.RMetalG.AutoSize = true;
+            this.RMetalG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RMetalG.Location = new System.Drawing.Point(33, 224);
+            this.RMetalG.Name = "RMetalG";
+            this.RMetalG.Size = new System.Drawing.Size(269, 35);
+            this.RMetalG.TabIndex = 27;
+            this.RMetalG.Text = "Real MetalGreymon";
+            this.RMetalG.UseVisualStyleBackColor = true;
+            this.RMetalG.CheckedChanged += new System.EventHandler(this.RMetalG_CheckedChanged);
             // 
-            // NewMonoInfo
+            // RMetalGInfo
             // 
-            this.NewMonoInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.NewMonoInfo.Enabled = false;
-            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
-            this.NewMonoInfo.Location = new System.Drawing.Point(887, 431);
-            this.NewMonoInfo.Name = "NewMonoInfo";
-            this.NewMonoInfo.Size = new System.Drawing.Size(40, 40);
-            this.NewMonoInfo.TabIndex = 24;
-            this.NewMonoInfo.Text = "?";
-            this.NewMonoInfo.UseVisualStyleBackColor = false;
-            this.NewMonoInfo.Visible = false;
-            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
+            this.RMetalGInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.RMetalGInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RMetalGInfo.Location = new System.Drawing.Point(401, 223);
+            this.RMetalGInfo.Name = "RMetalGInfo";
+            this.RMetalGInfo.Size = new System.Drawing.Size(35, 35);
+            this.RMetalGInfo.TabIndex = 28;
+            this.RMetalGInfo.Text = "?";
+            this.RMetalGInfo.UseVisualStyleBackColor = false;
+            this.RMetalGInfo.Click += new System.EventHandler(this.RMetalGInfo_Click);
             // 
             // HardcorePatcher
             // 
@@ -1612,5 +1640,7 @@
         private System.Windows.Forms.CheckBox medals;
         private System.Windows.Forms.CheckBox NewMono;
         private System.Windows.Forms.Button NewMonoInfo;
+        private System.Windows.Forms.Button RMetalGInfo;
+        private System.Windows.Forms.CheckBox RMetalG;
     }
 }

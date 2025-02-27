@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.DifficultyPatchesContainer = new System.Windows.Forms.GroupBox();
+            this.HyperMono = new System.Windows.Forms.CheckBox();
+            this.trueHardcoreInfo = new System.Windows.Forms.Button();
             this.trueHardcore = new System.Windows.Forms.CheckBox();
             this.ProgressionInfo = new System.Windows.Forms.Button();
             this.ProgressionMode = new System.Windows.Forms.CheckBox();
@@ -70,6 +72,11 @@
             this.MyotismonInfo = new System.Windows.Forms.Button();
             this.Myotismon = new System.Windows.Forms.CheckBox();
             this.miscPatches = new System.Windows.Forms.GroupBox();
+            this.NewMonoInfo = new System.Windows.Forms.Button();
+            this.RestoreTypes = new System.Windows.Forms.CheckBox();
+            this.EvoInfo = new System.Windows.Forms.CheckBox();
+            this.extraInput = new System.Windows.Forms.CheckBox();
+            this.NewMono = new System.Windows.Forms.CheckBox();
             this.removeTelephone = new System.Windows.Forms.CheckBox();
             this.colourBreak = new System.Windows.Forms.CheckBox();
             this.removeTechBoost = new System.Windows.Forms.CheckBox();
@@ -117,13 +124,10 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
-            this.trueHardcoreInfo = new System.Windows.Forms.Button();
-            this.HyperMono = new System.Windows.Forms.CheckBox();
-            this.NewMono = new System.Windows.Forms.CheckBox();
-            this.extraInput = new System.Windows.Forms.CheckBox();
-            this.EvoInfo = new System.Windows.Forms.CheckBox();
-            this.RestoreTypes = new System.Windows.Forms.CheckBox();
-            this.NewMonoInfo = new System.Windows.Forms.Button();
+            this.RealMetal = new System.Windows.Forms.CheckBox();
+            this.blackWere = new System.Windows.Forms.CheckBox();
+            this.realMetalInfo = new System.Windows.Forms.Button();
+            this.blackWereInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -163,6 +167,29 @@
             this.DifficultyPatchesContainer.TabStop = false;
             this.DifficultyPatchesContainer.Text = "Difficulty patches";
             this.DifficultyPatchesContainer.Visible = false;
+            // 
+            // HyperMono
+            // 
+            this.HyperMono.AutoSize = true;
+            this.HyperMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HyperMono.Location = new System.Drawing.Point(588, 209);
+            this.HyperMono.Name = "HyperMono";
+            this.HyperMono.Size = new System.Drawing.Size(243, 35);
+            this.HyperMono.TabIndex = 19;
+            this.HyperMono.Text = "8k Monochromon";
+            this.HyperMono.UseVisualStyleBackColor = true;
+            this.HyperMono.CheckedChanged += new System.EventHandler(this.HyperMono_CheckedChanged);
+            // 
+            // trueHardcoreInfo
+            // 
+            this.trueHardcoreInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.trueHardcoreInfo.Location = new System.Drawing.Point(306, 323);
+            this.trueHardcoreInfo.Name = "trueHardcoreInfo";
+            this.trueHardcoreInfo.Size = new System.Drawing.Size(35, 35);
+            this.trueHardcoreInfo.TabIndex = 18;
+            this.trueHardcoreInfo.Text = "?";
+            this.trueHardcoreInfo.UseVisualStyleBackColor = true;
+            this.trueHardcoreInfo.Click += new System.EventHandler(this.trueHardcoreInfo_Click);
             // 
             // trueHardcore
             // 
@@ -540,6 +567,10 @@
             // 
             // DigimonGroup
             // 
+            this.DigimonGroup.Controls.Add(this.blackWereInfo);
+            this.DigimonGroup.Controls.Add(this.realMetalInfo);
+            this.DigimonGroup.Controls.Add(this.blackWere);
+            this.DigimonGroup.Controls.Add(this.RealMetal);
             this.DigimonGroup.Controls.Add(this.Starters2);
             this.DigimonGroup.Controls.Add(this.Panjyamon);
             this.DigimonGroup.Controls.Add(this.Kunemon);
@@ -552,7 +583,7 @@
             this.DigimonGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DigimonGroup.Location = new System.Drawing.Point(90, 160);
             this.DigimonGroup.Name = "DigimonGroup";
-            this.DigimonGroup.Size = new System.Drawing.Size(1000, 300);
+            this.DigimonGroup.Size = new System.Drawing.Size(1000, 400);
             this.DigimonGroup.TabIndex = 20;
             this.DigimonGroup.TabStop = false;
             this.DigimonGroup.Text = "Digimon patches";
@@ -681,6 +712,66 @@
             this.miscPatches.TabStop = false;
             this.miscPatches.Text = "Miscellaneous patches";
             this.miscPatches.Visible = false;
+            // 
+            // NewMonoInfo
+            // 
+            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMonoInfo.Location = new System.Drawing.Point(401, 409);
+            this.NewMonoInfo.Name = "NewMonoInfo";
+            this.NewMonoInfo.Size = new System.Drawing.Size(35, 35);
+            this.NewMonoInfo.TabIndex = 34;
+            this.NewMonoInfo.Text = "?";
+            this.NewMonoInfo.UseVisualStyleBackColor = true;
+            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
+            // 
+            // RestoreTypes
+            // 
+            this.RestoreTypes.AutoSize = true;
+            this.RestoreTypes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.RestoreTypes.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RestoreTypes.Location = new System.Drawing.Point(587, 409);
+            this.RestoreTypes.Name = "RestoreTypes";
+            this.RestoreTypes.Size = new System.Drawing.Size(291, 35);
+            this.RestoreTypes.TabIndex = 33;
+            this.RestoreTypes.Text = "Original type balance";
+            this.RestoreTypes.UseVisualStyleBackColor = true;
+            this.RestoreTypes.CheckedChanged += new System.EventHandler(this.RestoreTypes_CheckedChanged);
+            // 
+            // EvoInfo
+            // 
+            this.EvoInfo.AutoSize = true;
+            this.EvoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.EvoInfo.Location = new System.Drawing.Point(109, 339);
+            this.EvoInfo.Name = "EvoInfo";
+            this.EvoInfo.Size = new System.Drawing.Size(228, 35);
+            this.EvoInfo.TabIndex = 32;
+            this.EvoInfo.Text = "Remove evo info";
+            this.EvoInfo.UseVisualStyleBackColor = true;
+            this.EvoInfo.CheckedChanged += new System.EventHandler(this.EvoInfo_CheckedChanged);
+            // 
+            // extraInput
+            // 
+            this.extraInput.AutoSize = true;
+            this.extraInput.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.extraInput.Location = new System.Drawing.Point(590, 339);
+            this.extraInput.Name = "extraInput";
+            this.extraInput.Size = new System.Drawing.Size(168, 35);
+            this.extraInput.TabIndex = 31;
+            this.extraInput.Text = "Extra input";
+            this.extraInput.UseVisualStyleBackColor = true;
+            this.extraInput.CheckedChanged += new System.EventHandler(this.extraInput_CheckedChanged);
+            // 
+            // NewMono
+            // 
+            this.NewMono.AutoSize = true;
+            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NewMono.Location = new System.Drawing.Point(109, 409);
+            this.NewMono.Name = "NewMono";
+            this.NewMono.Size = new System.Drawing.Size(267, 35);
+            this.NewMono.TabIndex = 30;
+            this.NewMono.Text = "New Monochromon";
+            this.NewMono.UseVisualStyleBackColor = true;
+            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
             // 
             // removeTelephone
             // 
@@ -1307,88 +1398,53 @@
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
-            // trueHardcoreInfo
+            // RealMetal
             // 
-            this.trueHardcoreInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.trueHardcoreInfo.Location = new System.Drawing.Point(306, 323);
-            this.trueHardcoreInfo.Name = "trueHardcoreInfo";
-            this.trueHardcoreInfo.Size = new System.Drawing.Size(35, 35);
-            this.trueHardcoreInfo.TabIndex = 18;
-            this.trueHardcoreInfo.Text = "?";
-            this.trueHardcoreInfo.UseVisualStyleBackColor = true;
-            this.trueHardcoreInfo.Click += new System.EventHandler(this.trueHardcoreInfo_Click);
+            this.RealMetal.AutoSize = true;
+            this.RealMetal.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RealMetal.Location = new System.Drawing.Point(33, 323);
+            this.RealMetal.Name = "RealMetal";
+            this.RealMetal.Size = new System.Drawing.Size(269, 35);
+            this.RealMetal.TabIndex = 28;
+            this.RealMetal.Text = "Real MetalGreymon";
+            this.RealMetal.UseVisualStyleBackColor = true;
+            this.RealMetal.CheckedChanged += new System.EventHandler(this.RealMetal_CheckedChanged);
             // 
-            // HyperMono
+            // blackWere
             // 
-            this.HyperMono.AutoSize = true;
-            this.HyperMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HyperMono.Location = new System.Drawing.Point(588, 209);
-            this.HyperMono.Name = "HyperMono";
-            this.HyperMono.Size = new System.Drawing.Size(243, 35);
-            this.HyperMono.TabIndex = 19;
-            this.HyperMono.Text = "8k Monochromon";
-            this.HyperMono.UseVisualStyleBackColor = true;
-            this.HyperMono.CheckedChanged += new System.EventHandler(this.HyperMono_CheckedChanged);
+            this.blackWere.AutoSize = true;
+            this.blackWere.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.blackWere.Location = new System.Drawing.Point(553, 323);
+            this.blackWere.Name = "blackWere";
+            this.blackWere.Size = new System.Drawing.Size(305, 35);
+            this.blackWere.TabIndex = 29;
+            this.blackWere.Text = "Black Weregarurumon";
+            this.blackWere.UseVisualStyleBackColor = true;
+            this.blackWere.CheckedChanged += new System.EventHandler(this.blackWere_CheckedChanged);
             // 
-            // NewMono
+            // realMetalInfo
             // 
-            this.NewMono.AutoSize = true;
-            this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMono.Location = new System.Drawing.Point(109, 409);
-            this.NewMono.Name = "NewMono";
-            this.NewMono.Size = new System.Drawing.Size(267, 35);
-            this.NewMono.TabIndex = 30;
-            this.NewMono.Text = "New Monochromon";
-            this.NewMono.UseVisualStyleBackColor = true;
-            this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
+            this.realMetalInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.realMetalInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.realMetalInfo.Location = new System.Drawing.Point(315, 323);
+            this.realMetalInfo.Name = "realMetalInfo";
+            this.realMetalInfo.Size = new System.Drawing.Size(35, 35);
+            this.realMetalInfo.TabIndex = 30;
+            this.realMetalInfo.Text = "?";
+            this.realMetalInfo.UseVisualStyleBackColor = false;
+            this.realMetalInfo.Click += new System.EventHandler(this.realMetalInfo_Click);
             // 
-            // extraInput
+            // blackWereInfo
             // 
-            this.extraInput.AutoSize = true;
-            this.extraInput.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.extraInput.Location = new System.Drawing.Point(590, 339);
-            this.extraInput.Name = "extraInput";
-            this.extraInput.Size = new System.Drawing.Size(168, 35);
-            this.extraInput.TabIndex = 31;
-            this.extraInput.Text = "Extra input";
-            this.extraInput.UseVisualStyleBackColor = true;
-            this.extraInput.CheckedChanged += new System.EventHandler(this.extraInput_CheckedChanged);
-            // 
-            // EvoInfo
-            // 
-            this.EvoInfo.AutoSize = true;
-            this.EvoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.EvoInfo.Location = new System.Drawing.Point(109, 339);
-            this.EvoInfo.Name = "EvoInfo";
-            this.EvoInfo.Size = new System.Drawing.Size(228, 35);
-            this.EvoInfo.TabIndex = 32;
-            this.EvoInfo.Text = "Remove evo info";
-            this.EvoInfo.UseVisualStyleBackColor = true;
-            this.EvoInfo.CheckedChanged += new System.EventHandler(this.EvoInfo_CheckedChanged);
-            // 
-            // RestoreTypes
-            // 
-            this.RestoreTypes.AutoSize = true;
-            this.RestoreTypes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.RestoreTypes.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.RestoreTypes.Location = new System.Drawing.Point(587, 409);
-            this.RestoreTypes.Name = "RestoreTypes";
-            this.RestoreTypes.Size = new System.Drawing.Size(291, 35);
-            this.RestoreTypes.TabIndex = 33;
-            this.RestoreTypes.Text = "Original type balance";
-            this.RestoreTypes.UseVisualStyleBackColor = true;
-            this.RestoreTypes.CheckedChanged += new System.EventHandler(this.RestoreTypes_CheckedChanged);
-            // 
-            // NewMonoInfo
-            // 
-            this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMonoInfo.Location = new System.Drawing.Point(401, 409);
-            this.NewMonoInfo.Name = "NewMonoInfo";
-            this.NewMonoInfo.Size = new System.Drawing.Size(35, 35);
-            this.NewMonoInfo.TabIndex = 34;
-            this.NewMonoInfo.Text = "?";
-            this.NewMonoInfo.UseVisualStyleBackColor = true;
-            this.NewMonoInfo.Click += new System.EventHandler(this.NewMonoInfo_Click);
+            this.blackWereInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.blackWereInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.blackWereInfo.Location = new System.Drawing.Point(864, 322);
+            this.blackWereInfo.Name = "blackWereInfo";
+            this.blackWereInfo.Size = new System.Drawing.Size(35, 35);
+            this.blackWereInfo.TabIndex = 31;
+            this.blackWereInfo.Text = "?";
+            this.blackWereInfo.UseVisualStyleBackColor = false;
+            this.blackWereInfo.Click += new System.EventHandler(this.blackWereInfo_Click);
             // 
             // ViceHackPatcher
             // 
@@ -1531,5 +1587,9 @@
         private System.Windows.Forms.CheckBox NewMono;
         private System.Windows.Forms.CheckBox RestoreTypes;
         private System.Windows.Forms.Button NewMonoInfo;
+        private System.Windows.Forms.Button blackWereInfo;
+        private System.Windows.Forms.Button realMetalInfo;
+        private System.Windows.Forms.CheckBox blackWere;
+        private System.Windows.Forms.CheckBox RealMetal;
     }
 }

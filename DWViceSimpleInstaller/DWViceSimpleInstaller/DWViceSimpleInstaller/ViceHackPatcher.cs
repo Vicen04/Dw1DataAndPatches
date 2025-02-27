@@ -376,12 +376,15 @@ namespace DWViceSimpleInstaller
                "- Starters 2: Changes the starters to Palmon, Biyomon, Patamon and Penguinmon" + Environment.NewLine + Environment.NewLine +
                "- Kunemon start: All the startes choices will give you a Kunemon." + Environment.NewLine + Environment.NewLine +
                "- Restore Panjyamon: Removes Weregarurumon and puts back Panjyamon, any game change related to WereGarurumon will be undone." + Environment.NewLine + Environment.NewLine +
-               "- Curling randomizer: click on the question mark next to it for detailed info";
+               "- Curling randomizer: click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine +
+               "- Real MetalGreymon: A skin for MetalGreymon, click on the question mark next to it for detailed info." + Environment.NewLine + Environment.NewLine +
+               "- Black WereGarurumon: A skin for WereGarurumon, click on the question mark next to it for detailed info";
 
-            OptionalPatchesInfo infoWindow = new OptionalPatchesInfo();
+            ViceHackInfo infoWindow = new ViceHackInfo();
             infoWindow.Text = "Info window";
             infoWindow.ChangeTitle("Digimon patches info");
             infoWindow.ChangeText(tempText);
+            infoWindow.DisableLink();
             infoWindow.ShowDialog();
         }
 
@@ -450,7 +453,7 @@ namespace DWViceSimpleInstaller
                "- Full time Seadramon: Seadramon appears at any time in the lake.";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
-            infoDifficulty.ChangeLink("Better item drops spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
+            infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
             infoDifficulty.ChangeTitle("Useful patches info");
             infoDifficulty.ChangeText(tempText);
             infoDifficulty.ShowDialog();
@@ -692,6 +695,14 @@ namespace DWViceSimpleInstaller
         private void Panjyamon_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetRestorePanjya(Panjyamon.Checked);
+
+            if (Panjyamon.Checked)
+            {
+                blackWere.Checked = false;
+                blackWere.Enabled = false;
+            }
+            else
+                blackWere.Enabled = true;
         }
 
         private void ProgressionMode_CheckedChanged(object sender, EventArgs e)
@@ -1002,6 +1013,54 @@ namespace DWViceSimpleInstaller
             hardcoreHackInfo.ChangeLink("https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?gid=207048170#gid=207048170", "Spreadsheet with detailed information");
             hardcoreHackInfo.ChangeText(tempText);
             hardcoreHackInfo.ShowDialog();
+        }
+
+        private void RealMetal_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRMetal(RealMetal.Checked);
+        }
+
+        private void realMetalInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "Vice version of the Real MetalGreymon" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                  "This patch changes the colour and types of MetalGreymon to resemble more the vaccine MetalGreymon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                  "Features: " + Environment.NewLine + Environment.NewLine +
+                  "- The texture and model have been changed to be able to recolor it to match the vaccine colours better." + Environment.NewLine + Environment.NewLine +
+                  "- It has exchanged its Fire type for the Air type, now it uses: Thunder Justice, Megalo Spark, Wind Cutter and Hurricane." + Environment.NewLine + Environment.NewLine +
+                  "- It is now a vaccine digimon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                  "Other changes:" + Environment.NewLine + Environment.NewLine +
+                  "- The MetalGreymon at the arena will be named: MetalGreymon?." + Environment.NewLine + Environment.NewLine +
+                  "- Hardcore will use the RealMetalGreymon as a boss battle.";
+
+            ViceHackInfo infoDifficulty = new ViceHackInfo();
+            infoDifficulty.DisableLink();
+            infoDifficulty.ChangeTitle("Real MetalGreymon Vice patch info");
+            infoDifficulty.ChangeText(tempText);
+            infoDifficulty.ShowDialog();
+        }
+
+        private void blackWere_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetBWere(blackWere.Checked);
+        }
+
+        private void blackWereInfo_Click(object sender, EventArgs e)
+        {
+            string tempText = "A skin for WereGarurumon" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "This patch changes the colour and types of WereGarurumon to resemble Black Weregarurumon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "Features: " + Environment.NewLine + Environment.NewLine +
+                              "- The texture has been changed to match the colours of Black WereGarurumon (except the back of the pants, which I cannot draw...)" + Environment.NewLine + Environment.NewLine +
+                              "- It has an unique finisher." + Environment.NewLine + Environment.NewLine +
+                              "- It is now a virus digimon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "Other changes:" + Environment.NewLine + Environment.NewLine +
+                              "- This will obviously change the secret boss battle.";
+
+            ViceHackInfo infoDifficulty = new ViceHackInfo();
+            infoDifficulty.DisableLink();
+            infoDifficulty.ChangeTitle("Black WereGarurumon patch info");
+            infoDifficulty.ChangeText(tempText);
+            infoDifficulty.ShowDialog();
+
         }
     }
 }
