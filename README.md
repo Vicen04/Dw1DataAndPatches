@@ -9,6 +9,13 @@ For anyone who wants to ask questions or want help with modding:
 
 [FAQ](https://github.com/Vicen04/Dw1DataAndPatches/wiki/Vice-hack-FAQ)
 
+
+## Digimon World Vice
+![ViceLogo](https://github.com/user-attachments/assets/cc431132-5177-4611-a85e-324398c2c139)
+
+_Image provided by Raikou_
+
+
 I have created a hack which mostly includes the changes shown in this repository (Last update 27/02/25).
 
 [Vice 2.1 installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer_2)
@@ -29,7 +36,7 @@ I have created a hack which mostly includes the changes shown in this repository
 If you would like to play a hack based on this code, which also changes a lot of other features as well as adding a lot of QoL changes, check the Maeson hack: https://www.romhacking.net/hacks/8069/
 
 
-More links:
+## More links
 
 [Spreadsheet with a easier to read "movement allowed" list](https://docs.google.com/spreadsheets/d/1vHHa8ynxtnFuwiQst09I0L4jDMKb8ZLdyxXYkoMi_UA/edit?usp=sharing)
 
