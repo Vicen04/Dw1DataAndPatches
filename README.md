@@ -11,10 +11,6 @@ For anyone who wants to ask questions or want help with modding:
 
 
 ## Digimon World Vice
-![ViceLogo](https://github.com/user-attachments/assets/cc431132-5177-4611-a85e-324398c2c139)
-
-_Image provided by Raikou_
-
 
 I have created a hack which mostly includes the changes shown in this repository (Last update 27/02/25).
 
