@@ -405,7 +405,9 @@ namespace DWViceSimpleInstaller
                "- Remove evo info: Removes the option to know to which digimon you will evolve." + Environment.NewLine + Environment.NewLine +
                "- Extra input: Adds two features linked to button combinations (thanks to the randomizer and SydMontague for the code): " + Environment.NewLine + Environment.NewLine +
                " * Auto text by holding L1, press L1 + select to toggle the auto text on/off" + Environment.NewLine + Environment.NewLine +
-               " * Reset the game by pressing 'Select + Start + Triangle + Square + Circle + Cross'.";
+               " * Reset the game by pressing 'Select + Start + Triangle + Square + Circle + Cross'." + Environment.NewLine + Environment.NewLine +
+               "- Quick text: The text that happens after battle will be instant, similar to the Japanese version" + Environment.NewLine + Environment.NewLine +
+               "- Digital clock: This will replace the analog clock for a digital one";
 
 
 
@@ -1022,7 +1024,8 @@ namespace DWViceSimpleInstaller
 
         private void realMetalInfo_Click(object sender, EventArgs e)
         {
-            string tempText = "Vice version of the Real MetalGreymon" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+            string tempText = "Original patch made by Gledson999, this is a modified version of it." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                "Vice version of the Real MetalGreymon" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                   "This patch changes the colour and types of MetalGreymon to resemble more the vaccine MetalGreymon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                   "Features: " + Environment.NewLine + Environment.NewLine +
                   "- The texture and model have been changed to be able to recolor it to match the vaccine colours better." + Environment.NewLine + Environment.NewLine +
@@ -1061,6 +1064,16 @@ namespace DWViceSimpleInstaller
             infoDifficulty.ChangeText(tempText);
             infoDifficulty.ShowDialog();
 
+        }
+
+        private void quickText_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetQuickText(quickText.Checked);
+        }
+
+        private void digitalClock_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetDigitalClock(digitalClock.Checked);
         }
     }
 }

@@ -55,6 +55,8 @@
             this.InfoUseful = new System.Windows.Forms.Button();
             this.InfoTechniques = new System.Windows.Forms.Button();
             this.DigimonGroup = new System.Windows.Forms.GroupBox();
+            this.RMetalGInfo = new System.Windows.Forms.Button();
+            this.RMetalG = new System.Windows.Forms.CheckBox();
             this.MyotismonInfo2 = new System.Windows.Forms.Button();
             this.MyotismonMaeson2 = new System.Windows.Forms.CheckBox();
             this.curlingRandomizerInfo = new System.Windows.Forms.Button();
@@ -128,8 +130,6 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.RMetalG = new System.Windows.Forms.CheckBox();
-            this.RMetalGInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -259,7 +259,7 @@
             this.FilthChallengeTitle.Name = "FilthChallengeTitle";
             this.FilthChallengeTitle.Size = new System.Drawing.Size(239, 38);
             this.FilthChallengeTitle.TabIndex = 10;
-            this.FilthChallengeTitle.Text = "Flith Challenge";
+            this.FilthChallengeTitle.Text = "Filth Challenge";
             // 
             // label3
             // 
@@ -493,6 +493,30 @@
             this.DigimonGroup.TabStop = false;
             this.DigimonGroup.Text = "Digimon patches";
             this.DigimonGroup.Visible = false;
+            // 
+            // RMetalGInfo
+            // 
+            this.RMetalGInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.RMetalGInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RMetalGInfo.Location = new System.Drawing.Point(401, 223);
+            this.RMetalGInfo.Name = "RMetalGInfo";
+            this.RMetalGInfo.Size = new System.Drawing.Size(35, 35);
+            this.RMetalGInfo.TabIndex = 28;
+            this.RMetalGInfo.Text = "?";
+            this.RMetalGInfo.UseVisualStyleBackColor = false;
+            this.RMetalGInfo.Click += new System.EventHandler(this.RMetalGInfo_Click);
+            // 
+            // RMetalG
+            // 
+            this.RMetalG.AutoSize = true;
+            this.RMetalG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RMetalG.Location = new System.Drawing.Point(33, 224);
+            this.RMetalG.Name = "RMetalG";
+            this.RMetalG.Size = new System.Drawing.Size(269, 35);
+            this.RMetalG.TabIndex = 27;
+            this.RMetalG.Text = "Real MetalGreymon";
+            this.RMetalG.UseVisualStyleBackColor = true;
+            this.RMetalG.CheckedChanged += new System.EventHandler(this.RMetalG_CheckedChanged);
             // 
             // MyotismonInfo2
             // 
@@ -1470,30 +1494,6 @@
             this.betterDrops.UseVisualStyleBackColor = true;
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
-            // 
-            // RMetalG
-            // 
-            this.RMetalG.AutoSize = true;
-            this.RMetalG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RMetalG.Location = new System.Drawing.Point(33, 224);
-            this.RMetalG.Name = "RMetalG";
-            this.RMetalG.Size = new System.Drawing.Size(269, 35);
-            this.RMetalG.TabIndex = 27;
-            this.RMetalG.Text = "Real MetalGreymon";
-            this.RMetalG.UseVisualStyleBackColor = true;
-            this.RMetalG.CheckedChanged += new System.EventHandler(this.RMetalG_CheckedChanged);
-            // 
-            // RMetalGInfo
-            // 
-            this.RMetalGInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.RMetalGInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.RMetalGInfo.Location = new System.Drawing.Point(401, 223);
-            this.RMetalGInfo.Name = "RMetalGInfo";
-            this.RMetalGInfo.Size = new System.Drawing.Size(35, 35);
-            this.RMetalGInfo.TabIndex = 28;
-            this.RMetalGInfo.Text = "?";
-            this.RMetalGInfo.UseVisualStyleBackColor = false;
-            this.RMetalGInfo.Click += new System.EventHandler(this.RMetalGInfo_Click);
             // 
             // HardcorePatcher
             // 

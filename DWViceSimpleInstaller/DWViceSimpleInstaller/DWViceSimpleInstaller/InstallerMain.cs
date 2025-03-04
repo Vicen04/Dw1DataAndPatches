@@ -42,7 +42,7 @@ namespace DWViceSimpleInstaller
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere;
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -103,7 +103,7 @@ namespace DWViceSimpleInstaller
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -219,6 +219,12 @@ namespace DWViceSimpleInstaller
 
             if (BlackWere)
                 SetPatch(path + "BWereGaru.ppf");
+
+            if (quickText)
+                SetPatch(path + "QuickBattleText.ppf");
+
+            if (digitalClock)
+                SetPatch(path + "DigitalClock.ppf");
 
 
             InstallOptionalPatches();
@@ -584,6 +590,9 @@ namespace DWViceSimpleInstaller
         public void SetBWere(bool enabled) { BlackWere = enabled; }
         public void SetRMetal(bool enabled) { realMetal = enabled; }
 
+        public void SetDigitalClock(bool enabled) { digitalClock = enabled; }
+        public void SetQuickText(bool enabled) { quickText = enabled; }
+
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
         {
@@ -890,6 +899,18 @@ namespace DWViceSimpleInstaller
                 if (removeEvoInfo)
                 {
                     txtWritter.Write("- Remove evolution information");
+                    txtWritter.WriteLine();
+                }
+
+                if (quickText)
+                {
+                    txtWritter.Write("- Quick battle text");
+                    txtWritter.WriteLine();
+                }
+
+                if (digitalClock)
+                {
+                    txtWritter.Write("- Digital clock");
                     txtWritter.WriteLine();
                 }
             }

@@ -63,6 +63,10 @@
             this.InfoUseful = new System.Windows.Forms.Button();
             this.InfoTechniques = new System.Windows.Forms.Button();
             this.DigimonGroup = new System.Windows.Forms.GroupBox();
+            this.blackWereInfo = new System.Windows.Forms.Button();
+            this.realMetalInfo = new System.Windows.Forms.Button();
+            this.blackWere = new System.Windows.Forms.CheckBox();
+            this.RealMetal = new System.Windows.Forms.CheckBox();
             this.Starters2 = new System.Windows.Forms.CheckBox();
             this.Panjyamon = new System.Windows.Forms.CheckBox();
             this.Kunemon = new System.Windows.Forms.CheckBox();
@@ -72,6 +76,8 @@
             this.MyotismonInfo = new System.Windows.Forms.Button();
             this.Myotismon = new System.Windows.Forms.CheckBox();
             this.miscPatches = new System.Windows.Forms.GroupBox();
+            this.quickText = new System.Windows.Forms.CheckBox();
+            this.digitalClock = new System.Windows.Forms.CheckBox();
             this.NewMonoInfo = new System.Windows.Forms.Button();
             this.RestoreTypes = new System.Windows.Forms.CheckBox();
             this.EvoInfo = new System.Windows.Forms.CheckBox();
@@ -124,10 +130,6 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
-            this.RealMetal = new System.Windows.Forms.CheckBox();
-            this.blackWere = new System.Windows.Forms.CheckBox();
-            this.realMetalInfo = new System.Windows.Forms.Button();
-            this.blackWereInfo = new System.Windows.Forms.Button();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -292,7 +294,7 @@
             this.FilthChallengeTitle.Name = "FilthChallengeTitle";
             this.FilthChallengeTitle.Size = new System.Drawing.Size(239, 38);
             this.FilthChallengeTitle.TabIndex = 10;
-            this.FilthChallengeTitle.Text = "Flith Challenge";
+            this.FilthChallengeTitle.Text = "Filth Challenge";
             // 
             // label3
             // 
@@ -589,6 +591,54 @@
             this.DigimonGroup.Text = "Digimon patches";
             this.DigimonGroup.Visible = false;
             // 
+            // blackWereInfo
+            // 
+            this.blackWereInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.blackWereInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.blackWereInfo.Location = new System.Drawing.Point(864, 322);
+            this.blackWereInfo.Name = "blackWereInfo";
+            this.blackWereInfo.Size = new System.Drawing.Size(35, 35);
+            this.blackWereInfo.TabIndex = 31;
+            this.blackWereInfo.Text = "?";
+            this.blackWereInfo.UseVisualStyleBackColor = false;
+            this.blackWereInfo.Click += new System.EventHandler(this.blackWereInfo_Click);
+            // 
+            // realMetalInfo
+            // 
+            this.realMetalInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.realMetalInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.realMetalInfo.Location = new System.Drawing.Point(315, 323);
+            this.realMetalInfo.Name = "realMetalInfo";
+            this.realMetalInfo.Size = new System.Drawing.Size(35, 35);
+            this.realMetalInfo.TabIndex = 30;
+            this.realMetalInfo.Text = "?";
+            this.realMetalInfo.UseVisualStyleBackColor = false;
+            this.realMetalInfo.Click += new System.EventHandler(this.realMetalInfo_Click);
+            // 
+            // blackWere
+            // 
+            this.blackWere.AutoSize = true;
+            this.blackWere.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.blackWere.Location = new System.Drawing.Point(553, 323);
+            this.blackWere.Name = "blackWere";
+            this.blackWere.Size = new System.Drawing.Size(305, 35);
+            this.blackWere.TabIndex = 29;
+            this.blackWere.Text = "Black Weregarurumon";
+            this.blackWere.UseVisualStyleBackColor = true;
+            this.blackWere.CheckedChanged += new System.EventHandler(this.blackWere_CheckedChanged);
+            // 
+            // RealMetal
+            // 
+            this.RealMetal.AutoSize = true;
+            this.RealMetal.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.RealMetal.Location = new System.Drawing.Point(33, 323);
+            this.RealMetal.Name = "RealMetal";
+            this.RealMetal.Size = new System.Drawing.Size(269, 35);
+            this.RealMetal.TabIndex = 28;
+            this.RealMetal.Text = "Real MetalGreymon";
+            this.RealMetal.UseVisualStyleBackColor = true;
+            this.RealMetal.CheckedChanged += new System.EventHandler(this.RealMetal_CheckedChanged);
+            // 
             // Starters2
             // 
             this.Starters2.AutoSize = true;
@@ -687,6 +737,8 @@
             // 
             // miscPatches
             // 
+            this.miscPatches.Controls.Add(this.quickText);
+            this.miscPatches.Controls.Add(this.digitalClock);
             this.miscPatches.Controls.Add(this.NewMonoInfo);
             this.miscPatches.Controls.Add(this.RestoreTypes);
             this.miscPatches.Controls.Add(this.EvoInfo);
@@ -707,16 +759,40 @@
             this.miscPatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.miscPatches.Location = new System.Drawing.Point(90, 160);
             this.miscPatches.Name = "miscPatches";
-            this.miscPatches.Size = new System.Drawing.Size(1000, 460);
+            this.miscPatches.Size = new System.Drawing.Size(1000, 510);
             this.miscPatches.TabIndex = 21;
             this.miscPatches.TabStop = false;
             this.miscPatches.Text = "Miscellaneous patches";
             this.miscPatches.Visible = false;
             // 
+            // quickText
+            // 
+            this.quickText.AutoSize = true;
+            this.quickText.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.quickText.Location = new System.Drawing.Point(590, 460);
+            this.quickText.Name = "quickText";
+            this.quickText.Size = new System.Drawing.Size(238, 35);
+            this.quickText.TabIndex = 36;
+            this.quickText.Text = "Quick battle text";
+            this.quickText.UseVisualStyleBackColor = true;
+            this.quickText.CheckedChanged += new System.EventHandler(this.quickText_CheckedChanged);
+            // 
+            // digitalClock
+            // 
+            this.digitalClock.AutoSize = true;
+            this.digitalClock.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.digitalClock.Location = new System.Drawing.Point(109, 460);
+            this.digitalClock.Name = "digitalClock";
+            this.digitalClock.Size = new System.Drawing.Size(184, 35);
+            this.digitalClock.TabIndex = 35;
+            this.digitalClock.Text = "Digital clock";
+            this.digitalClock.UseVisualStyleBackColor = true;
+            this.digitalClock.CheckedChanged += new System.EventHandler(this.digitalClock_CheckedChanged);
+            // 
             // NewMonoInfo
             // 
             this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMonoInfo.Location = new System.Drawing.Point(401, 409);
+            this.NewMonoInfo.Location = new System.Drawing.Point(401, 390);
             this.NewMonoInfo.Name = "NewMonoInfo";
             this.NewMonoInfo.Size = new System.Drawing.Size(35, 35);
             this.NewMonoInfo.TabIndex = 34;
@@ -729,7 +805,7 @@
             this.RestoreTypes.AutoSize = true;
             this.RestoreTypes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.RestoreTypes.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.RestoreTypes.Location = new System.Drawing.Point(587, 409);
+            this.RestoreTypes.Location = new System.Drawing.Point(590, 390);
             this.RestoreTypes.Name = "RestoreTypes";
             this.RestoreTypes.Size = new System.Drawing.Size(291, 35);
             this.RestoreTypes.TabIndex = 33;
@@ -741,7 +817,7 @@
             // 
             this.EvoInfo.AutoSize = true;
             this.EvoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.EvoInfo.Location = new System.Drawing.Point(109, 339);
+            this.EvoInfo.Location = new System.Drawing.Point(109, 320);
             this.EvoInfo.Name = "EvoInfo";
             this.EvoInfo.Size = new System.Drawing.Size(228, 35);
             this.EvoInfo.TabIndex = 32;
@@ -753,7 +829,7 @@
             // 
             this.extraInput.AutoSize = true;
             this.extraInput.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.extraInput.Location = new System.Drawing.Point(590, 339);
+            this.extraInput.Location = new System.Drawing.Point(590, 320);
             this.extraInput.Name = "extraInput";
             this.extraInput.Size = new System.Drawing.Size(168, 35);
             this.extraInput.TabIndex = 31;
@@ -765,7 +841,7 @@
             // 
             this.NewMono.AutoSize = true;
             this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMono.Location = new System.Drawing.Point(109, 409);
+            this.NewMono.Location = new System.Drawing.Point(109, 390);
             this.NewMono.Name = "NewMono";
             this.NewMono.Size = new System.Drawing.Size(267, 35);
             this.NewMono.TabIndex = 30;
@@ -777,7 +853,7 @@
             // 
             this.removeTelephone.AutoSize = true;
             this.removeTelephone.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.removeTelephone.Location = new System.Drawing.Point(590, 264);
+            this.removeTelephone.Location = new System.Drawing.Point(590, 250);
             this.removeTelephone.Name = "removeTelephone";
             this.removeTelephone.Size = new System.Drawing.Size(321, 35);
             this.removeTelephone.TabIndex = 29;
@@ -789,7 +865,7 @@
             // 
             this.colourBreak.AutoSize = true;
             this.colourBreak.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.colourBreak.Location = new System.Drawing.Point(109, 193);
+            this.colourBreak.Location = new System.Drawing.Point(109, 180);
             this.colourBreak.Name = "colourBreak";
             this.colourBreak.Size = new System.Drawing.Size(245, 35);
             this.colourBreak.TabIndex = 28;
@@ -801,7 +877,7 @@
             // 
             this.removeTechBoost.AutoSize = true;
             this.removeTechBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.removeTechBoost.Location = new System.Drawing.Point(590, 193);
+            this.removeTechBoost.Location = new System.Drawing.Point(590, 180);
             this.removeTechBoost.Name = "removeTechBoost";
             this.removeTechBoost.Size = new System.Drawing.Size(264, 35);
             this.removeTechBoost.TabIndex = 27;
@@ -813,7 +889,7 @@
             // 
             this.restoreLifetime.AutoSize = true;
             this.restoreLifetime.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreLifetime.Location = new System.Drawing.Point(109, 264);
+            this.restoreLifetime.Location = new System.Drawing.Point(109, 250);
             this.restoreLifetime.Name = "restoreLifetime";
             this.restoreLifetime.Size = new System.Drawing.Size(455, 35);
             this.restoreLifetime.TabIndex = 26;
@@ -861,7 +937,7 @@
             // 
             this.insaneBattle.AutoSize = true;
             this.insaneBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneBattle.Location = new System.Drawing.Point(109, 120);
+            this.insaneBattle.Location = new System.Drawing.Point(109, 110);
             this.insaneBattle.Name = "insaneBattle";
             this.insaneBattle.Size = new System.Drawing.Size(207, 35);
             this.insaneBattle.TabIndex = 3;
@@ -901,7 +977,7 @@
             // 
             this.UnlockAreas.AutoSize = true;
             this.UnlockAreas.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UnlockAreas.Location = new System.Drawing.Point(590, 118);
+            this.UnlockAreas.Location = new System.Drawing.Point(590, 110);
             this.UnlockAreas.Name = "UnlockAreas";
             this.UnlockAreas.Size = new System.Drawing.Size(254, 35);
             this.UnlockAreas.TabIndex = 0;
@@ -1398,54 +1474,6 @@
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
-            // RealMetal
-            // 
-            this.RealMetal.AutoSize = true;
-            this.RealMetal.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.RealMetal.Location = new System.Drawing.Point(33, 323);
-            this.RealMetal.Name = "RealMetal";
-            this.RealMetal.Size = new System.Drawing.Size(269, 35);
-            this.RealMetal.TabIndex = 28;
-            this.RealMetal.Text = "Real MetalGreymon";
-            this.RealMetal.UseVisualStyleBackColor = true;
-            this.RealMetal.CheckedChanged += new System.EventHandler(this.RealMetal_CheckedChanged);
-            // 
-            // blackWere
-            // 
-            this.blackWere.AutoSize = true;
-            this.blackWere.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.blackWere.Location = new System.Drawing.Point(553, 323);
-            this.blackWere.Name = "blackWere";
-            this.blackWere.Size = new System.Drawing.Size(305, 35);
-            this.blackWere.TabIndex = 29;
-            this.blackWere.Text = "Black Weregarurumon";
-            this.blackWere.UseVisualStyleBackColor = true;
-            this.blackWere.CheckedChanged += new System.EventHandler(this.blackWere_CheckedChanged);
-            // 
-            // realMetalInfo
-            // 
-            this.realMetalInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.realMetalInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.realMetalInfo.Location = new System.Drawing.Point(315, 323);
-            this.realMetalInfo.Name = "realMetalInfo";
-            this.realMetalInfo.Size = new System.Drawing.Size(35, 35);
-            this.realMetalInfo.TabIndex = 30;
-            this.realMetalInfo.Text = "?";
-            this.realMetalInfo.UseVisualStyleBackColor = false;
-            this.realMetalInfo.Click += new System.EventHandler(this.realMetalInfo_Click);
-            // 
-            // blackWereInfo
-            // 
-            this.blackWereInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.blackWereInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.blackWereInfo.Location = new System.Drawing.Point(864, 322);
-            this.blackWereInfo.Name = "blackWereInfo";
-            this.blackWereInfo.Size = new System.Drawing.Size(35, 35);
-            this.blackWereInfo.TabIndex = 31;
-            this.blackWereInfo.Text = "?";
-            this.blackWereInfo.UseVisualStyleBackColor = false;
-            this.blackWereInfo.Click += new System.EventHandler(this.blackWereInfo_Click);
-            // 
             // ViceHackPatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1591,5 +1619,7 @@
         private System.Windows.Forms.Button realMetalInfo;
         private System.Windows.Forms.CheckBox blackWere;
         private System.Windows.Forms.CheckBox RealMetal;
+        private System.Windows.Forms.CheckBox quickText;
+        private System.Windows.Forms.CheckBox digitalClock;
     }
 }

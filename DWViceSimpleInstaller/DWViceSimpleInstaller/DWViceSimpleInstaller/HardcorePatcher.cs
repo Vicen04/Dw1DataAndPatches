@@ -1020,6 +1020,7 @@ namespace DWViceSimpleInstaller
         private void RMetalGInfo_Click(object sender, EventArgs e)
         {
             string tempText = "VANILLA ONLY. MAY WORK WITH MAESON" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                              "Original patch made by Gledson999, this is a modified version of it." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                               "This patch changes the colour and types of MetalGreymon to resemble more the vaccine MetalGreymon." + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                               "Features: " + Environment.NewLine + Environment.NewLine +
                               "- The texture and model have been changed to be able to recolor it to match the vaccine colours better." + Environment.NewLine + Environment.NewLine +
