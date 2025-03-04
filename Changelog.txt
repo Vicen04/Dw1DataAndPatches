@@ -309,3 +309,7 @@ Version 2.0:
 - Added "RealMetalGreymon" and "BlackWereGarurumon"
 
 - Multiple bug fixes
+
+04/03/25
+
+- Addition of the "digital clock" and "quick battle text" patches
