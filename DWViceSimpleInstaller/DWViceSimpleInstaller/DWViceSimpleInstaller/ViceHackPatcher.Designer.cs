@@ -130,6 +130,7 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
+            this.noRNG = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -139,6 +140,7 @@
             // 
             // DifficultyPatchesContainer
             // 
+            this.DifficultyPatchesContainer.Controls.Add(this.noRNG);
             this.DifficultyPatchesContainer.Controls.Add(this.HyperMono);
             this.DifficultyPatchesContainer.Controls.Add(this.trueHardcoreInfo);
             this.DifficultyPatchesContainer.Controls.Add(this.trueHardcore);
@@ -174,7 +176,7 @@
             // 
             this.HyperMono.AutoSize = true;
             this.HyperMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HyperMono.Location = new System.Drawing.Point(588, 209);
+            this.HyperMono.Location = new System.Drawing.Point(718, 91);
             this.HyperMono.Name = "HyperMono";
             this.HyperMono.Size = new System.Drawing.Size(243, 35);
             this.HyperMono.TabIndex = 19;
@@ -185,7 +187,7 @@
             // trueHardcoreInfo
             // 
             this.trueHardcoreInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.trueHardcoreInfo.Location = new System.Drawing.Point(306, 323);
+            this.trueHardcoreInfo.Location = new System.Drawing.Point(306, 267);
             this.trueHardcoreInfo.Name = "trueHardcoreInfo";
             this.trueHardcoreInfo.Size = new System.Drawing.Size(35, 35);
             this.trueHardcoreInfo.TabIndex = 18;
@@ -198,7 +200,7 @@
             this.trueHardcore.AutoSize = true;
             this.trueHardcore.Enabled = false;
             this.trueHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trueHardcore.Location = new System.Drawing.Point(38, 323);
+            this.trueHardcore.Location = new System.Drawing.Point(37, 267);
             this.trueHardcore.Name = "trueHardcore";
             this.trueHardcore.Size = new System.Drawing.Size(263, 35);
             this.trueHardcore.TabIndex = 17;
@@ -209,7 +211,7 @@
             // ProgressionInfo
             // 
             this.ProgressionInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.ProgressionInfo.Location = new System.Drawing.Point(306, 267);
+            this.ProgressionInfo.Location = new System.Drawing.Point(306, 319);
             this.ProgressionInfo.Name = "ProgressionInfo";
             this.ProgressionInfo.Size = new System.Drawing.Size(35, 35);
             this.ProgressionInfo.TabIndex = 16;
@@ -221,7 +223,7 @@
             // 
             this.ProgressionMode.AutoSize = true;
             this.ProgressionMode.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProgressionMode.Location = new System.Drawing.Point(38, 268);
+            this.ProgressionMode.Location = new System.Drawing.Point(38, 322);
             this.ProgressionMode.Name = "ProgressionMode";
             this.ProgressionMode.Size = new System.Drawing.Size(251, 35);
             this.ProgressionMode.TabIndex = 15;
@@ -300,7 +302,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Black", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.label3.Location = new System.Drawing.Point(594, 32);
+            this.label3.Location = new System.Drawing.Point(514, 32);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(367, 38);
             this.label3.TabIndex = 9;
@@ -311,7 +313,7 @@
             this.ultraHardcore.AutoSize = true;
             this.ultraHardcore.Enabled = false;
             this.ultraHardcore.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ultraHardcore.Location = new System.Drawing.Point(588, 323);
+            this.ultraHardcore.Location = new System.Drawing.Point(435, 268);
             this.ultraHardcore.Name = "ultraHardcore";
             this.ultraHardcore.Size = new System.Drawing.Size(285, 35);
             this.ultraHardcore.TabIndex = 8;
@@ -323,7 +325,7 @@
             // 
             this.tournaments.AutoSize = true;
             this.tournaments.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tournaments.Location = new System.Drawing.Point(588, 268);
+            this.tournaments.Location = new System.Drawing.Point(435, 149);
             this.tournaments.Name = "tournaments";
             this.tournaments.Size = new System.Drawing.Size(310, 35);
             this.tournaments.TabIndex = 7;
@@ -335,11 +337,11 @@
             // 
             this.Monochromon.AutoSize = true;
             this.Monochromon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Monochromon.Location = new System.Drawing.Point(588, 149);
+            this.Monochromon.Location = new System.Drawing.Point(435, 92);
             this.Monochromon.Name = "Monochromon";
-            this.Monochromon.Size = new System.Drawing.Size(327, 35);
+            this.Monochromon.Size = new System.Drawing.Size(243, 35);
             this.Monochromon.TabIndex = 6;
-            this.Monochromon.Text = "Hardcore Monochromon";
+            this.Monochromon.Text = "4k Monochromon";
             this.Monochromon.UseVisualStyleBackColor = true;
             this.Monochromon.CheckedChanged += new System.EventHandler(this.Monochromon_CheckedChanged);
             // 
@@ -347,7 +349,7 @@
             // 
             this.hardcoreBattler.AutoSize = true;
             this.hardcoreBattler.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hardcoreBattler.Location = new System.Drawing.Point(588, 91);
+            this.hardcoreBattler.Location = new System.Drawing.Point(435, 210);
             this.hardcoreBattler.Name = "hardcoreBattler";
             this.hardcoreBattler.Size = new System.Drawing.Size(171, 35);
             this.hardcoreBattler.TabIndex = 5;
@@ -1474,6 +1476,19 @@
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
+            // noRNG
+            // 
+            this.noRNG.AutoSize = true;
+            this.noRNG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noRNG.Location = new System.Drawing.Point(671, 210);
+            this.noRNG.Name = "noRNG";
+            this.noRNG.Size = new System.Drawing.Size(290, 35);
+            this.noRNG.TabIndex = 20;
+            this.noRNG.Text = "No RNG Manipulation";
+            this.noRNG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.noRNG.UseVisualStyleBackColor = true;
+            this.noRNG.CheckedChanged += new System.EventHandler(this.noRNG_CheckedChanged);
+            // 
             // ViceHackPatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1621,5 +1636,6 @@
         private System.Windows.Forms.CheckBox RealMetal;
         private System.Windows.Forms.CheckBox quickText;
         private System.Windows.Forms.CheckBox digitalClock;
+        private System.Windows.Forms.CheckBox noRNG;
     }
 }

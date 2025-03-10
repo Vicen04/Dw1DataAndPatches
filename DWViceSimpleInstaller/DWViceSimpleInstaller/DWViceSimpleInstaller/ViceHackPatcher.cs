@@ -264,6 +264,8 @@ namespace DWViceSimpleInstaller
                 hardcoreBattler.Checked = false;                
                 removeTechBoost.Enabled = false;
                 removeTechBoost.Checked = false;
+                noRNG.Checked = true;
+                noRNG.Enabled = false;
             }
             else
             {
@@ -273,12 +275,16 @@ namespace DWViceSimpleInstaller
                     hardcoreBattler.Enabled = true;                
                 else if (!ChallengePatch.Checked)
                     hardcoreBattler.Enabled = true;
+
+                noRNG.Enabled = true;
             }
         }
 
         private void Monochromon_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetHardMono(Monochromon.Checked);
+            if (Monochromon.Checked)
+                HyperMono.Checked = false;
         }
 
         private void tournaments_CheckedChanged(object sender, EventArgs e)
@@ -302,6 +308,7 @@ namespace DWViceSimpleInstaller
                "- 8k Monochromon: The bits requirement to recruit Monochromon is increased to 8192 (Why would you choose this?)" + Environment.NewLine + Environment.NewLine +
                "- Hardcore tournaments: Tournaments will have the stats of the digimon buffed" + Environment.NewLine + Environment.NewLine +
                "- Ultra hardcore mode: you will be unable to run from battle and unable to use items in battle, on top of that, the tech boost for your digimon will be disabled and all of the NPCs will have a tech boost applied to all the normal techs" + Environment.NewLine + Environment.NewLine +
+               "- No RNG Manipulation: forces the game to advance the RNG each frame, basically killing manipulation for humans" + Environment.NewLine + Environment.NewLine +
                "- Progression mode: technically a main patch but it can be mixed, click on the question mark next to it for detailed info" + Environment.NewLine + Environment.NewLine + Environment.NewLine +
                "FILTH CHALLENGE" + Environment.NewLine + Environment.NewLine +
                "Can be mixed with other patches or applied as a standalone:" + Environment.NewLine + Environment.NewLine +
@@ -978,6 +985,8 @@ namespace DWViceSimpleInstaller
         private void HyperMono_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.Set8kMono(HyperMono.Checked);
+            if (HyperMono.Checked)
+                Monochromon.Checked = false;
         }
 
         private void NewMono_CheckedChanged(object sender, EventArgs e)
@@ -1074,6 +1083,11 @@ namespace DWViceSimpleInstaller
         private void digitalClock_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetDigitalClock(digitalClock.Checked);
+        }
+
+        private void noRNG_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetRNG(noRNG.Checked);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace DWViceSimpleInstaller
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock;
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -103,7 +103,7 @@ namespace DWViceSimpleInstaller
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -149,7 +149,18 @@ namespace DWViceSimpleInstaller
             }
 
             if (ultraHardcore)
-                SetPatch(path + "UltraHardcoreEnabler.ppf");
+            {
+                if (currentViceDifficulty == viceDifficulty.HARDCORE)
+                {
+                    if (trueHardcore)
+                        SetPatch(path + "UltraHardcoreT.ppf");
+                    else
+                        SetPatch(path + "UltraHardcoreH.ppf");
+                }
+                else
+                    SetPatch(path + "UltraHardcoreEnabler.ppf");
+            }
+               
 
             if (curlingRandomizer && restorePanjyamon)
                 SetPatch(path + "CurlingRandomizerViceP.ppf");   
@@ -211,7 +222,7 @@ namespace DWViceSimpleInstaller
             if (originalType)
                 SetPatch(path + "RestoreTypes.ppf");
 
-            if (extraInput)
+            if (extraInput && !noRNG)
                 SetPatch(path + "ExtraInput.ppf");
 
             if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
@@ -225,6 +236,14 @@ namespace DWViceSimpleInstaller
 
             if (digitalClock)
                 SetPatch(path + "DigitalClock.ppf");
+
+            if (noRNG)
+            {
+                if (extraInput)
+                    SetPatch(path + "ExtraInputRNG.ppf");
+                else
+                    SetPatch(path + "noRNG.ppf");
+            }
 
 
             InstallOptionalPatches();
@@ -593,6 +612,8 @@ namespace DWViceSimpleInstaller
         public void SetDigitalClock(bool enabled) { digitalClock = enabled; }
         public void SetQuickText(bool enabled) { quickText = enabled; }
 
+        public void SetRNG(bool enabled) { noRNG = enabled; }
+
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
         {
@@ -911,6 +932,13 @@ namespace DWViceSimpleInstaller
                 if (digitalClock)
                 {
                     txtWritter.Write("- Digital clock");
+                    txtWritter.WriteLine();
+                }
+
+
+                if (noRNG)
+                {
+                    txtWritter.Write("- No RNG Manipulation");
                     txtWritter.WriteLine();
                 }
             }
