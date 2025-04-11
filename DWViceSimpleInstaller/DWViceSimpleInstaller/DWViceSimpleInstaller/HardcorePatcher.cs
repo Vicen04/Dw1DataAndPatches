@@ -333,7 +333,9 @@ namespace DWViceSimpleInstaller
                " * Years medal requires to reach year 6" + Environment.NewLine + Environment.NewLine +
                " * Curling requires only 5 score" + Environment.NewLine + Environment.NewLine +
                "- Guaranteed rare spawns: Piximon, Mamemon, MetalMamemon and Otamamon will always appear." + Environment.NewLine + Environment.NewLine +
-               "- Full time Seadramon: Seadramon appears at any time in the lake.";
+               "- Full time Seadramon: Seadramon appears at any time in the lake." + Environment.NewLine + Environment.NewLine +
+               "- Easy Start: More items given by Tokomon at the start, should make the start a lot easier" + Environment.NewLine + Environment.NewLine +
+               "- Better vending machines: The vending machines will have better deals (not included the one at the Dragon Eye Lake).";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -837,6 +839,10 @@ namespace DWViceSimpleInstaller
             NewMono.Visible = false;
             NewMonoInfo.Visible = false;
             NewMonoInfo.Enabled = false;
+            vendingMachines.Visible = false;
+            vendingMachines.Enabled = false;
+            easyStart.Visible = false;
+            easyStart.Enabled = false;
         }
 
         private void RightUseful_Click(object sender, EventArgs e)
@@ -873,6 +879,10 @@ namespace DWViceSimpleInstaller
             NewMono.Visible = true;
             NewMonoInfo.Visible = true;
             NewMonoInfo.Enabled = true;
+            vendingMachines.Visible = true;
+            vendingMachines.Enabled = true;
+            easyStart.Visible = true;
+            easyStart.Enabled = true;
 
 
             RightUseful.Enabled= false;
@@ -907,6 +917,7 @@ namespace DWViceSimpleInstaller
             medals.Enabled = false;
             rareSpawn.Visible = false;
             rareSpawn.Enabled = false;
+
 
         }
 
@@ -1040,6 +1051,16 @@ namespace DWViceSimpleInstaller
         private void RMetalG_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetRMetal(RMetalG.Checked);
+        }
+
+        private void vendingMachines_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetVendingMachines(vendingMachines.Checked);
+        }
+
+        private void easyStart_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEasyStart(easyStart.Checked);
         }
     }
 }

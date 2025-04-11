@@ -317,3 +317,9 @@ Version 2.0:
 10/03/25
 
 - Addition of the "No RNG manipulation", fixed some issues with the "digital clock" patch.
+
+11/04/25
+
+- Addition of "Easy Start", "Better vending machines" and "Super Boost Items"
+
+- Update to "Helpful items", "Super low Monochromon goal" and "Black Weregarurumon"

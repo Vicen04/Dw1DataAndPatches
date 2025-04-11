@@ -414,7 +414,8 @@ namespace DWViceSimpleInstaller
                " * Auto text by holding L1, press L1 + select to toggle the auto text on/off" + Environment.NewLine + Environment.NewLine +
                " * Reset the game by pressing 'Select + Start + Triangle + Square + Circle + Cross'." + Environment.NewLine + Environment.NewLine +
                "- Quick text: The text that happens after battle will be instant, similar to the Japanese version" + Environment.NewLine + Environment.NewLine +
-               "- Digital clock: This will replace the analog clock for a digital one";
+               "- Digital clock: This will replace the analog clock for a digital one" + Environment.NewLine + Environment.NewLine +
+               "- Super Boost Items: The Disk buffs will be more powerful and also will be able to go over the stat limit (max +30% of your stat).";
 
 
 
@@ -428,12 +429,12 @@ namespace DWViceSimpleInstaller
 
         private void InfoUseful_Click(object sender, EventArgs e)
         {
-            string tempText = "These are patches that will help the player:" + Environment.NewLine + Environment.NewLine +              
+            string tempText = "These are patches that will help the player:" + Environment.NewLine + Environment.NewLine +
                "- New stats gains: the stats gains formula after you win a battle has been changed: stat gain = (1% of digimon with the highest stat x number of enemies)" + Environment.NewLine + Environment.NewLine +
                "- Super stats gains: Uses the new formula and duplicates the result" + Environment.NewLine + Environment.NewLine +
-               "- Ultra stats gains: Uses the new formula and multiplies the result by 10" + Environment.NewLine + Environment.NewLine + 
+               "- Ultra stats gains: Uses the new formula and multiplies the result by 10" + Environment.NewLine + Environment.NewLine +
                "- Stat gains evo item: Stat gains and extra lifespan are enabled when using an evolution item" + Environment.NewLine + Environment.NewLine +
-               "- Short intro: Makes the introduction a lot shorter" + Environment.NewLine + Environment.NewLine +               
+               "- Short intro: Makes the introduction a lot shorter" + Environment.NewLine + Environment.NewLine +
                "- Super useful rigging: The help from the bonus try now will make you always land in the right stop" + Environment.NewLine + Environment.NewLine +
                "- Ultra lucky bonus try: The chances of triggering the help are now 90% (60% normal help + 30% golden poop) + the effect from the super useful rigging patch" + Environment.NewLine + Environment.NewLine +
                "- Drimogemon dirt reduction: The removal of dirt will be reduced to only 5 times" + Environment.NewLine + Environment.NewLine +
@@ -441,7 +442,7 @@ namespace DWViceSimpleInstaller
                "- Super low Monochromon goal: You will only need 1280 bits to recruit Monochromon" + Environment.NewLine + Environment.NewLine +
                "- Helpful items: it does the following:" + Environment.NewLine + Environment.NewLine +
                " * The 'Steak' will now reduce the lifespan of a digimon to 0" + Environment.NewLine + Environment.NewLine +
-               " * The vending machine at the 'Dragon Eye Lake' will sell 'Steaks' and 'Prickly Pears'" + Environment.NewLine + Environment.NewLine +
+               " * The vending machine at the 'Dragon Eye Lake' will sell 'Steaks' and 'HappyMushrooms'" + Environment.NewLine + Environment.NewLine +
                "- Better drops: Digimon have better chances to drop an item, some digimon now drop different items" + Environment.NewLine + Environment.NewLine +
                "- Better restaurant: the restaurant will give better stats, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
                "- Better drimogemon: Drimogemon will give better rewards and lower the time it requires to find treasure, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
@@ -459,7 +460,9 @@ namespace DWViceSimpleInstaller
                " * Years medal requires to reach year 6" + Environment.NewLine + Environment.NewLine +
                " * Curling requires only 5 score" + Environment.NewLine + Environment.NewLine +
                "- Guaranteed rare spawns: Piximon, Mamemon, MetalMamemon and Otamamon will always appear." + Environment.NewLine + Environment.NewLine +
-               "- Full time Seadramon: Seadramon appears at any time in the lake.";
+               "- Full time Seadramon: Seadramon appears at any time in the lake." + Environment.NewLine + Environment.NewLine +
+               "- Easy Start: More items given by Tokomon at the start, should make the start a lot easier" + Environment.NewLine + Environment.NewLine +
+               "- Better vending machines: The vending machines will have better deals (not included the one at the Dragon Eye Lake).";
 
             ViceHackInfo infoDifficulty = new ViceHackInfo();
             infoDifficulty.ChangeLink("Optional patches spreadsheet data", "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
@@ -779,6 +782,10 @@ namespace DWViceSimpleInstaller
             trainingBoost.Enabled = true;
             Seadramon.Visible = true;
             Seadramon.Enabled = true;
+            vendingMachines.Visible = true;
+            vendingMachines.Enabled = true;
+            EasyStart.Visible = true;
+            EasyStart.Enabled = true;
 
 
             RightButton.Enabled = false;
@@ -873,6 +880,10 @@ namespace DWViceSimpleInstaller
             trainingBoost.Enabled = false;
             Seadramon.Visible = false;
             Seadramon.Enabled = false;
+            vendingMachines.Visible = false;
+            vendingMachines.Enabled = false;
+            EasyStart.Visible = false;
+            EasyStart.Enabled = false;
         }
 
         private void UsefulItems2_CheckedChanged(object sender, EventArgs e)
@@ -1088,6 +1099,21 @@ namespace DWViceSimpleInstaller
         private void noRNG_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetRNG(noRNG.Checked);
+        }
+
+        private void vendingMachines_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetVendingMachines(vendingMachines.Checked);
+        }
+
+        private void EasyStart_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetEasyStart(EasyStart.Checked);
+        }
+
+        private void BoostItem_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetSuperBoostItems(BoostItem.Checked);
         }
     }
 }

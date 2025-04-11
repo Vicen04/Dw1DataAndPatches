@@ -12,7 +12,7 @@ For anyone who wants to ask questions or want help with modding:
 
 ## Digimon World Vice
 
-I have created a hack which mostly includes the changes shown in this repository (Last update 10/03/25).
+I have created a hack which mostly includes the changes shown in this repository (Last update 11/04/25).
 
 [Vice 2.1 installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer_2)
 

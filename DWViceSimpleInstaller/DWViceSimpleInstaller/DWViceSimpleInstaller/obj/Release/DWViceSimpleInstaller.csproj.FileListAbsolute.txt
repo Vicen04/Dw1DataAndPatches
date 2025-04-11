@@ -2,7 +2,6 @@ C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSi
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\bin\Release\DWViceSimpleInstaller.exe
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\bin\Release\DWViceSimpleInstaller.pdb
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\obj\Release\DWViceSimpleInstaller.csproj.AssemblyReference.cache
-C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\obj\Release\DWViceSimpleInstaller.csproj.SuggestedBindingRedirects.cache
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\obj\Release\DWViceSimpleInstaller.OptionalPatchesInfo.resources
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\obj\Release\DWViceSimpleInstaller.HardcoreHackInfo.resources
 C:\Users\vicea\Documents\GitHub\Dw1DataAndPatches\DWViceSimpleInstaller\DWViceSimpleInstaller\DWViceSimpleInstaller\obj\Release\DWViceSimpleInstaller.MainApp.resources

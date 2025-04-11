@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.DifficultyPatchesContainer = new System.Windows.Forms.GroupBox();
+            this.noRNG = new System.Windows.Forms.CheckBox();
             this.HyperMono = new System.Windows.Forms.CheckBox();
             this.trueHardcoreInfo = new System.Windows.Forms.Button();
             this.trueHardcore = new System.Windows.Forms.CheckBox();
@@ -130,7 +131,9 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
-            this.noRNG = new System.Windows.Forms.CheckBox();
+            this.EasyStart = new System.Windows.Forms.CheckBox();
+            this.vendingMachines = new System.Windows.Forms.CheckBox();
+            this.BoostItem = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -171,6 +174,19 @@
             this.DifficultyPatchesContainer.TabStop = false;
             this.DifficultyPatchesContainer.Text = "Difficulty patches";
             this.DifficultyPatchesContainer.Visible = false;
+            // 
+            // noRNG
+            // 
+            this.noRNG.AutoSize = true;
+            this.noRNG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noRNG.Location = new System.Drawing.Point(671, 210);
+            this.noRNG.Name = "noRNG";
+            this.noRNG.Size = new System.Drawing.Size(290, 35);
+            this.noRNG.TabIndex = 20;
+            this.noRNG.Text = "No RNG Manipulation";
+            this.noRNG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.noRNG.UseVisualStyleBackColor = true;
+            this.noRNG.CheckedChanged += new System.EventHandler(this.noRNG_CheckedChanged);
             // 
             // HyperMono
             // 
@@ -739,6 +755,7 @@
             // 
             // miscPatches
             // 
+            this.miscPatches.Controls.Add(this.BoostItem);
             this.miscPatches.Controls.Add(this.quickText);
             this.miscPatches.Controls.Add(this.digitalClock);
             this.miscPatches.Controls.Add(this.NewMonoInfo);
@@ -819,7 +836,7 @@
             // 
             this.EvoInfo.AutoSize = true;
             this.EvoInfo.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.EvoInfo.Location = new System.Drawing.Point(109, 320);
+            this.EvoInfo.Location = new System.Drawing.Point(588, 319);
             this.EvoInfo.Name = "EvoInfo";
             this.EvoInfo.Size = new System.Drawing.Size(228, 35);
             this.EvoInfo.TabIndex = 32;
@@ -831,7 +848,7 @@
             // 
             this.extraInput.AutoSize = true;
             this.extraInput.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.extraInput.Location = new System.Drawing.Point(590, 320);
+            this.extraInput.Location = new System.Drawing.Point(369, 460);
             this.extraInput.Name = "extraInput";
             this.extraInput.Size = new System.Drawing.Size(168, 35);
             this.extraInput.TabIndex = 31;
@@ -891,7 +908,7 @@
             // 
             this.restoreLifetime.AutoSize = true;
             this.restoreLifetime.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.restoreLifetime.Location = new System.Drawing.Point(109, 250);
+            this.restoreLifetime.Location = new System.Drawing.Point(109, 110);
             this.restoreLifetime.Name = "restoreLifetime";
             this.restoreLifetime.Size = new System.Drawing.Size(455, 35);
             this.restoreLifetime.TabIndex = 26;
@@ -939,7 +956,7 @@
             // 
             this.insaneBattle.AutoSize = true;
             this.insaneBattle.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.insaneBattle.Location = new System.Drawing.Point(109, 110);
+            this.insaneBattle.Location = new System.Drawing.Point(109, 250);
             this.insaneBattle.Name = "insaneBattle";
             this.insaneBattle.Size = new System.Drawing.Size(207, 35);
             this.insaneBattle.TabIndex = 3;
@@ -989,6 +1006,8 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.vendingMachines);
+            this.usefulContainer.Controls.Add(this.EasyStart);
             this.usefulContainer.Controls.Add(this.medals);
             this.usefulContainer.Controls.Add(this.rareSpawn);
             this.usefulContainer.Controls.Add(this.Seadramon);
@@ -1148,7 +1167,7 @@
             this.BetterRestaurant.AutoSize = true;
             this.BetterRestaurant.Enabled = false;
             this.BetterRestaurant.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRestaurant.Location = new System.Drawing.Point(607, 35);
+            this.BetterRestaurant.Location = new System.Drawing.Point(344, 32);
             this.BetterRestaurant.Name = "BetterRestaurant";
             this.BetterRestaurant.Size = new System.Drawing.Size(245, 35);
             this.BetterRestaurant.TabIndex = 17;
@@ -1176,7 +1195,7 @@
             this.BetterMerit.AutoSize = true;
             this.BetterMerit.Enabled = false;
             this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterMerit.Location = new System.Drawing.Point(607, 114);
+            this.BetterMerit.Location = new System.Drawing.Point(344, 114);
             this.BetterMerit.Name = "BetterMerit";
             this.BetterMerit.Size = new System.Drawing.Size(181, 35);
             this.BetterMerit.TabIndex = 15;
@@ -1476,18 +1495,45 @@
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
             // 
-            // noRNG
+            // EasyStart
             // 
-            this.noRNG.AutoSize = true;
-            this.noRNG.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noRNG.Location = new System.Drawing.Point(671, 210);
-            this.noRNG.Name = "noRNG";
-            this.noRNG.Size = new System.Drawing.Size(290, 35);
-            this.noRNG.TabIndex = 20;
-            this.noRNG.Text = "No RNG Manipulation";
-            this.noRNG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.noRNG.UseVisualStyleBackColor = true;
-            this.noRNG.CheckedChanged += new System.EventHandler(this.noRNG_CheckedChanged);
+            this.EasyStart.AutoSize = true;
+            this.EasyStart.Enabled = false;
+            this.EasyStart.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.EasyStart.Location = new System.Drawing.Point(607, 114);
+            this.EasyStart.Name = "EasyStart";
+            this.EasyStart.Size = new System.Drawing.Size(156, 35);
+            this.EasyStart.TabIndex = 27;
+            this.EasyStart.Text = "Easy start";
+            this.EasyStart.UseVisualStyleBackColor = true;
+            this.EasyStart.Visible = false;
+            this.EasyStart.CheckedChanged += new System.EventHandler(this.EasyStart_CheckedChanged);
+            // 
+            // vendingMachines
+            // 
+            this.vendingMachines.AutoSize = true;
+            this.vendingMachines.Enabled = false;
+            this.vendingMachines.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.vendingMachines.Location = new System.Drawing.Point(607, 32);
+            this.vendingMachines.Name = "vendingMachines";
+            this.vendingMachines.Size = new System.Drawing.Size(335, 35);
+            this.vendingMachines.TabIndex = 28;
+            this.vendingMachines.Text = "Better vending machines";
+            this.vendingMachines.UseVisualStyleBackColor = true;
+            this.vendingMachines.Visible = false;
+            this.vendingMachines.CheckedChanged += new System.EventHandler(this.vendingMachines_CheckedChanged);
+            // 
+            // BoostItem
+            // 
+            this.BoostItem.AutoSize = true;
+            this.BoostItem.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.BoostItem.Location = new System.Drawing.Point(109, 319);
+            this.BoostItem.Name = "BoostItem";
+            this.BoostItem.Size = new System.Drawing.Size(257, 35);
+            this.BoostItem.TabIndex = 37;
+            this.BoostItem.Text = "Super Boost Items";
+            this.BoostItem.UseVisualStyleBackColor = true;
+            this.BoostItem.CheckedChanged += new System.EventHandler(this.BoostItem_CheckedChanged);
             // 
             // ViceHackPatcher
             // 
@@ -1637,5 +1683,8 @@
         private System.Windows.Forms.CheckBox quickText;
         private System.Windows.Forms.CheckBox digitalClock;
         private System.Windows.Forms.CheckBox noRNG;
+        private System.Windows.Forms.CheckBox vendingMachines;
+        private System.Windows.Forms.CheckBox EasyStart;
+        private System.Windows.Forms.CheckBox BoostItem;
     }
 }

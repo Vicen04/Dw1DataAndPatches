@@ -38,11 +38,12 @@ namespace DWViceSimpleInstaller
         bool myotismon , vermillimon , filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, infinityBurn, betterBattleTech, betterBrainTechs, betterDrop, superBonus,
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
-            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal;
+            trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal,
+            vendingMachine, easyStart;
 
         //Vice exclusive
         bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG;
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -99,11 +100,11 @@ namespace DWViceSimpleInstaller
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
             drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon = 
-            hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = false;
+            hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = vendingMachine = easyStart = false;
 
             //Vice exclusive
             insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG = false;
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG =  boostItems = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -244,6 +245,9 @@ namespace DWViceSimpleInstaller
                 else
                     SetPatch(path + "noRNG.ppf");
             }
+
+            if (boostItems)
+                SetPatch(path + "SuperDiskBuff.ppf");
 
 
             InstallOptionalPatches();
@@ -427,6 +431,12 @@ namespace DWViceSimpleInstaller
 
             if (newMono)
                 SetPatch(path + "Useful patches/NewMonochromon.ppf");
+
+            if (easyStart)
+                SetPatch(path + "Useful patches/EasyStart.ppf");
+
+            if (vendingMachine)
+                SetPatch(path + "Useful patches/VendingMachines.ppf");
 
 
 
@@ -613,6 +623,12 @@ namespace DWViceSimpleInstaller
         public void SetQuickText(bool enabled) { quickText = enabled; }
 
         public void SetRNG(bool enabled) { noRNG = enabled; }
+
+        public void SetEasyStart(bool enabled) { easyStart = enabled; }
+
+        public void SetSuperBoostItems(bool enabled) { boostItems = enabled; }
+
+        public void SetVendingMachines(bool enabled) { vendingMachine = enabled; }
 
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
@@ -941,6 +957,12 @@ namespace DWViceSimpleInstaller
                     txtWritter.Write("- No RNG Manipulation");
                     txtWritter.WriteLine();
                 }
+
+                if (boostItems)
+                {
+                    txtWritter.Write("- Super Boost Items");
+                    txtWritter.WriteLine();
+                }
             }
 
             txtWritter.WriteLine();
@@ -1105,6 +1127,24 @@ namespace DWViceSimpleInstaller
                 txtWritter.WriteLine();
             }
 
+            if (newMono)
+            {
+                txtWritter.Write("- New Monochromon shop minigame");
+                txtWritter.WriteLine();
+            }
+
+            if (easyStart)
+            {
+                txtWritter.Write("- Easy Start");
+                txtWritter.WriteLine();
+            }
+
+            if (vendingMachine)
+            {
+                txtWritter.Write("- Better vending machines");
+                txtWritter.WriteLine();
+            }
+
             txtWritter.WriteLine();
             txtWritter.Write("Techniques patches:");
             txtWritter.WriteLine();
@@ -1154,12 +1194,6 @@ namespace DWViceSimpleInstaller
             if (easyTechs)
             {
                 txtWritter.Write("- Telepathy");
-                txtWritter.WriteLine();
-            }
-
-            if (newMono)
-            {
-                txtWritter.Write("- New Monochromon shop minigame");
                 txtWritter.WriteLine();
             }
 

@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\installermain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\installermain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|c:\\users\\vicea\\documents\\github\\dw1dataandpatches\\dwvicesimpleinstaller\\dwvicesimpleinstaller\\dwvicesimpleinstaller\\vicehackpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\vicehackpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\vicehackpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\vicehackpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\hardcorepatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\hardcorepatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\hardcorepatcher.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\hardcorepatcher.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\hardcorepatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\hardcorepatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\dwvicesimpleinstaller\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6B66DC-26ED-43A5-A1EC-E5E9A1F4EE78}|DWViceSimpleInstaller\\DWViceSimpleInstaller.csproj|solutionrelative:dwvicesimpleinstaller\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HardcorePatcher.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.cs [Design]",
+              "RelativeToolTip": "DWViceSimpleInstaller\\HardcorePatcher.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T16:27:42.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ViceHackPatcher.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\ViceHackPatcher.cs [Design]",
+              "RelativeToolTip": "DWViceSimpleInstaller\\ViceHackPatcher.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T11:34:57.02Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HardcorePatcher.cs",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "RelativeToolTip": "DWViceSimpleInstaller\\HardcorePatcher.cs",
+              "ViewState": "AgIAADgDAAAAAAAAAAAowHQDAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T09:57:31.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ViceHackPatcher.cs",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "RelativeToolTip": "DWViceSimpleInstaller\\ViceHackPatcher.cs",
+              "ViewState": "AgIAAIwBAAAAAAAAAAAQwJ8BAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-11T05:38:43.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HardcorePatcher.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.Designer.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\HardcorePatcher.Designer.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\HardcorePatcher.Designer.cs",
+              "RelativeToolTip": "DWViceSimpleInstaller\\HardcorePatcher.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T09:56:41.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InstallerMain.cs",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\InstallerMain.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\InstallerMain.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\InstallerMain.cs",
+              "RelativeToolTip": "DWViceSimpleInstaller\\InstallerMain.cs",
+              "ViewState": "AgIAADAFAAAAAAAAAAAQwMMDAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-10T11:57:13.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\Program.cs",
+              "RelativeDocumentMoniker": "DWViceSimpleInstaller\\Program.cs",
+              "ToolTip": "C:\\Users\\vicea\\Documents\\GitHub\\Dw1DataAndPatches\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\DWViceSimpleInstaller\\Program.cs",
+              "RelativeToolTip": "DWViceSimpleInstaller\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-10T11:56:29.952Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -130,6 +130,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
+            this.easyStart = new System.Windows.Forms.CheckBox();
+            this.vendingMachines = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -1032,6 +1034,8 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.vendingMachines);
+            this.usefulContainer.Controls.Add(this.easyStart);
             this.usefulContainer.Controls.Add(this.NewMonoInfo);
             this.usefulContainer.Controls.Add(this.NewMono);
             this.usefulContainer.Controls.Add(this.medals);
@@ -1172,7 +1176,7 @@
             this.UsefulItems2.AutoSize = true;
             this.UsefulItems2.Enabled = false;
             this.UsefulItems2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UsefulItems2.Location = new System.Drawing.Point(607, 277);
+            this.UsefulItems2.Location = new System.Drawing.Point(357, 277);
             this.UsefulItems2.Name = "UsefulItems2";
             this.UsefulItems2.Size = new System.Drawing.Size(206, 35);
             this.UsefulItems2.TabIndex = 24;
@@ -1186,7 +1190,7 @@
             this.BetterMerit.AutoSize = true;
             this.BetterMerit.Enabled = false;
             this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterMerit.Location = new System.Drawing.Point(607, 195);
+            this.BetterMerit.Location = new System.Drawing.Point(355, 195);
             this.BetterMerit.Name = "BetterMerit";
             this.BetterMerit.Size = new System.Drawing.Size(246, 35);
             this.BetterMerit.TabIndex = 23;
@@ -1200,7 +1204,7 @@
             this.BetterRaise.AutoSize = true;
             this.BetterRaise.Enabled = false;
             this.BetterRaise.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRaise.Location = new System.Drawing.Point(678, 114);
+            this.BetterRaise.Location = new System.Drawing.Point(669, 114);
             this.BetterRaise.Name = "BetterRaise";
             this.BetterRaise.Size = new System.Drawing.Size(177, 35);
             this.BetterRaise.TabIndex = 22;
@@ -1256,7 +1260,7 @@
             this.BetterCards.AutoSize = true;
             this.BetterCards.Enabled = false;
             this.BetterCards.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterCards.Location = new System.Drawing.Point(678, 32);
+            this.BetterCards.Location = new System.Drawing.Point(669, 32);
             this.BetterCards.Name = "BetterCards";
             this.BetterCards.Size = new System.Drawing.Size(186, 35);
             this.BetterCards.TabIndex = 18;
@@ -1495,6 +1499,35 @@
             this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
+            // easyStart
+            // 
+            this.easyStart.AutoSize = true;
+            this.easyStart.Enabled = false;
+            this.easyStart.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.easyStart.Location = new System.Drawing.Point(669, 195);
+            this.easyStart.Name = "easyStart";
+            this.easyStart.Size = new System.Drawing.Size(159, 35);
+            this.easyStart.TabIndex = 31;
+            this.easyStart.Text = "Easy Start";
+            this.easyStart.UseVisualStyleBackColor = true;
+            this.easyStart.Visible = false;
+            this.easyStart.CheckedChanged += new System.EventHandler(this.easyStart_CheckedChanged);
+            // 
+            // vendingMachines
+            // 
+            this.vendingMachines.AutoSize = true;
+            this.vendingMachines.Enabled = false;
+            this.vendingMachines.Font = new System.Drawing.Font("Arial Black", 16F);
+            this.vendingMachines.Location = new System.Drawing.Point(669, 277);
+            this.vendingMachines.Name = "vendingMachines";
+            this.vendingMachines.Size = new System.Drawing.Size(322, 35);
+            this.vendingMachines.TabIndex = 32;
+            this.vendingMachines.Text = "Better vending machine";
+            this.vendingMachines.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.vendingMachines.UseVisualStyleBackColor = true;
+            this.vendingMachines.Visible = false;
+            this.vendingMachines.CheckedChanged += new System.EventHandler(this.vendingMachines_CheckedChanged);
+            // 
             // HardcorePatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1642,5 +1675,7 @@
         private System.Windows.Forms.Button NewMonoInfo;
         private System.Windows.Forms.Button RMetalGInfo;
         private System.Windows.Forms.CheckBox RMetalG;
+        private System.Windows.Forms.CheckBox vendingMachines;
+        private System.Windows.Forms.CheckBox easyStart;
     }
 }
