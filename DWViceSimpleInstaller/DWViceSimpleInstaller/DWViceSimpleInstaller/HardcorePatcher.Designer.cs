@@ -98,6 +98,8 @@
             this.betterTechsBrains = new System.Windows.Forms.CheckBox();
             this.bettertechBattle = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.vendingMachines = new System.Windows.Forms.CheckBox();
+            this.easyStart = new System.Windows.Forms.CheckBox();
             this.NewMonoInfo = new System.Windows.Forms.Button();
             this.NewMono = new System.Windows.Forms.CheckBox();
             this.medals = new System.Windows.Forms.CheckBox();
@@ -130,8 +132,8 @@
             this.evoItem = new System.Windows.Forms.CheckBox();
             this.sBonusTry = new System.Windows.Forms.CheckBox();
             this.betterDrops = new System.Windows.Forms.CheckBox();
-            this.easyStart = new System.Windows.Forms.CheckBox();
-            this.vendingMachines = new System.Windows.Forms.CheckBox();
+            this.MoreItemSpawn = new System.Windows.Forms.CheckBox();
+            this.MoreDrops = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.bugFixesContainer.SuspendLayout();
@@ -1034,6 +1036,8 @@
             // 
             // usefulContainer
             // 
+            this.usefulContainer.Controls.Add(this.MoreDrops);
+            this.usefulContainer.Controls.Add(this.MoreItemSpawn);
             this.usefulContainer.Controls.Add(this.vendingMachines);
             this.usefulContainer.Controls.Add(this.easyStart);
             this.usefulContainer.Controls.Add(this.NewMonoInfo);
@@ -1077,12 +1081,41 @@
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
             // 
+            // vendingMachines
+            // 
+            this.vendingMachines.AutoSize = true;
+            this.vendingMachines.Enabled = false;
+            this.vendingMachines.Font = new System.Drawing.Font("Arial Black", 16F);
+            this.vendingMachines.Location = new System.Drawing.Point(35, 30);
+            this.vendingMachines.Name = "vendingMachines";
+            this.vendingMachines.Size = new System.Drawing.Size(335, 35);
+            this.vendingMachines.TabIndex = 32;
+            this.vendingMachines.Text = "Better vending machines";
+            this.vendingMachines.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.vendingMachines.UseVisualStyleBackColor = true;
+            this.vendingMachines.Visible = false;
+            this.vendingMachines.CheckedChanged += new System.EventHandler(this.vendingMachines_CheckedChanged);
+            // 
+            // easyStart
+            // 
+            this.easyStart.AutoSize = true;
+            this.easyStart.Enabled = false;
+            this.easyStart.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.easyStart.Location = new System.Drawing.Point(680, 190);
+            this.easyStart.Name = "easyStart";
+            this.easyStart.Size = new System.Drawing.Size(159, 35);
+            this.easyStart.TabIndex = 31;
+            this.easyStart.Text = "Easy Start";
+            this.easyStart.UseVisualStyleBackColor = true;
+            this.easyStart.Visible = false;
+            this.easyStart.CheckedChanged += new System.EventHandler(this.easyStart_CheckedChanged);
+            // 
             // NewMonoInfo
             // 
             this.NewMonoInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.NewMonoInfo.Enabled = false;
             this.NewMonoInfo.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
-            this.NewMonoInfo.Location = new System.Drawing.Point(887, 431);
+            this.NewMonoInfo.Location = new System.Drawing.Point(860, 450);
             this.NewMonoInfo.Name = "NewMonoInfo";
             this.NewMonoInfo.Size = new System.Drawing.Size(40, 40);
             this.NewMonoInfo.TabIndex = 24;
@@ -1094,39 +1127,41 @@
             // NewMono
             // 
             this.NewMono.AutoSize = true;
-            this.NewMono.Enabled = false;
             this.NewMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NewMono.Location = new System.Drawing.Point(607, 437);
+            this.NewMono.Location = new System.Drawing.Point(580, 450);
             this.NewMono.Name = "NewMono";
             this.NewMono.Size = new System.Drawing.Size(267, 35);
             this.NewMono.TabIndex = 30;
             this.NewMono.Text = "New Monochromon";
             this.NewMono.UseVisualStyleBackColor = true;
-            this.NewMono.Visible = false;
             this.NewMono.CheckedChanged += new System.EventHandler(this.NewMono_CheckedChanged);
             // 
             // medals
             // 
             this.medals.AutoSize = true;
+            this.medals.Enabled = false;
             this.medals.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.medals.Location = new System.Drawing.Point(607, 437);
+            this.medals.Location = new System.Drawing.Point(580, 430);
             this.medals.Name = "medals";
             this.medals.Size = new System.Drawing.Size(203, 35);
             this.medals.TabIndex = 29;
             this.medals.Text = "Easier medals";
             this.medals.UseVisualStyleBackColor = true;
+            this.medals.Visible = false;
             this.medals.CheckedChanged += new System.EventHandler(this.medals_CheckedChanged);
             // 
             // rareSpawn
             // 
             this.rareSpawn.AutoSize = true;
+            this.rareSpawn.Enabled = false;
             this.rareSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.rareSpawn.Location = new System.Drawing.Point(36, 437);
+            this.rareSpawn.Location = new System.Drawing.Point(35, 350);
             this.rareSpawn.Name = "rareSpawn";
             this.rareSpawn.Size = new System.Drawing.Size(332, 35);
             this.rareSpawn.TabIndex = 28;
             this.rareSpawn.Text = "Guaranteed rare spawns";
             this.rareSpawn.UseVisualStyleBackColor = true;
+            this.rareSpawn.Visible = false;
             this.rareSpawn.CheckedChanged += new System.EventHandler(this.rareSpawn_CheckedChanged);
             // 
             // Seadramon
@@ -1134,7 +1169,7 @@
             this.Seadramon.AutoSize = true;
             this.Seadramon.Enabled = false;
             this.Seadramon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.Seadramon.Location = new System.Drawing.Point(607, 355);
+            this.Seadramon.Location = new System.Drawing.Point(580, 350);
             this.Seadramon.Name = "Seadramon";
             this.Seadramon.Size = new System.Drawing.Size(283, 35);
             this.Seadramon.TabIndex = 27;
@@ -1148,7 +1183,7 @@
             this.trainingBoost.AutoSize = true;
             this.trainingBoost.Enabled = false;
             this.trainingBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.trainingBoost.Location = new System.Drawing.Point(36, 437);
+            this.trainingBoost.Location = new System.Drawing.Point(35, 430);
             this.trainingBoost.Name = "trainingBoost";
             this.trainingBoost.Size = new System.Drawing.Size(247, 35);
             this.trainingBoost.TabIndex = 26;
@@ -1160,15 +1195,13 @@
             // BetterItemSpawns
             // 
             this.BetterItemSpawns.AutoSize = true;
-            this.BetterItemSpawns.Enabled = false;
             this.BetterItemSpawns.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterItemSpawns.Location = new System.Drawing.Point(36, 277);
+            this.BetterItemSpawns.Location = new System.Drawing.Point(580, 240);
             this.BetterItemSpawns.Name = "BetterItemSpawns";
             this.BetterItemSpawns.Size = new System.Drawing.Size(270, 35);
             this.BetterItemSpawns.TabIndex = 25;
             this.BetterItemSpawns.Text = "Better item spawns";
             this.BetterItemSpawns.UseVisualStyleBackColor = true;
-            this.BetterItemSpawns.Visible = false;
             this.BetterItemSpawns.CheckedChanged += new System.EventHandler(this.BetterItemSpawns_CheckedChanged);
             // 
             // UsefulItems2
@@ -1176,7 +1209,7 @@
             this.UsefulItems2.AutoSize = true;
             this.UsefulItems2.Enabled = false;
             this.UsefulItems2.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UsefulItems2.Location = new System.Drawing.Point(357, 277);
+            this.UsefulItems2.Location = new System.Drawing.Point(380, 270);
             this.UsefulItems2.Name = "UsefulItems2";
             this.UsefulItems2.Size = new System.Drawing.Size(206, 35);
             this.UsefulItems2.TabIndex = 24;
@@ -1190,7 +1223,7 @@
             this.BetterMerit.AutoSize = true;
             this.BetterMerit.Enabled = false;
             this.BetterMerit.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterMerit.Location = new System.Drawing.Point(355, 195);
+            this.BetterMerit.Location = new System.Drawing.Point(380, 190);
             this.BetterMerit.Name = "BetterMerit";
             this.BetterMerit.Size = new System.Drawing.Size(246, 35);
             this.BetterMerit.TabIndex = 23;
@@ -1204,7 +1237,7 @@
             this.BetterRaise.AutoSize = true;
             this.BetterRaise.Enabled = false;
             this.BetterRaise.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRaise.Location = new System.Drawing.Point(669, 114);
+            this.BetterRaise.Location = new System.Drawing.Point(680, 110);
             this.BetterRaise.Name = "BetterRaise";
             this.BetterRaise.Size = new System.Drawing.Size(177, 35);
             this.BetterRaise.TabIndex = 22;
@@ -1218,7 +1251,7 @@
             this.BetterCurling.AutoSize = true;
             this.BetterCurling.Enabled = false;
             this.BetterCurling.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterCurling.Location = new System.Drawing.Point(357, 114);
+            this.BetterCurling.Location = new System.Drawing.Point(380, 110);
             this.BetterCurling.Name = "BetterCurling";
             this.BetterCurling.Size = new System.Drawing.Size(202, 35);
             this.BetterCurling.TabIndex = 21;
@@ -1232,7 +1265,7 @@
             this.betterDrimogemon.AutoSize = true;
             this.betterDrimogemon.Enabled = false;
             this.betterDrimogemon.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.betterDrimogemon.Location = new System.Drawing.Point(36, 195);
+            this.betterDrimogemon.Location = new System.Drawing.Point(33, 110);
             this.betterDrimogemon.Name = "betterDrimogemon";
             this.betterDrimogemon.Size = new System.Drawing.Size(270, 35);
             this.betterDrimogemon.TabIndex = 20;
@@ -1246,7 +1279,7 @@
             this.BetterFishing.AutoSize = true;
             this.BetterFishing.Enabled = false;
             this.BetterFishing.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterFishing.Location = new System.Drawing.Point(357, 32);
+            this.BetterFishing.Location = new System.Drawing.Point(380, 32);
             this.BetterFishing.Name = "BetterFishing";
             this.BetterFishing.Size = new System.Drawing.Size(198, 35);
             this.BetterFishing.TabIndex = 19;
@@ -1260,7 +1293,7 @@
             this.BetterCards.AutoSize = true;
             this.BetterCards.Enabled = false;
             this.BetterCards.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterCards.Location = new System.Drawing.Point(669, 32);
+            this.BetterCards.Location = new System.Drawing.Point(680, 32);
             this.BetterCards.Name = "BetterCards";
             this.BetterCards.Size = new System.Drawing.Size(186, 35);
             this.BetterCards.TabIndex = 18;
@@ -1274,7 +1307,7 @@
             this.BetterRestaurant.AutoSize = true;
             this.BetterRestaurant.Enabled = false;
             this.BetterRestaurant.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BetterRestaurant.Location = new System.Drawing.Point(36, 114);
+            this.BetterRestaurant.Location = new System.Drawing.Point(35, 190);
             this.BetterRestaurant.Name = "BetterRestaurant";
             this.BetterRestaurant.Size = new System.Drawing.Size(245, 35);
             this.BetterRestaurant.TabIndex = 17;
@@ -1286,7 +1319,7 @@
             // RightUseful
             // 
             this.RightUseful.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RightUseful.Location = new System.Drawing.Point(518, 437);
+            this.RightUseful.Location = new System.Drawing.Point(500, 435);
             this.RightUseful.Name = "RightUseful";
             this.RightUseful.Size = new System.Drawing.Size(50, 50);
             this.RightUseful.TabIndex = 16;
@@ -1298,7 +1331,7 @@
             // 
             this.LeftUseful.Enabled = false;
             this.LeftUseful.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LeftUseful.Location = new System.Drawing.Point(450, 437);
+            this.LeftUseful.Location = new System.Drawing.Point(440, 435);
             this.LeftUseful.Name = "LeftUseful";
             this.LeftUseful.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LeftUseful.Size = new System.Drawing.Size(50, 50);
@@ -1314,7 +1347,7 @@
             this.UnlockAreasVice.AutoSize = true;
             this.UnlockAreasVice.Enabled = false;
             this.UnlockAreasVice.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.UnlockAreasVice.Location = new System.Drawing.Point(36, 355);
+            this.UnlockAreasVice.Location = new System.Drawing.Point(680, 270);
             this.UnlockAreasVice.Name = "UnlockAreasVice";
             this.UnlockAreasVice.Size = new System.Drawing.Size(256, 35);
             this.UnlockAreasVice.TabIndex = 14;
@@ -1328,7 +1361,7 @@
             this.bonusTryFix.AutoSize = true;
             this.bonusTryFix.Enabled = false;
             this.bonusTryFix.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.bonusTryFix.Location = new System.Drawing.Point(36, 195);
+            this.bonusTryFix.Location = new System.Drawing.Point(36, 170);
             this.bonusTryFix.Name = "bonusTryFix";
             this.bonusTryFix.Size = new System.Drawing.Size(263, 35);
             this.bonusTryFix.TabIndex = 13;
@@ -1341,7 +1374,7 @@
             // 
             this.BGMpatch.AutoSize = true;
             this.BGMpatch.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.BGMpatch.Location = new System.Drawing.Point(357, 114);
+            this.BGMpatch.Location = new System.Drawing.Point(380, 100);
             this.BGMpatch.Name = "BGMpatch";
             this.BGMpatch.Size = new System.Drawing.Size(166, 35);
             this.BGMpatch.TabIndex = 12;
@@ -1353,7 +1386,7 @@
             // 
             this.sDirtReduction.AutoSize = true;
             this.sDirtReduction.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.sDirtReduction.Location = new System.Drawing.Point(607, 277);
+            this.sDirtReduction.Location = new System.Drawing.Point(580, 380);
             this.sDirtReduction.Name = "sDirtReduction";
             this.sDirtReduction.Size = new System.Drawing.Size(278, 35);
             this.sDirtReduction.TabIndex = 11;
@@ -1365,7 +1398,7 @@
             // 
             this.dirtReduction.AutoSize = true;
             this.dirtReduction.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.dirtReduction.Location = new System.Drawing.Point(36, 277);
+            this.dirtReduction.Location = new System.Drawing.Point(35, 380);
             this.dirtReduction.Name = "dirtReduction";
             this.dirtReduction.Size = new System.Drawing.Size(360, 35);
             this.dirtReduction.TabIndex = 10;
@@ -1377,7 +1410,7 @@
             // 
             this.uStatsGains.AutoSize = true;
             this.uStatsGains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.uStatsGains.Location = new System.Drawing.Point(678, 32);
+            this.uStatsGains.Location = new System.Drawing.Point(680, 30);
             this.uStatsGains.Name = "uStatsGains";
             this.uStatsGains.Size = new System.Drawing.Size(233, 35);
             this.uStatsGains.TabIndex = 9;
@@ -1388,20 +1421,22 @@
             // helpfulItems
             // 
             this.helpfulItems.AutoSize = true;
+            this.helpfulItems.Enabled = false;
             this.helpfulItems.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.helpfulItems.Location = new System.Drawing.Point(607, 355);
+            this.helpfulItems.Location = new System.Drawing.Point(35, 270);
             this.helpfulItems.Name = "helpfulItems";
             this.helpfulItems.Size = new System.Drawing.Size(193, 35);
             this.helpfulItems.TabIndex = 8;
             this.helpfulItems.Text = "Helpful items";
             this.helpfulItems.UseVisualStyleBackColor = true;
+            this.helpfulItems.Visible = false;
             this.helpfulItems.CheckedChanged += new System.EventHandler(this.helpfulItems_CheckedChanged);
             // 
             // ShortIntro
             // 
             this.ShortIntro.AutoSize = true;
             this.ShortIntro.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.ShortIntro.Location = new System.Drawing.Point(678, 114);
+            this.ShortIntro.Location = new System.Drawing.Point(680, 100);
             this.ShortIntro.Name = "ShortIntro";
             this.ShortIntro.Size = new System.Drawing.Size(164, 35);
             this.ShortIntro.TabIndex = 7;
@@ -1413,7 +1448,7 @@
             // 
             this.sStatsGains.AutoSize = true;
             this.sStatsGains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.sStatsGains.Location = new System.Drawing.Point(357, 32);
+            this.sStatsGains.Location = new System.Drawing.Point(380, 30);
             this.sStatsGains.Name = "sStatsGains";
             this.sStatsGains.Size = new System.Drawing.Size(244, 35);
             this.sStatsGains.TabIndex = 6;
@@ -1425,7 +1460,7 @@
             // 
             this.lessMono.AutoSize = true;
             this.lessMono.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.lessMono.Location = new System.Drawing.Point(36, 355);
+            this.lessMono.Location = new System.Drawing.Point(36, 450);
             this.lessMono.Name = "lessMono";
             this.lessMono.Size = new System.Drawing.Size(393, 35);
             this.lessMono.TabIndex = 5;
@@ -1438,7 +1473,7 @@
             this.uBonustry.AutoSize = true;
             this.uBonustry.Enabled = false;
             this.uBonustry.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.uBonustry.Location = new System.Drawing.Point(678, 195);
+            this.uBonustry.Location = new System.Drawing.Point(680, 170);
             this.uBonustry.Name = "uBonustry";
             this.uBonustry.Size = new System.Drawing.Size(286, 35);
             this.uBonustry.TabIndex = 4;
@@ -1451,7 +1486,7 @@
             // 
             this.statsGains.AutoSize = true;
             this.statsGains.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.statsGains.Location = new System.Drawing.Point(36, 32);
+            this.statsGains.Location = new System.Drawing.Point(35, 30);
             this.statsGains.Name = "statsGains";
             this.statsGains.Size = new System.Drawing.Size(227, 35);
             this.statsGains.TabIndex = 3;
@@ -1463,7 +1498,7 @@
             // 
             this.evoItem.AutoSize = true;
             this.evoItem.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.evoItem.Location = new System.Drawing.Point(36, 114);
+            this.evoItem.Location = new System.Drawing.Point(35, 100);
             this.evoItem.Name = "evoItem";
             this.evoItem.Size = new System.Drawing.Size(265, 35);
             this.evoItem.TabIndex = 2;
@@ -1476,7 +1511,7 @@
             this.sBonusTry.AutoSize = true;
             this.sBonusTry.Enabled = false;
             this.sBonusTry.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.sBonusTry.Location = new System.Drawing.Point(357, 195);
+            this.sBonusTry.Location = new System.Drawing.Point(380, 170);
             this.sBonusTry.Name = "sBonusTry";
             this.sBonusTry.Size = new System.Drawing.Size(276, 35);
             this.sBonusTry.TabIndex = 1;
@@ -1488,45 +1523,38 @@
             // betterDrops
             // 
             this.betterDrops.AutoSize = true;
-            this.betterDrops.Enabled = false;
             this.betterDrops.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.betterDrops.Location = new System.Drawing.Point(36, 32);
+            this.betterDrops.Location = new System.Drawing.Point(580, 310);
             this.betterDrops.Name = "betterDrops";
             this.betterDrops.Size = new System.Drawing.Size(246, 35);
             this.betterDrops.TabIndex = 0;
             this.betterDrops.Text = "Better item drops";
             this.betterDrops.UseVisualStyleBackColor = true;
-            this.betterDrops.Visible = false;
             this.betterDrops.CheckedChanged += new System.EventHandler(this.betterDrops_CheckedChanged);
             // 
-            // easyStart
+            // MoreItemSpawn
             // 
-            this.easyStart.AutoSize = true;
-            this.easyStart.Enabled = false;
-            this.easyStart.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.easyStart.Location = new System.Drawing.Point(669, 195);
-            this.easyStart.Name = "easyStart";
-            this.easyStart.Size = new System.Drawing.Size(159, 35);
-            this.easyStart.TabIndex = 31;
-            this.easyStart.Text = "Easy Start";
-            this.easyStart.UseVisualStyleBackColor = true;
-            this.easyStart.Visible = false;
-            this.easyStart.CheckedChanged += new System.EventHandler(this.easyStart_CheckedChanged);
+            this.MoreItemSpawn.AutoSize = true;
+            this.MoreItemSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MoreItemSpawn.Location = new System.Drawing.Point(35, 240);
+            this.MoreItemSpawn.Name = "MoreItemSpawn";
+            this.MoreItemSpawn.Size = new System.Drawing.Size(254, 35);
+            this.MoreItemSpawn.TabIndex = 33;
+            this.MoreItemSpawn.Text = "More item spawns";
+            this.MoreItemSpawn.UseVisualStyleBackColor = true;
+            this.MoreItemSpawn.CheckedChanged += new System.EventHandler(this.MoreItemSpawn_CheckedChanged);
             // 
-            // vendingMachines
+            // MoreDrops
             // 
-            this.vendingMachines.AutoSize = true;
-            this.vendingMachines.Enabled = false;
-            this.vendingMachines.Font = new System.Drawing.Font("Arial Black", 16F);
-            this.vendingMachines.Location = new System.Drawing.Point(669, 277);
-            this.vendingMachines.Name = "vendingMachines";
-            this.vendingMachines.Size = new System.Drawing.Size(322, 35);
-            this.vendingMachines.TabIndex = 32;
-            this.vendingMachines.Text = "Better vending machine";
-            this.vendingMachines.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.vendingMachines.UseVisualStyleBackColor = true;
-            this.vendingMachines.Visible = false;
-            this.vendingMachines.CheckedChanged += new System.EventHandler(this.vendingMachines_CheckedChanged);
+            this.MoreDrops.AutoSize = true;
+            this.MoreDrops.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MoreDrops.Location = new System.Drawing.Point(35, 310);
+            this.MoreDrops.Name = "MoreDrops";
+            this.MoreDrops.Size = new System.Drawing.Size(230, 35);
+            this.MoreDrops.TabIndex = 34;
+            this.MoreDrops.Text = "More item drops";
+            this.MoreDrops.UseVisualStyleBackColor = true;
+            this.MoreDrops.CheckedChanged += new System.EventHandler(this.MoreDrops_CheckedChanged);
             // 
             // HardcorePatcher
             // 
@@ -1677,5 +1705,7 @@
         private System.Windows.Forms.CheckBox RMetalG;
         private System.Windows.Forms.CheckBox vendingMachines;
         private System.Windows.Forms.CheckBox easyStart;
+        private System.Windows.Forms.CheckBox MoreItemSpawn;
+        private System.Windows.Forms.CheckBox MoreDrops;
     }
 }

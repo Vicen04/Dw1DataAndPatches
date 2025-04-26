@@ -39,11 +39,11 @@ namespace DWViceSimpleInstaller
              ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, sStatsGains, uStatsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
              BGMpatch, curlingRandomizer, myotismon2, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
             trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal,
-            vendingMachine, easyStart;
+            vendingMachine, easyStart, moreItemDrops, MoreItemSpawn;
 
         //Vice exclusive
-        bool insaneBattle, restoreMelon, restoreLifetime, removeTechBoost, deRandoFactTown, randoCompatible, unlockAreas, mapColour, ultraHardcore,
-             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems;
+        bool insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore,
+             restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost;
 
         //bug fixes vanilla
         bool battleText, battleTime, bonusTry, softlock, mojyamon, tourneySchedule, saveData, tankmon, textboxChoice, missingText, forgetMoves, giromon, rotation,
@@ -100,11 +100,11 @@ namespace DWViceSimpleInstaller
             = superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = sStatsGains = uStatsGains = multipleTechs = evoItem 
             = helpfulItems = lessMono = BGMpatch = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 = 
             drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon = 
-            hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = vendingMachine = easyStart = false;
+            hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = vendingMachine = easyStart = moreItemDrops = MoreItemSpawn = false;
 
             //Vice exclusive
-            insaneBattle = restoreMelon = restoreLifetime = removeTechBoost = deRandoFactTown = randoCompatible = unlockAreas = mapColour = ultraHardcore =
-            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG =  boostItems = false;
+            insaneBattle = restoreLifetime = removeTechBoost = unlockAreas = mapColour = ultraHardcore =
+            restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG =  boostItems = nerfTechBoost = false;
 
             //bug fixes vanilla
             battleText = battleTime = bonusTry = softlock = mojyamon = tourneySchedule = saveData = tankmon = textboxChoice = missingText = forgetMoves = giromon 
@@ -249,6 +249,9 @@ namespace DWViceSimpleInstaller
             if (boostItems)
                 SetPatch(path + "SuperDiskBuff.ppf");
 
+            if (nerfTechBoost)
+                SetPatch(path + "NerfTechBoost.ppf");
+
 
             InstallOptionalPatches();
         }
@@ -346,11 +349,13 @@ namespace DWViceSimpleInstaller
 
             if (betterDrop)
                 SetPatch(path + "Useful patches/BetterDrops.ppf");
+            else if (moreItemDrops)
+                SetPatch(path + "Useful patches/MoreDrops.ppf");
 
             if (bonusTry || currentPatcher == patchType.VICEHACK)
             {
                 if (currentPatcher != patchType.VICEHACK)
-                SetPatch(path + "Useful patches/BonusTryFix 1.1.ppf");
+                    SetPatch(path + "Useful patches/BonusTryFix 1.1.ppf");
 
                 if (superBonus)
                     SetPatch(path + "Useful patches/BonusTrySuperHelpful 1.2.ppf");
@@ -413,6 +418,8 @@ namespace DWViceSimpleInstaller
 
             if (itemSpawns)
                 SetPatch(path + "Useful patches/BetterItemSpawns.ppf");
+            else if (MoreItemSpawn)
+                SetPatch(path + "Useful patches/MoreItemSpawn.ppf");        
 
             if (helpfulItems)
                 SetPatch(path + "Useful patches/HelpfulItems.ppf");
@@ -554,11 +561,8 @@ namespace DWViceSimpleInstaller
         public void SetBGMPatch (bool enabled) { BGMpatch = enabled; }
         public void SetCurlingRandomizer(bool enabled) { curlingRandomizer = enabled; }
         public void SetInsaneBattle(bool enabled) { insaneBattle = enabled; }
-        public void SetRestoreMelon(bool enabled) { restoreMelon = enabled; }
         public void SetRestoreLifetime(bool enabled) { restoreLifetime = enabled; }
         public void SetRemoveTechBoost(bool enabled) { removeTechBoost = enabled; }
-        public void SetDeRandoFact(bool enabled) { deRandoFactTown = enabled; }
-        public void SetRandoCompatible(bool enabled) { randoCompatible = enabled; }
         public void SetUnlockAreas (bool enabled) { unlockAreas = enabled; }
         public void SetGiromon(bool enabled) { giromon = enabled; }
         public void SetBattleText(bool enabled) { battleText = enabled; }
@@ -618,18 +622,15 @@ namespace DWViceSimpleInstaller
         public void SetTrueHardcore(bool enabled) { trueHardcore = enabled; }
         public void SetBWere(bool enabled) { BlackWere = enabled; }
         public void SetRMetal(bool enabled) { realMetal = enabled; }
-
-        public void SetDigitalClock(bool enabled) { digitalClock = enabled; }
+        public void SetDigitalClock(bool enabled) { digitalClock = enabled; }       
         public void SetQuickText(bool enabled) { quickText = enabled; }
-
         public void SetRNG(bool enabled) { noRNG = enabled; }
-
         public void SetEasyStart(bool enabled) { easyStart = enabled; }
-
         public void SetSuperBoostItems(bool enabled) { boostItems = enabled; }
-
         public void SetVendingMachines(bool enabled) { vendingMachine = enabled; }
-
+        public void SetNerfBoost(bool enabled) { nerfTechBoost = enabled; }
+        public void SetMoreDrops(bool enabled) { moreItemDrops = enabled; }
+        public void SetMoreItemSpawn(bool enabled) { MoreItemSpawn = enabled; }
 
         public void CreatePatchedFile(string folderDestination, string newFilename)
         {
@@ -866,18 +867,6 @@ namespace DWViceSimpleInstaller
                 txtWritter.Write("Miscellaneous patches:");
                 txtWritter.WriteLine();
 
-                if (randoCompatible)
-                {
-                    txtWritter.Write("- Randomizer compatibility");
-                    txtWritter.WriteLine();
-                }
-
-                if (deRandoFactTown)
-                {
-                    txtWritter.Write("- Factorial Town fix for the randomizer");
-                    txtWritter.WriteLine();
-                }
-
                 if (insaneBattle)
                 {
                     txtWritter.Write("- Insane battles");
@@ -887,12 +876,6 @@ namespace DWViceSimpleInstaller
                 if (restoreLifetime)
                 {
                     txtWritter.Write("- Restore lifetime");
-                    txtWritter.WriteLine();
-                }
-
-                if (restoreMelon)
-                {
-                    txtWritter.Write("- Restore chain melon");
                     txtWritter.WriteLine();
                 }
 
@@ -963,6 +946,12 @@ namespace DWViceSimpleInstaller
                     txtWritter.Write("- Super Boost Items");
                     txtWritter.WriteLine();
                 }
+
+                if (nerfTechBoost)
+                {
+                    txtWritter.Write("- Nerf Tech Boost");
+                    txtWritter.WriteLine();
+                }
             }
 
             txtWritter.WriteLine();
@@ -972,6 +961,11 @@ namespace DWViceSimpleInstaller
             if (betterDrop)
             {
                 txtWritter.Write("- Better drops");
+                txtWritter.WriteLine();
+            }
+            else if (moreItemDrops)
+            {
+                txtWritter.Write("- More drops");
                 txtWritter.WriteLine();
             }
 
@@ -1076,6 +1070,11 @@ namespace DWViceSimpleInstaller
             if (itemSpawns)
             {
                 txtWritter.Write("- Better item spawns");
+                txtWritter.WriteLine();
+            }
+            else if (MoreItemSpawn)
+            {
+                txtWritter.Write("- More item spawns");
                 txtWritter.WriteLine();
             }
 

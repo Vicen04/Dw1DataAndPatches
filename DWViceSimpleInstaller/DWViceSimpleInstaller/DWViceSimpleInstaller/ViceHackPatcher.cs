@@ -163,12 +163,27 @@ namespace DWViceSimpleInstaller
                 ultraHardcore.Enabled = false;
                 removeTechBoost.Enabled = false;
                 removeTechBoost.Checked = false;
+                EasyStart.Enabled = false;
+                EasyStart.Checked = false;
+                uStatsGains.Enabled = false;
+                uStatsGains.Checked = false;
+                trainingBoost.Checked = false;
+                trainingBoost.Enabled = false;
+                NerfIce.Enabled = false;
+                NerfIce.Checked = false;
+                noRNG.Checked = true;
+                noRNG.Enabled = false;
                 parentForm.SetViceDifficulty(MainApp.viceDifficulty.CHALLENGE);
             }
             else
             {
                 removeTechBoost.Enabled = true;
                 hardcoreBattler.Enabled = true;
+                EasyStart.Enabled = true;
+                uStatsGains.Enabled = true;
+                trainingBoost.Enabled = true;
+                NerfIce.Enabled = true;
+                noRNG.Enabled = true;
                 if (!Hardcore.Checked && !Hardmode.Checked)
                     parentForm.SetViceDifficulty(MainApp.viceDifficulty.NONE);
             }
@@ -266,6 +281,14 @@ namespace DWViceSimpleInstaller
                 removeTechBoost.Checked = false;
                 noRNG.Checked = true;
                 noRNG.Enabled = false;
+                EasyStart.Enabled = false;
+                EasyStart.Checked = false;
+                uStatsGains.Enabled = false;
+                uStatsGains.Checked = false;
+                trainingBoost.Checked = false;
+                trainingBoost.Enabled = false;
+                NerfIce.Enabled = false;
+                NerfIce.Checked = false;
             }
             else
             {
@@ -277,6 +300,10 @@ namespace DWViceSimpleInstaller
                     hardcoreBattler.Enabled = true;
 
                 noRNG.Enabled = true;
+                EasyStart.Enabled = true;
+                uStatsGains.Enabled = true;
+                trainingBoost.Enabled = true;
+                NerfIce.Enabled = true;
             }
         }
 
@@ -415,7 +442,9 @@ namespace DWViceSimpleInstaller
                " * Reset the game by pressing 'Select + Start + Triangle + Square + Circle + Cross'." + Environment.NewLine + Environment.NewLine +
                "- Quick text: The text that happens after battle will be instant, similar to the Japanese version" + Environment.NewLine + Environment.NewLine +
                "- Digital clock: This will replace the analog clock for a digital one" + Environment.NewLine + Environment.NewLine +
-               "- Super Boost Items: The Disk buffs will be more powerful and also will be able to go over the stat limit (max +30% of your stat).";
+               "- Super Boost Items: The Disk buffs will be more powerful and also will be able to go over the stat limit (max +30% of your stat)." + Environment.NewLine + Environment.NewLine +
+               "- Nerf Tech Boost: It will reduce the power given by the tech boost, check the 'optional patches' spreadsheet for details.";
+
 
 
 
@@ -443,11 +472,13 @@ namespace DWViceSimpleInstaller
                "- Helpful items: it does the following:" + Environment.NewLine + Environment.NewLine +
                " * The 'Steak' will now reduce the lifespan of a digimon to 0" + Environment.NewLine + Environment.NewLine +
                " * The vending machine at the 'Dragon Eye Lake' will sell 'Steaks' and 'HappyMushrooms'" + Environment.NewLine + Environment.NewLine +
-               "- Better drops: Digimon have better chances to drop an item, some digimon now drop different items" + Environment.NewLine + Environment.NewLine +
+               "- More drops: Digimon have better chances to drop an item, some digimon now drop different items." + Environment.NewLine + Environment.NewLine +
+               "- Better drops: even better chances than 'more drops', check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better restaurant: the restaurant will give better stats, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
                "- Better drimogemon: Drimogemon will give better rewards and lower the time it requires to find treasure, check the spreadsheet for details" + Environment.NewLine + Environment.NewLine +
                "- Better cards: Rare cards will be more frequent and the card merit value will be higher, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
-               "- Better merit: The merit shop will have more items and better prices, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- More item spawns: The items that randomly spawn will be more frequent, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
+               "- Better item spawns: even better chances than 'more items spawn', check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better fishing: Fishing will become easier, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better item spawns: The items that randomly spawn will be more frequent, check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
                "- Better raise: Raising a digimon will be easier (evolution requirements are not affected), check the spreadsheet for details." + Environment.NewLine + Environment.NewLine +
@@ -539,16 +570,6 @@ namespace DWViceSimpleInstaller
         private void UnlockAreas_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetUnlockAreas(UnlockAreas.Checked);
-        }
-
-        private void deRandoFact_CheckedChanged(object sender, EventArgs e)
-        {
-            parentForm.SetDeRandoFact(deRandoFact.Checked);
-        }
-
-        private void randoAdaptor_CheckedChanged(object sender, EventArgs e)
-        {
-            parentForm.SetRandoCompatible(randoAdaptor.Checked);
         }
 
         private void insaneBattle_CheckedChanged(object sender, EventArgs e)
@@ -658,11 +679,8 @@ namespace DWViceSimpleInstaller
         private void betterDrops_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetBetterDrops(betterDrops.Checked);
-        }
-
-        private void restoreChainMelon_CheckedChanged(object sender, EventArgs e)
-        {
-            parentForm.SetRestoreMelon(restoreChainMelon.Checked);
+            if (betterDrops.Checked)
+                MoreDrops.Checked = false;
         }
 
         private void removeTechBoost_CheckedChanged(object sender, EventArgs e)
@@ -758,8 +776,6 @@ namespace DWViceSimpleInstaller
         {
             LeftButton.Enabled = true;
             LeftButton.Visible = true;
-            betterDrops.Visible = true;
-            betterDrops.Enabled = true;
             BetterDrimogemon.Visible = true;
             BetterDrimogemon.Enabled = true;
             UsefulItems2.Enabled = true;
@@ -776,16 +792,18 @@ namespace DWViceSimpleInstaller
             BetterFishing.Enabled = true;
             BetterRaise.Enabled = true;
             BetterRaise.Visible = true;
-            BetterItemSpawns.Visible = true;
-            BetterItemSpawns.Enabled = true;
             trainingBoost.Visible = true;
             trainingBoost.Enabled = true;
-            Seadramon.Visible = true;
-            Seadramon.Enabled = true;
             vendingMachines.Visible = true;
             vendingMachines.Enabled = true;
             EasyStart.Visible = true;
             EasyStart.Enabled = true;
+            helpfulItems.Visible = true;
+            helpfulItems.Enabled = true;
+            evoItem.Enabled = true;
+            evoItem.Visible = true;
+            ShortIntro.Visible = true;
+            ShortIntro.Enabled = true;
 
 
             RightButton.Enabled = false;
@@ -796,10 +814,6 @@ namespace DWViceSimpleInstaller
             uStatsGains.Visible = false;
             statsGains.Enabled = false;
             uStatsGains.Enabled = false;
-            evoItem.Enabled = false;
-            evoItem.Visible = false;
-            ShortIntro.Visible = false;
-            ShortIntro.Enabled = false;
             uBonustry.Visible = false;
             uBonustry.Enabled = false;
             sBonusTry.Visible = false;
@@ -810,12 +824,20 @@ namespace DWViceSimpleInstaller
             sDirtReduction.Enabled = false;
             lessMono.Visible = false;
             lessMono.Enabled = false;
-            helpfulItems.Visible = false;
-            helpfulItems.Enabled = false;
             medals.Visible = false;
             medals.Enabled = false;
             rareSpawn.Visible = false;
             rareSpawn.Enabled = false;
+            betterDrops.Visible = false;
+            betterDrops.Enabled = false;
+            BetterItemSpawns.Visible = false;
+            BetterItemSpawns.Enabled = false;
+            Seadramon.Visible = false;
+            Seadramon.Enabled = false;
+            MoreItemsSpawn.Visible = false;
+            MoreItemsSpawn.Enabled = false;
+            MoreDrops.Visible = false;
+            MoreDrops.Enabled = false;
         }
 
         private void LeftButton_Click(object sender, EventArgs e)
@@ -828,22 +850,26 @@ namespace DWViceSimpleInstaller
             uStatsGains.Visible = true;
             statsGains.Enabled = true;
             uStatsGains.Enabled = true;
-            evoItem.Enabled = true;
-            evoItem.Visible = true;
-            ShortIntro.Visible = true;
-            ShortIntro.Enabled = true;
             dirtReduction.Visible = true;
             dirtReduction.Enabled = true;
             sDirtReduction.Visible = true;
             sDirtReduction.Enabled = true;
             lessMono.Visible = true;
             lessMono.Enabled = true;
-            helpfulItems.Visible = true;
-            helpfulItems.Enabled = true;
             medals.Visible = true;
             medals.Enabled = true;
             rareSpawn.Visible = true;
             rareSpawn.Enabled = true;
+            BetterItemSpawns.Visible = true;
+            BetterItemSpawns.Enabled = true;
+            betterDrops.Visible = true;
+            betterDrops.Enabled = true;
+            Seadramon.Visible = true;
+            Seadramon.Enabled = true;
+            MoreItemsSpawn.Visible = true;
+            MoreItemsSpawn.Enabled = true;
+            MoreDrops.Visible = true;
+            MoreDrops.Enabled = true;
 
             if (!Hardcore.Checked)
             {
@@ -856,8 +882,6 @@ namespace DWViceSimpleInstaller
 
             LeftButton.Enabled = false;
             LeftButton.Visible = false;
-            betterDrops.Visible = false;
-            betterDrops.Enabled = false;
             BetterDrimogemon.Visible = false;
             BetterDrimogemon.Enabled = false;
             UsefulItems2.Enabled = false;
@@ -874,16 +898,18 @@ namespace DWViceSimpleInstaller
             BetterFishing.Enabled = false;
             BetterRaise.Enabled = false;
             BetterRaise.Visible = false;
-            BetterItemSpawns.Visible = false;
-            BetterItemSpawns.Enabled = false;
             trainingBoost.Visible = false;
             trainingBoost.Enabled = false;
-            Seadramon.Visible = false;
-            Seadramon.Enabled = false;
             vendingMachines.Visible = false;
             vendingMachines.Enabled = false;
             EasyStart.Visible = false;
             EasyStart.Enabled = false;
+            helpfulItems.Visible = false;
+            helpfulItems.Enabled = false;
+            evoItem.Enabled = false;
+            evoItem.Visible = false;
+            ShortIntro.Visible = false;
+            ShortIntro.Enabled = false;
         }
 
         private void UsefulItems2_CheckedChanged(object sender, EventArgs e)
@@ -899,6 +925,8 @@ namespace DWViceSimpleInstaller
         private void BetterItemSpawns_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetItemSpawns(BetterItemSpawns.Checked);
+            if (BetterItemSpawns.Checked)
+                MoreItemsSpawn.Checked = false;
         }
 
         private void BetterFishing_CheckedChanged(object sender, EventArgs e)
@@ -1114,6 +1142,26 @@ namespace DWViceSimpleInstaller
         private void BoostItem_CheckedChanged(object sender, EventArgs e)
         {
             parentForm.SetSuperBoostItems(BoostItem.Checked);
+        }
+
+        private void NerfBoost_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetNerfBoost(NerfBoost.Checked);
+        }
+
+        private void MoreDrops_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetMoreDrops(MoreDrops.Checked);
+            if(MoreDrops.Checked)
+                betterDrops.Checked = false;
+
+        }
+
+        private void MoreItemsSpawn_CheckedChanged(object sender, EventArgs e)
+        {
+            parentForm.SetMoreItemSpawn(MoreItemsSpawn.Checked);
+            if (MoreItemsSpawn.Checked) 
+                BetterItemSpawns.Checked = false;
         }
     }
 }

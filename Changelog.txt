@@ -323,3 +323,11 @@ Version 2.0:
 - Addition of "Easy Start", "Better vending machines" and "Super Boost Items"
 
 - Update to "Helpful items", "Super low Monochromon goal" and "Black Weregarurumon"
+
+25/04/25
+
+- Addition of "More Drops", "More Items Spawns" and "Nerf tech boost"
+
+- Fixed an issue with "Better vending machines"
+
+- Organized a bit better the patching options in the installer.
