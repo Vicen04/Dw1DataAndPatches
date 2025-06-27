@@ -77,6 +77,7 @@
             this.MyotismonInfo = new System.Windows.Forms.Button();
             this.Myotismon = new System.Windows.Forms.CheckBox();
             this.miscPatches = new System.Windows.Forms.GroupBox();
+            this.NerfBoost = new System.Windows.Forms.CheckBox();
             this.BoostItem = new System.Windows.Forms.CheckBox();
             this.quickText = new System.Windows.Forms.CheckBox();
             this.digitalClock = new System.Windows.Forms.CheckBox();
@@ -93,6 +94,8 @@
             this.insaneBattle = new System.Windows.Forms.CheckBox();
             this.UnlockAreas = new System.Windows.Forms.CheckBox();
             this.usefulContainer = new System.Windows.Forms.GroupBox();
+            this.MoreItemsSpawn = new System.Windows.Forms.CheckBox();
+            this.MoreDrops = new System.Windows.Forms.CheckBox();
             this.vendingMachines = new System.Windows.Forms.CheckBox();
             this.EasyStart = new System.Windows.Forms.CheckBox();
             this.medals = new System.Windows.Forms.CheckBox();
@@ -130,9 +133,6 @@
             this.noOrders = new System.Windows.Forms.CheckBox();
             this.techContainer = new System.Windows.Forms.GroupBox();
             this.easyTech = new System.Windows.Forms.CheckBox();
-            this.NerfBoost = new System.Windows.Forms.CheckBox();
-            this.MoreDrops = new System.Windows.Forms.CheckBox();
-            this.MoreItemsSpawn = new System.Windows.Forms.CheckBox();
             this.DifficultyPatchesContainer.SuspendLayout();
             this.DigimonGroup.SuspendLayout();
             this.miscPatches.SuspendLayout();
@@ -783,6 +783,18 @@
             this.miscPatches.Text = "Miscellaneous patches";
             this.miscPatches.Visible = false;
             // 
+            // NerfBoost
+            // 
+            this.NerfBoost.AutoSize = true;
+            this.NerfBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.NerfBoost.Location = new System.Drawing.Point(580, 450);
+            this.NerfBoost.Name = "NerfBoost";
+            this.NerfBoost.Size = new System.Drawing.Size(230, 35);
+            this.NerfBoost.TabIndex = 38;
+            this.NerfBoost.Text = "Nerf Tech Boost";
+            this.NerfBoost.UseVisualStyleBackColor = true;
+            this.NerfBoost.CheckedChanged += new System.EventHandler(this.NerfBoost_CheckedChanged);
+            // 
             // BoostItem
             // 
             this.BoostItem.AutoSize = true;
@@ -1002,6 +1014,30 @@
             this.usefulContainer.TabStop = false;
             this.usefulContainer.Text = "Useful patches";
             this.usefulContainer.Visible = false;
+            // 
+            // MoreItemsSpawn
+            // 
+            this.MoreItemsSpawn.AutoSize = true;
+            this.MoreItemsSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MoreItemsSpawn.Location = new System.Drawing.Point(35, 310);
+            this.MoreItemsSpawn.Name = "MoreItemsSpawn";
+            this.MoreItemsSpawn.Size = new System.Drawing.Size(254, 35);
+            this.MoreItemsSpawn.TabIndex = 30;
+            this.MoreItemsSpawn.Text = "More item spawns";
+            this.MoreItemsSpawn.UseVisualStyleBackColor = true;
+            this.MoreItemsSpawn.CheckedChanged += new System.EventHandler(this.MoreItemsSpawn_CheckedChanged);
+            // 
+            // MoreDrops
+            // 
+            this.MoreDrops.AutoSize = true;
+            this.MoreDrops.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
+            this.MoreDrops.Location = new System.Drawing.Point(35, 240);
+            this.MoreDrops.Name = "MoreDrops";
+            this.MoreDrops.Size = new System.Drawing.Size(230, 35);
+            this.MoreDrops.TabIndex = 29;
+            this.MoreDrops.Text = "More item drops";
+            this.MoreDrops.UseVisualStyleBackColor = true;
+            this.MoreDrops.CheckedChanged += new System.EventHandler(this.MoreDrops_CheckedChanged);
             // 
             // vendingMachines
             // 
@@ -1480,42 +1516,6 @@
             this.easyTech.Text = "Telepathy";
             this.easyTech.UseVisualStyleBackColor = true;
             this.easyTech.CheckedChanged += new System.EventHandler(this.easyTech_CheckedChanged);
-            // 
-            // NerfBoost
-            // 
-            this.NerfBoost.AutoSize = true;
-            this.NerfBoost.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.NerfBoost.Location = new System.Drawing.Point(580, 450);
-            this.NerfBoost.Name = "NerfBoost";
-            this.NerfBoost.Size = new System.Drawing.Size(230, 35);
-            this.NerfBoost.TabIndex = 38;
-            this.NerfBoost.Text = "Nerf Tech Boost";
-            this.NerfBoost.UseVisualStyleBackColor = true;
-            this.NerfBoost.CheckedChanged += new System.EventHandler(this.NerfBoost_CheckedChanged);
-            // 
-            // MoreDrops
-            // 
-            this.MoreDrops.AutoSize = true;
-            this.MoreDrops.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.MoreDrops.Location = new System.Drawing.Point(35, 240);
-            this.MoreDrops.Name = "MoreDrops";
-            this.MoreDrops.Size = new System.Drawing.Size(230, 35);
-            this.MoreDrops.TabIndex = 29;
-            this.MoreDrops.Text = "More item drops";
-            this.MoreDrops.UseVisualStyleBackColor = true;
-            this.MoreDrops.CheckedChanged += new System.EventHandler(this.MoreDrops_CheckedChanged);
-            // 
-            // MoreItemsSpawn
-            // 
-            this.MoreItemsSpawn.AutoSize = true;
-            this.MoreItemsSpawn.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(64)));
-            this.MoreItemsSpawn.Location = new System.Drawing.Point(35, 310);
-            this.MoreItemsSpawn.Name = "MoreItemsSpawn";
-            this.MoreItemsSpawn.Size = new System.Drawing.Size(254, 35);
-            this.MoreItemsSpawn.TabIndex = 30;
-            this.MoreItemsSpawn.Text = "More item spawns";
-            this.MoreItemsSpawn.UseVisualStyleBackColor = true;
-            this.MoreItemsSpawn.CheckedChanged += new System.EventHandler(this.MoreItemsSpawn_CheckedChanged);
             // 
             // ViceHackPatcher
             // 

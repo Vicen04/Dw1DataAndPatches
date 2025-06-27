@@ -52,3 +52,5 @@ Filth Challenge vanilla version:
 
 
 This is being done during my free time; the hack has been finished, more updates may come in the future. I'm not sure if I'll upload more of the original code.
+
+Contact form: https://forms.gle/tJ1bYcuCKB2cdkCP6
