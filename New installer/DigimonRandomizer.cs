@@ -1,40 +1,63 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Xml.Linq;
+using Godot;
 
 public class digimonNecessaryData
 {
-    public List<byte> Attacks { get; set; }
-    public byte Level { get; set; }
-    public bool HasFinisher { get; set; }
-    public byte Type1 { get; set; }
-    public int dataWeight { get; set; }
+  public List<byte> Attacks { get; set; }
+  public byte Level { get; set; }
+  public bool HasFinisher { get; set; }
 
-  public digimonNecessaryData(uint currentOffset, ref Stream bin)
+  public int finisherLocation { get; set; }
+  public byte Type1 { get; set; }
+  public int dataWeight { get; set; }
+
+  public digimonNecessaryData(uint currentOffset, Stream bin)
   {
-      Attacks = new List<byte>();
-      HasFinisher = false;
+    finisherLocation = -1;
+    Attacks = new List<byte>();
+    HasFinisher = false;
 
-      bin.Position = currentOffset + 0x1C;
-      Level = (byte)bin.ReadByte();
+    bin.Position = currentOffset + 0x1D;
+    Level = (byte)bin.ReadByte();
 
-      bin.Position = currentOffset + 0x1E;
-      Type1 = (byte)bin.ReadByte();
+    bin.Position = currentOffset + 0x1E;
+    Type1 = (byte)bin.ReadByte();
 
-      bin.Position = currentOffset + 0x23;
+    bin.Position = currentOffset + 0x23;
+
+    if (currentOffset != 0x14D6F430)
       for (int j = 0; j < 16; j++)
       {
-        byte attackID = (byte)bin.ReadByte();
+        int attackID = bin.ReadByte();
         if (attackID == 0xFF)
           break;
-        else if (attackID > 56)
+        else if (attackID > 56 && attackID < 113)
+        {
           HasFinisher = true;
-        Attacks.Add(attackID);
+          finisherLocation = j;
+        }
+        Attacks.Add((byte)attackID);
       }
+    else
+    {
+      for (int j = 0; j < 6; j++)
+      {
+        int attackID = bin.ReadByte();
+        Attacks.Add((byte)attackID);
+      }
+      Attacks.AddRange([0xE, 0xF, 0x46]);
+      HasFinisher = true;
+      finisherLocation = 8;
     }
+  }
+  
 }
 
 public class TechNecessaryData
@@ -42,7 +65,7 @@ public class TechNecessaryData
   public short Power { get; set; }
   public byte Type { get; set; }
 
-  public TechNecessaryData(uint currentOffset, BinaryReader reader, ref Stream bin)
+  public TechNecessaryData(uint currentOffset, BinaryReader reader, Stream bin)
   {
       bin.Position = currentOffset;
       Power = reader.ReadInt16();
@@ -54,23 +77,48 @@ public class TechNecessaryData
 
 public class digimonMapData
 {
-    public short[] Attacks { get; set; }
-    public short[] AttackChances { get; set; }
-    public short Money { get; set; }
-    public short DigimonID { get; set; }
-    public short HPMax { get; set; }
-    public short HPCurrent { get; set; }
-    public short MPMax { get; set; }
-    public short MPCurrent { get; set; }
-    public short Offense { get; set; }
-    public short Defense { get; set; }
-    public short Speed { get; set; }
-    public short Brains { get; set; }
+  public int offset { get; set; }
+  public short[] Attacks { get; set; }
+  public short[] AttackChances { get; set; }
+
 }
 
 public class MapData
 {
-    public List<digimonMapData> digimonsMapData { get; set; }
+  public List<digimonMapData> digimonsMapData { get; set; }
+  public int[] scriptOffsets { get; set; }
+  public byte digimonID { get; set; }
+}
+
+public class BossMapData
+{
+  public int scriptOffset1{ get; set; }
+  public int scriptOffset2{ get; set; }
+  public int mapOffset { get; set; }
+}
+
+public class digimonStatsData
+{
+  public short currentHP { get; set; }
+  public short currentMP { get; set; }
+  public short maxHP { get; set; }
+  public short maxMP { get; set; }
+  public short offense { get; set; }
+  public short defense { get; set; }
+  public short speed { get; set; }
+  public short brains { get; set; }
+
+  public digimonStatsData(short cHP, short cMP, short mHP, short mMP, short off, short def, short spd, short brn)
+  {
+    currentHP = cHP;
+    currentMP = cMP;
+    maxHP = mHP;
+    maxMP = mMP;
+    offense = off;
+    defense = def;
+    speed = spd;
+    brains = brn;
+  }
 }
 
 public class DigimonRandomizer
@@ -82,7 +130,51 @@ public class DigimonRandomizer
   List<digimonNecessaryData> digimonData;
   List<TechNecessaryData> techData;
 
-  List<MapData> NPCMapData, bossMapData;
+  List<int> NPCOffsets =
+  new List<int>(){0x1420C5C, 0x1420CC2, 0x1420D22, 0x1420D8E, 0x1420DFA, 0x1420E66, 0x1420ECC, 0x1420F38, 0x14D3A16, 0x14D3ACA, 0x14D3B24, 0x14D3B7E, 0x157DD56, 0x157DDB6,
+                  0x157DE76, 0x157DED0, 0x16433F4, 0x164344E, 0x16434AE, 0x1643508, 0x18D6626, 0x18D66EC, 0x199D106, 0x199D16C, 0x199D1D8, 0x199D232, 0x199D298, 0x199D304,
+                  0x1BA6246, 0x1BA62AC, 0x1BA6306, 0x1BA636C, 0x1C018B2, 0x1C0190C, 0x1C01978, 0x1C019D2, 0x1CAB7EA, 0x1CAB85C, 0x1CAB8C8, 0x1CAB922, 0x1CABAC4, 0x1CABB30,
+                  0x1D68A54, 0x1D68B08, 0x1D68B62, 0x1D68BBC, 0x1E0A2C4, 0x1E0A378, 0x23FA8A4, 0x23FA8FE, 0x23FA958, 0x2449580, 0x24495DA, 0x2497646, 0x24976A6, 0x249770C,
+                  0x249776C, 0x24977CC, 0x2497832, 0x254AA4E, 0x254AAA8, 0x254AB02, 0x254AB62, 0x26198D6, 0x2619936, 0x2619990, 0x2619B20, 0x26D58FE, 0x26D595E, 0x26D59B8,
+                  0x26D5A18, 0x279B38A, 0x279B3F0, 0x279B450, 0x279B4AA, 0x279B510, 0x279B570, 0x2860346, 0x28603A0, 0x2860406, 0x286046C, 0x28604C6, 0x286052C, 0x29924EE,
+                  0x2992548, 0x29925AE, 0x2992608, 0x2992662, 0x29926C8, 0x2B7EC76, 0x2B7ECD0, 0x2B7ED30, 0x2B7ED8A, 0x2B7EDEA, 0x2B7EE50, 0x2D4BF48, 0x2D4BFA2, 0x2D4C008,
+                  0x2D4C062, 0x2D4C0BC, 0x2D4C122, 0x2DF66A4, 0x2DF66FE, 0x2DF6758, 0x2F3084E, 0x2F308A8, 0x2F30902, 0x2F3095C, 0x2F309B6, 0x2FBE59E, 0x2FBE5FE, 0x2FBE66A,
+                  0x2FBE6CA, 0x2FBE724, 0x4FD240E, 0x4FD246E, 0x4FD2522, 0x4FD257C, 0x506015E, 0x50601B8, 0x5060212, 0x50602C6, 0x50EDEAE, 0x50EDF0E, 0x50EDF68, 0x56448FE,
+                  0x5644948, 0x56449A2, 0x56449FC, 0x56D263E, 0x56D2698, 0x56D26F2, 0x56D274C, 0x576038E, 0x57603E8, 0x5760442, 0x576049C, 0x5EBE83E, 0x5EBE898, 0x5EBE8F2,
+                  0x5EBE94C, 0x5EBE9A6, 0x5F02DCE, 0x5F02E28, 0x5F02E82, 0x5F90B1E, 0x5F90B78, 0x5F90BD2, 0x5F90C2C, 0x601E86E, 0x601E8C8, 0x601E928, 0x60AC5BE, 0x60AC678,
+                  0x60AC618, 0x60AC738, 0x60AC6D2, 0x60AC798, 0x615FE1E, 0x615FE78, 0x6160002, 0x6160062, 0x61600C2, 0x616011C, 0x6160176, 0x61601D6, 0x61EF122, 0x61EF182,
+                  0x61EF1E2, 0x62A221E, 0x62A2284, 0x62A22F0, 0x62A235C, 0x6407EFA, 0x6407F66, 0x6407FD8, 0x640803E, 0x64080B0, 0x640811C, 0x640818E, 0x64081F4, 0x64BADB6,
+                  0x64BAE22, 0x64BAE94, 0x64BAEFA, 0x64BB09C, 0x64BB108, 0x64BB17A, 0x64BB1E0, 0x6580D9C, 0x6580E02, 0x6633BA6, 0x6633C06, 0x6633C72, 0x6633CDE, 0x6633D3E,
+                  0x6633DAA, 0x67AC99A, 0x6843EA6, 0x6844030, 0x684408A, 0x6B4270E, 0x6B4276E, 0x6B427DA, 0x6B42964, 0x6B429BE, 0x6B42A1E, 0x6B42A8A, 0x6B42AE4, 0x6C08FBA,
+                  0x6C0901A, 0x6C0907A, 0x6C090E6, 0x6C09146, 0x6C091B2, 0x6CCE592, 0x6CCE5F8, 0x6CCE658, 0x6CCE6BE, 0x6D9CA06, 0x6D9CA7E, 0x6D9CAF6, 0x6D9CB6E, 0x6D9CBE6,
+                  0x6D9CC5E, 0x6E0EF4E, 0x6E0EFBA, 0x6E0F01A, 0x6E0F07A, 0x6E0F0E6, 0x6ED3D9C, 0x7070BC6, 0x7070C2C, 0x7070C86, 0x7070CE6, 0x7070D4C, 0x7070DA6, 0x70FE5D6,
+                  0x70FE630, 0x70FE696, 0x70FE6F0, 0x70FE74A, 0x70FE7B0, 0x7195A22, 0x7195A7C, 0x7195AD6, 0x723F662, 0x723F6C2, 0x723F728, 0x723F788, 0x7541886, 0x75418E6,
+                  0x7541946, 0x75A623E, 0x75A629E, 0x75A62FE, 0x76B0F7A, 0x76B0FD4, 0x77489B2, 0x7748A0C, 0x7AFA3C2,
+                  0x7AFA41C, 0x7AFA476, 0x7C6E44E, 0x7D0A3AE, 0x7DF0324, 0x7DF037E, 0x7DF03DE, 0x7DF044A, 0x7EA7F7A, 0x7EA7FDA, 0x7EA8040, 0x7EA80B2, 0x7EA8112, 0x7EA8178,
+                  0x7F6E396, 0x7F6E3F6, 0x7F6E462, 0x7F6E4BC, 0x7F6E51C, 0x7F6E588, 0x800E866, 0x800E8CC, 0x800E92C, 0x800E992, 0x80D4BDC, 0x80D4D6C, 0x80D4DD8, 0x80D4E44,
+                  0x80D4EA4, 0x80D4F10, 0x819AB92, 0x819ABF2, 0x819AC52, 0x819ACB2, 0x819AD12, 0x819AD72, 0x831290E, 0x8312968, 0x83129C2, 0x8312A1C, 0x8312A76, 0x8312AD6,
+                  0x86BCF7E, 0x86BCFD8, 0x86BD038, 0x86BD092, 0x87700E6, 0x8770146, 0x87701A6, 0x8770206, 0x8836646, 0x88366B2, 0x883671E, 0x883678A, 0x88E959C, 0x88E9602,
+                  0x899CB36, 0x899CB9C, 0x899CC02, 0x899CC68, 0x899CCCE, 0x899CD34, 0x8B16304, 0x8B16370, 0x8B163CA, 0x8B16436, 0x8B846D2, 0x8B84738, 0x8B846D4, 0x8B8479E,
+                  0x8B847F8, 0x8B8485E, 0x8D464D2, 0x8D46538, 0x8D46598, 0x8D465F2, 0x8D46658, 0x8D466B8, 0x8F3E146, 0x8F3E1B2, 0x8F3E34E, 0x8F3E3BA, 0x9004E22,
+                  0x9004E8E, 0x9004EF4, 0x9004F60, 0x90B824E, 0x90B82B4, 0x90B831A, 0x90B8386, 0x90B83EC, 0x90B8452, 0x919D74A, 0x919D7AA, 0x919D80A, 0x919D864, 0x919D8C4,
+                  0x919D924, 0x92475CE, 0x924762E, 0x9247694, 0x92476F4, 0x9303D68, 0x9303DCE, 0x9303E2E, 0x9303E94, 0x93BFFF6, 0x93C0056, 0x93C00BC, 0x93C011C, 0x94F2E2A,
+                  0x94F2EA2, 0x94F303E, 0x963383E, 0x9633898, 0x96338F2, 0x96CA9A2, 0x96CAA14, 0x96CAA7A, 0x96CAAE6, 0x9774054, 0x97740AE, 0x9774108, 0x97C191E, 0x97C1984,
+                  0x991EF12, 0x991EF6C, 0x991F0FC, 0x991F162, 0x991F1C8, 0x991F222, 0x991F282, 0x991F2E8, 0x9C9B44E, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE, 0x9EEBC16, 0x9EEBC76,
+                  0x9EEBCD0, 0x9EEBD30, 0x9EEBD90, 0x9EEBDEA, 0x9FAF9BC, 0x9FAFA22, 0x9FAFA88, 0x9FAFAE8, 0x9FAFB4E, 0x9FAFCDE, 0xA073802, 0xA073992, 0xA0739F2, 0xA073A52,
+                  0xA073AB8, 0xA073B18, 0xA073B7E, 0xA1376B2, 0xA137712, 0xA137772, 0xA1377D2, 0xA137832, 0xA346156, 0xA3461B6, 0xA346216, 0xA346276, 0xA4F0BA8, 0xA5B5E3A,
+                  0xA5B5E94, 0xA5B5EEE, 0xA7EEAD0, 0xA7EEB36, 0xA7EEB96, 0xA7EEBFC, 0xA86D5FE, 0xA86D658, 0xA86D6B2, 0xA86D70C, 0xA86D896, 0xA86D8F0, 0xA86D94A, 0xA86D9A4},
+  bossOffsets =
+  new List<int>(){0x14D3A70, 0x157DE1C, 0x164339A, 0x17C609E, 0x18D6692, 0x1C01852, 0x2133FCA, 0x2134024, 0x213407E, 0x21340D8, 0x2134132, 0x254ABC2, 0x26D5A72, 0x2929254,
+                  0x2A3286A, 0x2AF131C, 0x2E3C072, 0x2EA2E6A, 0x2EA2EC4, 0x2EA2F1E, 0x3085C02, 0x3085C5C, 0x314D97A, 0x314D9D4, 0x3214FBA, 0x3215014, 0x32DC392, 0x32DC3EC,
+                  0x33A37DA, 0x33A3834, 0x346AF4A, 0x346AFA4, 0x35328BA, 0x3532914, 0x35F9D02, 0x35F9D5C, 0x36C1472, 0x36C14CC, 0x3789012, 0x378919C, 0x3850EBA, 0x3850F14,
+                  0x3918E2A, 0x3918E84, 0x4F4D9AE, 0x4F4DA0E, 0x517BBF6, 0x558834A, 0x59E5B6A, 0x5EBEA00, 0x60AC7FE, 0x61EF0C2, 0x8EEBF2E, 0x68440E4, 0x684413E, 0x6844198,
+                  0x69CECCA, 0x6FA261C, 0x7195B30, 0x7195B8A, 0x7195BE4, 0x7351FCA, 0x76268AE, 0x7626908, 0x7626962, 0x76269BC, 0x76B102E, 0x76B1088, 0x76B10E2, 0x76B113C,
+                  0x780E4D2, 0x7D6A690, 0x800E7FA, 0x831290E, 0x8836592, 0x88365EC, 0x8B162AA, 0x8E50416, 0x8EEBE7A, 0x9303D0E, 0x9303EF4, 0x9858822, 0x9E286E0, 0x9E28740,
+                  0xA07377E, 0xA5B5F48, 0xA5B5FA2, 0xA5B5FFC, 0xA668D76, 0xA7EEA76,
+                  0x63429FA, 0x6342A54, 0x6342AAE, 0x57EE0C6, 0x57EE120, 0x5860516, 0x5860570, 0x59201CE, 0x5920228 }; //extra maps
+
+  Dictionary<string, MapData> NPCMapData;
+  List<BossMapData> bossMapData;
 
   public DigimonRandomizer(bool hardcore, bool trueHardcore, ref Stream binOG, BinaryReader reader)
   {
@@ -98,16 +190,13 @@ public class DigimonRandomizer
 
     for (int i = 0; i < 176; i++)
     {
-      currentOffset = currentOffset + 0x34;
-      if (currentOffset > jumpOffsets[jumpValue])
+      digimonData.Add(new digimonNecessaryData(currentOffset, bin));
+       currentOffset = currentOffset + 0x34;
+      if (currentOffset + 0x1C > jumpOffsets[jumpValue])
       {
         currentOffset = currentOffset + 0x130;
         jumpValue++;
       }
-
-      digimonData.Add(new digimonNecessaryData(currentOffset, ref bin));
-
-
     }
 
     techData = new List<TechNecessaryData>();
@@ -116,91 +205,231 @@ public class DigimonRandomizer
     currentOffset = dataOffset;
 
     for (int i = 0; i < 57; i++)
-    {      
-      techData.Add(new TechNecessaryData(currentOffset, reader, ref bin));
+    {
+      techData.Add(new TechNecessaryData(currentOffset, reader, bin));
       currentOffset = currentOffset + 0x10;
     }
 
-    NPCMapData = new List<MapData>();
-    bossMapData = new List<MapData>();
-  }
+    NPCMapData = new Dictionary<string, MapData>();
+    bossMapData = new List<BossMapData>();
 
-
-  public void RandomizeDigimonNPC(int option, bool bosses)
-  {
-
-
-
-  }
-
-  public void RandomizeNPCStats(int option, bool bosses)
-  {
-    foreach (MapData maps in NPCMapData)
+    if (hardcore)
     {
-      foreach (digimonMapData data in maps.digimonsMapData)
-      {
+      bin.Position = 0x6580D42;
+      if (bin.ReadByte() != 0xA)
+        return;
 
+      bossOffsets.AddRange([0x1D68AAE, 0x2E3C0CC, 0x4F4DA6E, 0x5A8FA32, 0x5B399C6, 0x6580D42, 0x66F9FCA, 0x66FA024, 0x66FA07E, 0x6C08F5A, 0x6ED3D42, 0x76B1196, 0x7F6E32A,
+                            0x80D4B82, 0x8A6330E, 0x8EEBED4, 0x94851F6, 0x9AA152A, 0x9AA1584, 0x9AA15DE, 0x9B3AAC6, 0x9B3AB20, 0x9B3AB7A, 0x9BBF4FE]);
+      if (trueHardcore)
+      {
+        bin.Position = 0x723F7EE;
+        if (bin.ReadByte() != 0x2F)
+          return;
+
+        bossOffsets.AddRange([0x1EC08C6, 0x1F404D2, 0x20C7328, 0x23A3066, 0x723F7EE, 0x740DEC6, 0x740DF20, 0x7D6A636, 0x825FCA2, 0x825FCFC, 0x991F282, 0x991F2E8, 0xA40BA06,
+                              0xA40BA60, 0xA40BABA, ]);
       }
     }
+  }
 
 
-    if (bosses)
+  public void RandomizeDigimonNPC(int option, bool bosses, Random numberGenerator, BinaryWriter writter)
+  {
+    List<byte> validNPCDigimon = new List<byte>();
+    switch (option)
     {
-      foreach (MapData maps in bossMapData)
-      {
-        foreach (digimonMapData data in maps.digimonsMapData)
+      case 0:
+        break;
+      case 1:
+        for (int i = 66; i < 112; i++)
+          validNPCDigimon.Add((byte)i);
+        break;
+      case 2:
+        for (int i = 0; i < digimonData.Count; i++)
         {
+          if (i < 114 || (i > 128 && digimonData[i].HasFinisher))
+            validNPCDigimon.Add((byte)i);
+        }
+        validNPCDigimon.Add(115);
+        break;
 
+    }
+
+    if (bosses && option > 0)
+    {
+      List<byte> validDigimon = new List<byte>();
+      for (int i = 0; i < digimonData.Count; i++)
+      {
+        if (digimonData[i].HasFinisher && i < 67 && i > 128)
+          validDigimon.Add((byte)i);
+      }
+
+      validDigimon.Add(112);
+      validDigimon.Add(113);
+      validDigimon.Add(115);
+
+      foreach (BossMapData mapData in bossMapData)
+      {
+        byte randomDigimon = validDigimon[numberGenerator.Next(validDigimon.Count)];
+        bin.Position = mapData.scriptOffset1;
+        bin.WriteByte(randomDigimon);
+        bin.Position = mapData.scriptOffset2;
+        bin.WriteByte(randomDigimon);
+        bin.Position = mapData.mapOffset;
+
+        int currentOffset = mapData.mapOffset;
+        List<int> attackValues = new List<int>();
+
+        for (int i = 0; i < digimonData[randomDigimon].Attacks.Count; i++)
+          if (i != digimonData[randomDigimon].finisherLocation) attackValues.Add(i);
+
+        for (int i = 0; i < 4; i++)
+        {
+          if (i == digimonData[randomDigimon].Attacks.Count)
+            break;
+
+          bin.Position = currentOffset + 44 + i * 2;
+          if (digimonData[randomDigimon].HasFinisher)
+          {
+            if (i < 3)
+            {
+              int value = attackValues[numberGenerator.Next(attackValues.Count)];
+              if (digimonData[randomDigimon].Attacks[value] > 56)
+                value--;
+              writter.Write((short)(0x2E + value));
+              attackValues.Remove(value);
+              bin.Position = currentOffset + 52 + i * 2;
+              writter.Write((short)30);
+            }
+            else
+            {
+              writter.Write((short)(0x2E + digimonData[randomDigimon].finisherLocation));
+              bin.Position = currentOffset + 52 + i * 2;
+              writter.Write((short)10);
+            }
+
+          }
+          else
+          {
+            int value = attackValues[numberGenerator.Next(attackValues.Count)];
+            writter.Write((short)(0x2E + value));
+            attackValues.Remove(value);
+            bin.Position = currentOffset + 52 + i * 2;
+            writter.Write((short)30);
+          }
         }
       }
     }
+  }
+
+  public void RandomizeNPCStats(int option, bool bosses, Random numberGenerator, BinaryReader reader, BinaryWriter writter)
+  {
+    switch (option)
+    {
+      case 0:
+        ShuffleStats(NPCOffsets, numberGenerator, reader, writter);
+        break;
+      case 1:
+        if (isHardcore)
+        {
+          if (tHardcore)
+            RandomizeStats(NPCOffsets, numberGenerator, writter, 850, 150);
+          else
+            RandomizeStats(NPCOffsets, numberGenerator, writter, 741, 100);
+        }
+        else
+          RandomizeStats(NPCOffsets, numberGenerator, writter, 491, 10);
+        break;
+      case 2:
+        if (isHardcore)
+        {
+          if (tHardcore)
+            RandomizeStats(NPCOffsets, numberGenerator, writter, 1351, 150);
+          else
+            RandomizeStats(NPCOffsets, numberGenerator, writter, 1101, 100);
+        }
+        else
+          RandomizeStats(NPCOffsets, numberGenerator, writter, 999, 1);
+        break;
+    }
+
+    if (bosses)
+    {
+      switch (option)
+      {
+        case 0:
+          ShuffleStats(bossOffsets, numberGenerator, reader, writter);
+          break;
+        case 1:
+          if (isHardcore)
+          {
+            if (tHardcore)
+              RandomizeStats(bossOffsets, numberGenerator, writter, 1301, 200);
+            else
+              RandomizeStats(bossOffsets, numberGenerator, writter, 1051, 150);
+          }
+          else
+            RandomizeStats(bossOffsets, numberGenerator, writter, 960, 40);
+          break;
+        case 2:
+          if (isHardcore)
+          {
+            if (tHardcore)
+              RandomizeStats(bossOffsets, numberGenerator, writter, 2251, 250);
+            else
+              RandomizeStats(bossOffsets, numberGenerator, writter, 1301, 200);
+          }
+          else
+            RandomizeStats(bossOffsets, numberGenerator, writter, 1091, 10);
+          break;
+      }
+    }
 
   }
 
-  public void RandomizeNPCTechs(bool bosses, bool ignoreNPC)
+  public void RandomizeNPCTechs(bool bosses, bool ignoreNPC, Random numberGenerator, BinaryWriter writter)
   {
     if (!bosses && ignoreNPC)
       return;
 
     if (!ignoreNPC)
-    {
-      foreach (MapData maps in NPCMapData)
-      {
-        foreach (digimonMapData data in maps.digimonsMapData)
-        {
+      RandomizeTech(NPCOffsets, numberGenerator, writter);
 
-        }
-      }
-    }
     if (bosses)
-    {
-      foreach (MapData maps in bossMapData)
-      {
-        foreach (digimonMapData data in maps.digimonsMapData)
-        {
+      RandomizeTech(bossOffsets, numberGenerator, writter);
 
-        }
-      }
-    }
+
   }
 
-  public void RandomizeNPCMoney(int option, bool bosses)
+  public void RandomizeNPCMoney(int option, bool bosses, Random numberGenerator, BinaryReader reader, BinaryWriter writter)
   {
-    foreach (MapData maps in NPCMapData)
-    {
-      foreach (digimonMapData data in maps.digimonsMapData)
-      {
+    if (NPCOffsets.Count == 0)
+      return;
 
-      }
+    switch (option)
+    {
+      case 0:
+        ShuffleMoney(NPCOffsets, numberGenerator, reader, writter);
+        break;
+      case 1:
+        RandomizeMoney(NPCOffsets, numberGenerator, writter);
+        break;
     }
+
     if (bosses)
     {
-      foreach (MapData maps in bossMapData)
-      {
-        foreach (digimonMapData data in maps.digimonsMapData)
-        {
+      if (bossOffsets.Count == 0)
+        return;
 
-        }
+      switch (option)
+      {
+        case 0:
+          ShuffleMoney(bossOffsets, numberGenerator, reader, writter);
+          break;
+        case 1:
+          RandomizeMoney(bossOffsets, numberGenerator, writter);
+          break;
       }
     }
   }
@@ -213,59 +442,92 @@ public class DigimonRandomizer
     {
       if (option < 5)
       {
-        if (digimonData[i].Level == (option + 1))
-          possibleDigimon.Add((byte)i);
+        if (digimonData[i].Level == (option + 1))        
+          possibleDigimon.Add((byte)i);        
       }
-      else
-        possibleDigimon.Add((byte)i);
+      else      
+        possibleDigimon.Add((byte)i);       
     }
 
-    uint[] digimonOffsets = { 0x14D271B8, 0x14D271C0, 0x14D19DB0, 0x14D19DD4 },
+    uint[] digimonOffsets = { 0x14D271C0, 0x14D271B8, 0x14D19DB0, 0x14D19DD4 },
     techOffset = { 0x14CD1D50, 0x14CD1D30, 0x14D19D98, 0x14D19DC0 },
     learnOffset = { 0x14CD1D60, 0x14CD1D40, 0x14D19DA8, 0x14D19DD0 },
-    checkOffset = { 0x14CD1D18, 0x14CD1D44 };
+    checkOffset = { 0x14CD1D44, 0x14CD1D24 };
 
-    for (int i = 0; i < 4; i++)
+    if (option < 2)
     {
-      byte selectedDigimon = possibleDigimon[numberGenerator.Next(possibleDigimon.Count)];
-      if (i < 2)
+      for (int i = 0; i < 4; i++)
       {
-        bin.Position = checkOffset[i];
-        bin.WriteByte(selectedDigimon);
+        if (possibleDigimon.Count > i)
+        {
+          bin.Position = digimonOffsets[i];
+          bin.WriteByte(possibleDigimon[i]);
+          bin.Position = techOffset[i];
+          bin.WriteByte(0x2E);
+        }
+        else
+        {
+          bin.Position = digimonOffsets[i];
+          bin.WriteByte(possibleDigimon[0]);
+          bin.Position = techOffset[i];
+          bin.WriteByte(0x2E);
+        }
       }
-      bin.Position = digimonOffsets[i];
-      bin.WriteByte(selectedDigimon);
-      int count = 0;
-      foreach (byte attack in digimonData[selectedDigimon].Attacks)
+    }
+    else
+    {
+
+      for (int i = 0; i < 4; i++)
       {
-        if (attack > 56)
-          continue;
-        if (techData[attack].Type == digimonData[selectedDigimon].Type1)
+        byte selectedDigimon = possibleDigimon[numberGenerator.Next(possibleDigimon.Count)];
+        if (i < 2)
+        {
+          bin.Position = checkOffset[i];
+          bin.WriteByte(selectedDigimon);
+        }
+        bin.Position = digimonOffsets[i];
+        bin.WriteByte(selectedDigimon);
+
+        if (digimonData[selectedDigimon].Level > 2)
+        {
+          int count = 0;
+          foreach (byte attack in digimonData[selectedDigimon].Attacks)
+          {
+            if (attack > 56)
+              continue;
+            if (techData[attack].Type == digimonData[selectedDigimon].Type1)
+            {
+              bin.Position = techOffset[i];
+              bin.WriteByte((byte)(count + 0x2E));
+              bin.Position = learnOffset[i];
+              bin.WriteByte(attack);
+              break;
+            }
+            count++;
+          }
+          if (count == digimonData[selectedDigimon].Attacks.Count)
+          {
+            bin.Position = learnOffset[i];
+            bin.WriteByte(digimonData[selectedDigimon].Attacks[0]);
+            bin.Position = techOffset[i];
+            bin.WriteByte(0x2E);
+          }
+        }
+        else
         {
           bin.Position = techOffset[i];
-          bin.WriteByte((byte)(count + 0x2E));
-          bin.Position = learnOffset[i];
-          bin.WriteByte(attack);
-          break;
+          bin.WriteByte(0x2E);
         }
-        count++;
-      }
-      if (count == digimonData[selectedDigimon].Attacks.Count)
-      {
-        bin.Position = learnOffset[i];
-        bin.WriteByte(digimonData[selectedDigimon].Attacks[0]);
-        bin.Position = techOffset[i];
-        bin.WriteByte(0x2E);
-      }
 
-      possibleDigimon.Remove(selectedDigimon);
+        possibleDigimon.Remove(selectedDigimon);
+      }
     }
 
   }
 
   public void StarterTech(int option, Random numberGenerator)
   {
-    uint[] digimonOffsets = { 0x14D271B8, 0x14D271C0, 0x14D19DB0, 0x14D19DD4 },
+    uint[] digimonOffsets = { 0x14D271C0, 0x14D271B8, 0x14D19DB0, 0x14D19DD4 },
     techOffset = { 0x14CD1D50, 0x14CD1D30, 0x14D19D98, 0x14D19DC0 },
     learnOffset = { 0x14CD1D60, 0x14CD1D40, 0x14D19DA8, 0x14D19DD0 };
     for (int i = 0; i < 4; i++)
@@ -275,6 +537,9 @@ public class DigimonRandomizer
 
       int count = 0;
 
+      if (digimonData[Digimon].Level < 3)
+        continue;
+
       switch (option)
       {
         case 0:
@@ -283,7 +548,7 @@ public class DigimonRandomizer
 
           foreach (byte attack in digimonData[Digimon].Attacks)
           {
-            if (attack < 57 && techData[attack].Power < currentPower)
+            if (attack < 57 && techData[attack].Power < currentPower && techData[attack].Power > 0)
             {
               selectedAttack = count;
               currentPower = techData[attack].Power;
@@ -296,18 +561,21 @@ public class DigimonRandomizer
           bin.WriteByte((byte)(0x2E + selectedAttack));
           break;
         case 1:
-          byte randomTech = (byte)numberGenerator.Next(digimonData[Digimon].Attacks.Count);
-          if (digimonData[Digimon].Attacks[randomTech] > 56)
-            randomTech--;
+          List<int> validAttacks = new List<int>();
+          for (int j = 0; j < digimonData[Digimon].Attacks.Count; j++)
+          {
+            byte attack = digimonData[Digimon].Attacks[i];
+            if (attack < 57 || attack == 21 || attack == 30 || attack == 34 || attack == 41 || attack == 42)
+              continue;
+              validAttacks.Add(j);
+          }
+          int randomTech = validAttacks[numberGenerator.Next(validAttacks.Count)];
           bin.Position = learnOffset[i];
           bin.WriteByte(digimonData[Digimon].Attacks[randomTech]);
           bin.Position = techOffset[i];
           bin.WriteByte((byte)(0x2E + randomTech));
           break;
       }
-
-
-
     }
   }
 
@@ -439,7 +707,7 @@ public class DigimonRandomizer
         [0x1407870C],//Devimon
         [0x14078708],//Airdramon
         [0x14016CB6, 0x140172B6, 0x1409FFD6, 0x140B8570, 0x140B860E, 0x140B860E],//Tyrannomon
-        [0x13FD696A, 0x13FD6998, 0x13FF1A6C, 0x13FF44D8, 0x13FF5740, 0x13FF5886, 0x140A009A, 0x140B7AEA, 0x140B7B18],//Meramon
+        [0x13FD696A, 0x13FD6998, 0x13FF1A6C, 0x13FF44D8, 0x13FF572E, 0x13FF5740, 0x13FF5886, 0x140A009A, 0x140B7AEA, 0x140B7B18],//Meramon
         [0x13FE1D48, 0x13FE19B2, 0x14059D08, 0x140A104A, 0x14D725F0],//Seadramon
         [0x13FD9780, 0x13FD9794, 0x14073C7C, 0x140503F8, 0x14050CAC, 0x14074630, 0x140A0F72, 0x140BA900, 0x140BA914],//Numemon
         [0x14078704],//MetalGreymon
@@ -501,26 +769,26 @@ public class DigimonRandomizer
     }
 
     switch (option)
-      {
-        case 0:
-          List<byte> currentProsperity = new List<byte>();
-          foreach (uint offset in prosperityOffsets)
-          {
-            bin.Position = offset;
-            currentProsperity.Add((byte)bin.ReadByte());
-          }
+    {
+      case 0:
+        List<byte> currentProsperity = new List<byte>();
+        foreach (uint offset in prosperityOffsets)
+        {
+          bin.Position = offset;
+          currentProsperity.Add((byte)bin.ReadByte());
+        }
 
-          byte[] shuffledProsperity = currentProsperity.ToArray();
-          numberGenerator.Shuffle(shuffledProsperity);
-          SetProsperity(prosperityOffsets, shuffledProsperity, isHardcore);
-          break;
-        case 1:
-          byte[] prosperity = { 10, 7, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-          numberGenerator.Shuffle(prosperity);
-          SetProsperity(prosperityOffsets, prosperity, isHardcore);
-          triggers.AddRange([203, 205, 221, 224, 225, 235, 246, 261, 236]);
-          recruitTriggers.AddRange(
-            [[0x13FD79D2, 0x13FFF39C, 0x13FFF3B8, 0x1402BAA2, 0x1402BFDE, 0x140B8B52], // Agumon
+        byte[] shuffledProsperity = currentProsperity.ToArray();
+        numberGenerator.Shuffle(shuffledProsperity);
+        SetProsperity(prosperityOffsets, shuffledProsperity, isHardcore);
+        break;
+      case 1:
+        byte[] prosperity = { 10, 7, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        numberGenerator.Shuffle(prosperity);
+        SetProsperity(prosperityOffsets, prosperity, isHardcore);
+        triggers.AddRange([203, 205, 221, 224, 225, 235, 246, 261, 236]);
+        recruitTriggers.AddRange(
+          [[0x13FD79D2, 0x13FFF39C, 0x13FFF3B8, 0x1402BAA2, 0x1402BFDE, 0x140B8B52], // Agumon
             [0x1405B446, 0x1405B8C8, 0x1409E4BA, 0x1409E4D6, 0x140A092C] , // Greymon
             [0x1403A5A2, 0x1403AAF6, 0x140A0306, 0x14D725C6], // Birdramon
             [0x13FD7E6C, 0x1403E676, 0x140441D4, 0x14044250, 0x140450AE, 0x14059D10, 0x14059F08, 0x1406193E, 0x140B8FEC], // Whamon
@@ -536,8 +804,8 @@ public class DigimonRandomizer
           recruitTriggers.Add([0x13FE9770, 0x13FE9FC2, 0x13FEA132, 0x13FEA3D4, 0x13FEA49A, 0x13FEA560, 0x13FEA626, 0x13FEA710, 0x13FEA92A, 0x13FEB63C, 0x13FEB988, 0x13FEBDE0,
           0x13FEAA28, 0x13FEAB12, 0x13FEAC10, 0x13FEAD0E, 0x13FEAE0C, 0x13FEAEDE, 0x13FEAFDC, 0x13FEB1DE, 0x13FEB2CC, 0x13FEB3BA, 0x13FEB4AC, 0x13FEB7F8, 0x13FEBC52, 0x1409FB24]);
 
-          break;
-      }
+        break;
+    }
 
     short[] ShuffledTriggers = triggers.ToArray();
     numberGenerator.Shuffle(ShuffledTriggers);
@@ -613,21 +881,200 @@ public class DigimonRandomizer
       }
     }
   }
-    
-    /*#(if trigger list, trigger, name list, digimon).
-          254, 0x36 ), #Megadramon -- does nothing and has no Jijimon message
-        ( ( 0x140B600A, 0x13FD9396, 0x140BA516 ),
-          ( 0x13FE6B1A, 0x13FE6F98, 0x13FE75D6 ),
-          255, 0x37 ), #Piximon
-        ( ( 0x13FD9210, 0x140BA390, 0x13FD906E, 0x140AEF36, 0x140B67EE, 0x140BA1EE ),
-          ( 0x140774C8, 0x140788B0 ),
-          256, 0x38 ), #Digitamamon
-        ( ( 0x14066400, 0x140BAB1E, 0x140632A4, 0x140B53E6, 0x140663AC, 0x14063250, 0x14066374, 0x14095A7E,
-            0x14063218, 0x1409761C, 0x13FD999E ),
-          ( 0x14096804, ),
-          257, 0x39 ), #Penguinmon
-        ( ( 0x140B573A, 0x13FD95CE, 0x140BA74E ),
-          ( 0x13FE4AD6, ),
-          258, 0x3A )  #Ninjamon
-        )*/
+
+  void ShuffleMoney(List<int> currentData, Random numberGenerator, BinaryReader reader, BinaryWriter writter)
+  {
+    List<short> money = new List<short>();
+    foreach (int offset in currentData)
+    {
+      bin.Position = offset + 38;
+      CheckIfECC();
+      money.Add(reader.ReadInt16());
+    }
+    short[] moneyShuffled = money.ToArray();
+    numberGenerator.Shuffle(moneyShuffled);
+    for (int i = 0; i < moneyShuffled.Length; i++)
+    {
+      bin.Position = currentData[i] + 38;
+      CheckIfECC();
+      writter.Write(moneyShuffled[i]);
+    }
+  }
+
+  void RandomizeMoney(List<int> currentData, Random numberGenerator, BinaryWriter writter)
+  {
+    foreach (int offset in currentData)
+    {
+      bin.Position = offset + 38;
+      CheckIfECC();
+      if (isHardcore)
+      {
+        if (tHardcore)
+          writter.Write((short)((numberGenerator.Next(135) + 15) * 100));
+        else
+          writter.Write((short)((numberGenerator.Next(110) + 10) * 100));
+      }
+      else
+        writter.Write((short)((numberGenerator.Next(99) + 1) * 100));
+    }
+  }
+
+  void RandomizeTech(List<int> currentData, Random numberGenerator, BinaryWriter writter)
+  {
+    foreach (int offset in currentData)
+    {
+      int currentOffset = offset, digimonID;
+      List<int> attackValues = new List<int>();
+      bin.Position = currentOffset;
+      digimonID = bin.ReadByte();
+
+      if (digimonID == 40)
+        continue;
+
+      for (int i = 0; i < digimonData[digimonID].Attacks.Count; i++)
+        if (i != digimonData[digimonID].finisherLocation) attackValues.Add(i);
+
+      for (int i = 0; i < 4; i++)
+      {
+        if (i == digimonData[digimonID].Attacks.Count)
+          break;
+
+        bin.Position = currentOffset + 44 + i * 2;
+        CheckIfECC();
+
+        if (digimonData[digimonID].HasFinisher)
+        {
+          if (i < 3)
+          {
+            int value = attackValues[numberGenerator.Next(attackValues.Count)];
+            writter.Write((short)(0x2E + value));
+            attackValues.Remove(value);
+            bin.Position = currentOffset + 52 + i * 2;
+            CheckIfECC();
+            writter.Write((short)30);
+          }
+          else
+          {
+            writter.Write((short)(0x2E + digimonData[digimonID].finisherLocation));
+            bin.Position = currentOffset + 52 + i * 2;
+            CheckIfECC();
+            writter.Write((short)10);
+          }
+
+        }
+        else
+        {
+          int value = attackValues[numberGenerator.Next(attackValues.Count)];
+          writter.Write((short)(0x2E + value));
+          attackValues.Remove(value);
+          bin.Position = currentOffset + 52 + i * 2;
+          CheckIfECC();
+          writter.Write((short)30);
+        }
+      }
+    }
+  }
+
+  void ShuffleStats(List<int> currentData, Random numberGenerator, BinaryReader reader, BinaryWriter writter)
+  {
+    List<digimonStatsData> allStats = new List<digimonStatsData>();
+    short tempHP, tempMP, tempCHP, tempCMP, tempOff, tempDef, tempSpd, tempBrn;
+    foreach (int offset in currentData)
+    {
+      bin.Position = offset + 22;
+      CheckIfECC();
+      tempCHP = reader.ReadInt16();
+      CheckIfECC();
+      tempCMP = reader.ReadInt16();
+      CheckIfECC();
+      tempHP = reader.ReadInt16();
+      CheckIfECC();
+      tempMP = reader.ReadInt16();
+      CheckIfECC();
+      tempOff = reader.ReadInt16();
+      CheckIfECC();
+      tempDef = reader.ReadInt16();
+      CheckIfECC();
+      tempSpd = reader.ReadInt16();
+      CheckIfECC();
+      tempBrn = reader.ReadInt16();
+
+      allStats.Add(new digimonStatsData(tempCHP, tempCMP, tempHP, tempMP,
+       tempOff, tempDef, tempSpd, tempBrn));
+
+    }
+    digimonStatsData[] statsShuffled = allStats.ToArray();
+    numberGenerator.Shuffle(statsShuffled);
+    for (int i = 0; i < statsShuffled.Length; i++)
+    {
+      bin.Position = currentData[i] + 22;
+      CheckIfECC();
+      writter.Write(statsShuffled[i].currentHP);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].currentMP);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].maxHP);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].maxMP);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].offense);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].defense);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].speed);
+      CheckIfECC();
+      writter.Write(statsShuffled[i].brains);
+    }
+  }
+
+  void RandomizeStats(List<int> currentData, Random numberGenerator, BinaryWriter writter, int maxValue, int minValue)
+  {
+    foreach (int offset in currentData)
+    {
+      bin.Position = offset + 18;
+      CheckIfECC();
+      short HP = (short)((numberGenerator.Next(maxValue) + minValue) * 10), MP = (short)((numberGenerator.Next(maxValue) + minValue) * 10);
+      int tempMaxValue = maxValue;
+      if (maxValue - minValue > 1500)
+        tempMaxValue = 1501 - minValue;
+      if (HP == 9990)
+        HP = 9999;
+      if (MP == 9990)
+        MP = 9999;
+      writter.Write(HP);
+      CheckIfECC();
+      writter.Write(MP);
+      CheckIfECC();
+      writter.Write(HP);
+      CheckIfECC();
+      writter.Write(MP);
+      CheckIfECC();
+      writter.Write((short)(numberGenerator.Next(maxValue) + minValue));
+      CheckIfECC();
+      writter.Write((short)(numberGenerator.Next(tempMaxValue) + minValue));
+      CheckIfECC();
+      writter.Write((short)(numberGenerator.Next(tempMaxValue) + minValue));
+      CheckIfECC();
+      writter.Write((short)(numberGenerator.Next(tempMaxValue) + minValue));
+    }
+  }
+
+  void CheckIfECC()
+  {
+    int position = (int)bin.Position;
+    position = position - 24;
+    position = position % 0x930;
+
+    if (position >= 0x800)
+      bin.Position = bin.Position + 0x130;
+  }
+  
+  /*void CheckIfECC(int pos)
+  {   
+    pos = pos - 24;
+    pos = pos % 0x930;
+
+    if (pos >= 0x800)
+      bin.Position = bin.Position + 0x130;
+  }*/
 }

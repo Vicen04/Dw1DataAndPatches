@@ -701,13 +701,13 @@ public partial class RandomizerContainer : SubViewportContainer
 		DigimonRandomizer digimonRando = new DigimonRandomizer(hardcore, trueHardcore, ref bin, reader);
 
 		if (digimonNPC)
-			digimonRando.RandomizeDigimonNPC(digimonNPCOpt, bosses);
+			digimonRando.RandomizeDigimonNPC(digimonNPCOpt, bosses, numberGenerator, writter);
 		if (statsNPC)
-			digimonRando.RandomizeNPCStats(statsNPCOpt, bosses);
+			digimonRando.RandomizeNPCStats(statsNPCOpt, bosses, numberGenerator, reader, writter);
 		if (moneyNPC)
-			digimonRando.RandomizeNPCMoney(moneyNPCOpt, bosses);
+			digimonRando.RandomizeNPCMoney(moneyNPCOpt, bosses, numberGenerator, reader, writter);
 		if (techNPC)
-			digimonRando.RandomizeNPCTechs(bosses, digimonNPC);
+			digimonRando.RandomizeNPCTechs(bosses, digimonNPC, numberGenerator, writter);
 		if (!filth && !tanemon && !rookieOnly)
 		{
 			if (starter)
@@ -1520,7 +1520,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		switch (shopsPricesOpt)
 		{
 			case 0:
-				List<int> itemDrops = new List<int>();
+				List<int> prices = new List<int>();
 				for (int i = 0; i < 128; i++)
 				{
 					int value = reader.ReadInt32();
@@ -1531,10 +1531,10 @@ public partial class RandomizerContainer : SubViewportContainer
 						jumpValue++;
 					}
 					bin.Position = currentOffset;
-					itemDrops.Add(value);
+					prices.Add(value);
 				}
 
-				int[] shuffledValues = itemDrops.ToArray();
+				int[] shuffledValues = prices.ToArray();
 				numberGenerator.Shuffle<int>(shuffledValues);
 
 				currentOffset = shopPricesInitialOffset;
@@ -1554,7 +1554,15 @@ public partial class RandomizerContainer : SubViewportContainer
 					if (i < shuffledValues.Length)
 						writter.Write(shuffledValues[i]);
 					else
-						writter.Write(numberGenerator.Next(999) + 1);
+					{
+						int value = numberGenerator.Next(1000) * 10;
+
+						if (value == 0)
+							value = 9999;
+							
+						writter.Write(value);
+					}
+						
 				}
 				break;
 			case 1:
@@ -1567,7 +1575,12 @@ public partial class RandomizerContainer : SubViewportContainer
 						currentOffset = currentOffset + 0x130;
 						jumpValue++;
 					}
-					writter.Write(numberGenerator.Next(999) + 1);
+					int value = numberGenerator.Next(1000) * 10;
+
+					if (value == 0)
+						value = 9999;
+							
+					writter.Write(value);
 				}
 				break;
 		}
@@ -3757,15 +3770,36 @@ public partial class RandomizerContainer : SubViewportContainer
 			
 				break;
 			case 2:
-				bin.Position = 0x14CD519C;
-				bin.WriteByte(0x4c);
+			// all digimon except Machinedramon/Myotismon won't refuse evolution items
+				bin.Position = 0x14CD5198;
+				bin.WriteByte(0x15);
+				bin.WriteByte(0x80);
+				bin.WriteByte(0x1);
+				bin.WriteByte(0x3c);
+				bin.WriteByte(0xa8);
+				bin.WriteByte(0x57);
+				bin.WriteByte(0x23);
+				bin.WriteByte(0x8c);
+				bin.WriteByte(0x3e);
+				bin.WriteByte(0);
+				bin.WriteByte(0x2);
+				bin.WriteByte(0x24);
+				bin.WriteByte(0x8a);
+				bin.WriteByte(0);
+				bin.WriteByte(0x43);
+				bin.WriteByte(0x10);
+				writter.Write((int)0);
+				bin.WriteByte(0x48);
 				bin.WriteByte(0);
 				bin.WriteByte(0);
 				bin.WriteByte(0x10);
+				writter.Write((int)0);	
 
+				//Disable stat gains and extended lifespan
 				bin.Position = 0x14CF5AFC;
 				bin.WriteByte(1);
 
+				//Enable any digimon to evolve with the items
 				bin.Position = 0x14CF5AF0;
 				writter.Write((int)0);
 				SetExtraItemsDescriptions();
