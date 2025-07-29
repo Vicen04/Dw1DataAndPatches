@@ -26,19 +26,19 @@ public partial class TechContainer : PanelContainer
 	{
 	}
 
-	void BetterBattle_Toggled(bool toggled)	{VicePatcher.SetBetterBattleTech(toggled);	}
+	void BetterBattle_Toggled(bool toggled) { VicePatcher.SetBetterBattleTech(toggled); }
 
-	void BetterBrains_Toggled(bool toggled)	{VicePatcher.SetBetterBrainTech(toggled);	}
+	void BetterBrains_Toggled(bool toggled) { VicePatcher.SetBetterBrainTech(toggled); }
 
-	void LearnMulti_Toggled(bool toggled)	{VicePatcher.SetMultipleTechs(toggled);	}
+	void LearnMulti_Toggled(bool toggled) { VicePatcher.SetMultipleTechs(toggled); }
 
-	void InsaneDamage_Toggled(bool toggled)	{VicePatcher.SetInsaneDamage(toggled);	}
+	void InsaneDamage_Toggled(bool toggled) { VicePatcher.SetInsaneDamage(toggled); }
 
-	void Telepathy_Toggled(bool toggled)	{VicePatcher.SetEasyTech(toggled);	}
+	void Telepathy_Toggled(bool toggled) { VicePatcher.SetEasyTech(toggled); }
 
-	void SkipOrders_Toggled(bool toggled)	{VicePatcher.SetOrders(toggled);	}
+	void SkipOrders_Toggled(bool toggled) { VicePatcher.SetOrders(toggled); }
 
-	void NerfStatue_Toggled(bool toggled)	{VicePatcher.SetIceNerf(toggled);	}
+	void NerfStatue_Toggled(bool toggled) { VicePatcher.SetIceNerf(toggled); }
 
 	void SetupTextTranslation()
 	{
@@ -69,5 +69,28 @@ public partial class TechContainer : PanelContainer
 		Telepathy.Toggled += Telepathy_Toggled;
 		SkipOrders.Toggled += SkipOrders_Toggled;
 		NerfStatue.Toggled += NerfStatue_Toggled;
+	}
+	
+	public void LoadSaveData(bool BetterBattleS, bool BetterBrainsS, bool LearnMultiS, bool InsaneDamageS, bool TelepathyS, bool SkipOrdersS, bool NerfStatueS)
+	{
+		BetterBattle.ButtonPressed = BetterBattleS;
+		BetterBrains.ButtonPressed = BetterBrainsS;
+		LearnMulti.ButtonPressed = LearnMultiS;
+		InsaneDamage.ButtonPressed = InsaneDamageS;
+		Telepathy.ButtonPressed = TelepathyS;
+		SkipOrders.ButtonPressed = SkipOrdersS;
+		NerfStatue.ButtonPressed = NerfStatueS;
+
+	}
+
+	public void RestartSelection()
+	{
+		BetterBattle.ButtonPressed = false;
+		BetterBrains.ButtonPressed = false;
+		LearnMulti.ButtonPressed = false;
+		InsaneDamage.ButtonPressed = false;
+		Telepathy.ButtonPressed = false;
+		SkipOrders.ButtonPressed = false;
+		NerfStatue.ButtonPressed = false;
 	}
 }

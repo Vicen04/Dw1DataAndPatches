@@ -5,10 +5,249 @@ using System.Formats.Asn1;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 public partial class RandomizerContainer : SubViewportContainer
 {
+
+	class RandoSaveData
+	{
+		public bool itemsSpawn { get; set; }
+		public bool spawnRateItems { get; set; }
+		public bool  itemDrops { get; set; }
+		public bool  dropRate { get; set; }
+		public bool  chests { get; set; }
+		public bool  shops { get; set; }
+		public bool  shopsPrices { get; set; }
+		public bool  Mojyamon { get; set; }
+		public bool  meritItems { get; set; }
+		public bool  meritPrices { get; set; }
+		public bool  tournamentItems { get; set; }
+		public bool  keyItems { get; set; }
+		public bool  tokomon { get; set; }
+		public bool  curlingRewards { get; set; }
+		public bool difficulty { get; set; }
+		public bool  digimonNPC { get; set; }
+		public bool  statsNPC { get; set; }
+		public bool  techNPC { get; set; }
+		public bool  moneyNPC { get; set; }
+		public bool  bosses { get; set; }
+		public bool  starter { get; set; }
+		public bool  starterTech { get; set; }
+		public bool  starterStats { get; set; }
+		public bool  starterLevel { get; set; }
+		public bool  tournamentNPC { get; set; }
+		public bool  recruits { get; set; }
+		public bool restaurant { get; set; }
+		public bool  birdramon { get; set; }
+		public bool  boost { get; set; }
+		public bool  healing { get; set; }
+		public bool  devil { get; set; }
+		public bool  chips { get; set; }
+		public bool  seadramon { get; set; }
+		public bool  fish { get; set; }
+		public bool  tournamentSchedule { get; set; }
+		public bool  food { get; set; }
+		public bool  rareSpawns { get; set; }
+		public bool  chaosItems { get; set; }
+		public bool tree { get; set; }
+		public bool  time { get; set; }
+		public bool  statGains { get; set; }
+		public bool  requirementsEvo { get; set; }
+		public bool  specialEvo { get; set; }
+		public bool  specialChance { get; set; }
+		public bool  evoItems { get; set; }
+		public bool  speEvoReq { get; set; }
+		public bool  factorial { get; set; }
+		public bool  sukamon { get; set; }
+		public bool damageTech { get; set; }
+		public bool  MPtech { get; set; }
+		public bool  damageType { get; set; }
+		public bool  accuracy { get; set; }
+		public bool  status { get; set; }
+		public bool  statusChance { get; set; }
+		public bool  finishers { get; set; }
+		public bool  boostedTech { get; set; }
+		public bool  boostedTechValue { get; set; }
+		public bool  learnBattle { get; set; }
+		public bool  learnBrains { get; set; }
+		public bool  givenTechs { get; set; }
+		public int itemsSpawnOpt { get; set; }
+		public int spawnRateItemsOpt { get; set; }
+		public int  itemDropsOpt { get; set; }
+		public int  dropRateOpt { get; set; }
+		public int  chestsOpt { get; set; }
+		public int  shopsOpt { get; set; }
+		public int  shopsPricesOpt { get; set; }
+		public int  MojyamonOpt { get; set; }
+		public int  meritItemsOpt { get; set; }
+		public int  meritPricesOpt { get; set; }
+		public int  tournamentItemsOpt { get; set; }
+		public int  tokomonOpt { get; set; }
+		public int difficultyOpt { get; set; }
+		public int  digimonNPCOpt { get; set; }
+		public int  statsNPCOpt { get; set; }
+		public int  moneyNPCOpt { get; set; }
+		public int  starterTechOpt { get; set; }
+		public int  starterStatsOpt { get; set; }
+		public int  starterLevelOpt { get; set; }
+		public int  tournamentNPCOpt { get; set; }
+		public int  recruitsOpt { get; set; }
+		public int restaurantOpt { get; set; }
+		public int  birdramonOpt { get; set; }
+		public int  boostOpt { get; set; }
+		public int  healingOpt { get; set; }
+		public int  devilOpt { get; set; }
+		public int  chipsOpt { get; set; }
+		public int  fishOpt { get; set; }
+		public int  tournamentScheduleOpt { get; set; }
+		public int  foodOpt { get; set; }
+		public int  rareSpawnsOpt { get; set; }
+		public int treeOpt { get; set; }
+		public int  timeOpt { get; set; }
+		public int  statGainsOpt { get; set; }
+		public int  requirementsEvoOpt { get; set; }
+		public int  specialEvoOpt { get; set; }
+		public int  specialChanceOpt { get; set; }
+		public int  evoItemsOpt { get; set; }
+		public int  speEvoReqOpt { get; set; }
+		public int  factorialOpt { get; set; }
+		public int damageTechOpt { get; set; }
+		public int  MPtechOpt { get; set; }
+		public int  damageTypeOpt { get; set; }
+		public int  accuracyOpt { get; set; }
+		public int  statusOpt { get; set; }
+		public int  statusChanceOpt { get; set; }
+		public int  finishersOpt { get; set; }
+		public int  boostedTechValueOpt { get; set; }
+		public int  learnBattleOpt { get; set; }
+		public int  learnBrainsOpt { get; set; }
+
+		public RandoSaveData(bool itemsSpawn, bool spawnRateItems, bool itemDrops, bool dropRate, bool chests, bool shops, bool shopsPrices, bool Mojyamon, bool meritItems,
+		bool meritPrices, bool tournamentItems, bool keyItems, bool tokomon, bool curlingRewards, bool difficulty, bool digimonNPC, bool statsNPC, bool techNPC, bool moneyNPC,
+		bool bosses, bool starter, bool starterTech, bool starterStats, bool starterLevel, bool tournamentNPC, bool recruits, bool restaurant, bool birdramon, bool boost,
+		bool healing, bool devil, bool chips, bool seadramon, bool fish, bool tournamentSchedule, bool food, bool rareSpawns, bool chaosItems, bool tree, bool time, bool statGains,
+		bool requirementsEvo, bool specialEvo, bool specialChance, bool evoItems, bool speEvoReq, bool factorial, bool sukamon, bool damageTech, bool MPtech, bool damageType,
+		bool accuracy, bool status, bool statusChance, bool finishers, bool boostedTech, bool boostedTechValue, bool learnBattle, bool learnBrains, bool givenTechs,
+		int itemsSpawnOpt, int spawnRateItemsOpt, int itemDropsOpt, int dropRateOpt, int chestsOpt, int shopsOpt, int shopsPricesOpt, int MojyamonOpt, int meritItemsOpt,
+		int meritPricesOpt, int tournamentItemsOpt, int tokomonOpt, int difficultyOpt, int digimonNPCOpt, int statsNPCOpt, int moneyNPCOpt, int starterTechOpt, int starterStatsOpt,
+		int starterLevelOpt, int tournamentNPCOpt, int recruitsOpt, int restaurantOpt, int birdramonOpt, int boostOpt, int healingOpt, int devilOpt, int chipsOpt, int fishOpt,
+		int tournamentScheduleOpt, int foodOpt, int rareSpawnsOpt, int treeOpt, int timeOpt, int statGainsOpt, int requirementsEvoOpt, int specialEvoOpt, int specialChanceOpt,
+		int evoItemsOpt, int speEvoReqOpt, int factorialOpt, int damageTechOpt, int MPtechOpt, int damageTypeOpt, int accuracyOpt, int statusOpt, int statusChanceOpt,
+		int finishersOpt, int boostedTechValueOpt, int learnBattleOpt, int learnBrainsOpt)
+		{
+			this.itemsSpawn = itemsSpawn;
+			this.spawnRateItems = spawnRateItems;
+			this.itemDrops = itemDrops;
+			this.dropRate = dropRate;
+			this.chests = chests;
+			this.shops = shops;
+			this.shopsPrices = shopsPrices;
+			this.Mojyamon = Mojyamon;
+			this.meritItems = meritItems;
+			this.meritPrices = meritPrices;
+			this.tournamentItems = tournamentItems;
+			this.keyItems = keyItems;
+			this.tokomon = tokomon;
+			this.curlingRewards = curlingRewards;
+		 	this.difficulty = difficulty;
+			this.digimonNPC = digimonNPC;
+			this.statsNPC = statsNPC;
+			this.techNPC = techNPC;
+			this.moneyNPC = moneyNPC;
+			this.bosses = bosses;
+			this.starter = starter;
+			this.starterTech = starterTech;
+			this.starterStats = starterStats;
+			this.starterLevel = starterLevel;
+			this.tournamentNPC = tournamentNPC;
+			this.recruits = recruits;
+			this.restaurant = restaurant;
+			this.birdramon = birdramon;
+			this.boost = boost;
+			this.healing = healing;
+			this.devil = devil;
+			this.chips = chips;
+			this.seadramon = seadramon;
+			this.fish = fish;
+			this.tournamentSchedule = tournamentSchedule;
+			this.food = food;
+			this.rareSpawns = rareSpawns;
+			this.chaosItems = chaosItems;
+			this.tree = tree;
+			this.time = time;
+			this.statGains = statGains;
+			this.requirementsEvo = requirementsEvo;
+			this.specialEvo = specialEvo;
+			this.specialChance = specialChance;
+			this.evoItems = evoItems;
+			this.speEvoReq = speEvoReq;
+			this.factorial = factorial;
+			this.sukamon = sukamon;
+			this.damageTech = damageTech;
+			this.MPtech = MPtech;
+			this.damageType = damageType;
+			this.accuracy = accuracy;
+			this.status = status;
+			this.statusChance = statusChance;
+			this.finishers = finishers;
+			this.boostedTech = boostedTech;
+			this.boostedTechValue = boostedTechValue;
+			this.learnBattle = learnBattle;
+			this.learnBrains = learnBrains;
+			this.givenTechs = givenTechs;
+		 	this.itemsSpawnOpt = itemsSpawnOpt;
+			this.spawnRateItemsOpt = spawnRateItemsOpt;
+			this.itemDropsOpt = itemDropsOpt;
+			this.dropRateOpt = dropRateOpt;
+			this.chestsOpt = chestsOpt;
+			this.shopsOpt = shopsOpt;
+			this.shopsPricesOpt = shopsPricesOpt;
+			this.MojyamonOpt = MojyamonOpt;
+			this.meritItemsOpt = meritItemsOpt;
+			this.meritPricesOpt = meritPricesOpt;
+			this.tournamentItemsOpt = tournamentItemsOpt;
+			this.tokomonOpt = tokomonOpt;
+			this.difficultyOpt = difficultyOpt;
+			this.digimonNPCOpt = digimonNPCOpt;
+			this.statsNPCOpt = statsNPCOpt;
+			this.moneyNPCOpt = moneyNPCOpt;
+			this.starterTechOpt = starterTechOpt;
+			this.starterStatsOpt = starterStatsOpt;
+			this.starterLevelOpt = starterLevelOpt;
+			this.tournamentNPCOpt = tournamentNPCOpt;
+			this.recruitsOpt = recruitsOpt;
+			this.restaurantOpt = restaurantOpt;
+			this.birdramonOpt = birdramonOpt;
+			this.boostOpt = boostOpt;
+			this.healingOpt = healingOpt;
+			this.devilOpt = devilOpt;
+			this.chipsOpt = chipsOpt;
+			this.fishOpt = fishOpt;
+			this.tournamentScheduleOpt = tournamentScheduleOpt;
+			this.foodOpt = foodOpt;
+			this.rareSpawnsOpt = rareSpawnsOpt;
+		 	this.treeOpt = treeOpt;
+			this.timeOpt = timeOpt;
+			this.statGainsOpt = statGainsOpt;
+			this.requirementsEvoOpt = requirementsEvoOpt;
+			this.specialEvoOpt = specialEvoOpt;
+			this.specialChanceOpt = specialChanceOpt;
+			this.evoItemsOpt = evoItemsOpt;
+			this.speEvoReqOpt = speEvoReqOpt;
+			this.factorialOpt = factorialOpt;
+		 	this.damageTechOpt = damageTechOpt;
+			this.MPtechOpt = MPtechOpt;
+			this.damageTypeOpt = damageTypeOpt;
+			this.accuracyOpt = accuracyOpt;
+			this.statusOpt = statusOpt;
+			this.statusChanceOpt = statusChanceOpt;
+			this.finishersOpt = finishersOpt;
+			this.boostedTechValueOpt = boostedTechValueOpt;
+			this.learnBattleOpt = learnBattleOpt;
+			this.learnBrainsOpt = learnBrainsOpt;
+		}
+	}
 	//main stuff
 	[Export]
 	private Label mainTitle;
@@ -102,6 +341,13 @@ public partial class RandomizerContainer : SubViewportContainer
 	[Export]
 	private OptionButton DifficultyChoice;
 
+	[Export] ItemsContainer itemsScript;
+	[Export] DigimonContainerRando digimonScript;
+	[Export] MiscContainerRando miscScript;
+	[Export] EvolutionContainer evoScript;
+	[Export] TechContainerRando techScript;
+	[Export] Button SaveDataButton;
+
 	int randomSeed, currentSukamon = 39;
 
 	Random numberGenerator;
@@ -150,6 +396,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		confirmationPatch.CloseRequested += OnRandomizedCanceled;
 		chooseFolder.Pressed += _on_folderButton_pressed;
 		randomSeeder.Pressed += _on_seed_random_pressed;
+		SaveDataButton.Pressed += LoadSaveData;
 
 		patchingLoading.Text = Tr("Randomizing");
 		mainTitle.Text = Tr("RandoTitle");
@@ -168,8 +415,12 @@ public partial class RandomizerContainer : SubViewportContainer
 		PatchingWait.Confirmed += HandleError;
 		confirmationPatch.GetOkButton().Text = Tr("RandomizeButton");
 		confirmationPatch.GetCancelButton().Text = Tr("CancelButton");
+		SaveDataButton.Text = Tr("RandoSettings");
+		SaveDataButton.TooltipText = Tr("RandoSettingsInfo");
 
 		RestartStuffRandomizer();
+		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
+			SaveDataButton.Disabled = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -334,6 +585,7 @@ public partial class RandomizerContainer : SubViewportContainer
 	{
 		StartRandomizer.Visible = false;
 		confirmationPatch.Visible = true;
+		GenerateRandomSeed();
 	}
 
 	void OnFolderSelected(string folder)
@@ -757,7 +1009,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*TROP02*/   0x13FE7189, 0x13FE719F, 0x13FE71B5,
 			/*TROP03*/   0x13FE7AB5, 0x13FE7ACB,
 			/*TROP04*/   0x13FE8D11, 0x13FE8D27,
-			/*TROP06*/   0x13FE9FDD, 0x13FE9FF3, 0x13FEA009, 0x13FEA01F, 0x13FEA035, 0x13FEA04B, 0x13FEA061, 0x13FEA077, 0x13FEA08D, 0x13FEA0A3, 0x13FEA0B9, 0x13FEA0CF, 0x13FEA0E5, 0x13FEA0FB,
+			/*TROP06*/   0x13FE9FDD, 0x13FE9FF3, 0x13FEA009, 0x13FEA01F, 0x13FEA035, 0x13FEA04B, 0x13FEA061, 0x13FEA077, 0x13FEA08D, 0x13FEA0A3, 0x13FEA0B9, 0x13FEA0CF, 0x13FEA0E5, 0x13FEA0FB, 0x13FEA10F,
 			/*MIHA00*/   0x13FEC445, 0x13FEC45B, 0x13FEC471,
 			/*MIHA01*/   0x13FECD65, 0x13FECD7B, 0x13FECD91,
 			/*MIHA02*/   0x13FED695, 0x13FED6AB, 0x13FED6C1,
@@ -770,7 +1022,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*DGHA02*/   0x13FF7C01, 0x13FF7C17, 0x13FF7C2D, 0x13FF7C43,
 			/*GCAN01*/   0x13FF852D, 0x13FF8543, 0x13FF8559, 0x13FF856F,
 			/*GCAN02*/   0x13FF8E69, 0x13FF8E7F, 0x13FF8E95, 0x13FF8EAB,
-			/*GCAN03*/   0x13FF9795, 0x13FF97AB, 0x13FF97C1, 0x13FF97D6,
+			/*GCAN03*/   0x13FF9795, 0x13FF97AB, 0x13FF97C1, 0x13FF97D7,
 			/*GCAN05*/   0x13FFA9D9, 0x13FFA9EF, 0x13FFAA05, 0x13FFAA1B,
 			/*GCAN06*/   0x13FFB321, 0x13FFB337,
 			/*GCAN07*/   0x13FFBC4D, 0x13FFBC63, 0x13FFBC79,
@@ -1301,7 +1553,7 @@ public partial class RandomizerContainer : SubViewportContainer
             /*OMOC08*/   0x1404A6DD,
 			/*FACT09*/   0x140539ED, 0x140539F9,
 			/*FACT10*/   0x1405430D, 0x14054319, 0x14054325,
-			/*MGEN01*/   0x1405836D,
+			/*MGEN01*/   0x14058371,  //different from vanilla
 			/*MGEN02*/   0x14058C9D,
             /*MGEN03*/   0x14067B7D,
 			/*MGEN04*/   0x1406970D,
@@ -2064,7 +2316,70 @@ public partial class RandomizerContainer : SubViewportContainer
 			case 2:
 				for (int i = 0; i < 49; i++)				
 					bin.WriteByte(values[numberGenerator.Next(values.Length)]);
-				
+
+				bin.Position = 0x14B5CC8C;
+				bin.WriteByte(0xa);
+				bin.WriteByte(0);
+				bin.WriteByte(0x2);
+				bin.WriteByte(0x24);
+
+				bin.Position = 0x14B5CC58;
+				bin.WriteByte(0x3);
+				bin.WriteByte(0);
+				bin.WriteByte(0x61);
+				bin.WriteByte(0x28);
+				bin.WriteByte(0x14);
+				bin.WriteByte(0);
+				bin.WriteByte(0x1);
+				bin.WriteByte(0x14);
+
+				bin.Position = 0x14CA30CC;
+				bin.WriteByte(0xa);
+				bin.WriteByte(0);
+				bin.WriteByte(0x2);
+				bin.WriteByte(0x24);
+
+				bin.Position = 0x14CA3098;
+				bin.WriteByte(0x3);
+				bin.WriteByte(0);
+				bin.WriteByte(0x61);
+				bin.WriteByte(0x28);
+				bin.WriteByte(0x14);
+				bin.WriteByte(0);
+				bin.WriteByte(0x1);
+				bin.WriteByte(0x14);
+
+				bin.Position = 0x14C6A1B0;
+				bin.WriteByte(0xa);
+				bin.WriteByte(0);
+				bin.WriteByte(0x2);
+				bin.WriteByte(0x24);
+
+				bin.Position = 0x14C6A17C;
+				bin.WriteByte(0x3);
+				bin.WriteByte(0);
+				bin.WriteByte(0x61);
+				bin.WriteByte(0x28);
+				bin.WriteByte(0x14);
+				bin.WriteByte(0);
+				bin.WriteByte(0x1);
+				bin.WriteByte(0x14);
+
+				bin.Position = 0x14B5C83A;
+				bin.WriteByte(0x41);
+				bin.WriteByte(0x28);
+				bin.Position = 0x14B5C83E;
+				bin.WriteByte(1);
+
+				bin.Position = 0x14B5C818;
+				bin.WriteByte(0x3);
+				bin.WriteByte(0);
+				bin.WriteByte(0x41);
+				bin.WriteByte(0x28);
+				bin.WriteByte(0x14);
+				bin.WriteByte(0);
+				bin.WriteByte(0x1);
+				bin.WriteByte(0x14);
 				break;
 		}
 	}
@@ -2143,6 +2458,8 @@ public partial class RandomizerContainer : SubViewportContainer
 			case 1:
 				for (int i = 0; i < 57; i++)
 				{
+					if (i == 21 || i == 30 || i == 34 || i == 41 || i == 42)
+						continue;
 					bin.Position = currentOffset;
 					int selectedStatus = numberGenerator.Next(20);
 					if (selectedStatus < 4)					
@@ -2167,6 +2484,8 @@ public partial class RandomizerContainer : SubViewportContainer
 			case 2:
 				for (int i = 0; i < 57; i++)
 				{
+					if (i == 21 || i == 30 || i == 34 || i == 41 || i == 42)
+						continue;
 					bin.Position = currentOffset;
 					bin.WriteByte((byte)numberGenerator.Next(5));
 					bin.Position = currentOffset + 2;
@@ -2600,7 +2919,11 @@ public partial class RandomizerContainer : SubViewportContainer
 					if (checkBabies.Count > 0 && checkBabies.First() == i)
 					{
 						bin.WriteByte(0xff);
+						if (bin.Position == jumpOffset)
+							bin.Position = bin.Position + 0x130;
 						bin.WriteByte(0xff);
+							if (bin.Position == jumpOffset)
+							bin.Position = bin.Position + 0x130;
 						byte currentDigimon = (byte)(numberGenerator.Next(65) + 1);
 						while (currentDigimon == currentSukamon || currentDigimon == i)
 							currentDigimon = (byte)(numberGenerator.Next(65) + 1);
@@ -2617,9 +2940,17 @@ public partial class RandomizerContainer : SubViewportContainer
 						if (evoCount != 0)
 						{
 							if (evoCount < 5)
+							{
 								bin.WriteByte(0xff);
+								if (bin.Position == jumpOffset)
+									bin.Position = bin.Position + 0x130;
+							}
 							if (evoCount < 3)
+							{
 								bin.WriteByte(0xff);
+								if (bin.Position == jumpOffset)
+									bin.Position = bin.Position + 0x130;
+							}
 							for (int j = 0; j < evoCount; j++)
 							{
 								byte currentDigimon = (byte)(numberGenerator.Next(65) + 1);
@@ -2627,6 +2958,8 @@ public partial class RandomizerContainer : SubViewportContainer
 									currentDigimon = (byte)(numberGenerator.Next(65) + 1);
 								bin.WriteByte(currentDigimon);
 								digimonlists[currentDigimon].Add((byte)i);
+								if (bin.Position == jumpOffset)
+									bin.Position = bin.Position + 0x130;
 							}
 						}
 					}
@@ -2772,26 +3105,29 @@ public partial class RandomizerContainer : SubViewportContainer
 					int choosenStat = numberGenerator.Next(6) + 1;
 					for (int j = 0; j < 14; j++)
 					{
-						if (j == 0)
-							writter.Write((short)(numberGenerator.Next(65) + 1));
+						if (j == 0)						
+							writter.Write((short)(numberGenerator.Next(65) + 1));						
 						else if (j < 7)
 							if (numberGenerator.Next(2) == 1 || j == choosenStat)
+							{
 								writter.Write((short)(numberGenerator.Next(950) + 50));
-
-							else if (j < 8)
-								writter.Write((short)numberGenerator.Next(100));
-							else if (i < 9)
-								writter.Write((short)(numberGenerator.Next(99) + 1));
-							else if (j < 11)
+								if (bin.Position == jumpOffset)
+									bin.Position = bin.Position + 0x130;
+							}
+							else if (j < 8)							
+								writter.Write((short)numberGenerator.Next(100));							
+							else if (i < 9)							
+								writter.Write((short)(numberGenerator.Next(99) + 1));							
+							else if (j < 11)							
 								if (numberGenerator.Next(2) == 1)
-									writter.Write((short)numberGenerator.Next(100));
-								else if (j < 12)
-									if (numberGenerator.Next(2) == 1)
-										writter.Write((short)numberGenerator.Next(1000));
-									else if (j < 13)
-										writter.Write((short)numberGenerator.Next(56));
-									else
-										writter.Write((short)(numberGenerator.Next(2) * 16 + numberGenerator.Next(2)));
+									writter.Write((short)numberGenerator.Next(100));							
+							else if (j < 12)							
+								if (numberGenerator.Next(2) == 1)
+									writter.Write((short)numberGenerator.Next(1000));							
+							else if (j < 13)							
+								writter.Write((short)numberGenerator.Next(56));							
+							else
+								writter.Write((short)(numberGenerator.Next(2) * 16 + numberGenerator.Next(2)));
 					}		
 				}
 				break;
@@ -3008,7 +3344,7 @@ public partial class RandomizerContainer : SubViewportContainer
 	{
 		uint[] offsets = { 0x140AD588, 0x140AD790, 0x140AD998, 0x140ADDE6, 0x140ADFCC, 0x140AE1BA, 0x140AE602, 0x140AE7D0,
 						   0x140AE9E2, 0x140AF0B6, 0x140AF262, 0x140AF412, 0x140AF7F8, 0x140AFA72, 0x140AFD02,
-						   0x140B01B6, 0x140B02D6, 0x140B03F6, 0x140B0686, 0x140B07D2, 0x140B0A28, 0x140B0CBC, 0x140B0E10, 0x140B0F66 };
+						   0x140B01B8, 0x140B02D6, 0x140B03F6, 0x140B0686, 0x140B07D2, 0x140B0A28, 0x140B0CBC, 0x140B0E10, 0x140B0F66 };
 
 		switch (restaurantOpt)
 		{
@@ -4038,6 +4374,8 @@ public partial class RandomizerContainer : SubViewportContainer
 			for (int j = 0; j < 6; j++)
 			{
 				byte evo = (byte)bin.ReadByte();
+				if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
 				if (evo < 66 && evo != currentSukamon)
 					Evos[i].Add(evo);
 			}
@@ -4052,21 +4390,36 @@ public partial class RandomizerContainer : SubViewportContainer
 			if (bin.Position > 0x14D6CF98)
 				bin.Position = bin.Position + 0x130;
 			for (int j = 0; j < 6; j++)
+			{				
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+				bin.Position = bin.Position + 0x130;
+			}
 
 			bin.Position = 11 * Shuffled[i] + startOffset + 5;
 			if (bin.Position > 0x14D6CF98)
 				bin.Position = bin.Position + 0x130;
 
 			if (Evos[i].Count < 5)
+			{
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+				bin.Position = bin.Position + 0x130;
+			}
+
 			if (Evos[i].Count < 3)
+			{
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
+			}
 			if (Evos[i].Count > 0)
 				for (int j = 0; j < Evos[i].Count; j++)
 				{
 					bin.WriteByte(Evos[i][j]);
 					digimonlists[Evos[i][j]].Add(Shuffled[i]);
+					if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
 				}
 		}
 	}
@@ -4089,15 +4442,27 @@ public partial class RandomizerContainer : SubViewportContainer
 			int evoCount = numberGenerator.Next(randMax) + minMax;
 
 			for (int j = 0; j < 6; j++)
-			bin.WriteByte(0xff);
+			{
+				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+				bin.Position = bin.Position + 0x130;
+			}
 			bin.Position = 11 * digimonList[i] + startOffset + 5;
 			if (bin.Position > 0x14D6CF98)
 				bin.Position = bin.Position + 0x130;
 
 			if (evoCount < 5)
+			{
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+				bin.Position = bin.Position + 0x130;
+			}
 			if (evoCount < 3)
+			{
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+				bin.Position = bin.Position + 0x130;
+			}
 			for (int j = 0; j < evoCount; j++)
 			{
 				if (evos.Count > 0)
@@ -4107,12 +4472,16 @@ public partial class RandomizerContainer : SubViewportContainer
 					evos2.Add(evos[rand]);
 					digimonLists[evos[rand]].Add(digimonList[i]);
 					evos.RemoveAt(rand);
+					if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
 				}
 				else
 				{
 					bin.WriteByte(evos2.First());
 					digimonLists[evos2.First()].Add(digimonList[i]);
 					evos2.RemoveAt(0);
+					if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
 				}
 			}
 		}
@@ -4126,19 +4495,33 @@ public partial class RandomizerContainer : SubViewportContainer
 			if (bin.Position > 0x14D6CF98)
 				bin.Position = bin.Position + 0x130;
 			for (int j = 0; j < 5; j++)
+			{
 				bin.WriteByte(0xff);
+				if (bin.Position == 0x14D6CF98)
+					bin.Position = bin.Position + 0x130;
+			}
 			bin.Position = i * 11 + digimonDataOffset;
 			if (bin.Position > 0x14D6CF98)
 				bin.Position = bin.Position + 0x130;
 			if (digimonlists[i].Count != 0)
 			{
 				if (digimonlists[i].Count < 4)
+				{
 					bin.WriteByte(0xff);
+					if (bin.Position == 0x14D6CF98)
+						bin.Position = bin.Position + 0x130;
+				}
 				if (digimonlists[i].Count < 2)
+				{
 					bin.WriteByte(0xff);
+					if (bin.Position == 0x14D6CF98)
+						bin.Position = bin.Position + 0x130;
+				}
 				for (int j = 0; j < digimonlists[i].Count; j++)
 				{
 					bin.WriteByte(digimonlists[i][j]);
+					if (bin.Position == 0x14D6CF98)
+						bin.Position = bin.Position + 0x130;
 					if (j == 4)
 						break;
 				}
@@ -4229,7 +4612,11 @@ public partial class RandomizerContainer : SubViewportContainer
 				bin.Position = bin.Position + 0x130;
 			digimonRequirements.Add(new List<short>());
 			for (int i = 0; i < 14; i++)
+			{
 				digimonRequirements.Last().Add(reader.ReadInt16());
+				if (bin.Position == jumpOffset)
+					bin.Position = bin.Position + 0x130;
+			}
 
 		}
 
@@ -4242,7 +4629,11 @@ public partial class RandomizerContainer : SubViewportContainer
 			if (bin.Position > jumpOffset)
 				bin.Position = bin.Position + 0x130;
 			foreach (short requirement in digimonRequirements[i])
-				writter.Write(requirement);		
+			{				
+				writter.Write(requirement);
+				if (bin.Position == jumpOffset)
+					bin.Position = bin.Position + 0x130;
+			}
 		}
 	}
 
@@ -4274,6 +4665,8 @@ public partial class RandomizerContainer : SubViewportContainer
 					}
 					else
 						writter.Write((short)-1);
+					if (bin.Position == jumpOffset)
+						bin.Position = bin.Position + 0x130;
 				}
 				else if (i < 8)
 				{
@@ -4309,7 +4702,7 @@ public partial class RandomizerContainer : SubViewportContainer
 					else
 						writter.Write((short)-1);
 				}
-				else if (i < 13)
+				else if (i < 13)				
 					writter.Write((short)numberGenerator.Next(56));
 				else
 					writter.Write((short)(numberGenerator.Next(2) * 16 + numberGenerator.Next(2)));
@@ -4533,6 +4926,9 @@ public partial class RandomizerContainer : SubViewportContainer
 		System.IO.Stream txt = System.IO.File.OpenWrite(path);
 
 		System.IO.StreamWriter txtWritter = new System.IO.StreamWriter(txt);
+
+		txtWritter.Write(Tr("Seed") + ": " + Seed.Value);
+		txtWritter.WriteLine();
 
 		txtWritter.Write(Tr("items_txt"));
 		txtWritter.WriteLine();
@@ -5074,10 +5470,10 @@ public partial class RandomizerContainer : SubViewportContainer
 			switch (rareSpawnsOpt)
 			{
 				case 0:
-					txtWritter.Write(" " + Tr("Shuffle_T"));
+					txtWritter.Write(" " + Tr("Shared_T"));
 					break;
 				case 1:
-					txtWritter.Write(" " + Tr("Random_T"));
+					txtWritter.Write(" " + Tr("Unique_T"));
 					break;
 			}
 			txtWritter.WriteLine();
@@ -5380,7 +5776,10 @@ public partial class RandomizerContainer : SubViewportContainer
 		}
 
 		if (boostedTech)
+		{
 			txtWritter.Write("- " + Tr("BoostTechR_L"));
+			txtWritter.WriteLine();
+		}
 		
 
 		if (boostedTechValue)
@@ -5443,14 +5842,78 @@ public partial class RandomizerContainer : SubViewportContainer
 		txtWritter.Close();
 		txtWritter.Dispose();
 		txt.Close();
-		txt.Dispose();
+		txt.Dispose();		
 
 		MetalFinish.Visible = true;
 		MetalWait.Visible = false;
 		patchingLoading.Text = Tr("RandomizedP");
 		PatchingWait.GetOkButton().Text = Tr("ExitButton");
-		//PatchingWait.Confirmed -= HandleError;
-		//PatchingWait.Confirmed += ExitRandomizerPressed;
+		SaveData();
+		PatchingWait.Confirmed -= HandleError;
+		PatchingWait.Confirmed += ExitRandomizerPressed;
 	}
 
+	void CheckSaveData()
+	{
+		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
+		{
+			SaveDataButton.Disabled = true;
+		}
+	}
+
+	void SaveData()
+	{
+		var saveData = new RandoSaveData(itemsSpawn, spawnRateItems, itemDrops, dropRate, chests, shops, shopsPrices, Mojyamon, meritItems, meritPrices, tournamentItems, keyItems, tokomon, curlingRewards,
+		difficulty, digimonNPC, statsNPC, techNPC, moneyNPC, bosses, starter, starterTech, starterStats, starterLevel, tournamentNPC, recruits,
+		restaurant, birdramon, boost, healing, devil, chips, seadramon, fish, tournamentSchedule, food, rareSpawns, chaosItems,
+		tree, time, statGains, requirementsEvo, specialEvo, specialChance, evoItems, speEvoReq, factorial, sukamon,
+		damageTech, MPtech, damageType, accuracy, status, statusChance, finishers, boostedTech, boostedTechValue, learnBattle, learnBrains, givenTechs,
+		itemsSpawnOpt, spawnRateItemsOpt, itemDropsOpt, dropRateOpt, chestsOpt, shopsOpt, shopsPricesOpt, MojyamonOpt, meritItemsOpt, meritPricesOpt, tournamentItemsOpt, tokomonOpt,
+		difficultyOpt, digimonNPCOpt, statsNPCOpt, moneyNPCOpt, starterTechOpt, starterStatsOpt, starterLevelOpt, tournamentNPCOpt, recruitsOpt,
+		restaurantOpt, birdramonOpt, boostOpt, healingOpt, devilOpt, chipsOpt, fishOpt, tournamentScheduleOpt, foodOpt, rareSpawnsOpt,
+		treeOpt, timeOpt, statGainsOpt, requirementsEvoOpt, specialEvoOpt, specialChanceOpt, evoItemsOpt, speEvoReqOpt, factorialOpt,
+		damageTechOpt, MPtechOpt, damageTypeOpt, accuracyOpt, statusOpt, statusChanceOpt, finishersOpt, boostedTechValueOpt, learnBattleOpt, learnBrainsOpt);
+
+		Directory.CreateDirectory(OS.GetExecutablePath().GetBaseDir() + "/SaveData");
+		
+		using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave", Godot.FileAccess.ModeFlags.Write);
+
+		var bytes = JsonSerializer.SerializeToUtf8Bytes(saveData);
+		
+		saveFile.StoreBuffer(bytes);
+	}
+
+	void LoadSaveData()
+	{
+		if (File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
+		{
+			using var saveFile = System.IO.File.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave", System.IO.FileMode.Open);
+			var saveData = JsonSerializer.Deserialize<RandoSaveData>(saveFile);
+			saveFile.Close();
+			if (saveData != null)
+			{
+				itemsScript.LoadData(saveData.itemsSpawn, saveData.spawnRateItems, saveData.itemDrops, saveData.dropRate, saveData.chests, saveData.shops, saveData.shopsPrices,
+				saveData.Mojyamon, saveData.meritItems, saveData.meritPrices, saveData.tournamentItems, saveData.tokomon, saveData.keyItems, saveData.curlingRewards,
+				saveData.itemsSpawnOpt, saveData.spawnRateItemsOpt, saveData.itemDropsOpt, saveData.dropRateOpt, saveData.chestsOpt, saveData.shopsOpt, saveData.shopsPricesOpt,
+				saveData.MojyamonOpt, saveData.meritItemsOpt, saveData.meritPricesOpt, saveData.tournamentItemsOpt, saveData.tokomonOpt);
+
+				digimonScript.LoadSaveData(saveData.difficulty, saveData.digimonNPC, saveData.statsNPC, saveData.techNPC, saveData.moneyNPC, saveData.bosses, saveData.starter,
+				saveData.starterTech, saveData.starterLevel, saveData.starterStats, saveData.tournamentNPC, saveData.recruits, saveData.difficultyOpt, saveData.digimonNPCOpt, saveData.statsNPCOpt,
+				saveData.moneyNPCOpt, saveData.starterTechOpt, saveData.starterLevelOpt, saveData.starterStatsOpt, saveData.tournamentNPCOpt, saveData.recruitsOpt);
+
+				miscScript.LoadSaveData(saveData.restaurant, saveData.birdramon, saveData.boost, saveData.healing, saveData.devil, saveData.chips, saveData.seadramon, saveData.fish,
+				saveData.tournamentSchedule, saveData.food, saveData.rareSpawns, saveData.chaosItems, saveData.restaurantOpt, saveData.birdramonOpt, saveData.boostOpt,
+				saveData.healingOpt, saveData.devilOpt, saveData.chipsOpt, saveData.fishOpt, saveData.tournamentScheduleOpt, saveData.foodOpt, saveData.rareSpawnsOpt);
+
+				evoScript.LoadSaveData(saveData.tree, saveData.time, saveData.statGains, saveData.requirementsEvo, saveData.evoItems, saveData.specialEvo, saveData.specialChance,
+				saveData.speEvoReq, saveData.factorial, saveData.sukamon, saveData.treeOpt, saveData.timeOpt, saveData.statGainsOpt, saveData.requirementsEvoOpt, saveData.evoItemsOpt,
+				saveData.specialEvoOpt, saveData.specialChanceOpt, saveData.speEvoReqOpt, saveData.factorialOpt);
+
+				techScript.LoadSaveData(saveData.damageTech, saveData.MPtech, saveData.damageType, saveData.accuracy, saveData.status, saveData.statusChance, saveData.finishers,
+				saveData.boostedTech, saveData.boostedTechValue, saveData.learnBattle, saveData.learnBrains, saveData.givenTechs, saveData.damageTechOpt, saveData.MPtechOpt,
+				saveData.damageTypeOpt, saveData.accuracyOpt, saveData.statusOpt, saveData.statusChanceOpt, saveData.finishersOpt, saveData.boostedTechValueOpt, saveData.learnBattleOpt,
+				saveData.learnBrainsOpt);
+			}
+		}
+	}
 }

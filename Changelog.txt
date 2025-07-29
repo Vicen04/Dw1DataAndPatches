@@ -331,3 +331,16 @@ Version 2.0:
 - Fixed an issue with "Better vending machines"
 
 - Organized a bit better the patching options in the installer.
+
+
+* 2.2 (19/07/25):
+
+- New installer made to be portable to other OS.
+
+- Randomizer for the Vice hack included with the installer
+
+- Evolution tool included with the installer
+
+- Some small changes to prepare for future updates
+
+- "Rookie only" and "Tanemon only" patches added

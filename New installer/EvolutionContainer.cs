@@ -290,4 +290,29 @@ public partial class EvolutionContainer : PanelContainer
 		Factorial.Toggled += FactorialToggled;
 		Sukamon.Toggled += SukamonToggled;
 	}
+
+	public void LoadSaveData(bool PathS, bool TimeS, bool StatGainsS, bool RequirementsS, bool ItemsS, bool SpeEvolutionS, bool SpeChanceS, bool SpeRequirementsS,
+	bool FactorialS, bool SukamonS, int PathValue, int TimeValue, int StatGainsValue, int RequirementsValue, int ItemsValue, int SpeEvolutionValue,
+	int SpeChanceValue, int SpeRequirementsValue, int FactorialValue)
+	{
+		PathOpt.Selected = PathValue;
+		TimeOpt.Selected = TimeValue;
+		StatGainsOpt.Selected = StatGainsValue;
+		RequirementsOpt.Selected = RequirementsValue;
+		ItemsOpt.Selected = ItemsValue;
+		SpeEvolutionOpt.Selected = SpeEvolutionValue;
+		SpeChanceOpt.Selected = SpeChanceValue;
+		SpeRequirementsOpt.Selected = SpeRequirementsValue;
+		FactorialOpt.Selected = FactorialValue;
+		Path.ButtonPressed = PathS;
+		Time.ButtonPressed = TimeS;
+		StatGains.ButtonPressed = StatGainsS;
+		Requirements.ButtonPressed = RequirementsS;
+		Items.ButtonPressed = ItemsS;
+		SpeEvolution.ButtonPressed = SpeEvolutionS;
+		SpeChance.ButtonPressed = SpeChanceS;
+		SpeRequirements.ButtonPressed = SpeRequirementsS;
+		Factorial.ButtonPressed = FactorialS;
+		Sukamon.ButtonPressed = SukamonS;
+	}
 }

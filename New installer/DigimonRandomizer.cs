@@ -564,11 +564,10 @@ public class DigimonRandomizer
           List<int> validAttacks = new List<int>();
           for (int j = 0; j < digimonData[Digimon].Attacks.Count; j++)
           {
-            byte attack = digimonData[Digimon].Attacks[i];
-            if (attack < 57 || attack == 21 || attack == 30 || attack == 34 || attack == 41 || attack == 42)
-              continue;
+            byte attack = digimonData[Digimon].Attacks[j];
+            if (attack < 57 && attack != 21 && attack != 30 && attack != 34 && attack != 41 && attack != 42)
               validAttacks.Add(j);
-          }
+          }          
           int randomTech = validAttacks[numberGenerator.Next(validAttacks.Count)];
           bin.Position = learnOffset[i];
           bin.WriteByte(digimonData[Digimon].Attacks[randomTech]);
@@ -706,14 +705,14 @@ public class DigimonRandomizer
         [ 0x13FD6576, 0x13FE909A, 0x1409FC94, 0x140B76F6], //Betamon
         [0x1407870C],//Devimon
         [0x14078708],//Airdramon
-        [0x14016CB6, 0x140172B6, 0x1409FFD6, 0x140B8570, 0x140B860E, 0x140B860E],//Tyrannomon
+        [0x13FD73E0, 0x13FD73F0, 0x13FD748E, 0x14016CB6, 0x140172B6, 0x1409FFD6, 0x140B8560, 0x140B8570, 0x140B860E],//Tyrannomon
         [0x13FD696A, 0x13FD6998, 0x13FF1A6C, 0x13FF44D8, 0x13FF572E, 0x13FF5740, 0x13FF5886, 0x140A009A, 0x140B7AEA, 0x140B7B18],//Meramon
         [0x13FE1D48, 0x13FE19B2, 0x14059D08, 0x140A104A, 0x14D725F0],//Seadramon
         [0x13FD9780, 0x13FD9794, 0x14073C7C, 0x140503F8, 0x14050CAC, 0x14074630, 0x140A0F72, 0x140BA900, 0x140BA914],//Numemon
         [0x14078704],//MetalGreymon
         [0x13FD6792, 0x13FED052, 0x140A0E94, 0x140B7912],//Mamemon
-        [0x13FD8E96, 0x14046696, 0x14061FA8, 0x140BA016],//Monzaemon
-        [0x13FD7C5A, 0x140360A2 ,0x140A0B80, 0x140B8DDA],//Gabumon
+        [0x13FD8E96, 0x14046696, 0x14047768, 0x14061FA8, 0x140BA016],//Monzaemon
+        [0x13FD7C5A, 0x140360A2, 0x140A0B80, 0x140B8DDA],//Gabumon
         [0x13FD7106, 0x1400DD0A, 0x140A045E, 0x140B8286],//Elecmon
         [0x13FD797E, 0x14029508, 0x140B8AFE],//Kabuterimon
         [0x140209F6, 0x14020E84],//Angemon
@@ -725,16 +724,16 @@ public class DigimonRandomizer
         [0x13FD715E, 0x1400E6D6, 0x140A072E, 0x140B82DE],//Patamon
         [0x13FD627A, 0x13FD6294, 0x13FD62B2, 0x13FDDEA8, 0x13FDE354, 0x140A22A6, 0x140B73FA, 0x140B7414, 0x140B7432],//Kunemon
         [0x13FD9922, 0x1407B436, 0x1407B9AE, 0x140A0654, 0x140BAAA2],//Unimon
-        [0x13FD689E, 0x13FF1972, 0x13FF0F98, 0x140B7A1E],//Ogremon
+        [0x13FD689E, 0x13FE2BC6, 0x13FF1972, 0x13FF0F98, 0x13FEFDA6, 0x13FEFD12, 0x140B7A1E],//Ogremon
         [0x13FF8018, 0x13FD6A34, 0x1409FD2E, 0x140B7BB4, 0x14D725CC],//Bakemon
-        [0x13FD69B8, 0x13FF6080, 0x13FF6092, 0x13FF6456, 0x140A0A9C, 0x140B7B38],//Drimogemon
+        [0x13FD69B8, 0x13FE2BB6, 0x13FEFD96, 0x13FF6080, 0x13FF6092, 0x13FF6456, 0x140A0A9C, 0x140B7B38],//Drimogemon
         [0x14057792, 0x1405779C],//Sukamon
         [0x1404F994, 0x1404FAD8],//Andromon
         [0x13FD84B8, 0x14052A7A, 0x140A1240, 0x140B9638],//Giromon
         [0x13FD630C, 0x13FD6348, 0x13FD6362, 0x13FDF1CC, 0x13FDF210, 0x13FDF54E, 0x140A1776, 0x140B748C, 0x140B74C8, 0x140B74E2],//Etemon
-        [0x13FD71AC, 0x1400EFFC, 0x1400F148, 0x1400F292, 0x1400F50C, 0x1400F914, 0x140A0732, 0x140B832C],//Biyomon           
-        [0x13FD6D72, 0x14000C52, 0x140A05B0, 0x140B7EF2],//Monochromon
-        [0x13FD72F4, 0x14012928, 0x140122D6, 0x140B8474],//Leomon
+        [0x13FD71AC, 0x1400EFFC, 0x140150C0, 0x1400F148, 0x1400F292, 0x1400F50C, 0x1400F914, 0x140A0732, 0x140B832C],//Biyomon           
+        [0x13FD6D72, 0x13FFFC7C, 0x13FFFC96, 0x14000C52, 0x140A05B0, 0x140B7EF2, ],//Monochromon
+        [0x13FD72F4, 0x13FD7AA2, 0x14012928, 0x140122D6, 0x140B8474, 0x140B8C22],//Leomon
         [0x13FE08F2, 0x13FE0398, 0x13FE03EE, 0x13FE056A, 0x13FE0908, 0x1409FBF6],//Coelamon
         [0x13FD7B84, 0x14032EE4, 0x14032EF4, 0x14032FA4, 0x14059D20, 0x14059F00, 0x140A050E, 0x140B8D04],//Kokatorimon
         [0x13FD79A8, 0x1402A742, 0x140B8B28],//Kuwagamon
@@ -798,10 +797,10 @@ public class DigimonRandomizer
             [0x1404591C]]); // MegaSeadramon Arena
 
         if (isHardcore)
-          recruitTriggers.Add([0x13FE9770, 0x13FE9FC2, 0x13FEA132, 0x13FEA3D4, 0x13FEA49A, 0x13FEA560, 0x13FEA626, 0x13FEA710, 0x13FEA92A, 0x13FEB63A, 0x13FEB986, 0x13FEBDDE,
+          recruitTriggers.Add([0x13FE9770, 0x13FE9FC2, 0x13FEA132, 0x13FEA3D4, 0x13FEA49A, 0x13FEA560, 0x13FEA626, 0x13FEA710, 0x13FEA92A, 0x13FEB63A, 0x13FEB986, 0x13FEBDE0,
           0x13FEAA28, 0x13FEAB12, 0x13FEAC10, 0x13FEAD0E, 0x13FEAE0C, 0x13FEAEDE, 0x13FEAFDC, 0x13FEB1DE, 0x13FEB2CC, 0x13FEB3BA, 0x13FEB4AC, 0x13FEB7F8, 0x13FEBC52, 0x1409FB24]);
         else
-          recruitTriggers.Add([0x13FE9770, 0x13FE9FC2, 0x13FEA132, 0x13FEA3D4, 0x13FEA49A, 0x13FEA560, 0x13FEA626, 0x13FEA710, 0x13FEA92A, 0x13FEB63C, 0x13FEB988, 0x13FEBDE0,
+          recruitTriggers.Add([0x13FE9770, 0x13FE9FC2, 0x13FEA132, 0x13FEA3D4, 0x13FEA49A, 0x13FEA560, 0x13FEA626, 0x13FEA710, 0x13FEA92A, 0x13FEB63C, 0x13FEB988, 0x13FEBDE2,
           0x13FEAA28, 0x13FEAB12, 0x13FEAC10, 0x13FEAD0E, 0x13FEAE0C, 0x13FEAEDE, 0x13FEAFDC, 0x13FEB1DE, 0x13FEB2CC, 0x13FEB3BA, 0x13FEB4AC, 0x13FEB7F8, 0x13FEBC52, 0x1409FB24]);
 
         break;
@@ -1031,7 +1030,7 @@ public class DigimonRandomizer
   {
     foreach (int offset in currentData)
     {
-      bin.Position = offset + 18;
+      bin.Position = offset + 22;
       CheckIfECC();
       short HP = (short)((numberGenerator.Next(maxValue) + minValue) * 10), MP = (short)((numberGenerator.Next(maxValue) + minValue) * 10);
       int tempMaxValue = maxValue;

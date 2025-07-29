@@ -32,7 +32,7 @@ public partial class MiscContainer : PanelContainer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+
 	}
 
 	void Clock_Toggled(bool toggled)
@@ -64,7 +64,7 @@ public partial class MiscContainer : PanelContainer
 	{
 		VicePatcher.SetNerfBoost(toggled);
 		if (toggled)
-		RemoveTech.ButtonPressed = false;
+			RemoveTech.ButtonPressed = false;
 	}
 
 	void OGLife_Toggled(bool toggled)
@@ -76,7 +76,7 @@ public partial class MiscContainer : PanelContainer
 	{
 		VicePatcher.SetRemoveTechBoost(toggled);
 		if (toggled)
-		NerfTech.ButtonPressed = false;
+			NerfTech.ButtonPressed = false;
 	}
 
 	void RemoveEvo_Toggled(bool toggled)
@@ -160,5 +160,42 @@ public partial class MiscContainer : PanelContainer
 		MapColour.Toggled += MapColour_Toggled;
 		OgreTel.Toggled += OgreTel_Toggled;
 		OGType.Toggled += OGType_Toggled;
+	}
+
+	public void LoadSaveData(bool ClockS, bool InputS, bool AreasS, bool BattleTextS, bool BoostItemsS, bool NerfTechS, bool OGLifeS, bool RemoveTechS, bool RemoveEvoS,
+	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS)
+	{
+		Clock.ButtonPressed = ClockS;
+		Input.ButtonPressed = InputS;
+		Areas.ButtonPressed = AreasS;
+		BattleText.ButtonPressed = BattleTextS;
+		BoostItems.ButtonPressed = BoostItemsS;
+		NerfTech.ButtonPressed = NerfTechS;
+		OGLife.ButtonPressed = OGLifeS;
+		RemoveTech.ButtonPressed = RemoveTechS;
+		RemoveEvo.ButtonPressed = RemoveEvoS;
+		NewMono.ButtonPressed = NewMonoS;
+		InsaneBattles.ButtonPressed = InsaneBattlesS;
+		MapColour.ButtonPressed = MapColourS;
+		OgreTel.ButtonPressed = OgreTelS;
+		OGType.ButtonPressed = OGTypeS;
+	}
+
+	public void RestartSelection()
+	{
+		Clock.ButtonPressed = false;
+		Input.ButtonPressed = false;
+		Areas.ButtonPressed = false;
+		BattleText.ButtonPressed = false;
+		BoostItems.ButtonPressed = false;
+		NerfTech.ButtonPressed = false;
+		OGLife.ButtonPressed = false;
+		RemoveTech.ButtonPressed = false;
+		RemoveEvo.ButtonPressed = false;
+		NewMono.ButtonPressed = false;
+		InsaneBattles.ButtonPressed = false;
+		MapColour.ButtonPressed = false;
+		OgreTel.ButtonPressed = false;
+		OGType.ButtonPressed = false;
 	}
 }

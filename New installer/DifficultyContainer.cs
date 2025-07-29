@@ -43,7 +43,7 @@ public partial class DifficultyContainer : PanelContainer
 	{
 		if (toggled)
 		{
-			VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.CHALLENGE);
+			VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.CHALLENGE);
 			Hardmode.ButtonPressed = false;
 			Hardcore.ButtonPressed = false;
 			UltraHardcore.Disabled = true;
@@ -58,7 +58,7 @@ public partial class DifficultyContainer : PanelContainer
 			FairBattles.Disabled = false;
 
 			if (!Hardcore.ButtonPressed && !Hardcore.ButtonPressed)
-				VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.NONE);
+				VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.NONE);
 		}
 	}
 
@@ -66,7 +66,7 @@ public partial class DifficultyContainer : PanelContainer
 	{
 		if (toggled)
 		{
-			VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.HARDMODE);
+			VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.HARDMODE);
 			Challenge.ButtonPressed = false;
 			Hardcore.ButtonPressed = false;
 			UltraHardcore.Disabled = false;
@@ -76,7 +76,7 @@ public partial class DifficultyContainer : PanelContainer
 			if (!Hardcore.ButtonPressed)
 				UltraHardcore.Disabled = true;
 			if (!Hardcore.ButtonPressed && !Challenge.ButtonPressed)
-				VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.NONE);
+				VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.NONE);
 		}
 
 	}
@@ -86,7 +86,7 @@ public partial class DifficultyContainer : PanelContainer
 
 		if (toggled)
 		{
-			VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.HARDCORE);
+			VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.HARDCORE);
 			Hardmode.ButtonPressed = false;
 			Challenge.ButtonPressed = false;
 			UltraHardcore.Disabled = false;
@@ -100,7 +100,7 @@ public partial class DifficultyContainer : PanelContainer
 			TrueHardcore.ButtonPressed = false;
 
 			if (!Hardmode.ButtonPressed && !Challenge.ButtonPressed)
-				VicePatcher.SetViceDifficulty(VicePatcherContainer.viceDifficulty.NONE);
+				VicePatcher.SetViceDifficulty(VicePatcherContainer.ViceDifficulty.NONE);
 		}
 	}
 
@@ -173,7 +173,7 @@ public partial class DifficultyContainer : PanelContainer
 	{
 		VicePatcher.SetTanemon(toggled);
 		if (toggled)
-		{			
+		{
 			Rookie.ButtonPressed = false;
 			FilthChallenge.SetPressedNoSignal(false);
 			VicePatcher.SetFilth(false);
@@ -253,6 +253,44 @@ public partial class DifficultyContainer : PanelContainer
 		Difficulty2.Visible = false;
 	}
 
+	public void LoadSaveData(bool ChallengeS, bool HardmodeS, bool HardcoreS, bool TrueHardcoreS, bool UltraHardcoreS, bool ProgressionS, bool FilthS, bool RFilthS, bool FairBattlesS,
+	bool TournamentsS, bool NoRNGS, bool Mono4KS, bool Mono8KS, bool RookieS, bool TanemonS)
+	{
+		Challenge.ButtonPressed = ChallengeS;
+		Hardmode.ButtonPressed = HardmodeS;
+		Hardcore.ButtonPressed = HardcoreS;
+		TrueHardcore.ButtonPressed = TrueHardcoreS;
+		UltraHardcore.ButtonPressed = UltraHardcoreS;
+		Progression.ButtonPressed = ProgressionS;
+		FilthChallenge.ButtonPressed = FilthS;
+		RestoreFilth.ButtonPressed = RFilthS;
+		FairBattles.ButtonPressed = FairBattlesS;
+		Tournaments.ButtonPressed = TournamentsS;
+		RNG.ButtonPressed = NoRNGS;
+		Mono4K.ButtonPressed = Mono4KS;
+		Mono8K.ButtonPressed = Mono8KS;
+		Rookie.ButtonPressed = RookieS;
+		Tanemon.ButtonPressed = TanemonS;
+	}
+	
+	public void RestartSelection()
+	{
+		Challenge.ButtonPressed = false;
+		Hardmode.ButtonPressed = false;	
+		Hardcore.ButtonPressed = false;
+		TrueHardcore.ButtonPressed = false;
+		UltraHardcore.ButtonPressed = false;
+		Progression.ButtonPressed = false;
+		FilthChallenge.ButtonPressed = false;
+		RestoreFilth.ButtonPressed = false;
+		FairBattles.ButtonPressed = false;
+		Tournaments.ButtonPressed = false;
+		RNG.ButtonPressed = false;
+		Mono4K.ButtonPressed = false;
+		Mono8K.ButtonPressed = false;
+		Rookie.ButtonPressed = false;
+		Tanemon.ButtonPressed = false;	
+	}
 	/*void _on_exit_installer_pressed()
 	{
 		Challenge.ButtonPressed = false;

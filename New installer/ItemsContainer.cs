@@ -119,7 +119,7 @@ public partial class ItemsContainer : PanelContainer
 		if (toggled)
 			baseScript.SetItemSpawns(toggled, ItemSpawnedOpt.Selected);
 		else
-			baseScript.SetItemSpawns(toggled, -1);		
+			baseScript.SetItemSpawns(toggled, -1);
 	}
 
 	void ItemSpawnChanceToggled(bool toggled)
@@ -128,19 +128,19 @@ public partial class ItemsContainer : PanelContainer
 		if (toggled)
 			baseScript.SetItemSpawnRate(toggled, ItemSpawnRateOpt.Selected);
 
-		else		
-			baseScript.SetItemSpawnRate(toggled, -1);		
+		else
+			baseScript.SetItemSpawnRate(toggled, -1);
 	}
 
 	void ItemDropToggled(bool toggled)
 	{
 		ItemDroppedOpt.Disabled = !toggled;
-		if (toggled)		
-			baseScript.SetItemDrops(toggled, ItemDroppedOpt.Selected);	
-		else		
-			baseScript.SetItemDrops(toggled, -1);			
-		
-		
+		if (toggled)
+			baseScript.SetItemDrops(toggled, ItemDroppedOpt.Selected);
+		else
+			baseScript.SetItemDrops(toggled, -1);
+
+
 	}
 
 	void ItemDropRateToggled(bool toggled)
@@ -149,7 +149,7 @@ public partial class ItemsContainer : PanelContainer
 		if (toggled)
 			baseScript.SetDropRate(toggled, ItemDropRateOpt.Selected);
 		else
-			baseScript.SetDropRate(toggled, -1);	
+			baseScript.SetDropRate(toggled, -1);
 	}
 
 	void ChestsToggled(bool toggled)
@@ -159,7 +159,7 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetChests(toggled, ChestItemsOpt.Selected);
 		else
 			baseScript.SetChests(toggled, -1);
-		
+
 	}
 
 	void ShopsToggled(bool toggled)
@@ -169,7 +169,7 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetShops(toggled, ShopItemsOpt.Selected);
 		else
 			baseScript.SetShops(toggled, -1);
-		
+
 	}
 
 	void ShopPricesToggled(bool toggled)
@@ -179,7 +179,7 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetShopsPrices(toggled, ShopPricesOpt.Selected);
 		else
 			baseScript.SetShopsPrices(toggled, -1);
-		
+
 	}
 
 	void MojyamonToggled(bool toggled)
@@ -188,7 +188,7 @@ public partial class ItemsContainer : PanelContainer
 		if (toggled)
 			baseScript.SetMojyamon(toggled, MojyamonOpt.Selected);
 		else
-			baseScript.SetMojyamon(toggled, -1);	
+			baseScript.SetMojyamon(toggled, -1);
 	}
 
 	void MeritToggled(bool toggled)
@@ -198,7 +198,7 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetMeritItems(toggled, MeritOpt.Selected);
 		else
 			baseScript.SetMeritItems(toggled, -1);
-		
+
 	}
 
 	void MeritPricesToggled(bool toggled)
@@ -208,7 +208,7 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetMeritPrices(toggled, MeritPricesOpt.Selected);
 		else
 			baseScript.SetMeritPrices(toggled, -1);
-		
+
 	}
 
 	void TournamentsToggled(bool toggled)
@@ -218,31 +218,31 @@ public partial class ItemsContainer : PanelContainer
 			baseScript.SetTournamentItems(toggled, TournamentsOpt.Selected);
 		else
 			baseScript.SetTournamentItems(toggled, -1);
-		
+
 	}
 
-    void TokomonToggled(bool toggled)
+	void TokomonToggled(bool toggled)
 	{
 		if (!baseScript.hasEasyStart())
 			TokomonOpt.Disabled = !toggled;
 		else
 			TokomonOpt.Selected = 1;
-			
+
 		if (toggled)
 			baseScript.SetTokomon(toggled, TokomonOpt.Selected);
 		else
 			baseScript.SetTokomon(toggled, -1);
-		
+
 	}
 
 	void KeyItemsToggled(bool toggled)
-	{	
-		baseScript.SetKeyItems(toggled);		
+	{
+		baseScript.SetKeyItems(toggled);
 	}
 
 	void CurlingRewardsToggled(bool toggled)
-	{	
-		baseScript.SetCurlingRewards(toggled);		
+	{
+		baseScript.SetCurlingRewards(toggled);
 	}
 
 	void ItemSpawnValue(int value)
@@ -344,7 +344,7 @@ public partial class ItemsContainer : PanelContainer
 		KeyItems.Text = Tr("KeyItems_T");
 		KeyItems.TooltipText = Tr("KeyItems_info");
 		CurlingRewards.Text = Tr("CurlingRewards_T");
-		CurlingRewards.TooltipText = Tr("CurlingRewards_info");		
+		CurlingRewards.TooltipText = Tr("CurlingRewards_info");
 	}
 
 	void SetUpOptionsTranslations()
@@ -405,6 +405,38 @@ public partial class ItemsContainer : PanelContainer
 		Tokomon.Toggled += TokomonToggled;
 		KeyItems.Toggled += KeyItemsToggled;
 		CurlingRewards.Toggled += CurlingRewardsToggled;
+	}
+
+	public void LoadData(bool ItemSpawnedS, bool ItemSpawnRateS, bool ItemDroppedS, bool ItemDropRateS, bool ChestItemsS, bool ShopItemsS, bool ShopPricesS, bool MojyamonS, bool MeritS,
+	bool MeritPricesS, bool TournamentsS, bool TokomonS, bool KeyItemsS, bool CurlingRewardsS, int ItemSpawnedOptS, int ItemSpawnRateOptS, int ItemDroppedOptS, int ItemDropRateOptS,
+	int ChestItemsOptS, int ShopItemsOptS, int ShopPricesOptS, int MojyamonOptS, int MeritOptS, int MeritPricesOptS, int TournamentsOptS, int TokomonOptS)
+	{
+		ItemSpawnedOpt.Selected = ItemSpawnedOptS;
+		ItemSpawnRateOpt.Selected = ItemSpawnRateOptS;
+		ItemDroppedOpt.Selected = ItemDroppedOptS;
+		ItemDropRateOpt.Selected = ItemDropRateOptS;
+		ChestItemsOpt.Selected = ChestItemsOptS;
+		ShopItemsOpt.Selected = ShopItemsOptS;
+		ShopPricesOpt.Selected = ShopPricesOptS;
+		MojyamonOpt.Selected = MojyamonOptS;
+		MeritOpt.Selected = MeritOptS;
+		MeritPricesOpt.Selected = MeritPricesOptS;
+		TournamentsOpt.Selected = TournamentsOptS;
+		TokomonOpt.Selected = TokomonOptS;
+		ItemSpawned.ButtonPressed = ItemSpawnedS;
+		ItemSpawnRate.ButtonPressed = ItemSpawnRateS;
+		ItemDropped.ButtonPressed = ItemDroppedS;
+		ItemDropRate.ButtonPressed = ItemDropRateS;
+		ChestItems.ButtonPressed = ChestItemsS;
+		ShopItems.ButtonPressed = ShopItemsS;
+		ShopPrices.ButtonPressed = ShopPricesS;
+		Mojyamon.ButtonPressed = MojyamonS;
+		Merit.ButtonPressed = MeritS;
+		MeritPrices.ButtonPressed = MeritPricesS;
+		Tournaments.ButtonPressed = TournamentsS;
+		Tokomon.ButtonPressed = TokomonS;
+		KeyItems.ButtonPressed = KeyItemsS;
+		CurlingRewards.ButtonPressed = CurlingRewardsS;
 	}
 
 }

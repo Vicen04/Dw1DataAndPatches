@@ -143,7 +143,7 @@ public partial class MiscContainerRando : PanelContainer
 	}
 
 	void SeadramonToggled(bool toggled)
-	{		
+	{
 		baseScript.SetSeadramon(toggled);
 	}
 
@@ -207,52 +207,52 @@ public partial class MiscContainerRando : PanelContainer
 	}
 
 	void RestaurantOptSelected(int option)
-	{		
+	{
 		baseScript.SetRestaurantOpt(option);
 	}
 
 	void BirdramonOptSelected(int option)
-	{		
+	{
 		baseScript.SetBirdramonOpt(option);
 	}
 
 	void BoostOptSelected(int option)
-	{		
+	{
 		baseScript.SetItemBoostOpt(option);
 	}
 
 	void HealingOptSelected(int option)
-	{		
+	{
 		baseScript.SetHealingOpt(option);
 	}
 
 	void DevilOptSelected(int option)
-	{		
+	{
 		baseScript.SetDevilChipsOpt(option);
 	}
 
 	void ChipsOptSelected(int option)
-	{		
+	{
 		baseScript.SetChipsOpt(option);
 	}
 
 	void FishOptSelected(int option)
-	{		
+	{
 		baseScript.SetFishOpt(option);
 	}
 
 	void TournamentScheduleOptSelected(int option)
-	{		
+	{
 		baseScript.SetTournamentScheduleOpt(option);
 	}
 
 	void FoodOptSelected(int option)
-	{		
+	{
 		baseScript.SetFoodOpt(option);
 	}
 
 	void RareSpawnsOptSelected(int option)
-	{		
+	{
 		baseScript.SetRareSpawnsOpt(option);
 	}
 
@@ -326,7 +326,7 @@ public partial class MiscContainerRando : PanelContainer
 		Birdramon.Toggled += BirdramonToggled;
 		Boost.Toggled += BoostToggled;
 		Healing.Toggled += HealingToggled;
-		Devil.Toggled += DevilToggled;
+		Devil.Toggled += DevilToggled; //This is Monochromon
 		Chips.Toggled += ChipsToggled;
 		Seadramon.Toggled += SeadramonToggled;
 		Fish.Toggled += FishToggled;
@@ -334,5 +334,33 @@ public partial class MiscContainerRando : PanelContainer
 		Food.Toggled += FoodToggled;
 		RareSpawns.Toggled += RareSpawnsToggled;
 		ChaosItems.Toggled += ChaosItemsToggled;
+	}
+
+	public void LoadSaveData(bool RestaurantS, bool BirdramonS, bool BoostS, bool HealingS, bool DevilS, bool ChipsS, bool SeadramonS, bool FishS,
+	bool TournamentScheduleS, bool FoodS, bool RareSpawnsS, bool ChaosItemsS, int RestaurantValue, int BirdramonValue, int BoostValue, int HealingValue, int DevilValue,
+	int ChipsValue, int FishValue, int TournamentScheduleValue, int FoodValue, int RareSpawnsValue)
+	{
+		RestaurantOpt.Selected = RestaurantValue;
+		BirdramonOpt.Selected = BirdramonValue;
+		BoostOpt.Selected = BoostValue;
+		HealingOpt.Selected = HealingValue;
+		DevilOpt.Selected = DevilValue;
+		ChipsOpt.Selected = ChipsValue;
+		FishOpt.Selected = FishValue;
+		TournamentScheduleOpt.Selected = TournamentScheduleValue;
+		FoodOpt.Selected = FoodValue;
+		RareSpawnsOpt.Selected = RareSpawnsValue;
+		Restaurant.ButtonPressed = RestaurantS;
+		Birdramon.ButtonPressed = BirdramonS;
+		Boost.ButtonPressed = BoostS;
+		Healing.ButtonPressed = HealingS;
+		Devil.ButtonPressed = DevilS;
+		Chips.ButtonPressed = ChipsS;
+		Seadramon.ButtonPressed = SeadramonS;
+		Fish.ButtonPressed = FishS;
+		TournamentSchedule.ButtonPressed = TournamentScheduleS;
+		Food.ButtonPressed = FoodS;
+		RareSpawns.ButtonPressed = RareSpawnsS;
+		ChaosItems.ButtonPressed = ChaosItemsS;
 	}
 }

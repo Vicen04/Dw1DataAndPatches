@@ -97,7 +97,7 @@ public partial class DigimonContainerRando : PanelContainer
 		if (toggled)
 			baseScript.SetDifficulty(toggled, DifficultyOpt.Selected);
 		else
-			baseScript.SetDifficulty(toggled, -1);		
+			baseScript.SetDifficulty(toggled, -1);
 	}
 
 	void DigimonToggled(bool toggled)
@@ -256,7 +256,7 @@ public partial class DigimonContainerRando : PanelContainer
 		OtherPatches.Text = Tr("OtherPatchesL_T");
 		OtherPatches.TooltipText = Tr("OtherPatchesL_info");
 		Difficulty.Text = Tr("DigimonDif_T");
-		Difficulty.TooltipText = Tr("DigimonDif_info");		
+		Difficulty.TooltipText = Tr("DigimonDif_info");
 		Digimon.TooltipText = Tr("DigimonNPC_info");
 		NPCStats.Text = Tr("DigimonStats_T");
 		NPCStats.TooltipText = Tr("DigimonStats_info");
@@ -277,7 +277,7 @@ public partial class DigimonContainerRando : PanelContainer
 		TournamentsNPC.Text = Tr("TournamentsNPC_T");
 		TournamentsNPC.TooltipText = Tr("TournamentsNPC_info");
 		Recruitments.Text = Tr("Recruits_T");
-		Recruitments.TooltipText = Tr("Recruits_info");	
+		Recruitments.TooltipText = Tr("Recruits_info");
 	}
 
 	void SetUpOptionsTranslations()
@@ -325,5 +325,33 @@ public partial class DigimonContainerRando : PanelContainer
 		StarterStats.Toggled += StarterStatsToggled;
 		TournamentsNPC.Toggled += TournamentsNPCToggled;
 		Recruitments.Toggled += RecruitmentsToggled;
+	}
+
+	public void LoadSaveData(bool DifficultyS, bool DigimonS, bool NPCStatsS, bool NPCTechsS, bool NPCMoneyS, bool BossesS, bool StarterS, bool StarterTechS,
+	bool StarterLevelS, bool StarterStatsS, bool TournamentsNPCS, bool RecruitmentsS, int DifficultyValue, int DigimonValue, int NPCStatsValue, int NPCMoneyValue,
+	int StarterTechValue, int StarterLevelValue, int StarterStatsValue, int TournamentsNPCValue, int RecruitmentsValue)
+	{
+		DifficultyOpt.Selected = DifficultyValue;
+		DigimonOpt.Selected = DigimonValue;
+		NPCStatsOpt.Selected = NPCStatsValue;
+		NPCMoneyOpt.Selected = NPCMoneyValue;
+		StarterTechOpt.Selected = StarterTechValue;
+		StarterLevelOpt.Selected = StarterLevelValue;
+		StarterStatsOpt.Selected = StarterStatsValue;
+		TournamentsNPCOpt.Selected = TournamentsNPCValue;
+		RecruitmentsOpt.Selected = RecruitmentsValue;
+		Difficulty.ButtonPressed = DifficultyS;
+		Digimon.ButtonPressed = DigimonS;
+		NPCStats.ButtonPressed = NPCStatsS;
+		NPCTechs.ButtonPressed = NPCTechsS;
+		NPCMoney.ButtonPressed = NPCMoneyS;
+		Bosses.ButtonPressed = BossesS;
+		Starter.ButtonPressed = StarterS;
+		StarterTech.ButtonPressed = StarterTechS;
+		StarterLevel.ButtonPressed = StarterLevelS;
+		StarterStats.ButtonPressed = StarterStatsS;
+		TournamentsNPC.ButtonPressed = TournamentsNPCS;
+		Recruitments.ButtonPressed = RecruitmentsS;
+
 	}
 }

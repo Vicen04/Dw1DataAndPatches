@@ -80,6 +80,9 @@ public partial class Base_script : Node2D
 	[Export]
 	private Label Disclaimer;
 
+	[Export]
+	private Button Tools;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -94,6 +97,7 @@ public partial class Base_script : Node2D
 		Spreadsheet.Pressed += OpenSpreadsheet;
 		Start.Pressed += GoToMainMenu;
 		CloseSettings.Pressed += ExitSettings;
+		Tools.Pressed += ToolsPressed;
 
 		viceInstaller.Text = Tr("ViceButton");
 		viceInstaller.TooltipText = Tr("ViceButton_info");
@@ -111,6 +115,8 @@ public partial class Base_script : Node2D
 		CreditsInfo.Text = Tr("Credits_text");
 		Start.Text = Tr("StartInstaller_L");
 		Disclaimer.Text = Tr("Disclaimer_L");
+		Tools.Text = Tr("ToolsL");
+		Tools.TooltipText = Tr("ToolsInfo");
 
 		WindowSizeChoice.SetItemText(0, Tr("WindowS"));
 		WindowSizeChoice.SetItemText(1, Tr("WindowL"));
@@ -265,6 +271,16 @@ public partial class Base_script : Node2D
 		ExitSettings();
 	}
 
+	void ToolsPressed()
+	{
+		var scene = GD.Load<PackedScene>("res://Scenes/ToolsScene.tscn");
+		var Tools = scene.Instantiate() as ToolsHandler;
+		fileSearch.Visible = false;
+		BaseContainer.Visible = false;
+		Tools.SetParent(this);
+		this.AddChild(Tools);
+	}
+
 	void OpenLink(string url)
 	{
 		try
@@ -292,5 +308,4 @@ public partial class Base_script : Node2D
 			}
 		}
 	}
-
 }

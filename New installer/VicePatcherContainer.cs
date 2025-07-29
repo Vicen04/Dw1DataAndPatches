@@ -4,9 +4,179 @@ using System;
 using System.Drawing;
 using PatcherData;
 using System.IO;
+using System.Text.Json;
 
 public partial class VicePatcherContainer : SubViewportContainer
 {
+
+	public enum ViceDifficulty
+	{
+		CHALLENGE = 0,
+		HARDCORE = 1,
+		HARDMODE = 2,
+		NONE = 3,
+	}
+
+	[Serializable]
+	class ViceSaveData
+	{
+		public ViceDifficulty viceDifficulty { get; set; }
+		public bool myotismon { get; set; }
+		public bool vermillimon{ get; set; }
+		public bool filth { get; set; }
+		public bool restoreFilth { get; set; }
+		public bool superHardcore { get; set; }
+		public bool hardMono { get; set; }
+		public bool hardTourney { get; set; }
+		public bool betterBattleTech { get; set; }
+		public bool betterBrainTechs { get; set; }
+		public bool betterDrop { get; set; }
+		public bool superBonus { get; set; }
+		public bool tanemon { get; set; }
+		public bool rookieOnly { get; set; }
+		public bool	ultraBonus { get; set; }
+		public bool dirtReduction { get; set; }
+		public bool sDirtReduction { get; set; }
+		public bool shortIntro { get; set; }
+		public bool statsGains { get; set; }
+		public bool multipleTechs { get; set; }
+		public bool evoItem { get; set; }
+		public bool helpfulItems { get; set; }
+		public bool lessMono { get; set; }
+		public bool nerfIce { get; set; }
+		public bool	curlingRandomizer { get; set; }
+		public bool betterRestaurant { get; set; }
+		public bool progression { get; set; }
+		public bool itemSpawns { get; set; }
+		public bool raise { get; set; }
+		public bool drimogemon { get; set; }
+		public bool cards { get; set; }
+		public bool merit { get; set; }
+		public bool fishing { get; set; }
+		public bool usefulItems2 { get; set; }
+		public bool curling { get; set; }
+		public bool	trainingBoost { get; set; }
+		public bool insaneDamage { get; set; }
+		public bool trueHardcore { get; set; }
+		public bool noOrders { get; set; }
+		public bool medals { get; set; }
+		public bool seadramon { get; set; }
+		public bool rareSpawns { get; set; }
+		public bool hyperMono { get; set; }
+		public bool extraInput { get; set; }
+		public bool removeEvoInfo { get; set; }
+		public bool originalType { get; set; }
+		public bool newMono { get; set; }
+		public bool realMetal { get; set; }
+		public bool	vendingMachine	{ get; set; }
+		public bool easyStart { get; set; }
+		public bool moreItemDrops { get; set; }
+		public bool MoreItemSpawn { get; set; }
+		public bool insaneBattle { get; set; }
+		public bool restoreLifetime { get; set; }
+		public bool removeTechBoost { get; set; }
+		public bool unlockAreas { get; set; }
+		public bool mapColour { get; set; }
+		public bool ultraHardcore { get; set; }
+		public bool restorePanjyamon { get; set; }
+		public bool starters2 { get; set; }
+		public bool kunemon { get; set; }
+		public bool removeTelephone { get; set; }
+		public bool easyTechs { get; set; }
+		public bool BlackWere { get; set; }
+		public bool quickText { get; set; }
+		public bool digitalClock { get; set; }
+		public bool noRNG { get; set; }
+		public bool boostItems { get; set; }
+		public bool nerfTechBoost { get; set; }
+		public int StatsValue { get; set; }
+		public int RareSpawnValue { get; set; }		
+
+		public ViceSaveData(ViceDifficulty viceDifficulty, bool myotismon, bool vermillimon, bool filth, bool restoreFilth, bool superHardcore, bool hardMono, bool hardTourney,
+		bool betterBattleTech, bool betterBrainTechs, bool betterDrop, bool superBonus, bool tanemon, bool rookieOnly, bool ultraBonus, bool dirtReduction,
+		bool sDirtReduction, bool shortIntro, bool statsGains, bool multipleTechs, bool evoItem, bool helpfulItems, bool lessMono, bool nerfIce,
+		bool curlingRandomizer, bool betterRestaurant, bool progression, bool itemSpawns, bool raise, bool drimogemon, bool cards, bool merit, bool fishing,
+		bool usefulItems2, bool curling, bool trainingBoost, bool insaneDamage, bool trueHardcore, bool noOrders, bool medals, bool seadramon, bool rareSpawns,
+		bool hyperMono, bool extraInput, bool removeEvoInfo, bool originalType, bool newMono, bool realMetal, bool vendingMachine, bool easyStart,
+		bool moreItemDrops, bool MoreItemSpawn, bool insaneBattle, bool restoreLifetime, bool removeTechBoost, bool unlockAreas, bool mapColour, bool ultraHardcore,
+		bool restorePanjyamon, bool starters2, bool kunemon, bool removeTelephone, bool easyTechs,bool BlackWere, bool quickText, bool digitalClock, bool noRNG, 
+		bool boostItems, bool nerfTechBoost, int StatsValue, int RareSpawnValue)
+		{
+			this.viceDifficulty = viceDifficulty;
+			this.myotismon = myotismon;
+			this.vermillimon = vermillimon;
+			this.filth = filth;
+			this.restoreFilth = restoreFilth;
+			this.superHardcore = superHardcore;
+			this.hardMono = hardMono;
+			this.hardTourney = hardTourney;
+			this.betterBattleTech = betterBattleTech;
+			this.betterBrainTechs = betterBrainTechs;
+			this.betterDrop = betterDrop;
+			this.superBonus = superBonus;
+			this.tanemon = tanemon;
+			this.rookieOnly = rookieOnly;
+			this.ultraBonus = ultraBonus;
+			this.dirtReduction = dirtReduction;
+			this.sDirtReduction = sDirtReduction;
+			this.shortIntro = shortIntro;
+			this.statsGains = statsGains;
+			this.multipleTechs = multipleTechs;
+			this.evoItem = evoItem;
+			this.helpfulItems = helpfulItems;
+			this.lessMono = lessMono;
+			this.nerfIce = nerfIce;
+			this.curlingRandomizer = curlingRandomizer;
+			this.betterRestaurant = betterRestaurant;
+			this.progression = progression;
+			this.itemSpawns = itemSpawns;
+			this.raise = raise;
+			this.drimogemon = drimogemon;
+			this.cards = cards;
+			this.merit = merit;
+			this.fishing = fishing;
+			this.usefulItems2 = usefulItems2;
+			this.curling = curling;
+			this.trainingBoost = trainingBoost;
+			this.insaneDamage = insaneDamage;
+			this.trueHardcore = trueHardcore;
+			this.noOrders = noOrders;
+			this.medals = medals;
+			this.seadramon = seadramon;
+			this.rareSpawns = rareSpawns;
+			this.hyperMono = hyperMono;
+			this.extraInput = extraInput;
+			this.removeEvoInfo = removeEvoInfo;
+			this.originalType = originalType;
+			this.newMono = newMono;
+			this.realMetal = realMetal;
+			this.vendingMachine = vendingMachine;
+			this.easyStart = easyStart;
+			this.moreItemDrops = moreItemDrops;
+			this.MoreItemSpawn = MoreItemSpawn;
+
+			this.insaneBattle = insaneBattle;
+			this.restoreLifetime = restoreLifetime;
+			this.removeTechBoost = removeTechBoost;
+			this.unlockAreas = unlockAreas;
+			this.mapColour = mapColour;
+			this.ultraHardcore = ultraHardcore;
+			this.restorePanjyamon = restorePanjyamon;
+			this.starters2 = starters2;
+			this.kunemon = kunemon;
+			this.removeTelephone = removeTelephone;
+			this.easyTechs = easyTechs;
+			this.BlackWere = BlackWere;
+			this.quickText = quickText;
+			this.digitalClock = digitalClock;
+			this.noRNG = noRNG;
+			this.boostItems = boostItems;
+			this.nerfTechBoost = nerfTechBoost;
+
+			this.StatsValue = StatsValue;
+			this.RareSpawnValue = RareSpawnValue;
+		}
+	}
 	//main stuff
 
 	[Export]
@@ -102,26 +272,57 @@ public partial class VicePatcherContainer : SubViewportContainer
 	[Export]
 	private Panel difficulty2;
 
+	[Export] DifficultyContainer difficultyScript;
+	[Export] DigimonContainer digimonScript;
+	[Export] MiscContainer miscScript;
+	[Export] UsefulContainer usefulScript;
+	[Export] TechContainer techScript;
+	[Export] Button OpenViceSettings;
+	[Export] Button RecommendedSettings;
+	[Export] Button SaveSettings;
+	[Export] Button LoadSettings;
+	[Export] Button BackSaveSettings;
+	[Export] Button BackRecommendedSettings;
+	[Export] private PanelContainer ViceSettings;
+	[Export] Button[] Saves;
+	[Export] Button Recommended;
+	[Export] Button Easy;
+	[Export] Button HardcoreSettings;
+	[Export] Button UltraHardcoreSettings;
+	[Export] Button Speedrun;
+	[Export] Button SpeedrunHard;
+	[Export] Button Vanilla;
+	[Export] Button UltraSettings;
+	[Export] private Panel ViceMainSettings;
+	[Export] private Panel ViceSave;
+	[Export] private Panel ViceRecommended;
+	[Export] private Label ViceMainSettingsLabel;
+	[Export] private Label ViceSaveLabel;
+	[Export] private Label ViceRecommendedLabel;
+	[Export] private ConfirmationDialog ViceSaveConfirm;
+	[Export] private LineEdit SaveName;
+	[Export] private Label SaveLabel;
+	[Export] private Label ViceSaveConfirmTitle;
+	[Export] Button LatestOptions;
+
+
+
 	System.IO.BinaryReader ppf;
 	System.IO.Stream bin;
 	patchType currentPatcher;
 
 	string filePath, newFilePath, fileDirectory;
+	ViceSaveData saveData;
 
-
-	public enum viceDifficulty
-	{
-		CHALLENGE = 0,
-		HARDCORE = 1,
-		HARDMODE = 2,
-		NONE = 3,
-	}
+	string[] saveNames = new string[8];
 
 	byte[] statHexValues1 = {0x21, 0x18, 0x0, 0x1, 0x18, 0x0, 0x83, 0x0, 0x12, 0x18, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x18, 0x0, 0x62, 0x0, 0x12, 0x18, 0x0, 0x0,
 	0x0, 0x0, 0x0, 0x0, 0x64, 0x0, 0x2, 0x24, 0x1a, 0x0, 0x62, 0x0, 0x12, 0x18, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2a, 0x8, 0x82, 0x0};
 	byte[] statHexValues2 = { 0x19, 0x0, 0x60, 0x10 };
+	string newSaveName = null;
+	int currentSave = -1;
 
-	viceDifficulty currentViceDifficulty;
+	ViceDifficulty currentViceDifficulty;
 
 	Base_script parent_script;
 
@@ -154,7 +355,41 @@ public partial class VicePatcherContainer : SubViewportContainer
 		confirmationPatch.CloseRequested += OnPatchCanceled;
 		chooseFolder.Pressed += _on_folderButton_pressed;
 		PatchingWait.Canceled += HandleError;
-		
+		for (int i = 0; i < Saves.Length; i++)
+		{
+			int temp = i;
+			Saves[i].Toggled += (bool saving) =>
+			{
+				if (saving)
+				{
+					currentSave = temp;
+					SaveName.PlaceholderText = "Save " + (temp + 1);
+					SetSave();
+				}
+				else
+				{
+					LoadSaveData(Saves[temp].Text);
+				}
+			};
+		}
+		OpenViceSettings.Pressed += OpenViceSave;
+		RecommendedSettings.Pressed += OpenRecommended;
+		SaveSettings.Pressed += SavePressed;
+		LoadSettings.Pressed += LoadPressed;
+		BackSaveSettings.Pressed += BackSaves;
+		BackRecommendedSettings.Pressed += BackRecommended;
+		Recommended.Pressed += RecommendedVice;
+		Easy.Pressed += EasyVice;
+		HardcoreSettings.Pressed += Hardcore;
+		UltraHardcoreSettings.Pressed += UltraHardcore;
+		Speedrun.Pressed += SpeedrunMode;
+		SpeedrunHard.Pressed += SpeedHardcore;
+		Vanilla.Pressed += VanillaMode;
+		UltraSettings.Pressed += MasochistMode;
+		ViceSaveConfirm.Confirmed += ConfirmSave;
+		ViceSaveConfirm.Canceled += CloseSave;
+		ViceSaveConfirm.CloseRequested += CloseSave;
+		LatestOptions.Pressed += LoadLatest;
 
 		patchingLoading.Text = Tr("Patching");
 		mainTitle.Text = Tr("OptionalTitle");
@@ -172,8 +407,36 @@ public partial class VicePatcherContainer : SubViewportContainer
 		PatchingWait.GetCancelButton().Text = Tr("CancelButton");
 		confirmationPatch.GetOkButton().Text = Tr("PatchButton");
 		confirmationPatch.GetCancelButton().Text = Tr("CancelButton");
+		OpenViceSettings.Text = Tr("ViceSettingsButton");
+		OpenViceSettings.TooltipText = Tr("ViceSettingsButtonInfo");
+		RecommendedSettings.Text = Tr("RecommendedSettings");
+		ViceRecommendedLabel.Text = Tr("RecommendedSettings");
+		ViceMainSettingsLabel.Text = Tr("SaveSettingsTitle");
+		SaveSettings.Text = Tr("SaveSettingsLabel");
+		LoadSettings.Text = Tr("LoadSettingsLabel");
+		BackSaveSettings.Text = Tr("BackButtonSave");
+		BackRecommendedSettings.Text = Tr("BackButtonSave");
+		SaveLabel.Text = Tr("SaveConfirmLabel");
+		ViceSaveConfirmTitle.Text = Tr("SaveTitle");
+		Recommended.Text = Tr("ViceRecommended");
+		Recommended.TooltipText = Tr("ViceRecommendedInfo");
+		Easy.Text = Tr("EasyMode");
+		Easy.TooltipText = Tr("EasyModeInfo");
+		HardcoreSettings.TooltipText = Tr("HardcoreModeInfo");
+		UltraHardcoreSettings.TooltipText = Tr("UltraModeInfo");
+		Speedrun.TooltipText = Tr("SpeedInfo");
+		SpeedrunHard.TooltipText = Tr("SpeedHardInfo");
+		Vanilla.Text = Tr("VanillaMode");
+		Vanilla.TooltipText = Tr("VanillaModeInfo");
+		UltraSettings.Text = Tr("PainfulMode");
+		UltraSettings.TooltipText = Tr("PainfulModeInfo");
+		LatestOptions.Text = Tr("LatestOptions");
+		LatestOptions.TooltipText = Tr("LatestOptionsInfo");
 
 		RestartBoolsInstaller();
+		CheckSaveFiles();
+		
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -188,6 +451,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Difficulty.Disabled = true;
 			Difficulty.Visible = false;
 			FileNameSet.PlaceholderText = "Digimon World Vice Optionals";
+			OpenViceSettings.Visible = false;
 		}
 		else
 			FileNameSet.PlaceholderText = "Digimon World Vice";
@@ -215,6 +479,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Useful.ButtonPressed = false;
 			Techniques.Disabled = false;
 			Techniques.ButtonPressed = false;
+			ViceSettings.Visible = false;
+			OpenViceSettings.Disabled = false;
 
 			difficulty1.Visible = true;
 			difficulty2.Visible = false;
@@ -239,6 +505,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Useful.ButtonPressed = false;
 			Techniques.Disabled = false;
 			Techniques.ButtonPressed = false;
+			ViceSettings.Visible = false;
+			OpenViceSettings.Disabled = false;
 		}
 	}
 
@@ -260,6 +528,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Useful.ButtonPressed = false;
 			Techniques.Disabled = false;
 			Techniques.ButtonPressed = false;
+			ViceSettings.Visible = false;
+			OpenViceSettings.Disabled = false;
 		}
 	}
 
@@ -281,6 +551,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Useful.Disabled = true;
 			Techniques.Disabled = false;
 			Techniques.ButtonPressed = false;
+			ViceSettings.Visible = false;
+			OpenViceSettings.Disabled = false;
 
 			useful1.Visible = true;
 			useful2.Visible = false;
@@ -305,7 +577,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 			Useful.Disabled = false;
 			Useful.ButtonPressed = false;
 			Techniques.Disabled = true;
-
+			ViceSettings.Visible = false;
+			OpenViceSettings.Disabled = false;
 		}
 
 	}
@@ -465,7 +738,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 	void _on_folderButton_pressed()
 	{
 		confirmationPatch.Visible = false;
-		selectFolder.Visible = true;		
+		selectFolder.Visible = true;
 	}
 
 	void _on_choose_folder_canceled()
@@ -493,11 +766,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 	void _on_patching_loader_confirmed()
 	{
 		parent_script.SetPatchingData(fileDirectory, newFilePath);
-		parent_script.SetRandomizerTransference(filth, currentViceDifficulty == viceDifficulty.HARDCORE, trueHardcore, ultraHardcore, merit, removeTechBoost, easyStart, tanemon, rookieOnly);
+		parent_script.SetRandomizerTransference(filth, currentViceDifficulty == ViceDifficulty.HARDCORE, trueHardcore, ultraHardcore, merit, removeTechBoost, easyStart, tanemon, rookieOnly);
 		this.QueueFree();
 	}
 
-	void _on_patching_loader_canceled() {ExitViceInstaller();}
+	void _on_patching_loader_canceled() { ExitViceInstaller(); }
 
 	void HandleError()
 	{
@@ -515,11 +788,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 			bin.Dispose();
 		}
 	}
-	
+
 	public void RestartBoolsInstaller()
 	{
-		myotismon = vermillimon = filth = restoreFilth = hardmode = superHardcore = hardMono = hardTourney = betterBattleTech = betterBrainTechs = betterDrop
-		= superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = multipleTechs = evoItem = tanemon = rookieOnly 
+		myotismon = vermillimon = filth = restoreFilth = superHardcore = hardMono = hardTourney = betterBattleTech = betterBrainTechs = betterDrop
+		= superBonus = ultraBonus = dirtReduction = sDirtReduction = shortIntro = statsGains = multipleTechs = evoItem = tanemon = rookieOnly
 		= helpfulItems = lessMono = curlingRandomizer = betterRestaurant = progression = curling = raise = itemSpawns = usefulItems2 =
 		drimogemon = fishing = merit = cards = nerfIce = insaneDamage = trainingBoost = trueHardcore = noOrders = medals = rareSpawns = seadramon =
 		hyperMono = extraInput = removeEvoInfo = originalType = newMono = realMetal = vendingMachine = easyStart = moreItemDrops = MoreItemSpawn = false;
@@ -527,87 +800,86 @@ public partial class VicePatcherContainer : SubViewportContainer
 		insaneBattle = restoreLifetime = removeTechBoost = unlockAreas = mapColour = ultraHardcore =
 		restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG = boostItems = nerfTechBoost = false;
 
-		currentViceDifficulty = viceDifficulty.NONE;
+		currentViceDifficulty = ViceDifficulty.NONE;
 	}
-	
 
-public void SetMyotismon(bool enabled) { myotismon = enabled; }
-public void SetViceDifficulty(viceDifficulty difficulty) { currentViceDifficulty = difficulty; }
-public viceDifficulty GetViceDifficulty() { return currentViceDifficulty; }
-public void SetFilth(bool enabled) { filth = enabled; }
-public void SetRestoreFilth(bool enabled) { restoreFilth = enabled; }
-public void SetVermillimon (bool enabled) { vermillimon = enabled; }
-public void SetHardmode(bool enabled) { hardmode = enabled; }
-public void SetSuperHardcore(bool enabled) { superHardcore = enabled; }
-public void SetHardMono(bool enabled) { hardMono = enabled; }
-public void SetHardTourney(bool enabled) { hardTourney = enabled; }
-public void SetBetterBattleTech(bool enabled) { betterBattleTech = enabled; }
-public void SetBetterBrainTech(bool enabled) { betterBrainTechs = enabled; }
-public void SetBetterDrops(bool enabled) { betterDrop = enabled; }
-public void SetSuperBonus(bool enabled) { superBonus = enabled; }
-public void SetUltraBonus(bool enabled) { ultraBonus = enabled; }
-public void SetSDirtReduction(bool enabled) { sDirtReduction = enabled; }
-public void SetDirtReduction(bool enabled) { dirtReduction = enabled; }
-public void SetMapColour(bool enabled) { mapColour = enabled; }
-public void SetShortIntro(bool enabled) { shortIntro = enabled; }
-public void SetStatsGains(bool enabled) { statsGains = enabled; }
-public void SetMultipleTechs(bool enabled) { multipleTechs = enabled; }
-public void SetEvoItem(bool enabled) { evoItem = enabled; }
-public void SetHelpfulItems(bool enabled) { helpfulItems = enabled; }
-public void SetLessMono(bool enabled) { lessMono = enabled; }
-public void SetCurlingRandomizer(bool enabled) { curlingRandomizer = enabled; }
-public void SetInsaneBattle(bool enabled) { insaneBattle = enabled; }
-public void SetRestoreLifetime(bool enabled) { restoreLifetime = enabled; }
-public void SetRemoveTechBoost(bool enabled) { removeTechBoost = enabled; }
-public void SetUnlockAreas (bool enabled) { unlockAreas = enabled; }
-public void SetUltraHardcore(bool enabled) { ultraHardcore = enabled; }
-public bool GetUltraHardcore() { return ultraHardcore; }
-public void SetRestaurant(bool enabled) { betterRestaurant = enabled; }
-public void SetCurling(bool enabled) { curling = enabled; }
-public void SetRaise(bool enabled) { raise = enabled; }
-public void SetCards(bool enabled) { cards = enabled; }
-public void SetMerit(bool enabled) { merit = enabled; }
-public void SetUseful2(bool enabled) { usefulItems2 = enabled; }
-public void SetDrimogemon(bool enabled) { drimogemon = enabled; }
-public void SetItemSpawns(bool enabled) { itemSpawns = enabled; }
-public void SetFishing(bool enabled) { fishing = enabled; }
-public void SetProgression(bool enabled) { progression = enabled; }
-public void SetRestorePanjya(bool enabled) { restorePanjyamon = enabled; }
-public void SetStarters2(bool enabled) { starters2 = enabled; }
-public void SetKunemon(bool enabled) { kunemon = enabled; }
-public void SetIceNerf(bool enabled) { nerfIce = enabled; }
-public void SetTrainingBoost(bool enabled) { trainingBoost = enabled; }
-public void SetInsaneDamage(bool enabled) { insaneDamage = enabled; }
-public void SetTelephone(bool enabled) {removeTelephone = enabled; }
-public void SetOrders(bool enabled) { noOrders = enabled; }
-public void SetSeadramon(bool enabled) { seadramon = enabled; }
-public void SetRareSpawns(bool enabled) { rareSpawns = enabled; }
-public void SetEasyMedals(bool enabled) { medals = enabled; }
-public void SetEasyTech(bool enabled) { easyTechs = enabled; }
-public void SetNewMono(bool enabled) { newMono = enabled; }
-public void SetOriginalType(bool enabled) { originalType = enabled; }
-public void Set8kMono(bool enabled) { hyperMono = enabled; }
-public void SetExtraInput(bool enabled) { extraInput = enabled; }
-public void SetEvoInfo(bool enabled) { removeEvoInfo = enabled; }
-public void SetTrueHardcore(bool enabled) { trueHardcore = enabled; }
-public void SetBWere(bool enabled) { BlackWere = enabled; }
-public void SetRMetal(bool enabled) { realMetal = enabled; }
-public void SetDigitalClock(bool enabled) { digitalClock = enabled; }       
-public void SetQuickText(bool enabled) { quickText = enabled; }
-public void SetRNG(bool enabled) { noRNG = enabled; }
-public void SetEasyStart(bool enabled) { easyStart = enabled; }
-public void SetSuperBoostItems(bool enabled) { boostItems = enabled; }
-public void SetVendingMachines(bool enabled) { vendingMachine = enabled; }
-public void SetNerfBoost(bool enabled) { nerfTechBoost = enabled; }
-public void SetMoreDrops(bool enabled) { moreItemDrops = enabled; }
-public void SetMoreItemSpawn(bool enabled) { MoreItemSpawn = enabled; }
-public void SetRareSpawnValue(int value) { RareSpawnValue = value; }
-public void SetStatsValue(int value) { StatsValue = value; }
 
-public void SetRookie(bool enabled) { rookieOnly = enabled;}
-public void SetTanemon(bool enabled) { tanemon = enabled; }
+	public void SetMyotismon(bool enabled) { myotismon = enabled; }
+	public void SetViceDifficulty(ViceDifficulty difficulty) { currentViceDifficulty = difficulty; }
+	public ViceDifficulty GetViceDifficulty() { return currentViceDifficulty; }
+	public void SetFilth(bool enabled) { filth = enabled; }
+	public void SetRestoreFilth(bool enabled) { restoreFilth = enabled; }
+	public void SetVermillimon(bool enabled) { vermillimon = enabled; }
+	public void SetSuperHardcore(bool enabled) { superHardcore = enabled; }
+	public void SetHardMono(bool enabled) { hardMono = enabled; }
+	public void SetHardTourney(bool enabled) { hardTourney = enabled; }
+	public void SetBetterBattleTech(bool enabled) { betterBattleTech = enabled; }
+	public void SetBetterBrainTech(bool enabled) { betterBrainTechs = enabled; }
+	public void SetBetterDrops(bool enabled) { betterDrop = enabled; }
+	public void SetSuperBonus(bool enabled) { superBonus = enabled; }
+	public void SetUltraBonus(bool enabled) { ultraBonus = enabled; }
+	public void SetSDirtReduction(bool enabled) { sDirtReduction = enabled; }
+	public void SetDirtReduction(bool enabled) { dirtReduction = enabled; }
+	public void SetMapColour(bool enabled) { mapColour = enabled; }
+	public void SetShortIntro(bool enabled) { shortIntro = enabled; }
+	public void SetStatsGains(bool enabled) { statsGains = enabled; }
+	public void SetMultipleTechs(bool enabled) { multipleTechs = enabled; }
+	public void SetEvoItem(bool enabled) { evoItem = enabled; }
+	public void SetHelpfulItems(bool enabled) { helpfulItems = enabled; }
+	public void SetLessMono(bool enabled) { lessMono = enabled; }
+	public void SetCurlingRandomizer(bool enabled) { curlingRandomizer = enabled; }
+	public void SetInsaneBattle(bool enabled) { insaneBattle = enabled; }
+	public void SetRestoreLifetime(bool enabled) { restoreLifetime = enabled; }
+	public void SetRemoveTechBoost(bool enabled) { removeTechBoost = enabled; }
+	public void SetUnlockAreas(bool enabled) { unlockAreas = enabled; }
+	public void SetUltraHardcore(bool enabled) { ultraHardcore = enabled; }
+	public bool GetUltraHardcore() { return ultraHardcore; }
+	public void SetRestaurant(bool enabled) { betterRestaurant = enabled; }
+	public void SetCurling(bool enabled) { curling = enabled; }
+	public void SetRaise(bool enabled) { raise = enabled; }
+	public void SetCards(bool enabled) { cards = enabled; }
+	public void SetMerit(bool enabled) { merit = enabled; }
+	public void SetUseful2(bool enabled) { usefulItems2 = enabled; }
+	public void SetDrimogemon(bool enabled) { drimogemon = enabled; }
+	public void SetItemSpawns(bool enabled) { itemSpawns = enabled; }
+	public void SetFishing(bool enabled) { fishing = enabled; }
+	public void SetProgression(bool enabled) { progression = enabled; }
+	public void SetRestorePanjya(bool enabled) { restorePanjyamon = enabled; }
+	public void SetStarters2(bool enabled) { starters2 = enabled; }
+	public void SetKunemon(bool enabled) { kunemon = enabled; }
+	public void SetIceNerf(bool enabled) { nerfIce = enabled; }
+	public void SetTrainingBoost(bool enabled) { trainingBoost = enabled; }
+	public void SetInsaneDamage(bool enabled) { insaneDamage = enabled; }
+	public void SetTelephone(bool enabled) { removeTelephone = enabled; }
+	public void SetOrders(bool enabled) { noOrders = enabled; }
+	public void SetSeadramon(bool enabled) { seadramon = enabled; }
+	public void SetRareSpawns(bool enabled) { rareSpawns = enabled; }
+	public void SetEasyMedals(bool enabled) { medals = enabled; }
+	public void SetEasyTech(bool enabled) { easyTechs = enabled; }
+	public void SetNewMono(bool enabled) { newMono = enabled; }
+	public void SetOriginalType(bool enabled) { originalType = enabled; }
+	public void Set8kMono(bool enabled) { hyperMono = enabled; }
+	public void SetExtraInput(bool enabled) { extraInput = enabled; }
+	public void SetEvoInfo(bool enabled) { removeEvoInfo = enabled; }
+	public void SetTrueHardcore(bool enabled) { trueHardcore = enabled; }
+	public void SetBWere(bool enabled) { BlackWere = enabled; }
+	public void SetRMetal(bool enabled) { realMetal = enabled; }
+	public void SetDigitalClock(bool enabled) { digitalClock = enabled; }
+	public void SetQuickText(bool enabled) { quickText = enabled; }
+	public void SetRNG(bool enabled) { noRNG = enabled; }
+	public void SetEasyStart(bool enabled) { easyStart = enabled; }
+	public void SetSuperBoostItems(bool enabled) { boostItems = enabled; }
+	public void SetVendingMachines(bool enabled) { vendingMachine = enabled; }
+	public void SetNerfBoost(bool enabled) { nerfTechBoost = enabled; }
+	public void SetMoreDrops(bool enabled) { moreItemDrops = enabled; }
+	public void SetMoreItemSpawn(bool enabled) { MoreItemSpawn = enabled; }
+	public void SetRareSpawnValue(int value) { RareSpawnValue = value; }
+	public void SetStatsValue(int value) { StatsValue = value; }
 
-public void CreatePatchedFile(string folderDestination, string newFilename)
+	public void SetRookie(bool enabled) { rookieOnly = enabled; }
+	public void SetTanemon(bool enabled) { tanemon = enabled; }
+
+	public void CreatePatchedFile(string folderDestination, string newFilename)
 	{
 		confirmationPatch.Visible = false;
 		PatchingWait.Visible = true;
@@ -645,48 +917,66 @@ public void CreatePatchedFile(string folderDestination, string newFilename)
 		}
 	}
 
-	public void InstallVicePatch() 
+	public void InstallVicePatch()
 	{
-			string path = "Patches/ViceHack/";
-			//main patch
-			SetPatch(path + "DigimonWorldVice_2.2.ppf");
+		string path = "Patches/ViceHack/";
+		//main patch
+		SetPatch(path + "DigimonWorldVice_2.2.ppf");
 
-			//optional exclusive patches
-			switch (currentViceDifficulty)
-			{
-				case viceDifficulty.CHALLENGE:
-					SetPatch(path + "ChallengePatch.ppf");
-					break;
-				case viceDifficulty.HARDMODE:
-					SetPatch(path + "DigimonWorldViceHardmode.ppf");
-					break;
-				case viceDifficulty.HARDCORE:
-					if (!progression)
-						SetPatch(path + "HardcoreVice 1.1.ppf");
-					else
-						SetPatch(path + "HardcoreViceP 1.1.ppf");
-
-					if (trueHardcore)
-						SetPatch(path + "TrueHardcoreVice 1.1.ppf");
-					break;
-				default:
-					break;
-			}
-
-			if (ultraHardcore)
-			{
-				if (currentViceDifficulty == viceDifficulty.HARDCORE)
-				{
-					if (trueHardcore)
-						SetPatch(path + "UltraHardcoreT.ppf");
-					else
-						SetPatch(path + "UltraHardcoreH.ppf");
-				}
+		//optional exclusive patches
+		switch (currentViceDifficulty)
+		{
+			case ViceDifficulty.CHALLENGE:
+				SetPatch(path + "ChallengePatch.ppf");
+				break;
+			case ViceDifficulty.HARDMODE:
+				SetPatch(path + "DigimonWorldViceHardmode.ppf");
+				break;
+			case ViceDifficulty.HARDCORE:
+				if (!progression)
+					SetPatch(path + "HardcoreVice 1.2.ppf");
 				else
-					SetPatch(path + "UltraHardcoreEnabler.ppf");
-			}		   		
+					SetPatch(path + "HardcoreViceP 1.2.ppf");
 
-			InstallOptionalPatches();
+				if (trueHardcore)
+				{
+					SetPatch(path + "TrueHardcoreVice 1.2.ppf");
+					if (restorePanjyamon)
+					{
+						bin.Position = 0x9303F20;
+						bin.WriteByte(0x2E);
+						bin.Position = 0x9303F22;
+						bin.WriteByte(0x32);
+						bin.Position = 0x9303F24;
+						bin.WriteByte(0x33);
+						bin.Position = 0x9303F26;
+						bin.WriteByte(0x38);
+					}
+					else if (BlackWere)
+					{
+						bin.Position = 0x9303F20;
+						bin.WriteByte(0x31);
+					}
+				}
+				break;
+			default:
+				break;
+		}
+
+		if (ultraHardcore)
+		{
+			if (currentViceDifficulty == ViceDifficulty.HARDCORE)
+			{
+				if (trueHardcore)
+					SetPatch(path + "UltraHardcoreT.ppf");
+				else
+					SetPatch(path + "UltraHardcoreH.ppf");
+			}
+			else
+				SetPatch(path + "UltraHardcoreEnabler.ppf");
+		}
+
+		InstallOptionalPatches();
 	}
 
 	public void ExtraInstall()
@@ -696,149 +986,173 @@ public void CreatePatchedFile(string folderDestination, string newFilename)
 
 	void InstallOptionalPatches()
 	{
-			string path = "Patches/OptionalPatches/";	
+		string path = "Patches/OptionalPatches/";
 
-			if (curlingRandomizer && restorePanjyamon)
-				SetPatch("Patches/ViceHack/CurlingRandomizerViceP.ppf");   
-			else if (curlingRandomizer && !restorePanjyamon)
-				SetPatch("Patches/ViceHack/CurlingRandomizerViceHack2.ppf");
+		if (curlingRandomizer && restorePanjyamon)
+			SetPatch("Patches/ViceHack/CurlingRandomizerViceP.ppf");
+		else if (curlingRandomizer && !restorePanjyamon)
+			SetPatch("Patches/ViceHack/CurlingRandomizerViceHack2.ppf");
 
-			if (restorePanjyamon)
-				SetPatch("Patches/ViceHack/RestorePanjyamon.ppf");
+		if (restorePanjyamon)
+			SetPatch("Patches/ViceHack/RestorePanjyamon.ppf");
 
-			if (starters2)
-				SetPatch("Patches/ViceHack/Starter2.ppf");
-			else if (kunemon)
-				SetPatch("Patches/ViceHack/KunemonStart.ppf");
+		if (starters2)
+			SetPatch("Patches/ViceHack/Starter2.ppf");
+		else if (kunemon)
+			SetPatch("Patches/ViceHack/KunemonStart.ppf");
 
-			if (myotismon)
-				SetPatch("Patches/ViceHack/MyotismonPatchVice2.ppf");
+		if (myotismon)
+			SetPatch("Patches/ViceHack/MyotismonPatchVice2.ppf");
 
-			if (filth)
-			{
-				SetPatch("Patches/ViceHack/FilthChallengeViceHack 1.4.1.ppf");
+		if (filth)
+		{
+			SetPatch("Patches/ViceHack/FilthChallengeViceHack 1.4.2.ppf");
 
-				if (restoreFilth)
-					SetPatch(path + "Difficulty patches/RestoreFilthDigimon.ppf");
-			}
-			else if (rookieOnly)
-				SetPatch("Patches/ViceHack/RookieOnly.ppf");						   
-			else if (tanemon)
-				SetPatch("Patches/ViceHack/Tanemon.ppf");
-			if (insaneBattle)
-				SetPatch("Patches/ViceHack/InsaneBattle.ppf");
+			if (restoreFilth)
+				SetPatch(path + "Difficulty patches/RestoreFilthDigimon.ppf");
+		}
+		else if (rookieOnly)
+			SetPatch("Patches/ViceHack/RookieOnly.ppf");
+		else if (tanemon)
+			SetPatch("Patches/ViceHack/Tanemon.ppf");
+		if (insaneBattle)
+			SetPatch("Patches/ViceHack/InsaneBattle.ppf");
 
-			if (restoreLifetime)
-				SetPatch("Patches/ViceHack/RemoveExtraLifetimeEvo.ppf");
+		if (restoreLifetime)
+			SetPatch("Patches/ViceHack/RemoveExtraLifetimeEvo.ppf");
 
-			if (removeTechBoost)
+		if (removeTechBoost)
+		{
+			if (currentViceDifficulty == ViceDifficulty.NONE)
 				SetPatch("Patches/ViceHack/RemoveTechBoost.ppf");
+			else if (currentViceDifficulty != ViceDifficulty.CHALLENGE && !ultraHardcore)
+			{
+				SetPatch("Patches/ViceHack/RemovePartnerTechBoost.ppf");
+				if (currentViceDifficulty == ViceDifficulty.HARDCORE)
+				{
+					if (trueHardcore)
+					{
+						bin.Position = 0x14CCFE34;
+						bin.Write([0xC2, 0x1]);
+						bin.Position = 0x14CCFE50;
+						bin.Write([0x5E, 0x1]);
+					}
+					else
+					{
+						bin.Position = 0x14CCFE34;
+						bin.Write([0x5E, 0x1]);
+						bin.Position = 0x14CCFE50;
+						bin.Write([0xFA, 0x1]);
+					}
+				}
+			}
+		}
 
-			if (unlockAreas)
+		if (unlockAreas)
 				SetPatch("Patches/ViceHack/FullyUnlockAreas.ppf");
 
-			if (mapColour)
-				SetPatch("Patches/ViceHack/BreakColour.ppf");
+		if (mapColour)
+			SetPatch("Patches/ViceHack/BreakColour.ppf");
 
-			if (removeTelephone)
-				SetPatch("Patches/ViceHack/NoTelephoneOgre.ppf");
+		if (removeTelephone)
+			SetPatch("Patches/ViceHack/NoTelephoneOgre.ppf");
 
-			if (easyTechs)
-			{
-				if (currentViceDifficulty != viceDifficulty.HARDCORE)
-					SetPatch("Patches/ViceHack/TelepathyBattle.ppf");
-				else
-					SetPatch("Patches/ViceHack/TelepathyBattleHard.ppf");
-			}
+		if (easyTechs)
+		{
+			if (currentViceDifficulty != ViceDifficulty.HARDCORE)
+				SetPatch("Patches/ViceHack/TelepathyBattle.ppf");
+			else
+				SetPatch("Patches/ViceHack/TelepathyBattleHard.ppf");
+		}
 
-			if (removeEvoInfo)
-				SetPatch("Patches/ViceHack/RemoveEvoInfo.ppf");
+		if (removeEvoInfo)
+			SetPatch("Patches/ViceHack/RemoveEvoInfo.ppf");
 
-			if (originalType)
-				SetPatch("Patches/ViceHack/RestoreTypes.ppf");
+		if (originalType)
+			SetPatch("Patches/ViceHack/RestoreTypes.ppf");
 
-			if (extraInput && !noRNG)
-				SetPatch("Patches/ViceHack/ExtraInput.ppf");
+		if (extraInput && !noRNG)
+			SetPatch("Patches/ViceHack/ExtraInput.ppf");
 
-			if (progression && currentViceDifficulty != viceDifficulty.HARDCORE)
-				SetPatch(path + "Difficulty patches/ProgressionPatch.ppf");
+		if (progression && currentViceDifficulty != ViceDifficulty.HARDCORE)
+			SetPatch(path + "Difficulty patches/ProgressionPatch.ppf");
 
-			if (BlackWere)
-				SetPatch("Patches/ViceHack/BWereGaru.ppf");
+		if (BlackWere)
+			SetPatch("Patches/ViceHack/BWereGaru.ppf");
 
-			if (quickText)
-				SetPatch("Patches/ViceHack/QuickBattleText.ppf");
+		if (quickText)
+			SetPatch("Patches/ViceHack/QuickBattleText.ppf");
 
-			if (digitalClock)
-				SetPatch("Patches/ViceHack/DigitalClock.ppf");
+		if (digitalClock)
+			SetPatch("Patches/ViceHack/DigitalClock.ppf");
 
-			if (noRNG)
-			{
-				if (extraInput)
-					SetPatch("Patches/ViceHack/ExtraInputRNG.ppf");
-				else
-					SetPatch("Patches/ViceHack/noRNG.ppf");
-			}
+		if (noRNG)
+		{
+			if (extraInput)
+				SetPatch("Patches/ViceHack/ExtraInputRNG.ppf");
+			else
+				SetPatch("Patches/ViceHack/noRNG.ppf");
+		}
 
-			if (boostItems)
-				SetPatch("Patches/ViceHack/SuperDiskBuff.ppf");
+		if (boostItems)
+			SetPatch("Patches/ViceHack/SuperDiskBuff.ppf");
 
-			if (nerfTechBoost)
-				SetPatch("Patches/ViceHack/NerfTechBoost.ppf");			
-			
-			if (vermillimon)
+		if (nerfTechBoost)
+			SetPatch("Patches/ViceHack/NerfTechBoost.ppf");
+
+		if (vermillimon)
 			SetPatch(path + "MonochromonToVermilimon.ppf");
 
-			if (realMetal)				
-			    SetPatch(path + "RealMTGRVice.ppf");			
+		if (realMetal)
+			SetPatch(path + "RealMTGRVice.ppf");
 
-			if (superHardcore)
-				SetPatch(path + "Difficulty patches/SuperHardcoreEnabler.ppf");
+		if (superHardcore)
+			SetPatch(path + "Difficulty patches/SuperHardcoreEnabler.ppf");
 
-			if (hardMono)
-				SetPatch(path + "Difficulty patches/IncreaseMonochromonGoal.ppf");
+		if (hardMono)
+			SetPatch(path + "Difficulty patches/IncreaseMonochromonGoal.ppf");
 
-			if (hardTourney)
-				SetPatch(path + "Difficulty patches/MoreDifficultTournaments.ppf");
+		if (hardTourney)
+			SetPatch(path + "Difficulty patches/MoreDifficultTournaments.ppf");
 
-			if (hyperMono)
-				SetPatch(path + "Difficulty patches/8KMono.ppf");
+		if (hyperMono)
+			SetPatch(path + "Difficulty patches/8KMono.ppf");
 
-			if (betterBattleTech)
-				SetPatch(path + "Tech patches/BetterBattleTechChances.ppf");
+		if (betterBattleTech)
+			SetPatch(path + "Tech patches/BetterBattleTechChances.ppf");
 
-			if (betterBrainTechs)
-				SetPatch(path + "Tech patches/BetterBrainsTechChances.ppf");
+		if (betterBrainTechs)
+			SetPatch(path + "Tech patches/BetterBrainsTechChances.ppf");
 
-			if (multipleTechs)
-				SetPatch(path + "Tech patches/LearnMoreTechs.ppf");
+		if (multipleTechs)
+			SetPatch(path + "Tech patches/LearnMoreTechs.ppf");
 
-			if (nerfIce)
-				SetPatch(path + "Tech patches/NerfIceStatue.ppf");
+		if (nerfIce)
+			SetPatch(path + "Tech patches/NerfIceStatue.ppf");
 
-			if (insaneDamage)
-				SetPatch(path + "Tech patches/InsaneDamage.ppf");
+		if (insaneDamage)
+			SetPatch(path + "Tech patches/InsaneDamage.ppf");
 
-			if (noOrders)
-				SetPatch(path + "Tech patches/BrainsNoOrders.ppf");
+		if (noOrders)
+			SetPatch(path + "Tech patches/BrainsNoOrders.ppf");
 
-			if (betterDrop)
-				SetPatch(path + "Useful patches/BetterDrops.ppf");
-			else if (moreItemDrops)
-				SetPatch(path + "Useful patches/MoreDrops.ppf");
+		if (betterDrop)
+			SetPatch(path + "Useful patches/BetterDrops.ppf");
+		else if (moreItemDrops)
+			SetPatch(path + "Useful patches/MoreDrops.ppf");
 
-            if (superBonus)
-				SetPatch(path + "Useful patches/BonusTrySuperHelpful 1.2.ppf");
-		    else if (ultraBonus)
-				SetPatch(path + "Useful patches/BonusTryUltraLucky 1.2.ppf");	
+		if (superBonus)
+			SetPatch(path + "Useful patches/BonusTrySuperHelpful 1.2.ppf");
+		else if (ultraBonus)
+			SetPatch(path + "Useful patches/BonusTryUltraLucky 1.2.ppf");
 
-			if (dirtReduction)
-				SetPatch(path + "Useful patches/DirtReductionHalf.ppf");
-			else if (sDirtReduction)
-				SetPatch(path + "Useful patches/SuperDirtReduction.ppf");
+		if (dirtReduction)
+			SetPatch(path + "Useful patches/DirtReductionHalf.ppf");
+		else if (sDirtReduction)
+			SetPatch(path + "Useful patches/SuperDirtReduction.ppf");
 
-			if (shortIntro)
-				SetPatch(path + "Useful patches/ShortIntro.ppf");
+		if (shortIntro)
+			SetPatch(path + "Useful patches/ShortIntro.ppf");
 
 		if (statsGains)
 		{
@@ -847,35 +1161,35 @@ public void CreatePatchedFile(string folderDestination, string newFilename)
 				SetStatGains();
 		}
 
-			if (evoItem)
-				SetPatch(path + "Useful patches/EnableStatGainsEvoItems.ppf");
+		if (evoItem)
+			SetPatch(path + "Useful patches/EnableStatGainsEvoItems.ppf");
 
-			if (lessMono)
-				SetPatch(path + "Useful patches/LowerMonochromonBits.ppf");
+		if (lessMono)
+			SetPatch(path + "Useful patches/LowerMonochromonBits.ppf");
 
-			if (betterRestaurant)
-				SetPatch(path + "Useful patches/BetterRestaurant.ppf");
+		if (betterRestaurant)
+			SetPatch(path + "Useful patches/BetterRestaurant.ppf");
 
-			if (drimogemon)
-				SetPatch(path + "Useful patches/BetterDrimogemon.ppf");
+		if (drimogemon)
+			SetPatch(path + "Useful patches/BetterDrimogemon.ppf");
 
-			if (fishing)
-				SetPatch(path + "Useful patches/BetterFishing.ppf");
+		if (fishing)
+			SetPatch(path + "Useful patches/BetterFishing.ppf");
 
-			if (cards)
-				SetPatch(path + "Useful patches/BetterCards.ppf");
+		if (cards)
+			SetPatch(path + "Useful patches/BetterCards.ppf");
 
-			if (merit)
-				SetPatch(path + "Useful patches/BetterMeritShop.ppf");
+		if (merit)
+			SetPatch(path + "Useful patches/BetterMeritShop.ppf");
 
-			if (usefulItems2)
-				SetPatch(path + "Useful patches/UsefulItems2.ppf");
+		if (usefulItems2)
+			SetPatch(path + "Useful patches/UsefulItems2.ppf");
 
-			if (curling)
-				SetPatch(path + "Useful patches/BetterCurlingRewards.ppf");
+		if (curling)
+			SetPatch(path + "Useful patches/BetterCurlingRewards.ppf");
 
-			if (raise)
-				SetPatch(path + "Useful patches/BetterRaise.ppf");
+		if (raise)
+			SetPatch(path + "Useful patches/BetterRaise.ppf");
 
 		if (itemSpawns)
 		{
@@ -919,41 +1233,41 @@ public void CreatePatchedFile(string folderDestination, string newFilename)
 			}
 			bin.Position = 0x1401631F;
 			bin.WriteByte(9);
-		}    
+		}
 
-			if (helpfulItems)
-				SetPatch(path + "Useful patches/HelpfulItems.ppf");
+		if (helpfulItems)
+			SetPatch(path + "Useful patches/HelpfulItems.ppf");
 
-			if (trainingBoost)
-				SetPatch(path + "Useful patches/TrainingBoostB.ppf");
+		if (trainingBoost)
+			SetPatch(path + "Useful patches/TrainingBoostB.ppf");
 
-			if (rareSpawns)						
-				SetRareSpawns();
+		if (rareSpawns)
+			SetRareSpawns();
 
-			if (seadramon)
-				SetPatch(path + "Useful patches/FullSeadramon.ppf");
+		if (seadramon)
+			SetPatch(path + "Useful patches/FullSeadramon.ppf");
 
-			if (medals)
-				SetPatch(path + "Useful patches/EasierMedals.ppf");
+		if (medals)
+			SetPatch(path + "Useful patches/EasierMedals.ppf");
 
-			if (newMono)
-				SetPatch(path + "Useful patches/NewMonochromon.ppf");
+		if (newMono)
+			SetPatch(path + "Useful patches/NewMonochromon.ppf");
 
-			if (easyStart)
-				SetPatch(path + "Useful patches/EasyStart.ppf");
+		if (easyStart)
+			SetPatch(path + "Useful patches/EasyStart.ppf");
 
-			if (vendingMachine)
-				SetPatch(path + "Useful patches/VendingMachines.ppf");
+		if (vendingMachine)
+			SetPatch(path + "Useful patches/VendingMachines.ppf");
 
 
 		bin.Close();
 		bin.Dispose();
 		CreateTxt();
 	}
-		
 
-void SetPatch(string patchPath)
-{
+
+	void SetPatch(string patchPath)
+	{
 		try
 		{
 			if (OS.HasFeature("editor"))
@@ -979,10 +1293,10 @@ void SetPatch(string patchPath)
 		{
 			SetError();
 		}
-		
 
-	ApplyPPF3Patch();
-}
+
+		ApplyPPF3Patch();
+	}
 
 	void ApplyPPF3Patch()
 	{
@@ -1037,7 +1351,7 @@ void SetPatch(string patchPath)
 			bin.Position = 0x140B90C7;
 			bin.WriteByte((byte)RareSpawnValue);
 		}
-		
+
 	}
 
 	void SetStatGains()
@@ -1055,7 +1369,7 @@ void SetPatch(string patchPath)
 		{
 			bin.WriteByte(statHexValues2[i]);
 		}
-    }
+	}
 
 	void CreateTxt()
 	{
@@ -1085,13 +1399,13 @@ void SetPatch(string patchPath)
 				txtWritter.WriteLine();
 				switch (currentViceDifficulty)
 				{
-					case viceDifficulty.CHALLENGE:
+					case ViceDifficulty.CHALLENGE:
 						txtWritter.Write("- " + Tr("Challenge_L"));
 						break;
-					case viceDifficulty.HARDMODE:
+					case ViceDifficulty.HARDMODE:
 						txtWritter.Write("- " + Tr("Hardmode_L"));
 						break;
-					case viceDifficulty.HARDCORE:
+					case ViceDifficulty.HARDCORE:
 						txtWritter.Write("- " + Tr("Hardcore_L"));
 						break;
 					default:
@@ -1525,15 +1839,359 @@ void SetPatch(string patchPath)
 		txt.Close();
 		txt.Dispose();
 
+		
+
 		WarFinish.Visible = true;
 		WarWait.Visible = false;
 		patchingLoading.Text = Tr("FinishedP");
 		if (currentPatcher != patchType.OPTIONAL)
-			PatchingWait.GetOkButton().Visible = true;
-		
+			PatchingWait.GetOkButton().Visible = true;		
 		PatchingWait.GetCancelButton().Text = Tr("ExitButton");
+		SaveData();
 		PatchingWait.Canceled -= HandleError;
 		PatchingWait.Canceled += _on_patching_loader_canceled;
 
-}
+
+	}
+
+	void OpenViceSave()
+	{
+		ViceSettings.Visible = true;
+		difficultyContainer.Visible = false;
+		digimonContainer.Visible = false;
+		miscContainer.Visible = false;
+		usefulContainer.Visible = false;
+		techContainer.Visible = false;
+		Difficulty.Disabled = false;
+		Difficulty.ButtonPressed = false;
+		Digimon.Disabled = false;
+		Miscellaneous.Disabled = false;
+		Miscellaneous.ButtonPressed = false;
+		Useful.Disabled = false;
+		Useful.ButtonPressed = false;
+		Techniques.Disabled = false;
+		Techniques.ButtonPressed = false;
+		ViceMainSettings.Visible = true;
+		ViceSave.Visible = false;
+		ViceRecommended.Visible = false;
+		OpenViceSettings.Disabled = true;
+	}
+
+	void SetSave()
+	{
+		ViceSaveConfirm.Visible = true;
+	}
+
+	void ConfirmSave()
+	{
+		string name;
+		if (SaveName.Text != null && SaveName.Text != "")
+			name = SaveName.Text;
+		else
+			name = SaveName.PlaceholderText;
+		SaveData(name, saveNames[currentSave]);
+		ViceSaveConfirm.Visible = false;
+		ViceSave.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void CloseSave()
+	{
+		ViceSaveConfirm.Visible = false;
+		Saves[currentSave].SetPressedNoSignal(false);
+	}
+
+	void BackSaves()
+	{
+		ViceSave.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void BackRecommended()
+	{
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void OpenRecommended()
+	{
+		ViceMainSettings.Visible = false;
+		ViceRecommended.Visible = true;
+	}
+
+	void SavePressed()
+	{
+		for (int i = 0; i < Saves.Length; i++)
+		{
+			Saves[i].SetPressedNoSignal(false);
+			Saves[i].Disabled = false;
+		}
+		SaveLabel.Text = Tr("SaveSettingsLabel");
+
+		ViceMainSettings.Visible = false;
+		ViceSave.Visible = true;
+	}
+
+	void LoadPressed()
+	{
+		for (int i = 0; i < Saves.Length; i++)
+		{
+			Saves[i].SetPressedNoSignal(true);
+			if (saveNames[i] == null)
+				Saves[i].Disabled = true;
+		}
+		SaveLabel.Text = Tr("LoadSettingsLabel");
+
+		ViceMainSettings.Visible = false;
+		ViceSave.Visible = true;
+	}
+
+	void SaveData(string saveName = null, string oldName = null)
+	{
+		saveData = new ViceSaveData(currentViceDifficulty, myotismon, vermillimon, filth, restoreFilth, superHardcore, hardMono, hardTourney, betterBattleTech, betterBrainTechs, betterDrop,
+		superBonus, tanemon, rookieOnly, ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
+		curlingRandomizer, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
+		trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal,
+		vendingMachine, easyStart, moreItemDrops, MoreItemSpawn, insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore,
+		restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
+		StatsValue, RareSpawnValue);
+
+		Directory.CreateDirectory(OS.GetExecutablePath().GetBaseDir() + "/SaveData");
+
+		var bytes = JsonSerializer.SerializeToUtf8Bytes(saveData);
+		if (saveName != null)
+		{
+			string name;
+			if (oldName != null)
+				name = "/SaveData/" + oldName + ".ViceSave";
+			else
+				name = "/SaveData/" + saveName + ".ViceSave";
+
+			using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + name, Godot.FileAccess.ModeFlags.Write);
+
+			saveFile.StoreBuffer(bytes);
+			saveFile.Close();
+			if (oldName != null)
+				File.Move(OS.GetExecutablePath().GetBaseDir() + name, OS.GetExecutablePath().GetBaseDir() + "/SaveData/" + saveName + ".ViceSave");
+
+			saveNames[currentSave] = saveName;
+			Saves[currentSave].Text = saveName;
+		}
+		else
+		{
+			using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/LatestSave", Godot.FileAccess.ModeFlags.Write);
+			saveFile.StoreBuffer(bytes);
+			saveFile.Close();
+		}
+
+		
+	}
+	void LoadSaveData(string saveName = null)
+	{
+		string name;
+		if (saveName == null)
+			name = "/SaveData/LatestSave";
+		else
+			name = "/SaveData/" + saveName + ".ViceSave";
+
+		if (File.Exists(OS.GetExecutablePath().GetBaseDir() + name))
+		{
+			using var saveFile = System.IO.File.Open(OS.GetExecutablePath().GetBaseDir() + name, System.IO.FileMode.Open);
+			saveData = JsonSerializer.Deserialize<ViceSaveData>(saveFile);
+			saveFile.Close();
+
+			if (saveData != null)
+			{
+
+				digimonScript.LoadSaveData(saveData.myotismon, saveData.restorePanjyamon, saveData.vermillimon, saveData.starters2, saveData.kunemon, saveData.curling, saveData.realMetal,
+				saveData.BlackWere);
+
+				miscScript.LoadSaveData(saveData.digitalClock, saveData.extraInput, saveData.unlockAreas, saveData.quickText, saveData.boostItems, saveData.nerfTechBoost,
+				saveData.restoreLifetime, saveData.removeTechBoost, saveData.removeEvoInfo, saveData.newMono, saveData.insaneBattle, saveData.mapColour, saveData.removeTelephone,
+				saveData.originalType);
+
+				usefulScript.LoadSaveData(saveData.statsGains, saveData.rareSpawns, saveData.shortIntro, saveData.easyStart, saveData.superBonus, saveData.ultraBonus, saveData.trainingBoost,
+				saveData.dirtReduction, saveData.sDirtReduction, saveData.drimogemon, saveData.lessMono, saveData.seadramon, saveData.evoItem, saveData.moreItemDrops, saveData.betterDrop,
+				saveData.raise, saveData.MoreItemSpawn, saveData.itemSpawns, saveData.medals, saveData.vendingMachine, saveData.curling, saveData.betterRestaurant, saveData.cards, saveData.merit,
+				saveData.fishing, saveData.helpfulItems, saveData.usefulItems2, saveData.StatsValue, saveData.RareSpawnValue);
+
+				techScript.LoadSaveData(saveData.betterBattleTech, saveData.betterBrainTechs, saveData.multipleTechs, saveData.insaneDamage, saveData.easyTechs, saveData.noOrders,
+				saveData.nerfIce);
+
+				difficultyScript.LoadSaveData(saveData.viceDifficulty == ViceDifficulty.CHALLENGE, saveData.viceDifficulty == ViceDifficulty.HARDMODE, saveData.viceDifficulty == ViceDifficulty.HARDCORE,
+				saveData.trueHardcore, saveData.ultraHardcore, saveData.progression, saveData.filth, saveData.restoreFilth, saveData.superHardcore, saveData.hardTourney, saveData.noRNG,
+				saveData.hardMono, saveData.hyperMono, saveData.rookieOnly, saveData.tanemon);
+			}
+		}
+
+		ViceSave.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void CheckSaveFiles()
+	{
+		if (Directory.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData"))
+		{
+			int saves = 0;
+			foreach (string file in DirAccess.GetFilesAt(OS.GetExecutablePath().GetBaseDir() + "/SaveData"))
+			{
+				if (file.GetExtension() == "ViceSave")
+				{
+					saveNames[saves] = file.GetBaseName();
+					saves++;
+					if (saves > 7)
+						break;
+				}
+			}
+		}
+
+		for (int i = 0; i < saveNames.Length; i++)
+		{
+			if (saveNames[i] != null)
+				Saves[i].Text = saveNames[i];
+		}
+
+		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/LatestSave"))
+			LatestOptions.Disabled = true;
+
+	}
+
+	void RecommendedVice()
+	{
+		digimonScript.LoadSaveData(false, false, false, false, false, true, true, false);
+
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, false, false, true, false, false, false, false);
+
+		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
+		true, true, false, false, true, true, true, 1, 10);
+
+		techScript.LoadSaveData(true, true, true, false, false, false, true);
+
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;		
+	}
+
+	void EasyVice()
+	{
+		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false);
+
+		miscScript.LoadSaveData(true, true, true, false, true, false, false, false, false, true, false, false, true, false);
+
+		usefulScript.LoadSaveData(true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
+		true, true, true, 20, 100);
+
+		techScript.LoadSaveData(true, true, true, false, true, true, false);
+
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void Hardcore()
+	{
+		digimonScript.LoadSaveData(false, false, false, false, false, false, true, false);
+
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, false, false, true, false, false, false, false);
+
+		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
+		true, true, false, false, true, true, true, 1, 10);
+
+		techScript.LoadSaveData(true, true, true, false, false, true, false);
+
+		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
+		
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void UltraHardcore()
+	{
+
+		digimonScript.LoadSaveData(true, false, false, false, false, false, true, true);
+
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, false, false, true, false, false, false, false);
+
+		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
+		true, true, false, false, true, true, true, 1, 10);
+
+		techScript.LoadSaveData(false, false, false, false, false, false, true);
+
+		difficultyScript.LoadSaveData(false, false, true, false, true, false, false, false, false, true, true, true, false, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void SpeedrunMode()
+	{
+		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false);
+
+		miscScript.LoadSaveData(true, true, true, true, true, false, false, false, false, true, false, false, true, false);
+
+		usefulScript.LoadSaveData(true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
+		true, true, true, 20, 100);
+
+		techScript.LoadSaveData(true, true, true, false, true, true, false);
+
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void SpeedHardcore()
+	{
+		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false);
+
+		miscScript.LoadSaveData(true, true, true, true, true, false, false, false, false, true, false, false, true, false);
+
+		usefulScript.LoadSaveData(true, true, true, true, false, false, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
+		true, true, true, 10, 100);
+
+		techScript.LoadSaveData(true, true, true, false, true, true, false);
+
+		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void VanillaMode()
+	{
+		digimonScript.LoadSaveData(false, true, false, false, false, false, false, false);
+
+		miscScript.LoadSaveData(false, false, false, false, false, false, true, true, true, false, false, false, false, true);
+
+		usefulScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+		false, false, false, false, false, false, false, 1, 3);
+
+		techScript.LoadSaveData(false, false, false, false, false, false, false);
+
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void MasochistMode()
+	{
+		digimonScript.LoadSaveData(false, false, false, false, false, false, false, true);
+
+		miscScript.LoadSaveData(false, false, false, false, false, false, true, true, true, false, true, true, false, false);
+
+		usefulScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+		false, false, false, false, false, false, false, 1, 1);
+
+		techScript.LoadSaveData(false, false, false, true, false, false, false);
+
+		difficultyScript.LoadSaveData(false, false, true, true, true, true, false, false, false, true, true, false, true, false, false);
+
+		ViceRecommended.Visible = false;
+		ViceMainSettings.Visible = true;
+	}
+
+	void LoadLatest() { LoadSaveData(); }
 }

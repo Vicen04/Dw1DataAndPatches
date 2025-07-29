@@ -82,71 +82,71 @@ public partial class UsefulContainer : PanelContainer
 		}
 	}
 
-	void ShortIntro_Toggled(bool toggled) {VicePatcher.SetShortIntro(toggled);}
-	void EasyStart_Toggled(bool toggled) {VicePatcher.SetEasyStart(toggled);}
+	void ShortIntro_Toggled(bool toggled) { VicePatcher.SetShortIntro(toggled); }
+	void EasyStart_Toggled(bool toggled) { VicePatcher.SetEasyStart(toggled); }
 	void UsefulRigging_Toggled(bool toggled)
 	{
 		VicePatcher.SetSuperBonus(toggled);
 		if (toggled)
-		UltraLucky.ButtonPressed = false;
+			UltraLucky.ButtonPressed = false;
 	}
 	void UltraLucky_Toggled(bool toggled)
 	{
 		VicePatcher.SetUltraBonus(toggled);
 		if (toggled)
-		UsefulRigging.ButtonPressed = false;
+			UsefulRigging.ButtonPressed = false;
 	}
-	void TrainingBoost_Toggled(bool toggled) {VicePatcher.SetTrainingBoost(toggled);}
+	void TrainingBoost_Toggled(bool toggled) { VicePatcher.SetTrainingBoost(toggled); }
 	void Dirt_Toggled(bool toggled)
 	{
 		VicePatcher.SetDirtReduction(toggled);
 		if (toggled)
-		SuperDirt.ButtonPressed = false;
+			SuperDirt.ButtonPressed = false;
 	}
 	void SuperDirt_Toggled(bool toggled)
 	{
 		VicePatcher.SetSDirtReduction(toggled);
 		if (toggled)
-		Dirt.ButtonPressed = false;
+			Dirt.ButtonPressed = false;
 	}
-	void Treasure_Toggled(bool toggled) {VicePatcher.SetDrimogemon(toggled);}
-	void LowMono_Toggled(bool toggled) {VicePatcher.SetLessMono(toggled);}
-	void Seadramon_Toggled(bool toggled) {VicePatcher.SetSeadramon(toggled);}
-	void EvoItem_Toggled(bool toggled) {VicePatcher.SetEvoItem(toggled);}
+	void Treasure_Toggled(bool toggled) { VicePatcher.SetDrimogemon(toggled); }
+	void LowMono_Toggled(bool toggled) { VicePatcher.SetLessMono(toggled); }
+	void Seadramon_Toggled(bool toggled) { VicePatcher.SetSeadramon(toggled); }
+	void EvoItem_Toggled(bool toggled) { VicePatcher.SetEvoItem(toggled); }
 	void MoreItemDrops_Toggled(bool toggled)
 	{
 		VicePatcher.SetMoreDrops(toggled);
 		if (toggled)
-		BetterItemDrops.ButtonPressed = false;
+			BetterItemDrops.ButtonPressed = false;
 	}
 	void BetterItemDrops_Toggled(bool toggled)
 	{
 		VicePatcher.SetBetterDrops(toggled);
 		if (toggled)
-		MoreItemDrops.ButtonPressed = false;
+			MoreItemDrops.ButtonPressed = false;
 	}
-	void Raise_Toggled(bool toggled) {VicePatcher.SetRaise(toggled);}
+	void Raise_Toggled(bool toggled) { VicePatcher.SetRaise(toggled); }
 	void MoreItemSpawns_Toggled(bool toggled)
 	{
 		VicePatcher.SetMoreItemSpawn(toggled);
 		if (toggled)
-		BetterItemSpawns.ButtonPressed = false;
+			BetterItemSpawns.ButtonPressed = false;
 	}
 	void BetterItemSpawns_Toggled(bool toggled)
 	{
 		VicePatcher.SetItemSpawns(toggled);
 		if (toggled)
-		MoreItemSpawns.ButtonPressed = false;
+			MoreItemSpawns.ButtonPressed = false;
 	}
-	void Easymedals_Toggled(bool toggled) {VicePatcher.SetEasyMedals(toggled);}
-	void VendingMachines_Toggled(bool toggled) {VicePatcher.SetVendingMachines(toggled);}
-	void BetterCurling_Toggled(bool toggled) {VicePatcher.SetCurling(toggled);}
-	void Restaurant_Toggled(bool toggled) {VicePatcher.SetRestaurant(toggled);}
-	void Cards_Toggled(bool toggled) {VicePatcher.SetCards(toggled);}
-	void Merit_Toggled(bool toggled) {VicePatcher.SetMerit(toggled);}
-	void Fishing_Toggled(bool toggled) {VicePatcher.SetFishing(toggled);}
-	void Useful_Toggled(bool toggled) {VicePatcher.SetHelpfulItems(toggled);}
-	void Useful2_Toggled(bool toggled) {VicePatcher.SetUseful2(toggled);}
+	void Easymedals_Toggled(bool toggled) { VicePatcher.SetEasyMedals(toggled); }
+	void VendingMachines_Toggled(bool toggled) { VicePatcher.SetVendingMachines(toggled); }
+	void BetterCurling_Toggled(bool toggled) { VicePatcher.SetCurling(toggled); }
+	void Restaurant_Toggled(bool toggled) { VicePatcher.SetRestaurant(toggled); }
+	void Cards_Toggled(bool toggled) { VicePatcher.SetCards(toggled); }
+	void Merit_Toggled(bool toggled) { VicePatcher.SetMerit(toggled); }
+	void Fishing_Toggled(bool toggled) { VicePatcher.SetFishing(toggled); }
+	void Useful_Toggled(bool toggled) { VicePatcher.SetHelpfulItems(toggled); }
+	void Useful2_Toggled(bool toggled) { VicePatcher.SetUseful2(toggled); }
 	void StatSlider_ValueChanged(double value)
 	{
 		VicePatcher.SetStatsValue((int)value);
@@ -165,11 +165,11 @@ public partial class UsefulContainer : PanelContainer
 			int value;
 			try { value = text.ToInt(); }
 			catch (FormatException) { value = (int)StatSlider.MaxValue; }
-			
+
 			if (value > (int)StatSlider.MaxValue || value == 0)
 				value = (int)StatSlider.MaxValue;
-			else if(value < (int)StatSlider.MinValue)
-			    value = (int)StatSlider.MinValue;
+			else if (value < (int)StatSlider.MinValue)
+				value = (int)StatSlider.MinValue;
 			StatValue.Text = value.ToString();
 			StatSlider.SetValueNoSignal(value);
 			VicePatcher.SetStatsValue((int)value);
@@ -254,7 +254,7 @@ public partial class UsefulContainer : PanelContainer
 			EasyStart.Disabled = false;
 			BetterItemDrops.Disabled = false;
 			BetterItemSpawns.Disabled = false;
-			if (VicePatcher.GetViceDifficulty() == VicePatcherContainer.viceDifficulty.HARDCORE)
+			if (VicePatcher.GetViceDifficulty() == VicePatcherContainer.ViceDifficulty.HARDCORE)
 			{
 				StatSlider.MaxValue = 10;
 				StatSlider.TooltipText = Tr("StatGains_SinfoH");
@@ -366,5 +366,73 @@ public partial class UsefulContainer : PanelContainer
 		StatSlider.ValueChanged += StatSlider_ValueChanged;
 		StatValue.TextChanged += StatValue_TextChanged;
 		RareValue.TextChanged += RareValue_TextChanged;
+	}
+
+	public void LoadSaveData(bool StatGainsS, bool RareSpawnsS, bool ShortIntroS, bool EasyStartS, bool UsefulRiggingS, bool UltraLuckyS, bool TrainingBoostS, bool DirtS, bool SuperDirtS,
+	bool TreasureS, bool LowMonoS, bool SeadramonS, bool EvoItemS, bool MoreItemDropsS, bool BetterItemDropsS, bool RaiseS, bool MoreItemSpawnsS, bool BetterItemSpawnsS, bool EasymedalsS,
+	bool VendingMachinesS, bool BetterCurlingS, bool RestaurantS, bool CardsS, bool MeritS, bool FishingS, bool UsefulS, bool Useful2S, int statValue = 1, int rareValue = 10)
+	{
+		StatGains.ButtonPressed = StatGainsS;
+		RareSpawns.ButtonPressed = RareSpawnsS;
+		ShortIntro.ButtonPressed = ShortIntroS;
+		EasyStart.ButtonPressed = EasyStartS;
+		UsefulRigging.ButtonPressed = UsefulRiggingS;
+		UltraLucky.ButtonPressed = UltraLuckyS;
+		TrainingBoost.ButtonPressed = TrainingBoostS;
+		Dirt.ButtonPressed = DirtS;
+		SuperDirt.ButtonPressed = SuperDirtS;
+		Treasure.ButtonPressed = TreasureS;
+		LowMono.ButtonPressed = LowMonoS;
+		Seadramon.ButtonPressed = SeadramonS;
+		EvoItem.ButtonPressed = EvoItemS;
+		MoreItemDrops.ButtonPressed = MoreItemDropsS;
+		BetterItemDrops.ButtonPressed = BetterItemDropsS;
+		Raise.ButtonPressed = RaiseS;
+		MoreItemSpawns.ButtonPressed = MoreItemSpawnsS;
+		BetterItemSpawns.ButtonPressed = BetterItemSpawnsS;
+		Easymedals.ButtonPressed = EasymedalsS;
+		VendingMachines.ButtonPressed = VendingMachinesS;
+		BetterCurling.ButtonPressed = BetterCurlingS;
+		Restaurant.ButtonPressed = RestaurantS;
+		Cards.ButtonPressed = CardsS;
+		Merit.ButtonPressed = MeritS;
+		Fishing.ButtonPressed = FishingS;
+		Useful.ButtonPressed = UsefulS;
+		Useful2.ButtonPressed = Useful2S;
+		StatSlider.Value = statValue;
+		RareSlider.Value = rareValue;
+	}
+
+	public void RestartSelection()
+	{
+		StatGains.ButtonPressed = false;
+		RareSpawns.ButtonPressed = false;
+		ShortIntro.ButtonPressed = false;
+		EasyStart.ButtonPressed = false;
+		UsefulRigging.ButtonPressed = false;
+		UltraLucky.ButtonPressed = false;
+		TrainingBoost.ButtonPressed = false;
+		Dirt.ButtonPressed = false;
+		SuperDirt.ButtonPressed = false;
+		Treasure.ButtonPressed = false;
+		LowMono.ButtonPressed = false;
+		Seadramon.ButtonPressed = false;
+		EvoItem.ButtonPressed = false;
+		MoreItemDrops.ButtonPressed = false;
+		BetterItemDrops.ButtonPressed = false;
+		Raise.ButtonPressed = false;
+		MoreItemSpawns.ButtonPressed = false;
+		BetterItemSpawns.ButtonPressed = false;
+		Easymedals.ButtonPressed = false;
+		VendingMachines.ButtonPressed = false;
+		BetterCurling.ButtonPressed = false;
+		Restaurant.ButtonPressed = false;
+		Cards.ButtonPressed = false;
+		Merit.ButtonPressed = false;
+		Fishing.ButtonPressed = false;
+		Useful.ButtonPressed = false;
+		Useful2.ButtonPressed = false;
+		StatSlider.Value = 1;
+		RareSlider.Value = 10;
 	}
 }

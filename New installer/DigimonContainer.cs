@@ -27,11 +27,11 @@ public partial class DigimonContainer : PanelContainer
 	{
 	}
 
-	void Myotismon_Toggled(bool toggled){VicePatcher.SetMyotismon(toggled);	}
+	void Myotismon_Toggled(bool toggled) { VicePatcher.SetMyotismon(toggled); }
 
-	void Panjyamon_Toggled(bool toggled){VicePatcher.SetRestorePanjya(toggled);	}
+	void Panjyamon_Toggled(bool toggled) { VicePatcher.SetRestorePanjya(toggled); }
 
-	void Vermillimon_Toggled(bool toggled){VicePatcher.SetVermillimon(toggled);}
+	void Vermillimon_Toggled(bool toggled) { VicePatcher.SetVermillimon(toggled); }
 
 	void Starters2_Toggled(bool toggled)
 	{
@@ -47,11 +47,11 @@ public partial class DigimonContainer : PanelContainer
 			Starters2.ButtonPressed = false;
 	}
 
-	void Curling_Toggled(bool toggled)	{VicePatcher.SetCurlingRandomizer(toggled);	}
+	void Curling_Toggled(bool toggled) { VicePatcher.SetCurlingRandomizer(toggled); }
 
-	void RMTGR_Toggled(bool toggled)	{VicePatcher.SetRMetal(toggled);}
+	void RMTGR_Toggled(bool toggled) { VicePatcher.SetRMetal(toggled); }
 
-	void BWere_Toggled(bool toggled)	{VicePatcher.SetBWere(toggled);	}
+	void BWere_Toggled(bool toggled) { VicePatcher.SetBWere(toggled); }
 
 	void _on_filth_challenge_toggled(bool toggled)
 	{
@@ -98,5 +98,30 @@ public partial class DigimonContainer : PanelContainer
 		Curling.Toggled += Curling_Toggled;
 		RMTGR.Toggled += RMTGR_Toggled;
 		BWere.Toggled += BWere_Toggled;
+	}
+
+	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS, bool WarGreymonS,
+	bool TentomonS, bool MetalGaruS)
+	{
+		Myotismon.ButtonPressed = MyotismonS;
+		Panjyamon.ButtonPressed = PanjyamonS;
+		Vermillimon.ButtonPressed = VermillimonS;
+		Starters2.ButtonPressed = Starters2S;
+		Kunemon.ButtonPressed = KunemonS;
+		Curling.ButtonPressed = CurlingS;
+		RMTGR.ButtonPressed = RMTGRS;
+		BWere.ButtonPressed = BWereS;
+	}
+	
+	public void RestartSelection()
+	{
+		Myotismon.ButtonPressed = false;
+		Panjyamon.ButtonPressed = false;	
+		Vermillimon.ButtonPressed = false;
+		Starters2.ButtonPressed = false;
+		Kunemon.ButtonPressed = false;
+		Curling.ButtonPressed = false;
+		RMTGR.ButtonPressed = false;
+		BWere.ButtonPressed = false;
 	}
 }

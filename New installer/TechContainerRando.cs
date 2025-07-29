@@ -191,7 +191,7 @@ public partial class TechContainerRando : PanelContainer
 	}
 
 	void GivenTechsToggled(bool toggled)
-	{		
+	{
 		baseScript.SetGivenTechs(toggled);
 	}
 
@@ -297,14 +297,6 @@ public partial class TechContainerRando : PanelContainer
 		AccuracyOpt.SetItemText(1, Tr("Random_T"));
 		AccuracyOpt.SetItemText(2, Tr("Chaos_T"));
 
-		TypeDamageOpt.SetItemText(0, Tr("Shuffle_T"));
-		TypeDamageOpt.SetItemText(1, Tr("Random_T"));
-		TypeDamageOpt.SetItemText(2, Tr("Chaos_T"));
-
-		AccuracyOpt.SetItemText(0, Tr("Shuffle_T"));
-		AccuracyOpt.SetItemText(1, Tr("Random_T"));
-		AccuracyOpt.SetItemText(2, Tr("Chaos_T"));
-
 		StatusChanceOpt.SetItemText(0, Tr("Shuffle_T"));
 		StatusChanceOpt.SetItemText(1, Tr("Random_T"));
 		StatusChanceOpt.SetItemText(2, Tr("Chaos_T"));
@@ -343,5 +335,33 @@ public partial class TechContainerRando : PanelContainer
 		LearnBattle.Toggled += LearnBattleToggled;
 		LearnBrains.Toggled += LearnBrainsToggled;
 		GivenTechs.Toggled += GivenTechsToggled;
+	}
+
+	public void LoadSaveData(bool DamageS, bool MPS, bool TypeDamageS, bool AccuracyS, bool StatusS, bool StatusChanceS, bool FinishersS, bool BoostTechS,
+	bool BoostPowerS, bool LearnBattleS, bool LearnBrainsS, bool GivenTechsS, int DamageValue, int MPValue, int TypeValue, int AccuracyValue, int StatusValue, int statusChanceValue,
+	int finisherValue, int boostPowerValue, int battleValue, int brainsValue)
+	{
+		DamageOpt.Selected = DamageValue;
+		MPOpt.Selected = MPValue;
+		TypeDamageOpt.Selected = TypeValue;
+		AccuracyOpt.Selected = AccuracyValue;
+		StatusOpt.Selected = StatusValue;
+		StatusChanceOpt.Selected = statusChanceValue;
+		FinishersOpt.Selected = finisherValue;
+		BoostPowerOpt.Selected = boostPowerValue;
+		LearnBattleOpt.Selected = battleValue;
+		LearnBrainsOpt.Selected = brainsValue;
+		Damage.ButtonPressed = DamageS;
+		MP.ButtonPressed = MPS;
+		TypeDamage.ButtonPressed = TypeDamageS;
+		Accuracy.ButtonPressed = AccuracyS;
+		Status.ButtonPressed = StatusS;
+		StatusChance.ButtonPressed = StatusChanceS;
+		Finishers.ButtonPressed = FinishersS;
+		BoostTech.ButtonPressed = BoostTechS;
+		BoostPower.ButtonPressed = BoostPowerS;
+		LearnBattle.ButtonPressed = LearnBattleS;
+		LearnBrains.ButtonPressed = LearnBrainsS;
+		GivenTechs.ButtonPressed = GivenTechsS;
 	}
 }
