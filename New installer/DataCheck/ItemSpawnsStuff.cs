@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class ItemSpawnsStuff : Control
 {
@@ -17,6 +18,8 @@ public partial class ItemSpawnsStuff : Control
 			offsets = itemOffset;
 			chanceOffsets = chancesOff;
 			mapName = name;
+			itemIds = new List<int>();
+			itemChances = new List<int>();
 		}
 	}
 
@@ -31,6 +34,8 @@ public partial class ItemSpawnsStuff : Control
 			AreaName = name;
 		}
 	}
+	[Export] Control ByMap;
+	[Export] Control ByItem;
 	[Export] OptionButton Areas;
 	[Export] OptionButton Maps;
 	[Export] TextureRect[] ItemIcons;
@@ -43,6 +48,23 @@ public partial class ItemSpawnsStuff : Control
 	[Export] TextureRect[] CentaItemIcons;
 	[Export] Label[] CentaItemNames;
 	[Export] Label[] CentaItemChances;
+	[Export] Label AreasLabel;
+	[Export] Label MapsLabel;
+	[Export] Label ItemLabel;
+	[Export] Label ChanceLabel;
+	[Export] Label ItemLabelCenta;
+	[Export] Label ChanceLabelCenta;
+	[Export] Label ItemLabelCenta2;
+	[Export] Label ChanceLabelCenta2;
+	[Export] VBoxContainer ItemSearchList;
+
+	[Export] Button SetByMap;
+	[Export] Button SetByItem;
+	[Export] OptionButton AllItems;
+	[Export] Label ItemsLabel;
+	[Export] Label MapNameLabel;
+	[Export] Label SearchItemLabel;
+	[Export] Label SearchChanceLabel;
 
 	List<AreasData> allAreas;
 
@@ -53,6 +75,22 @@ public partial class ItemSpawnsStuff : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		AreasLabel.Text = Tr("AreasSpawnLabel");
+		MapsLabel.Text = Tr("MapSpawnLabel");
+		ItemLabel.Text = Tr("ItemCheckLabel");
+		ChanceLabel.Text = Tr("ChanceCheckLabel");
+		ItemLabelCenta.Text = Tr("ItemCheckLabel");
+		ChanceLabelCenta.Text = Tr("ChanceCheckLabel");
+		ItemLabelCenta2.Text = Tr("ItemCheckLabel");
+		ChanceLabelCenta2.Text = Tr("ChanceCheckLabel");
+		SearchChanceLabel.Text = Tr("SearchItemChanceCheckLabel");
+		SearchItemLabel.Text = Tr("SearchItemCheckLabel");
+		MapNameLabel.Text = Tr("MapCheckNameLabel");
+		ItemsLabel.Text = Tr("ItemsSpawnSearchLabel");
+		SetByMap.Text = Tr("SearchSpawnMap");
+		SetByItem.Text = Tr("SearchSpawnItem");
+		SetByMap.Pressed += SetByMapPressed;
+		SetByItem.Pressed += SetByItemPressed;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,6 +100,13 @@ public partial class ItemSpawnsStuff : Control
 
 	public void SetUpData(System.IO.Stream bin, DataCheck main, ItemsStuff items, bool vice)
 	{
+		mainParent = main;
+		parent = items;
+
+		ItemsContainer.Visible = false;
+		CentaItems.Visible = false;
+		CentaItems2.Visible = false;
+
 		allAreas = new List<AreasData>();
 
 		List<uint> mayo04AC = [0x13FDF0E5, 0x13FDF0FB, 0x13FDF111, 0x13FDF127];
@@ -96,7 +141,6 @@ public partial class ItemSpawnsStuff : Control
 					new MapData([0x1402C92D, 0x1402C943, 0x1402C959], [0x1402C925, 0x1402C93B, 0x1402C951], "MAYO01_2"),
 					new MapData([0x13FDDE89, 0x13FDDE9F], [0x13FDDE81, 0x13FDDE97], "MAYO02"),
 					new MapData([0x1402D25D, 0x1402D273, 0x1402D289], [0x1402D255, 0x1402D26B, 0x1402D281], "MAYO02_2"),
-					new MapData([0x13FDE7B5, 0x13FDE7CB, 0x13FDE7E1], [0x13FDE7AD, 0x13FDE7C3, 0x13FDE7D9], "MAYO03"),
 					new MapData([0x13FDE7B5, 0x13FDE7CB, 0x13FDE7E1], [0x13FDE7AD, 0x13FDE7C3, 0x13FDE7D9], "MAYO03"),
 					new MapData(mayo04A, mayo04AC, "MAYO04A")
 				]
@@ -184,7 +228,7 @@ public partial class ItemSpawnsStuff : Control
 				[
 					new MapData([0x14014759, 0x1401476F, 0x14014785, 0x1401479B], [0x14014751, 0x14014767, 0x1401477D, 0x14014793], "KODA01"),
 					new MapData([0x14015089, 0x1401509F, 0x140150B5], [0x14015081, 0x14015097, 0x140150AD], "KODA02"),
-					new MapData([0x140162DD, 0x140162F3, 0x14016309, 0x1401631F], [0x140162DD, 0x140162F3, 0x14016309, 0x1401631F], "KODA03")
+					new MapData([0x140162E5, 0x140162FB, 0x14016311, 0x14016327], [0x140162DD, 0x140162F3, 0x14016309, 0x1401631F], "KODA03")
 				]
 				, "Ancient Glacial Region"),
 				new AreasData([new MapData([0x140190C9], [0x140190C1], "KODA07")], "Ancient Speedy Region"),
@@ -224,14 +268,9 @@ public partial class ItemSpawnsStuff : Control
 				, "Geko Swamp")
 		]);
 
-		foreach (var area in allAreas)
-		{
-			Areas.AddItem(area.AreaName);
-		}
-
 		for (int i = 0; i < allAreas.Count; i++)
 		{
-			if (i == 8)
+			if (i == 7)
 				continue;
 			for (int j = 0; j < allAreas[i].maps.Count; j++)
 			{
@@ -245,32 +284,38 @@ public partial class ItemSpawnsStuff : Control
 			}
 		}
 
-		for (int i = 0; i < allAreas[8].maps[0].offsets.Count; i++)
+		for (int i = 0; i < allAreas[7].maps[0].offsets.Count; i++)
 		{
-			bin.Position = allAreas[8].maps[0].offsets[i];
+			bin.Position = allAreas[7].maps[0].offsets[i];
 			int itemID = bin.ReadByte();
-			ItemIcons[i].Texture = mainParent.GetItemTex(itemID);
-			ItemNames[i].Text = parent.GetItemData(itemID).name;
+			CentaItemIcons[i].Texture = mainParent.GetItemTex(itemID);
+			CentaItemNames[i].Text = parent.GetItemData(itemID).name;
+			allAreas[7].maps[0].itemIds.Add(itemID);
 			if (i < 12 && i % 2 == 0)
 			{
-				bin.Position = allAreas[8].maps[0].chanceOffsets[i];
+				bin.Position = allAreas[7].maps[0].chanceOffsets[i];
 				int itemChance = bin.ReadByte();
-				CentaItemChances[i].Text = (itemChance + 1).ToString();
-				bin.Position = allAreas[8].maps[0].chanceOffsets[i + 1];
+				CentaItemChances[i].Text = (itemChance + 1).ToString() + "%";
+				allAreas[7].maps[0].itemChances.Add(itemChance + 1);
+				bin.Position = allAreas[7].maps[0].chanceOffsets[i + 1];
 				itemChance = bin.ReadByte() - itemChance;
-				CentaItemChances[i + 1].Text = itemChance.ToString();
+				CentaItemChances[i + 1].Text = itemChance.ToString() + "%";
+				allAreas[7].maps[0].itemChances.Add(itemChance);
 			}
 			else if (i == 12)
 			{
-				bin.Position = allAreas[8].maps[0].chanceOffsets[i];
+				bin.Position = allAreas[7].maps[0].chanceOffsets[i];
 				int firstChance = bin.ReadByte();
-				CentaItemChances[i].Text = (firstChance + 1).ToString();
-				bin.Position = allAreas[8].maps[0].chanceOffsets[i + 1];
+				CentaItemChances[i].Text = (firstChance + 1).ToString() + "%";
+				allAreas[7].maps[0].itemChances.Add(firstChance + 1);
+				bin.Position = allAreas[7].maps[0].chanceOffsets[i + 1];
 				int secondChance = bin.ReadByte();
-				CentaItemChances[i + 1].Text = (secondChance - firstChance).ToString();
-				bin.Position = allAreas[8].maps[0].chanceOffsets[i + 2];
+				CentaItemChances[i + 1].Text = (secondChance - firstChance).ToString() + "%";
+				allAreas[7].maps[0].itemChances.Add(secondChance - firstChance);
+				bin.Position = allAreas[7].maps[0].chanceOffsets[i + 2];
 				secondChance = bin.ReadByte() - secondChance;
-				CentaItemChances[i + 2].Text = secondChance.ToString();
+				CentaItemChances[i + 2].Text = secondChance.ToString() + "%";
+				allAreas[7].maps[0].itemChances.Add(secondChance);
 			}
 		}
 		if (vice)
@@ -283,8 +328,22 @@ public partial class ItemSpawnsStuff : Control
 				allAreas[allAreas.Count - 1].maps[0].itemChances.Add(100);
 			}
 		}
-		mainParent = main;
-		parent = items;
+
+		Areas.Clear();
+		foreach (var area in allAreas)
+		{
+			Areas.AddItem(area.AreaName);
+		}
+		Areas.Selected = -1;
+
+		AllItems.Clear();
+		for (int i = 0; i < 128; i++)
+		{
+			AllItems.AddIconItem(mainParent.GetItemTex(i), parent.GetItemData(i).name, i);
+		}
+
+		AllItems.Selected = -1;
+
 	}
 
 	void OnAreaSelected(int areaIndex)
@@ -303,7 +362,7 @@ public partial class ItemSpawnsStuff : Control
 
 	void OnMapSelected(int mapIndex)
 	{
-		if (areaSelected != 8)
+		if (areaSelected != 7)
 		{
 			ItemsContainer.Visible = true;
 			int i = 0;
@@ -312,7 +371,7 @@ public partial class ItemSpawnsStuff : Control
 				Items[i].Visible = true;
 				ItemIcons[i].Texture = mainParent.GetItemTex(allAreas[areaSelected].maps[mapIndex].itemIds[i]);
 				ItemNames[i].Text = parent.GetItemData(allAreas[areaSelected].maps[mapIndex].itemIds[i]).name;
-				ItemChances[i].Text = allAreas[areaSelected].maps[mapIndex].itemChances[i].ToString();
+				ItemChances[i].Text = allAreas[areaSelected].maps[mapIndex].itemChances[i].ToString() + "%";
 			}
 			if (i < ItemIcons.Length)
 			{
@@ -327,5 +386,62 @@ public partial class ItemSpawnsStuff : Control
 			CentaItems.Visible = true;
 			CentaItems2.Visible = true;
 		}
+	}
+
+	void OnItemSelected(int itemIndex)
+	{
+		if (ItemSearchList.GetChildCount() != 0)
+		{
+			foreach (Node n in ItemSearchList.GetChildren())
+			{
+				ItemSearchList.RemoveChild(n);
+				n.QueueFree();
+			}
+		}
+		foreach (AreasData area in allAreas)
+		{
+			foreach (MapData map in area.maps)
+			{
+				for (int i = 0; i < map.itemIds.Count; i++)
+				{
+					if (map.itemIds[i] == itemIndex)
+					{
+						var scene = GD.Load<PackedScene>("res://Items/ItemSearch.tscn");
+						var child = scene.Instantiate() as ItemSearch;
+						child.SetupData(mainParent.GetItemTex(itemIndex), map.mapName, parent.GetItemData(itemIndex).name, map.itemChances[i].ToString());
+						ItemSearchList.AddChild(child);
+					}
+				}
+			}
+		}
+	}
+
+	void SetByItemPressed()
+	{
+		ByMap.Visible = false;
+		ByItem.Visible = true;
+		SetByItem.Disabled = true;
+		SetByMap.Disabled = false;
+	}
+
+	void SetByMapPressed()
+	{
+		ByMap.Visible = true;
+		ByItem.Visible = false;
+		SetByItem.Disabled = false;
+		SetByMap.Disabled = true;
+	}
+
+	public void RestartData()
+	{
+		AllItems.Selected = -1;
+		Areas.Selected = -1;
+		ByMap.Visible = false;
+		ByItem.Visible = false;
+		SetByItem.Disabled = false;
+		SetByMap.Disabled = false;
+		ItemsContainer.Visible = false;
+		CentaItems.Visible = false;
+		CentaItems2.Visible = false;
 	}
 }

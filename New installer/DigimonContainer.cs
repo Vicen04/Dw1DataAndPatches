@@ -14,6 +14,7 @@ public partial class DigimonContainer : PanelContainer
 	[Export] private CheckBox RMTGR;
 	[Export] private CheckBox BWere;
 
+
 	[Export] private VicePatcherContainer VicePatcher;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -42,7 +43,7 @@ public partial class DigimonContainer : PanelContainer
 
 	void Kunemon_Toggled(bool toggled)
 	{
-		VicePatcher.SetMyotismon(toggled);
+		VicePatcher.SetKunemon(toggled);
 		if (toggled)
 			Starters2.ButtonPressed = false;
 	}
@@ -52,6 +53,7 @@ public partial class DigimonContainer : PanelContainer
 	void RMTGR_Toggled(bool toggled) { VicePatcher.SetRMetal(toggled); }
 
 	void BWere_Toggled(bool toggled) { VicePatcher.SetBWere(toggled); }
+
 
 	void _on_filth_challenge_toggled(bool toggled)
 	{
@@ -100,8 +102,7 @@ public partial class DigimonContainer : PanelContainer
 		BWere.Toggled += BWere_Toggled;
 	}
 
-	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS, bool WarGreymonS,
-	bool TentomonS, bool MetalGaruS)
+	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS)
 	{
 		Myotismon.ButtonPressed = MyotismonS;
 		Panjyamon.ButtonPressed = PanjyamonS;

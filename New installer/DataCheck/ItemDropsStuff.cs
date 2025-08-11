@@ -15,7 +15,6 @@ public partial class ItemDropsStuff : Control
 
 	[Export] Label ItemLabel;
 	[Export] Label ChanceLabel;
-	[Export] Label IconLabel;
 
 	DigimonDropsSetup[] playableDigimon = new DigimonDropsSetup[66];
 	DigimonDropsSetup[] NPCDigimon = new DigimonDropsSetup[180 - 66];
@@ -25,7 +24,11 @@ public partial class ItemDropsStuff : Control
 		Playables.Visible = true;
 		NPCs.Visible = false;
 		currentOption.Selected = 0;
-		CurrentOptionLabel.Text = Tr("");
+		CurrentOptionLabel.Text = Tr("OptionDropsCheckLabel");
+		ItemLabel.Text = Tr("ItemCheckLabel");
+		ChanceLabel.Text = Tr("ChanceCheckLabel");
+		currentOption.SetItemText(0, Tr("PlayableDrop"));
+		currentOption.SetItemText(1, Tr("NOPlayableDrop"));
 	}
 
 	public void SetupData(DataCheck main, ItemsStuff parent)
@@ -46,22 +49,34 @@ public partial class ItemDropsStuff : Control
 		{
 			var scene = GD.Load<PackedScene>("res://Items/digimonDrops.tscn");
 			playableDigimon[i] = scene.Instantiate() as DigimonDropsSetup;
-			playableDigimon[i].Setup(main.GetDigimonData(i).name, main.GetDigimonData(i).digimonSprite, main.GetItemTex(main.GetDigimonData(i).itemID),
+			if (main.GetDigimonData(i).itemID != 0xFF)
+				playableDigimon[i].Setup(main.GetDigimonData(i).name, main.GetDigimonData(i).digimonSprite, main.GetItemTex(main.GetDigimonData(i).itemID),
 			parent.GetItemData(main.GetDigimonData(i).itemID).name, main.GetDigimonData(i).itemChance);
+			else
+				playableDigimon[i].Setup(main.GetDigimonData(i).name, main.GetDigimonData(i).digimonSprite, null, "", 0);
+			PlayableDigimonContainer.AddChild(playableDigimon[i]);
 		}
 
 		for (int i = 66; i < 180; i++)
 		{
 			var scene = GD.Load<PackedScene>("res://Items/digimonDrops.tscn");
-			NPCDigimon[i] = scene.Instantiate() as DigimonDropsSetup;
+			NPCDigimon[i - 66] = scene.Instantiate() as DigimonDropsSetup;
 			NPCDigimon[i - 66].Setup(main.GetDigimonData(i).name, main.GetDigimonData(i).digimonSprite, main.GetItemTex(main.GetDigimonData(i).itemID),
-			parent.GetItemData(main.GetDigimonData(i).itemID).name, main.GetDigimonData(i).itemChance );
+			parent.GetItemData(main.GetDigimonData(i).itemID).name, main.GetDigimonData(i).itemChance);
+			NPCDigimonContainer.AddChild(NPCDigimon[i - 66]);
 		}
 	}
 
 	void TypeSelected(int option)
 	{
 		Playables.Visible = option == 0;
-		NPCs.Visible = option == 1;		
+		NPCs.Visible = option == 1;
+	}
+
+	public void RestartData()
+	{
+		Playables.Visible = true;
+		NPCs.Visible = false;
+		currentOption.Selected = 0;
 	}
 }

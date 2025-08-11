@@ -848,6 +848,13 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void StartRandomizing()
 	{
+		if (difficulty)
+		{
+			hardcore = true;
+			if (difficultyOpt == 1)
+				trueHardcore = true;
+		}
+
 		if (itemsSpawn)
 			RandomizeItemSpawns();
 		if (spawnRateItems)
@@ -948,7 +955,8 @@ public partial class RandomizerContainer : SubViewportContainer
 				randomizeEvoItems();
 		}
 		if (keyItems)
-			UnlockKeyItems();
+			UnlockKeyItems();	
+
 
 		DigimonRandomizer digimonRando = new DigimonRandomizer(hardcore, trueHardcore, ref bin, reader);
 
@@ -1042,7 +1050,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*KODA00*/   0x140134F5, 0x1401350B,
 			/*KODA01*/   0x14014759, 0x1401476F, 0x14014785, 0x1401479B,
 			/*KODA02*/   0x14015089, 0x1401509F, 0x140150B5,
-			/*KODA03*/   0x140162DD, 0x140162F3, 0x14016309, 0x1401631F,
+			/*KODA03*/   0x140162E5, 0x140162FB, 0x14016311, 0x14016327,
 			/*KODA07*/   0x140190C9,
 			/*FRZL01*/   0x1401AC6D, 0x1401AC83, 0x1401AC99,
 			/*FRZL02*/   0x1401B595, 0x1401B5AB,
@@ -2239,7 +2247,12 @@ public partial class RandomizerContainer : SubViewportContainer
 					currentOffset = currentOffset + 0x10;
 					if (i == 21 || i == 30 || i == 34 || i == 41 || i == 42)
 						continue;
-					writter.Write((short)(numberGenerator.Next(999) + 1));
+					if (!hardcore)
+						writter.Write((short)(numberGenerator.Next(999) + 1));
+					else if (!trueHardcore)
+						writter.Write((short)(numberGenerator.Next(1200) + 1));
+					else
+						writter.Write((short)(numberGenerator.Next(1500) + 1));
 				}
 				
 				if (finishers)
@@ -2252,7 +2265,12 @@ public partial class RandomizerContainer : SubViewportContainer
 						currentOffset = currentOffset + 0x130;
 						jumped = true;
 					}
-					writter.Write((short)(numberGenerator.Next(999) + 1));
+					if (!hardcore)
+						writter.Write((short)(numberGenerator.Next(999) + 1));
+					else if (!trueHardcore)
+						writter.Write((short)(numberGenerator.Next(1200) + 1));
+					else
+						writter.Write((short)(numberGenerator.Next(1500) + 1));
 				}
 				break;
 		}
@@ -2294,11 +2312,13 @@ public partial class RandomizerContainer : SubViewportContainer
 
 		bin.Position = offset;
 
+		byte noneValue;
+
 		switch (damageTypeOpt)
 		{
 			case 0:
-				List <byte> typeDamages = new List<byte>();
-				for (int i = 0; i < 49; i++)				
+				List<byte> typeDamages = new List<byte>();
+				for (int i = 0; i < 49; i++)
 					typeDamages.Add((byte)bin.ReadByte());
 
 				byte[] shuffledValues = typeDamages.ToArray();
@@ -2309,13 +2329,25 @@ public partial class RandomizerContainer : SubViewportContainer
 					bin.WriteByte(shuffledValues[i]);
 				break;
 			case 1:
-				for (int i = 0; i < 49; i++)				
+				for (int i = 0; i < 49; i++)
 					bin.WriteByte(values[numberGenerator.Next(5) + 1]);
-				
+
+				noneValue = values[numberGenerator.Next(5) + 1];
+				bin.Position = 0x14B58744;
+				bin.WriteByte(noneValue);
+				bin.Position = 0x14C6654C;
+				bin.WriteByte(noneValue);
 				break;
 			case 2:
-				for (int i = 0; i < 49; i++)				
+				for (int i = 0; i < 49; i++)
 					bin.WriteByte(values[numberGenerator.Next(values.Length)]);
+
+				noneValue = values[numberGenerator.Next(values.Length)];
+				bin.Position = 0x14B58744;
+				bin.WriteByte(noneValue);
+				bin.Position = 0x14C6654C;
+				bin.WriteByte(noneValue);
+
 
 				bin.Position = 0x14B5CC8C;
 				bin.WriteByte(0xa);
@@ -2459,7 +2491,10 @@ public partial class RandomizerContainer : SubViewportContainer
 				for (int i = 0; i < 57; i++)
 				{
 					if (i == 21 || i == 30 || i == 34 || i == 41 || i == 42)
+					{
+						currentOffset = currentOffset + 0x10;
 						continue;
+					}
 					bin.Position = currentOffset;
 					int selectedStatus = numberGenerator.Next(20);
 					if (selectedStatus < 4)					
@@ -2485,7 +2520,10 @@ public partial class RandomizerContainer : SubViewportContainer
 				for (int i = 0; i < 57; i++)
 				{
 					if (i == 21 || i == 30 || i == 34 || i == 41 || i == 42)
+					{
+						currentOffset = currentOffset + 0x10;
 						continue;
+					}
 					bin.Position = currentOffset;
 					bin.WriteByte((byte)numberGenerator.Next(5));
 					bin.Position = currentOffset + 2;
@@ -2575,7 +2613,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			else
 			{
 				bin.Position = currentOffsetDigimon;
-				while (digimonTechs.Count < 16)
+				for (int j = 0; j < 16; j++)
 				{
 					if (bin.Position >= jumpOffsets[jumpValue])
 					{
@@ -2636,9 +2674,15 @@ public partial class RandomizerContainer : SubViewportContainer
 				randomizeBoostPower(UltimatesPower, 551, 100);
 				break;
 			case 2:
-				randomizeBoostPower(RookiesPower, 1000, 1);
-				randomizeBoostPower(ChampionsPower, 1000, 1);
-				randomizeBoostPower(UltimatesPower, 1000, 1);
+				int boostValue = 1000;
+				if (hardcore && !trueHardcore)
+					boostValue = 1200;
+				else if (trueHardcore)
+					boostValue = 1500;
+
+				randomizeBoostPower(RookiesPower, boostValue, 1);
+				randomizeBoostPower(ChampionsPower, boostValue, 1);
+				randomizeBoostPower(UltimatesPower, boostValue, 1);
 				break;
 
 		}
@@ -3788,13 +3832,14 @@ public partial class RandomizerContainer : SubViewportContainer
 		uint offsetValues = 0x14CF5C44;
 		uint[] offsetEnHaDiTir= { 0x14CF5DD0, 0x14CF5DEC, 0x14CF5E14, 0x14CF5E48, 0x14CF5EA0, 0x14CF5EF0, 0x14CF5F10, 0x14CF5F3C, 0x14CF5F70, 0x14CF6000, 0x14CF6050,
 							 	  0x14CF6088, 0x14CF60B8, 0x14CF60D4, 0x14CF60F8, 0x14CF6120, 0x14CF6140, 0x14CF6168, 0x14CF6384, 0x14CF63AC, 0x14CF63CC, 0x14CF63E8,
-								  0x14CF6404, 0x14CF6430, 0x14CF64B0, 0x14CF64E8, 0x14CF6528, 0x14CF6554, 0x14CF65F0, 0x14CF6554, 0x14CF6584, 0x14CF5E08, 0x14CF5EE8,
+								  0x14CF6404, 0x14CF6430, 0x14CF64B0, 0x14CF64E8, 0x14CF6528, 0x14CF6554, 0x14CF6554, 0x14CF6584, 0x14CF5E08, 0x14CF5EE8,
 								  0x14CF5F2C, 0x14CF6048, 0x14CF6070},
-		offsetWeight = { 0x14CF5DD4, 0x14CF5E10, 0x14CF5E78, 0x14CF5ED0, 0x14CF5EF4, 0x14CF5F14, 0x14CF5F48, 0x14CF5FD8, 0x14CF6030, 0x14CF6054, 0x14CF6094, 0x14CF60BC,
-						 0x14CF60D8, 0x14CF60FC, 0x14CF6124, 0x14CF6144, 0x14CF616C, 0x14CF61AC, 0x14CF630C, 0x14CF633C, 0x14CF636C, 0x14CF6388, 0x14CF63B0, 0x14CF6498,
-						 0x14CF63D0, 0x14CF63EC, 0x14CF6408, 0x14CF6498, 0x14CF64B4, 0x14CF64FC, 0x14CF652C, 0x14CF6558, 0x14CF65B4},
-		offsetHPMP = {0x14CF5FCC, 0x14CF60F0, 0x14CF6118, 0x14CF615C, 0x14CF648C, 0x14CF64CC, 0x14CF65D8},
-		offsetParameters = { 0x14CF618C, 0x14CF61BC, 0x14CF631C, 0x14CF634C, 0x14CF5F60, 0x14CF6420},
+		offsetWeight = { 0x14CF5DD4, 0x14CF5DF0, 0x14CF5E10, 0x14CF5E78, 0x14CF5ED0, 0x14CF5EF4, 0x14CF5F14, 0x14CF5F48, 0x14CF5FD8, 0x14CF6030, 0x14CF6054, 0x14CF6094, 0x14CF60BC,
+						 0x14CF60D8, 0x14CF60FC, 0x14CF6124, 0x14CF6144, 0x14CF616C, 0x14CF61AC, 0x14CF630C, 0x14CF633C, 0x14CF636C, 0x14CF6388, 0x14CF63B0, 0x14CF63D0,
+						 0x14CF63EC, 0x14CF6408, 0x14CF6498, 0x14CF64B4, 0x14CF64FC, 0x14CF652C, 0x14CF6558, 0x14CF65B4},
+		offsetHPMP = { 0x14CF60F0, 0x14CF6118, 0x14CF615C, 0x14CF64CC, 0x14CF65D8},
+		offsetParamHPMP = {0x14CF637C, 0x14CF63A4, 0x14CF648C, 0x14CF5FCC},
+		offsetParameters = { 0x14CF618C, 0x14CF61BC, 0x14CF631C, 0x14CF634C, 0x14CF5F60, 0x14CF6420 },
 		offsetBuffValue = { 0x14CF5E54, 0x14CF5EAC, 0x14CF600C},
 		offsetBuffTime = { 0x14CF5E70, 0x14CF5EC8, 0x14CF6028};
 		
@@ -3819,6 +3864,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		{
 			case 1:
 				RandomizeShortswithRange(offsetEnHaDiTir, 100, 1);
+				RandomizeShortswithRange(offsetParamHPMP, 100, 1, 10);
 				RandomizeShortswithRange(offsetWeight, 16, -5);
 				RandomizeShortswithRange(offsetHPMP, 51, 1, 10);
 				RandomizeShortswithRange(offsetParameters, 51, 1);
@@ -3831,6 +3877,7 @@ public partial class RandomizerContainer : SubViewportContainer
 				break;
 			case 2:
 				RandomizeShortswithRange(offsetEnHaDiTir, 201, -100);
+				RandomizeShortswithRange(offsetParamHPMP, 201, -100, 10);
 				RandomizeShortswithRange(offsetWeight, 31, -10);
 				RandomizeShortswithRange(offsetHPMP, 151, -50, 10);
 				RandomizeShortswithRange(offsetParameters, 151, -50);
@@ -4718,7 +4765,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			if (i % 3 == 0)
 			{
 				randomDigimon = (byte)(numberGenerator.Next(65) + 1);
-				while (randomDigimon == currentSukamon)
+				while (randomDigimon == currentSukamon || randomDigimon == 62)
 					randomDigimon = (byte)(numberGenerator.Next(65) + 1);
 
 				if (digimonList.Count == 0)
@@ -4740,7 +4787,7 @@ public partial class RandomizerContainer : SubViewportContainer
 						if (sameValue)
 						{
 							randomDigimon = (byte)(numberGenerator.Next(65) + 1);
-							while (randomDigimon == currentSukamon)
+							while (randomDigimon == currentSukamon || randomDigimon == 62)
 								randomDigimon = (byte)(numberGenerator.Next(65) + 1);
 							continue;
 						}
@@ -4759,7 +4806,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		for (int i = 0; i < upgradeOffsets.Length; i++)
 		{
 			randomDigimon = (byte)(numberGenerator.Next(65) + 1);
-			while (randomDigimon == currentSukamon)
+			while (randomDigimon == currentSukamon || randomDigimon == 62)
 				randomDigimon = (byte)(numberGenerator.Next(65) + 1);
 
 			if (digimonList.Count == 0)
@@ -4781,7 +4828,7 @@ public partial class RandomizerContainer : SubViewportContainer
 					if (sameValue)
 					{
 						randomDigimon = (byte)(numberGenerator.Next(65) + 1);
-						while (randomDigimon == currentSukamon)
+						while (randomDigimon == currentSukamon || randomDigimon == 62)
 							randomDigimon = (byte)(numberGenerator.Next(65) + 1);
 						continue;
 					}

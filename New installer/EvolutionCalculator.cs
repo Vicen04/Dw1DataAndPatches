@@ -309,60 +309,63 @@ public partial class EvolutionCalculator : Control
 		//check if this is Maeson
 		bin.Position = 0x14D19A84;
 		if (bin.ReadByte() == 0x3E)
+		{
 			Maeson = true;
+			vanilla = false;
+		}
 
 		//Set Maeson extra Digimon
-		if (Maeson)
-		{
-			for (int i = 63; i < 66; i++)
+			if (Maeson)
 			{
-				BonusDigimon[i] = BonusDigimon[62];
-				HPRequired[i] = HPRequired[62];
-				MPRequired[i] = MPRequired[62];
-				OffenseRequired[i] = OffenseRequired[62];
-				DefenseRequired[i] = DefenseRequired[62];
-				SpeedRequired[i] = SpeedRequired[62];
-				BrainsRequired[i] = BrainsRequired[62];
-				CareRequired[i] = CareRequired[62];
-				WeightRequired[i] = WeightRequired[62];
-				DisciplineRequired[i] = DisciplineRequired[62];
-				HappinessRequired[i] = HappinessRequired[62];
-				BattlesRequired[i] = BattlesRequired[62];
-				TechsRequired[i] = TechsRequired[62];
-				FlagValues[i] = FlagValues[62];
-			}
+				for (int i = 63; i < 66; i++)
+				{
+					BonusDigimon[i] = BonusDigimon[62];
+					HPRequired[i] = HPRequired[62];
+					MPRequired[i] = MPRequired[62];
+					OffenseRequired[i] = OffenseRequired[62];
+					DefenseRequired[i] = DefenseRequired[62];
+					SpeedRequired[i] = SpeedRequired[62];
+					BrainsRequired[i] = BrainsRequired[62];
+					CareRequired[i] = CareRequired[62];
+					WeightRequired[i] = WeightRequired[62];
+					DisciplineRequired[i] = DisciplineRequired[62];
+					HappinessRequired[i] = HappinessRequired[62];
+					BattlesRequired[i] = BattlesRequired[62];
+					TechsRequired[i] = TechsRequired[62];
+					FlagValues[i] = FlagValues[62];
+				}
 
-			minWeight = -3;
-			maxWeight = 2;
-		}
-		else if (!vanilla)
-		{
-			//Set up the extra Vice digimon
-			int[] extraRequirements = new int[3];
-			bin.Position = 0x14D19840;
-			extraRequirements[0] = bin.ReadByte();
-			bin.Position = 0x14D1984C;
-			extraRequirements[1] = bin.ReadByte();
-			bin.Position = 0x14D19858;
-			extraRequirements[2] = bin.ReadByte();
-			for (int i = 0; i < 3; i++)
-			{
-				BonusDigimon[i + 63] = BonusDigimon[extraRequirements[i]];
-				HPRequired[i + 63] = HPRequired[extraRequirements[i]];
-				MPRequired[i + 63] = MPRequired[extraRequirements[i]];
-				OffenseRequired[i + 63] = OffenseRequired[extraRequirements[i]];
-				DefenseRequired[i + 63] = DefenseRequired[extraRequirements[i]];
-				SpeedRequired[i + 63] = SpeedRequired[extraRequirements[i]];
-				BrainsRequired[i + 63] = BrainsRequired[extraRequirements[i]];
-				CareRequired[i + 63] = CareRequired[extraRequirements[i]];
-				WeightRequired[i + 63] = WeightRequired[extraRequirements[i]];
-				DisciplineRequired[i + 63] = DisciplineRequired[extraRequirements[i]];
-				HappinessRequired[i + 63] = HappinessRequired[extraRequirements[i]];
-				BattlesRequired[i + 63] = BattlesRequired[extraRequirements[i]];
-				TechsRequired[i + 63] = TechsRequired[extraRequirements[i]];
-				FlagValues[i + 63] = FlagValues[extraRequirements[i]];
+				minWeight = -3;
+				maxWeight = 2;
 			}
-		}
+			else if (!vanilla)
+			{
+				//Set up the extra Vice digimon
+				int[] extraRequirements = new int[3];
+				bin.Position = 0x14D19840;
+				extraRequirements[0] = bin.ReadByte();
+				bin.Position = 0x14D1984C;
+				extraRequirements[1] = bin.ReadByte();
+				bin.Position = 0x14D19858;
+				extraRequirements[2] = bin.ReadByte();
+				for (int i = 0; i < 3; i++)
+				{
+					BonusDigimon[i + 63] = BonusDigimon[extraRequirements[i]];
+					HPRequired[i + 63] = HPRequired[extraRequirements[i]];
+					MPRequired[i + 63] = MPRequired[extraRequirements[i]];
+					OffenseRequired[i + 63] = OffenseRequired[extraRequirements[i]];
+					DefenseRequired[i + 63] = DefenseRequired[extraRequirements[i]];
+					SpeedRequired[i + 63] = SpeedRequired[extraRequirements[i]];
+					BrainsRequired[i + 63] = BrainsRequired[extraRequirements[i]];
+					CareRequired[i + 63] = CareRequired[extraRequirements[i]];
+					WeightRequired[i + 63] = WeightRequired[extraRequirements[i]];
+					DisciplineRequired[i + 63] = DisciplineRequired[extraRequirements[i]];
+					HappinessRequired[i + 63] = HappinessRequired[extraRequirements[i]];
+					BattlesRequired[i + 63] = BattlesRequired[extraRequirements[i]];
+					TechsRequired[i + 63] = TechsRequired[extraRequirements[i]];
+					FlagValues[i + 63] = FlagValues[extraRequirements[i]];
+				}
+			}
 
 		for (int i = 0; i < 8; i++)
 		{

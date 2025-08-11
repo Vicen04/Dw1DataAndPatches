@@ -99,8 +99,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 		bool usefulItems2, bool curling, bool trainingBoost, bool insaneDamage, bool trueHardcore, bool noOrders, bool medals, bool seadramon, bool rareSpawns,
 		bool hyperMono, bool extraInput, bool removeEvoInfo, bool originalType, bool newMono, bool realMetal, bool vendingMachine, bool easyStart,
 		bool moreItemDrops, bool MoreItemSpawn, bool insaneBattle, bool restoreLifetime, bool removeTechBoost, bool unlockAreas, bool mapColour, bool ultraHardcore,
-		bool restorePanjyamon, bool starters2, bool kunemon, bool removeTelephone, bool easyTechs,bool BlackWere, bool quickText, bool digitalClock, bool noRNG, 
-		bool boostItems, bool nerfTechBoost, int StatsValue, int RareSpawnValue)
+		bool restorePanjyamon, bool starters2, bool kunemon, bool removeTelephone, bool easyTechs,
+		bool BlackWere, bool quickText, bool digitalClock, bool noRNG, bool boostItems, bool nerfTechBoost, int StatsValue, int RareSpawnValue)
 		{
 			this.viceDifficulty = viceDifficulty;
 			this.myotismon = myotismon;
@@ -333,7 +333,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 		 vendingMachine, easyStart, moreItemDrops, MoreItemSpawn;
 
 	//Vice exclusive
-	bool insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore,
+	bool insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, 
 		 restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost;
 
 	int StatsValue = 1, RareSpawnValue = 10;

@@ -12,6 +12,7 @@ public partial class ToolsHandler : SubViewportContainer
 	[Export] Button EvoCalc;
 	[Export] Button Bingo;
 	[Export] Button GameCheck;
+	[Export] DataCheck dataCheckScript;
 	Base_script parent_script;
 
 	public override void _Ready()
@@ -22,6 +23,8 @@ public partial class ToolsHandler : SubViewportContainer
 		Bingo.TooltipText = Tr("BingoInfo");
 		GameCheck.Text = Tr("GameCheckerL");
 		GameCheck.TooltipText = Tr("GameChecker");
+		EvoCalc.Pressed += OpenEvoTool;
+		GameCheck.Pressed += OpenCheckTool;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,17 +37,36 @@ public partial class ToolsHandler : SubViewportContainer
 		parent_script = OGScript;
 	}
 
-	void OpenFileDialog()
+	void OpenEvoTool()
 	{
 		SelectFile.Visible = true;
+		SelectFile.FileSelected += StartEvoTool;
+		
 	}
 
 	void StartEvoTool(string path)
 	{
+		SelectFile.FileSelected -= StartEvoTool;
 		SelectFile.Visible = false;
 		Main.Visible = false;
 		evoTool.Visible = true;
 		evoScript.StartEvoCalculator(path, this);
+	}
+
+	void OpenCheckTool()
+	{
+		SelectFile.Visible = true;
+		SelectFile.FileSelected += StartCheckTool;
+		
+	}
+
+	void StartCheckTool(string path)
+	{
+		SelectFile.FileSelected -= StartCheckTool;
+		SelectFile.Visible = false;
+		Main.Visible = false;
+		dataCheckScript.Visible = true;
+		dataCheckScript.StartDataCheck(path, this);
 	}
 
 	void ExitTools()
@@ -57,6 +79,12 @@ public partial class ToolsHandler : SubViewportContainer
 	{
 		Main.Visible = true;
 		evoTool.Visible = false;
+	}
+
+	void ExitCheckTool()
+	{
+		Main.Visible = true;
+		dataCheckScript.Visible = false;
 	}
 
 	public Texture2D GetDigimonTexture(float posX, float posY)
