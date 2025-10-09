@@ -1,0 +1,363 @@
+Digimon Sizes by ID order:
+0. Player: 57036
+1. Botamon: 22092
+2. Koromon: 22904
+3. Agumon: 72012
+4. Betamon: 65948
+5. Greymon: 93408
+6. Devimon: 88448
+7. Airdramon: 71416
+8. Tyrannomon: 89436
+9. Meramon: 87832
+10. Seadramon: 62548
+11. Numemon: 84928
+12. MetalGreymon: 89828
+13. Mamemon: 82544
+14. Monzaemon: 52224
+15. Punimon: 21932
+16. Tsunomon: 14984
+17. Gabumon: 72456
+18. Elecmon: 80868
+19. Kabuterimon: 96288
+20. Angemon: 91336
+21. Birdramon: 84652
+22. Garurumon: 95816
+23. Frigimon: 62504
+24. Whamon: 39724
+25. Vegiemon: 62060
+26. SkullGreymon: 85392
+27. MetalMamemon: 91684
+28. Vademon: 54320
+29. Poyomon: 20232
+30. Tokomon: 34192
+31. Patamon: 84296
+32. Kunemon: 78064
+33. Unimon: 90740
+34. Ogremon: 75632
+35. Shellmon: 64976
+36. Centarumon: 96160
+37. Bakemon: 84620
+38. Drimogemon: 88516
+39. Sukamon: 70080
+40. Andromon: 89956
+41. Giromon: 50228
+42. Etemon: 97820
+43. Yuramon: 24104
+44. Tanemon: 42396
+45. Biyomon: 79840
+46. Palmon: 70356
+47. Monochromon: 96224
+48. Leomon: 85916
+49. Coelamon: 85144
+50. Kokatorimon: 95412
+51. Kuwagamon: 96352
+52. Mojyamon: 87728
+53. Nanimon: 75336
+54. Megadramon: 75444
+55. Piximon: 76956
+56. Digitamamon: 85652
+57. Penguinmon: 86248
+58. Ninjamon: 81324
+59. Phoenixmon: 97504
+60. H-Kabuterimon: 95964
+61. MegaSeadramon: 65688
+62. No MMD
+63. Panjyamon: 81608
+64. Gigadramon: 74804
+65. MetalEtemon: 98070
+66. Myotismon: 67566
+67. Yanmamon: 66320
+68. Gotsumon: 40976
+69. Flarerizamon: 47888
+70. WaruMonzaemon: 40896
+71. SnowAgumon: 43176
+72. Hyogamon: 47352
+73. PlatinumSukamon: 42320
+74. Dokunemon: 44400
+75. ShimaUnimon: 52924
+76. Tankmon: 40084
+77. RedVegimon: 39752
+78. J-Mojyamon: 44316
+79. NiseDrimogemon: 49928
+80. Goburimon: 55620
+81. MudFrigimon: 37544
+82. Psychemon: 42228
+83. ModokiBetamon: 40728
+84. ToyAgumon: 44944
+85. Piddomon: 56428
+86. Aruraumon: 44712
+87. Geremon: 51912
+88. Vermilimon: 54656
+89. Fugamon: 45368
+90. Tekkamon: 21888
+91. MoriShellmon: 40076
+92. Guardromon: 55800
+93. Muchomon: 44752
+94. Icemon: 38972
+95. Akatorimon: 54304
+96. Tsukaimon: 49832
+97. Sharmamon: 45572
+98. ClearAgumon: 44944
+99. Weedmon: 39752
+100. IceDevimon: 48864
+101. Darklizamon: 45940
+102. SandYanmamon: 61456
+103. SnowGoburimon: 48332
+104. BlueMeramon: 45404
+105. Gururumon: 56720
+106. Saberdramon: 44672
+107. Soulmon: 49340
+108. Rockmon: 44472
+109. Otamamon: 37856
+110. Gekomon: 53408
+111. Tentomon: 56724
+112. WaruSeadramon: 38740
+113. Meteoromon: 49572
+114. No MMD
+115. Machinedramon: 79774
+116. Analogman: 22100
+117. Jijimon: 33176
+118. Market Manager: 27764
+119. Shogun Gekomon: 53124
+120. King Sukamon: 29824
+121. Cherrymon: 30044
+122. Hagurumon: 16292
+123. Tinmon: 17676
+124. Master Tyrannomon: 25544
+125. Goburimon Shop: 31828
+126. Brachiomon: 28040
+127. DemiMeramon: 8148
+128. Betamon NPC: 46800
+129. Greymon NPC: 51948
+130. Devimon NPC: 54856
+131. Airdramon NPC: 41564
+132. Tyrannomon NPC: 55112
+133. Meramon NPC: 50508
+134. Seadramon NPC: 21956
+135. Numemon NPC: 56376
+136. MetalGreymon NPC: 59040
+137. Mamemon NPC: 47928
+138. Monzaemon NPC: 17424
+139. Gabumon NPC: 42264
+140. Elecmon NPC: 33576
+141. Kabuterimon NPC: 65760
+142. Angemon NPC: 39476
+143. Birdramon NPC: 50444
+144. Garurumon NPC: 55264
+145. Frigimon NPC: 25040
+146. Whamon NPC: 16868
+147. Vegiemon NPC: 24216
+148. SkullGreymon NPC: 50752
+149. MetalMamemon NPC: 54220
+150. Vademon NPC: 21804
+151. Patamon NPC: 54036
+152. Kunemon NPC: 55740
+153. Unimon NPC: 27276
+154. Ogremon NPC: 59220
+155. Shellmon NPC: 30056
+156. Centarumon NPC: 25996
+157. Bakemon NPC: 26188
+158. Drimogemon NPC: 63380
+159. Sukamon NPC: 28012
+160. Andromon NPC: 31764
+161. Giromon NPC: 30500
+162. Etemon NPC: 60656
+163. Biyomon NPC: 24788
+164. Palmon NPC: 48176 
+165. Monochromon NPC: 32596
+166. Leomon NPC: 41316
+167. Coelamon NPC: 32996
+168. Kokatorimon NPC: 59688
+169. Kuwagamon NPC: 37104
+170. Mojyamon NPC: 32572
+171. Nanimon NPC: 24408
+172. Megadramon NPC: 45440
+173. Piximon NPC: 42824
+174. Digitamamon NPC: 45260
+175. Ninjamon NPC: 49012
+176. Penguinmon NPC: 30164
+177. Myotismon Mansion: 35148
+178. Greymon Arena: 24740
+179. MetalGreymon Arena: 28824
+
+
+
+Digimon Sizes by file order: (14D5FA8C, this is actually a structure with 3 ints: file name ptr, sector and file size, this points to file size of the first digimon)
+Agumon: 72012
+Airdramon: 71416
+Angemon: 91336
+Betamon: 65948
+Birdramon: 84652
+Botamon: 22092
+Player: 57036
+Devimon: 88448
+Elecmon: 80868
+Gabumon: 72456
+Garurumon: 95816
+Greymon: 93408
+Whamon: 39724
+Kabuterimon: 96288
+Koromon: 22904
+Mamemon: 82544
+Meramon: 87832
+Monzaemon: 52224
+MetalGreymon: 89828
+MetalMamemon: 91684
+Numemon: 84928
+Poyomon: 20232
+Punimon: 21932
+Seadramon: 62548
+SkullGreymon: 85392
+Tsunomon: 14984
+Tyrannomon: 89436
+Vademon: 54320
+Vegiemon: 62060
+Frigimon: 62504
+Andromon: 89956
+Bakemon: 84620
+Centarumon: 96160
+Kokatorimon: 95412
+Digitamamon: 85652
+Drimogemon: 88516
+Etemon: 97820
+Giromon: 50228
+Phoenixmon: 97504
+Ninjamon: 81324
+Kunemon: 78064
+Kuwagamon: 96352
+Leomon: 85916
+Megadramon: 75444
+Mojyamon: 87728
+Monochromon: 96224
+Nanimon: 75336
+Ogremon: 75632
+Palmon: 70356
+Patamon: 84296
+Penguinmon: 86248
+Piximon: 76956
+Biyomon: 79840
+Sukamon: 70080
+Shellmon: 64976
+Coelamon: 85144
+Tanemon: 42396
+Tokomon: 34192
+Unimon: 90740
+Yuramon: 24104
+Aruraumon: 44712
+Dokunemon: 44400
+Flarerizamon: 47888
+Fugamon: 45368
+Geremon: 51912
+Gigadramon: 74804
+Goburimon: 55620
+Gotsumon: 40976
+H-Kabuterimon: 95964
+Hyogamon: 47352
+J-Mojyamon: 44316
+MegaSeadramon: 65688
+ModokiBetamon: 40728
+MetalEtemon: 98070
+NiseDrimogemon: 49928
+Panjyamon: 81608
+PlatinumSukamon: 42320
+Piddomon: 56428
+Psychemon: 42228
+RedVegimon: 39752
+ShimaUnimon: 52924
+Tankmon: 40084
+ToyAgumon: 44944
+MudFrigimon: 37544
+Myotismon: 67566
+Vermilimon: 54656
+WaruMonzaemon: 40896
+Yanmamon: 66320
+SnowAgumon: 43176
+Akatorimon: 54304
+Analogman: 22100
+BlueMeramon: 45404
+ClearAgumon: 44944
+Darklizamon: 45940
+Guardromon: 55800
+Gekomon: 53408
+Rockmon: 44472
+Gururumon: 56720
+IceDevimon: 48864
+Icemon: 38972
+Meteoromon: 49572
+Jijimon: 33176
+Muchomon: 44752
+MoriShellmon: 40076
+Machinedramon: 79774
+Otamamon: 37856
+Saberdramon: 44672
+Sharmamon: 45572
+SandYanmamon: 61456
+SnowGoburimon: 48332
+Soulmon: 49340
+Market Manager: 27764
+Tentomon: 56724
+Tekkamon: 21888
+Shogun Gekomon: 53124
+Tsukaimon: 49832
+WaruSeadramon: 38740
+Weedmon: 39752
+Brachiomon: 28040
+Tinmon: 17676
+Airdramon NPC: 41564
+Angemon NPC: 39476
+Betamon NPC: 46800
+Birdramon NPC: 50444
+Devimon NPC: 54856
+Elecmon NPC: 33576
+Gabumon NPC: 42264
+Garurumon NPC: 55264
+Goburimon Shop: 31828
+Greymon NPC: 51948
+Whamon NPC: 16868
+Kabuterimon NPC: 65760
+Mamemon NPC: 47928
+Meramon NPC: 50508
+Monzaemon NPC: 17424
+MetalGreymon NPC: 59040
+MetalMamemon NPC: 54220
+Numemon NPC: 56376
+Seadramon NPC: 21956
+SkullGreymon NPC: 50752
+Tyrannomon NPC: 55112
+Vegiemon NPC: 24216
+Frigimon NPC: 25040
+Hagurumon: 16292
+Cherrymon: 30044
+DemiMeramon: 8148
+King Sukamon: 29824
+Master Tyrannomon: 25544
+Greymon Arena: 24740
+MetalGreymon Arena: 28824
+Andromon NPC: 31764
+Bakemon NPC: 26188
+Centarumon NPC: 25996
+Kokatorimon NPC: 59688
+Digitamamon NPC: 45260
+Drimogemon NPC: 63380
+Etemon NPC: 60656
+Giromon NPC: 30500
+Ninjamon NPC: 49012
+Kunemon NPC: 55740
+Kuwagamon NPC: 37104
+Leomon NPC: 41316
+Megadramon NPC: 45440
+Monochromon NPC: 32596
+Mojyamon NPC: 32572
+Nanimon NPC: 24408
+Ogremon NPC: 59220
+Palmon NPC: 48176 
+Patamon NPC: 54036
+Penguinmon NPC: 30164
+Piximon NPC: 42824
+Biyomon NPC: 24788
+Sukamon NPC: 28012
+Shellmon NPC: 30056
+Coelamon NPC: 32996
+Unimon NPC: 27276
+Myotismon Mansion: 35148
+Vademon NPC: 21804

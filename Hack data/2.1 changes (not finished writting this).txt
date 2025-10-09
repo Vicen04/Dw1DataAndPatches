@@ -715,6 +715,7 @@ void RenderStatsMenu(void)
   //code ignored
 }
 
+located at: 800bb610
 
 
 //Fix some visual issues in the overworld UI

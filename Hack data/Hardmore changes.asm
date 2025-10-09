@@ -25,12 +25,12 @@ Disassembly:
         800a2a94 00 00 66 84     lh         a2,0x0(v1) //MoveDamage
         800a2a98 00 00 00 00     nop
         800a2a9c 00 00 43 8e     lw         v1,0x0(s2) //DigimonID
-        800a2aa0 42 00 61 28     slti       at,v1,0x42
-        800a2aa4 04 00 20 14     bne        at,zero,0x800a2ab8 //LAB_800a2ab8
-        800a2aa8 00 00 00 00     _nop
-        800a2aac 64 00 c6 24     addiu      a2,a2,0x64
+        800a2aa0 00 00 00 00     nop
+        800a2aa4 42 00 61 28     slti       at,v1,0x42
+        800a2aa8 04 00 20 14     bne        at,zero,0x800a2ab8 //LAB_800a2ab8
+        800a2aac 00 00 00 00     nop
         800a2ab0 0e 00 00 10     b          0x800a2aec //LAB_800a2aec
-        800a2ab4 00 00 00 00     _nop
+        800a2ab4 64 00 c6 24     addiu      a2,a2,0x64
                              LAB_800a2ab8                                    
         800a2ab8 c0 08 03 00     sll        at,v1,0x3
         800a2abc 22 08 23 00     sub        at,at,v1
