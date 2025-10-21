@@ -1,4 +1,4 @@
-// This is a new funciton for the status effects, it works in the same way in the battles an tournaments but the addresses are different
+// This is a new funciton for the status effects, it works in the same way in the battles and tournaments but the addresses are different
 
 void StatusEffectNew(DigimonEntity *AffectedPtr,FighterData *CombatPtr,int Tech4,int attPtr)
 
@@ -275,7 +275,7 @@ LAB_8005c12c:
 
 
 
-//Remove new status effect
+//Remove status effect boost
 
 void StatusEffectNew(DigimonEntity *AffectedPtr,FighterData *CombatPtr,int Tech4,int attPtr)
 {

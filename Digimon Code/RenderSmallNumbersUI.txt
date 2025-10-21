@@ -1,0 +1,130 @@
+//Used for the HP and the Damage taken during battle usually
+
+
+void SetSmallNumbersUI(int color,int digits,int posX,short posY,short value,int param_6)
+{
+  POLY_FT4 *poly;
+  int currentValue;
+  int renderAmount;
+  int values[4];
+  
+  poly = (POLY_FT4 *)GSGetWorkBase();
+  ConvertValueToDigits(digits,value,&renderAmount,*values[]);  //Sets the render amount and the values
+  renderAmount = renderAmount--;
+  currentValue = renderAmount * 4;
+  for (; -1 < renderAmount; renderAmount--)
+  {
+    SetPolyFT4(poly, 256, 484);
+    poly->r0 = Colour_ARRAY_UI[color].Red;
+    poly->g0 = Colour_ARRAY_UI[color].Green;
+    poly->b0 = Colour_ARRAY_UI[color].Blue;
+    SetUVDataPolyFT4(poly, values[currentValue] * 8, 183, 8, 8);
+    SetPosDataPolyFT4(poly,(posX + ((digits - 1) - renderAmount) * 7)), posY, 8, 8);
+    AddPrim((void *)(*(int *)(DAT_80134ed0 + 4) + param_6 * 4),poly);
+    currentValue = currentValue--;
+    poly = poly++;
+  }
+  GSSetWorkBase(poly);
+  return;
+}
+
+Disassembly
+                             RenderSmallNumbers                              
+        800e5724 a8 ff bd 27     addiu      sp,sp,-0x58
+        800e5728 3c 00 bf af     sw         ra,local_1c(sp)
+        800e572c 38 00 be af     sw         s8,local_20(sp)
+        800e5730 34 00 b7 af     sw         s7,local_24(sp)
+        800e5734 30 00 b6 af     sw         s6,local_28(sp)
+        800e5738 2c 00 b5 af     sw         s5,local_2c(sp)
+        800e573c 28 00 b4 af     sw         s4,local_30(sp)
+        800e5740 24 00 b3 af     sw         s3,local_34(sp)
+        800e5744 20 00 b2 af     sw         s2,local_38(sp)
+        800e5748 1c 00 b1 af     sw         s1,local_3c(sp)
+        800e574c 68 00 b1 87     lh         s1,value(sp)
+        800e5750 6c 00 be 8f     lw         s8,param_6(sp)
+        800e5754 18 00 b0 af     sw         s0,local_40(sp)
+        800e5758 21 90 80 00     move       s2,color
+        800e575c 21 a0 a0 00     move       s4,digits
+        800e5760 21 b0 c0 00     move       s6,posX
+        800e5764 0e 63 02 0c     jal        GSGetWorkBase                                   
+        800e5768 21 b8 e0 00     _move      s7,posY
+        800e576c 21 80 40 00     move       s0,v0
+        800e5770 21 20 80 02     move       color,s4
+        800e5774 21 28 20 02     move       digits,s1
+        800e5778 44 00 a6 27     addiu      posX,sp,0x44
+        800e577c 6e 95 03 0c     jal        ConvertValueToDigits                            
+        800e5780 48 00 a7 27     _addiu     posY,sp,0x48
+        800e5784 44 00 a2 8f     lw         v0,local_14(sp)
+        800e5788 ff ff 95 22     addi       s5,s4,-0x1
+        800e578c ff ff 51 20     addi       s1,v0,-0x1
+        800e5790 40 10 12 00     sll        v0,s2,0x1
+        800e5794 80 98 11 00     sll        s3,s1,0x2
+        800e5798 20 90 52 00     add        s2,v0,s2
+        800e579c 31 00 00 10     b          LAB_800e5864
+        800e57a0 80 a0 1e 00     _sll       s4,s8,0x2
+                             LAB_800e57a4                                    
+        800e57a4 00 01 05 24     li         digits,0x100
+        800e57a8 ed 94 03 0c     jal        FUN_800e53b4                                    
+        800e57ac e4 01 06 24     _li        posX,0x1e4
+        800e57b0 13 80 02 3c     lui        v0,0x8013
+        800e57b4 18 b9 42 24     addiu      v0,v0,-0x46e8
+        800e57b8 21 10 52 00     addu       v0,v0,s2
+        800e57bc 00 00 42 90     lbu        v0,0x0(v0)=>Colour_ARRAY_8012b918
+        800e57c0 08 00 07 24     li         posY,0x8
+        800e57c4 04 00 02 a2     sb         v0,0x4(s0)
+        800e57c8 13 80 02 3c     lui        v0,0x8013
+        800e57cc 19 b9 42 24     addiu      v0,v0,-0x46e7
+        800e57d0 21 10 52 00     addu       v0,v0,s2
+        800e57d4 00 00 42 90     lbu        v0,0x0(v0)=>Colour_ARRAY_8012b918[0].Green
+        800e57d8 21 20 00 02     move       color,s0
+        800e57dc 05 00 02 a2     sb         v0,0x5(s0)
+        800e57e0 13 80 02 3c     lui        v0,0x8013
+        800e57e4 1a b9 42 24     addiu      v0,v0,-0x46e6
+        800e57e8 21 10 52 00     addu       v0,v0,s2
+        800e57ec 00 00 42 90     lbu        v0,0x0(v0)=>Colour_ARRAY_8012b918[0].Blue
+        800e57f0 b7 00 06 24     li         posX,0xb7
+        800e57f4 06 00 02 a2     sb         v0,0x6(s0)
+        800e57f8 10 00 a7 af     sw         posY,local_48(sp)
+        800e57fc 21 10 b3 03     addu       v0,sp,s3
+        800e5800 48 00 42 8c     lw         v0,0x48(v0)
+        800e5804 00 00 00 00     nop
+        800e5808 c0 10 02 00     sll        v0,v0,0x3
+        800e580c 00 2c 02 00     sll        digits,v0,0x10
+        800e5810 ad 95 03 0c     jal        SetUVDataPolyFT4                                
+        800e5814 03 2c 05 00     _sra       digits,digits,0x10
+        800e5818 22 18 b1 02     sub        v1,s5,s1
+        800e581c c0 10 03 00     sll        v0,v1,0x3
+        800e5820 22 10 43 00     sub        v0,v0,v1
+        800e5824 20 10 c2 02     add        v0,s6,v0
+        800e5828 08 00 07 24     li         posY,0x8
+        800e582c 00 2c 02 00     sll        digits,v0,0x10
+        800e5830 10 00 a7 af     sw         posY,local_48(sp)
+        800e5834 03 2c 05 00     sra        digits,digits,0x10
+        800e5838 21 20 00 02     move       color,s0
+        800e583c bb 95 03 0c     jal        SetPosDataPolyFT4                               
+        800e5840 21 30 e0 02     _move      posX,s7
+        800e5844 a4 93 82 8f     lw         v0,-0x6c5c(gp)=>DAT_80134ed0                    
+        800e5848 21 28 00 02     move       digits,s0
+        800e584c 04 00 42 8c     lw         v0,0x4(v0)
+        800e5850 28 00 b0 24     addiu      s0,digits,0x28
+        800e5854 b5 4a 02 0c     jal        AddPrim                                          
+        800e5858 21 20 54 00     _addu      color,v0,s4
+        800e585c ff ff 31 22     addi       s1,s1,-0x1
+        800e5860 fc ff 73 22     addi       s3,s3,-0x4
+                             LAB_800e5864                                   
+        800e5864 cf ff 21 06     bgez       s1,LAB_800e57a4
+        800e5868 21 20 00 02     _move      color,s0
+        800e586c 0a 63 02 0c     jal        GSSetWorkBase                                    
+        800e5870 21 20 00 02     _move      color,s0
+        800e5874 3c 00 bf 8f     lw         ra,local_1c(sp)
+        800e5878 38 00 be 8f     lw         s8,local_20(sp)
+        800e587c 34 00 b7 8f     lw         s7,local_24(sp)
+        800e5880 30 00 b6 8f     lw         s6,local_28(sp)
+        800e5884 2c 00 b5 8f     lw         s5,local_2c(sp)
+        800e5888 28 00 b4 8f     lw         s4,local_30(sp)
+        800e588c 24 00 b3 8f     lw         s3,local_34(sp)
+        800e5890 20 00 b2 8f     lw         s2,local_38(sp)
+        800e5894 1c 00 b1 8f     lw         s1,local_3c(sp)
+        800e5898 18 00 b0 8f     lw         s0,local_40(sp)
+        800e589c 08 00 e0 03     jr         ra
+        800e58a0 58 00 bd 27     _addiu     sp,sp,0x58
