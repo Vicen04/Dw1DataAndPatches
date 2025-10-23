@@ -1,0 +1,11 @@
+//This should fix the black box appearing after you do shopping with Betamon/Coelamon or in the green gym with the "useful items 2" patch
+
+
+                             RenderText
+
+        80100c38 50 00 02 24     li         v0,0x50
+
+        80100c70 50 00 02 24     li         v0,0x50
+
+
+

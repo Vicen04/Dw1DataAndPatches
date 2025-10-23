@@ -983,17 +983,199 @@ Located at: 14D6451C
 
 
 
-// Name lenght changes
+// Name length changes
+
+        8010a1f4 00 00 00 00     nop
+        
+        8010a20c 00 00 46 a0     sb         a2,0x0(v0)=>DAT_801b1d1c            
+
+        8010a21c 00 00 40 a0     sb         zero,0x0(v0)=>DAT_801b1d1d                    
+    
+        8010a228 05 00 01 24     li         at,0x5
+
+        8010a230 00 00 00 00     _nop
+
+        8010a264 0b 00 01 24     li         at,0xb
+
+        8010ab78 21 18 02 00     move       v1,v0
+
+        80109fd8 00 00 00 00     nop
+
+        80109fe4 0c 00 01 24     li         at,0xc
 
 
-// Birdramon flying locations change
 
 
-// Merit changes
 
 
-// 
+// Birdramon flying locations change, check the original function in the repository
+
+void SetBirdramonFlyingLocations(void)
+{
+//code ignored
+   for (int i = 0; i < 8; i++) 
+   {
+//code ignored
+      if (CurrentMoney < (short)BirdramonLocations[i].travelFee) 
+//code ignored
+    }
+}
+
+        80107b28 00 00 43 84     lh         v1,0x0(v0)  //TravelFee
+         
+        80107b70 06 00 52 22     addi       s2,s2,0x6                   
+        80107b74 08 00 21 2e     sltiu      at,s1,0x8
 
 
+Location Data:
+
+* Format: byte mapID, byte placement, short trigger, short cost
+
+26 09 DD 00 E8 03 
+23 00 ED 00 E8 03 
+46 09 BE 00 E8 03 
+51 00 BC 00 DC 05 
+5D 01 5F 01 D0 07 
+8C 01 3F 01 C4 09 
+77 09 93 00 C4 09 
+69 00 D2 00 C4 09
+
+Located at: 14D725C4
+
+
+// Merit limit changes
+
+        80103024 30 75 41 28     slti       at,v0,0x7530
+
+        80103030 2f 75 02 24     li         v0,0x752f
+
+        80103064 30 75 41 28     slti       at,v0,0x7530
+
+        80103070 2f 75 02 24     li         v0,0x752f
+
+
+
+
+        8010be54 30 75 41 28     slti       at,v0,0x7530
+
+        8010be60 2f 75 02 24     li         v0,0x752f   
+
+
+//Fix memory leak at Shogun Gekomon merit shop
+     
+        8010bddc ce 94 82 a7     sh         v0,-0x6b32(gp)
+        8010bde0 e8 94 83 a7     sh         v1,-0x6b18(gp)
+
+       
+
+
+
+// Render Digimon name below Player name in the save/load menu
+
+RenderLoadDataBoxes(int currentBox,short cPosX,short cPosY)
+{
+//code ignored
+  if ((&SaveFileStrings)[currentBox].fileNumber != 0) {
+    DrawText(prim_00,cPosX + 0x28,cPosY + 5,'\x18',vStart,0x90,0xc,colour);
+    prim_00 = prim + 0x1e;
+    DrawText(prim + 0x14,cPosX + 0x28,cPosY + 0x13,'\x18',cVar1 + '\x18',0xe0,0xc,colour);
+  }
+//code ignored
+}
+
+
+        8010d968 21 20 00 02     move       a0,s0
+        8010d96c 28 00 65 22     addi       a1,s3,0x28
+        8010d970 10 00 b2 af     sw         s2,0x10(sp)
+        8010d974 90 00 02 24     li         v0,0x90
+        8010d978 14 00 a2 af     sw         v0,0x14(sp)
+        8010d97c 0c 00 02 24     li         v0,0xc
+        8010d980 18 00 a2 af     sw         v0,0x18(sp)
+        8010d984 1c 00 b1 af     sw         s1,0x1c(sp)
+        8010d988 28 00 90 24     addiu      s0,a0,0x28
+        8010d98c 21 b0 a0 00     move       s6,a1
+        8010d990 21 30 a0 02     move       a2,s5
+        8010d994 58 34 04 0c     jal        0x8010d160  //DrawText                                        
+        8010d998 18 00 07 24     _li        a3,0x18
+        8010d99c 0c 00 42 22     addi       v0,s2,0xc
+        8010d9a0 10 00 a2 af     sw         v0,0x10(sp)
+        8010d9a4 e0 00 02 24     li         v0,0xe0
+        8010d9a8 14 00 a2 af     sw         v0,0x14(sp)
+        8010d9ac 0c 00 02 24     li         v0,0xc
+        8010d9b0 18 00 a2 af     sw         v0,0x18(sp)
+        8010d9b4 21 20 00 02     move       a0,s0
+        8010d9b8 1c 00 b1 af     sw         s1,0x1c(sp)
+        8010d9bc 28 00 90 24     addiu      s0,a0,0x28
+        8010d9c0 13 00 86 22     addi       a2,s4,0x13
+        8010d9c4 21 28 c0 02     move       a1,s6
+        8010d9c8 58 34 04 0c     jal        0x8010d160  //DrawText                                         
+        8010d9cc 18 00 07 24     _li        a3,0x18
+        8010d9d0 0b 00 00 10     b          0x8010da00
+        8010d9d4 00 00 00 00     _nop
+        8010d9d8 00 00 00 00     nop
+        8010d9dc 00 00 00 00     nop
+        8010d9e0 00 00 00 00     nop
+        8010d9e4 00 00 00 00     nop
+        8010d9e8 00 00 00 00     nop
+        8010d9ec 00 00 00 00     nop
+        8010d9f0 00 00 00 00     nop
+        8010d9f4 00 00 00 00     nop
+        8010d9f8 00 00 00 00     nop
+        8010d9fc 00 00 00 00     nop
+
+
+
+void RenderSaveDataConfirmation(void)
+{
+//code ignored
+else 
+  {
+    DrawText(prim + 2, 88, 46, 24, 15, 144, 12, 0);
+    DrawText(prim + 3, 88, 60, 0, 24, 128, 12, 0);
+    prim_00 = prim + 5;  
+  }
+//code ignored
+}
+
+
+        8010dcf0 0c 00 03 24     li         v1,0xc
+        8010dcf4 21 20 00 02     move       a0,s0
+        8010dcf8 10 00 a3 af     sw         v1,0x10(sp)
+        8010dcfc 90 00 02 24     li         v0,0x90
+        8010dd00 14 00 a2 af     sw         v0,0x14(sp)
+        8010dd04 18 00 a3 af     sw         v1,0x18(sp)
+        8010dd08 1c 00 a0 af     sw         zero,0x1c(sp)
+        8010dd0c 28 00 90 24     addiu      s0,a0,0x28
+        8010dd10 58 00 05 24     li         a1,0x58
+        8010dd14 2e 00 06 24     li         a2,0x2e
+        8010dd18 58 34 04 0c     jal        0x8010d160  //DrawText                                       
+        8010dd1c 18 00 07 24     _li        a3,0x18
+        8010dd20 18 00 02 24     li         v0,0x18
+        8010dd24 10 00 a2 af     sw         v0,0x10(sp)
+        8010dd28 80 00 02 24     li         v0,0x80
+        8010dd2c 14 00 a2 af     sw         v0,0x14(sp)
+        8010dd30 0c 00 02 24     li         v0,0xc
+        8010dd34 18 00 a2 af     sw         v0,0x18(sp)
+        8010dd38 21 20 00 02     move       a0,s0
+        8010dd3c 1c 00 a0 af     sw         zero,0x1c(sp)
+        8010dd40 28 00 90 24     addiu      s0,a0,0x28
+        8010dd44 58 00 05 24     li         a1,0x58
+        8010dd48 3c 00 06 24     li         a2,0x3c
+        8010dd4c 58 34 04 0c     jal        0x8010d160  //DrawText                                         
+        8010dd50 21 38 00 00     _clear     a3
+        8010dd54 28 00 10 26     addiu      s0,s0,0x28
+        8010dd58 19 00 00 10     b          0x8010ddc0
+        8010dd5c f0 00 02 24     _li        v0,0xf0
+        8010dd60 00 00 00 00     nop
+        8010dd64 00 00 00 00     nop
+        8010dd68 00 00 00 00     nop
+        8010dd6c 00 00 00 00     nop
+        8010dd70 00 00 00 00     nop
+        8010dd74 00 00 00 00     nop
+        8010dd78 00 00 00 00     nop
+        8010dd7c 00 00 00 00     nop
+        8010dd80 00 00 00 00     nop
+        8010dd84 00 00 00 00     nop
+        8010dd88 00 00 00 00     nop
 
 
