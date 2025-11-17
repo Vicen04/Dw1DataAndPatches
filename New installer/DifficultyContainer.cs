@@ -22,6 +22,7 @@ public partial class DifficultyContainer : PanelContainer
 	[Export] private CheckBox Mono8K;
 	[Export] private CheckBox Rookie;
 	[Export] private CheckBox Tanemon;
+	[Export] private CheckBox AllBattles;
 	[Export] private VicePatcherContainer VicePatcher;
 	[Export] private Panel Difficulty1;
 	[Export] private Panel Difficulty2;
@@ -104,7 +105,18 @@ public partial class DifficultyContainer : PanelContainer
 		}
 	}
 
-	void TrueHardcore_Toggled(bool toggled) { VicePatcher.SetTrueHardcore(toggled); }
+	void TrueHardcore_Toggled(bool toggled)
+	{
+		VicePatcher.SetTrueHardcore(toggled);
+		if (toggled)
+		{
+			AllBattles.ButtonPressed = false;
+			AllBattles.Disabled = true;
+		}
+		else
+			AllBattles.Disabled = false;
+
+	}
 
 	void UltraHardcore_Toggled(bool toggled)
 	{
@@ -182,6 +194,11 @@ public partial class DifficultyContainer : PanelContainer
 		}
 	}
 
+	void AllBattles_Toggled(bool toggled)
+    {
+        VicePatcher.SetAllBattles(toggled);
+    }
+
 	void SetupTextTranslation()
 	{
 		Title.Text = Tr("Difficulty_L");
@@ -220,6 +237,8 @@ public partial class DifficultyContainer : PanelContainer
 		Rookie.TooltipText = Tr("Rookie_info");
 		Tanemon.Text = Tr("Tanemon_L");
 		Tanemon.TooltipText = Tr("Tanemon_info");
+		AllBattles.Text = Tr("AllBattles_L");
+		AllBattles.TooltipText = Tr("AllBattles_info");
 	}
 
 	void SetupButtons()
@@ -239,6 +258,7 @@ public partial class DifficultyContainer : PanelContainer
 		Mono8K.Toggled += Mono8K_Toggled;
 		Rookie.Toggled += Rookie_Toggled;
 		Tanemon.Toggled += Tanemon_Toggled;
+		AllBattles.Toggled += AllBattles_Toggled;
 	}
 
 	void ChangeToPage2()
@@ -254,7 +274,7 @@ public partial class DifficultyContainer : PanelContainer
 	}
 
 	public void LoadSaveData(bool ChallengeS, bool HardmodeS, bool HardcoreS, bool TrueHardcoreS, bool UltraHardcoreS, bool ProgressionS, bool FilthS, bool RFilthS, bool FairBattlesS,
-	bool TournamentsS, bool NoRNGS, bool Mono4KS, bool Mono8KS, bool RookieS, bool TanemonS)
+	bool TournamentsS, bool NoRNGS, bool Mono4KS, bool Mono8KS, bool RookieS, bool TanemonS, bool allBattles)
 	{
 		Challenge.ButtonPressed = ChallengeS;
 		Hardmode.ButtonPressed = HardmodeS;
@@ -271,6 +291,7 @@ public partial class DifficultyContainer : PanelContainer
 		Mono8K.ButtonPressed = Mono8KS;
 		Rookie.ButtonPressed = RookieS;
 		Tanemon.ButtonPressed = TanemonS;
+		AllBattles.ButtonPressed = allBattles;
 	}
 	
 	public void RestartSelection()
@@ -289,7 +310,8 @@ public partial class DifficultyContainer : PanelContainer
 		Mono4K.ButtonPressed = false;
 		Mono8K.ButtonPressed = false;
 		Rookie.ButtonPressed = false;
-		Tanemon.ButtonPressed = false;	
+		Tanemon.ButtonPressed = false;
+		AllBattles.ButtonPressed = false;
 	}
 	/*void _on_exit_installer_pressed()
 	{

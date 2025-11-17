@@ -10,16 +10,15 @@ public partial class MiscContainer : PanelContainer
 	[Export] private CheckBox Areas;
 	[Export] private CheckBox BattleText;
 	[Export] private CheckBox BoostItems;
-	[Export] private CheckBox NerfTech;
 	[Export] private CheckBox OGLife;
-	[Export] private CheckBox RemoveTech;
 	[Export] private CheckBox RemoveEvo;
 	[Export] private CheckBox NewMono;
 	[Export] private CheckBox InsaneBattles;
 	[Export] private CheckBox MapColour;
 	[Export] private CheckBox OgreTel;
 	[Export] private CheckBox OGType;
-
+	[Export] private CheckBox DropBattle;
+	[Export] private CheckBox RemoveExtraInfo;
 	[Export] private VicePatcherContainer VicePatcher;
 
 	// Called when the node enters the scene tree for the first time.
@@ -60,24 +59,10 @@ public partial class MiscContainer : PanelContainer
 		VicePatcher.SetSuperBoostItems(toggled);
 	}
 
-	void NerfTech_Toggled(bool toggled)
-	{
-		VicePatcher.SetNerfBoost(toggled);
-		if (toggled)
-			RemoveTech.ButtonPressed = false;
-	}
-
 	void OGLife_Toggled(bool toggled)
 	{
 		VicePatcher.SetRestoreLifetime(toggled);
-	}
-
-	void RemoveTech_Toggled(bool toggled)
-	{
-		VicePatcher.SetRemoveTechBoost(toggled);
-		if (toggled)
-			NerfTech.ButtonPressed = false;
-	}
+	}	
 
 	void RemoveEvo_Toggled(bool toggled)
 	{
@@ -109,6 +94,16 @@ public partial class MiscContainer : PanelContainer
 		VicePatcher.SetOriginalType(toggled);
 	}
 
+	void Drop_Toggled(bool toggled)
+	{
+		VicePatcher.SetDropItems(toggled);
+	}
+
+	void RemoveExtraInfo_Toggled(bool toggled)
+	{
+		VicePatcher.SetRemoveExtraInfo(toggled);
+	}
+
 
 	void SetupTextTranslation()
 	{
@@ -124,12 +119,8 @@ public partial class MiscContainer : PanelContainer
 		BattleText.TooltipText = Tr("BattleText_info");
 		BoostItems.Text = Tr("BoostItems_L");
 		BoostItems.TooltipText = Tr("BoostItems_info");
-		NerfTech.Text = Tr("NerfTech_L");
-		NerfTech.TooltipText = Tr("NerfTech_info");
 		OGLife.Text = Tr("OGLife_L");
 		OGLife.TooltipText = Tr("OGLife_info");
-		RemoveTech.Text = Tr("RemoveTech_L");
-		RemoveTech.TooltipText = Tr("RemoveTech_info");
 		RemoveEvo.Text = Tr("RemoveEvo_L");
 		RemoveEvo.TooltipText = Tr("RemoveEvo_info");
 		NewMono.Text = Tr("NewMono_L");
@@ -142,6 +133,10 @@ public partial class MiscContainer : PanelContainer
 		OgreTel.TooltipText = Tr("OgreTel_info");
 		OGType.Text = Tr("OGType_L");
 		OGType.TooltipText = Tr("OGType_info");
+		DropBattle.Text = Tr("DropBattle_L");
+		DropBattle.TooltipText = Tr("DropBattle_info");
+		RemoveExtraInfo.Text = Tr("RemoveLifeEvo_L");
+		RemoveExtraInfo.TooltipText = Tr("RemoveLifeEvo_info");
 	}
 
 	void SetupButtons()
@@ -151,34 +146,34 @@ public partial class MiscContainer : PanelContainer
 		Areas.Toggled += Areas_Toggled;
 		BattleText.Toggled += BattleText_Toggled;
 		BoostItems.Toggled += BoostItems_Toggled;
-		NerfTech.Toggled += NerfTech_Toggled;
 		OGLife.Toggled += OGLife_Toggled;
-		RemoveTech.Toggled += RemoveTech_Toggled;
 		RemoveEvo.Toggled += RemoveEvo_Toggled;
 		NewMono.Toggled += NewMono_Toggled;
 		InsaneBattles.Toggled += InsaneBattles_Toggled;
 		MapColour.Toggled += MapColour_Toggled;
 		OgreTel.Toggled += OgreTel_Toggled;
 		OGType.Toggled += OGType_Toggled;
+		DropBattle.Toggled += Drop_Toggled;
+		RemoveExtraInfo.Toggled += RemoveExtraInfo_Toggled;
 	}
 
-	public void LoadSaveData(bool ClockS, bool InputS, bool AreasS, bool BattleTextS, bool BoostItemsS, bool NerfTechS, bool OGLifeS, bool RemoveTechS, bool RemoveEvoS,
-	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS)
+	public void LoadSaveData(bool ClockS, bool InputS, bool AreasS, bool BattleTextS, bool BoostItemsS, bool OGLifeS, bool RemoveEvoS,
+	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS, bool DropItemsS, bool RemoveExtraInfoS)
 	{
 		Clock.ButtonPressed = ClockS;
 		Input.ButtonPressed = InputS;
 		Areas.ButtonPressed = AreasS;
 		BattleText.ButtonPressed = BattleTextS;
 		BoostItems.ButtonPressed = BoostItemsS;
-		NerfTech.ButtonPressed = NerfTechS;
 		OGLife.ButtonPressed = OGLifeS;
-		RemoveTech.ButtonPressed = RemoveTechS;
 		RemoveEvo.ButtonPressed = RemoveEvoS;
 		NewMono.ButtonPressed = NewMonoS;
 		InsaneBattles.ButtonPressed = InsaneBattlesS;
 		MapColour.ButtonPressed = MapColourS;
 		OgreTel.ButtonPressed = OgreTelS;
 		OGType.ButtonPressed = OGTypeS;
+		DropBattle.ButtonPressed = DropItemsS;
+		RemoveExtraInfo.ButtonPressed = RemoveExtraInfoS;
 	}
 
 	public void RestartSelection()
@@ -188,14 +183,14 @@ public partial class MiscContainer : PanelContainer
 		Areas.ButtonPressed = false;
 		BattleText.ButtonPressed = false;
 		BoostItems.ButtonPressed = false;
-		NerfTech.ButtonPressed = false;
 		OGLife.ButtonPressed = false;
-		RemoveTech.ButtonPressed = false;
 		RemoveEvo.ButtonPressed = false;
 		NewMono.ButtonPressed = false;
 		InsaneBattles.ButtonPressed = false;
 		MapColour.ButtonPressed = false;
 		OgreTel.ButtonPressed = false;
 		OGType.ButtonPressed = false;
+		DropBattle.ButtonPressed = false;
+		RemoveExtraInfo.ButtonPressed = false;
 	}
 }

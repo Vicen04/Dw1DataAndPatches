@@ -27,7 +27,7 @@ public partial class TechStuff : Control
 	[Export] TechData TechDataCheck;
 	[Export] LearnBattle LearnCheck;
 	[Export] TechDamage TypeCheck;
-	[Export] Control CalculatorCheck;
+	[Export] DamageCalculator CalculatorCheck;
 	[Export] TechBoost BoostCheck;
 
 	Techdata[] techniques = new Techdata[122];
@@ -41,10 +41,7 @@ public partial class TechStuff : Control
 		Learn.Text = Tr("TechLearnCheck");
 		Types.Text = Tr("TechTypeCheck");
 		Calculator.Text = Tr("CalculatorCheck");
-		Boost.Text = Tr("TechBoostCheck");
-		emptyTech = new Techdata();
-		emptyTech.name = Tr("NoTechCheck");
-		emptyTech.type = 7;
+		Boost.Text = Tr("TechBoostCheck");		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,6 +51,10 @@ public partial class TechStuff : Control
 
 	public void SetupData(System.IO.Stream bin, BinaryReader reader, DataCheck parent, bool vice)
 	{
+		emptyTech = new Techdata();
+		emptyTech.name = Tr("NoTechCheck");
+		emptyTech.type = 7;
+		
 		uint currentPos = techDataOffset;
 		for (int i = 0; i < techniques.Length; i++)
 		{
@@ -120,9 +121,10 @@ public partial class TechStuff : Control
 		LearnCheck.SetupData(bin, parent, this, vice);
 		TechDataCheck.SetupData(parent, this, vice);
 		TypeCheck.SetupData(bin, parent, this);
+		CalculatorCheck.SetupData(bin, reader, this, parent, vice);
 
 		bin.Position = 0x14C66650;
-		if (bin.ReadByte() != 33)
+		if (reader.ReadInt16() != 6177)
 		{
 			BoostCheck.SetupData(bin, reader, parent, this);
 			Boost.Visible = true;
@@ -147,6 +149,12 @@ public partial class TechStuff : Control
 				return Tr("StunEffect");
 			case 4:
 				return Tr("FlatEffect");
+			case 5:
+				return Tr("BurnEffect");
+			case 6:
+				return Tr("FreezeEffect");
+			case 7:
+				return Tr("ShockEffect");
 			default:
 				return Tr("NoEffect");
 

@@ -344,3 +344,27 @@ Version 2.0:
 - Some small changes to prepare for future updates
 
 - "Rookie only" and "Tanemon only" patches added
+
+2.2 Part 1:
+
+- Added new status effects
+
+- Added the status effect boost
+
+- Fixed a few more bugs
+
+- More optional patches
+
+2.2 Part 2:
+
+- Improved the UI of the stats/tech data
+
+- "All battles" patch 
+
+- Improved the health shoes
+
+- More bug fixes
+
+- Fixed a few issues that came up in Part 1.
+
+- More optional patches

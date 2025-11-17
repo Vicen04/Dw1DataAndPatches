@@ -285,9 +285,8 @@ public partial class DigimonContainerRando : PanelContainer
 		DifficultyOpt.SetItemText(0, Tr("Hardcore_L"));
 		DifficultyOpt.SetItemText(1, Tr("THardcore_L"));
 
-		DigimonOpt.SetItemText(0, Tr("Shuffle_T"));
-		DigimonOpt.SetItemText(1, Tr("Random_T"));
-		DigimonOpt.SetItemText(2, Tr("Chaos_T"));
+		DigimonOpt.SetItemText(0, Tr("Random_T"));
+		DigimonOpt.SetItemText(1, Tr("Chaos_T"));
 
 		NPCStatsOpt.SetItemText(0, Tr("Shuffle_T"));
 		NPCStatsOpt.SetItemText(1, Tr("Random_T"));

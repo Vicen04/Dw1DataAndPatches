@@ -54,6 +54,8 @@ public partial class EvolutionCalculator : Control
 	[Export] private Panel[] BonusDigiPanels;
 	[Export] AtlasTexture InfoIcons;
 
+	[Export] SpinBox[] AllValues;
+
 	[Export] CheckBox HideEvos;
 	[Export] Panel errorPanel;
 	[Export] Label ErrorLabel;
@@ -303,8 +305,8 @@ public partial class EvolutionCalculator : Control
 
 		//check if this is vanilla
 		bin.Position = 0x14D19840;
-		if (bin.ReadByte() == 0x10)
-			vanilla = true;
+		vanilla = bin.ReadByte() == 0x10;
+
 
 		//check if this is Maeson
 		bin.Position = 0x14D19A84;
@@ -313,59 +315,62 @@ public partial class EvolutionCalculator : Control
 			Maeson = true;
 			vanilla = false;
 		}
+		else				
+			Maeson = false;
+		
 
 		//Set Maeson extra Digimon
-			if (Maeson)
+		if (Maeson)
+		{
+			for (int i = 63; i < 66; i++)
 			{
-				for (int i = 63; i < 66; i++)
-				{
-					BonusDigimon[i] = BonusDigimon[62];
-					HPRequired[i] = HPRequired[62];
-					MPRequired[i] = MPRequired[62];
-					OffenseRequired[i] = OffenseRequired[62];
-					DefenseRequired[i] = DefenseRequired[62];
-					SpeedRequired[i] = SpeedRequired[62];
-					BrainsRequired[i] = BrainsRequired[62];
-					CareRequired[i] = CareRequired[62];
-					WeightRequired[i] = WeightRequired[62];
-					DisciplineRequired[i] = DisciplineRequired[62];
-					HappinessRequired[i] = HappinessRequired[62];
-					BattlesRequired[i] = BattlesRequired[62];
-					TechsRequired[i] = TechsRequired[62];
-					FlagValues[i] = FlagValues[62];
-				}
+				BonusDigimon[i] = BonusDigimon[62];
+				HPRequired[i] = HPRequired[62];
+				MPRequired[i] = MPRequired[62];
+				OffenseRequired[i] = OffenseRequired[62];
+				DefenseRequired[i] = DefenseRequired[62];
+				SpeedRequired[i] = SpeedRequired[62];
+				BrainsRequired[i] = BrainsRequired[62];
+				CareRequired[i] = CareRequired[62];
+				WeightRequired[i] = WeightRequired[62];
+				DisciplineRequired[i] = DisciplineRequired[62];
+				HappinessRequired[i] = HappinessRequired[62];
+				BattlesRequired[i] = BattlesRequired[62];
+				TechsRequired[i] = TechsRequired[62];
+				FlagValues[i] = FlagValues[62];
+			}
 
-				minWeight = -3;
-				maxWeight = 2;
-			}
-			else if (!vanilla)
+			minWeight = -3;
+			maxWeight = 2;
+		}
+		else if (!vanilla)
+		{
+			//Set up the extra Vice digimon
+			int[] extraRequirements = new int[3];
+			bin.Position = 0x14D19840;
+			extraRequirements[0] = bin.ReadByte();
+			bin.Position = 0x14D1984C;
+			extraRequirements[1] = bin.ReadByte();
+			bin.Position = 0x14D19858;
+			extraRequirements[2] = bin.ReadByte();
+			for (int i = 0; i < 3; i++)
 			{
-				//Set up the extra Vice digimon
-				int[] extraRequirements = new int[3];
-				bin.Position = 0x14D19840;
-				extraRequirements[0] = bin.ReadByte();
-				bin.Position = 0x14D1984C;
-				extraRequirements[1] = bin.ReadByte();
-				bin.Position = 0x14D19858;
-				extraRequirements[2] = bin.ReadByte();
-				for (int i = 0; i < 3; i++)
-				{
-					BonusDigimon[i + 63] = BonusDigimon[extraRequirements[i]];
-					HPRequired[i + 63] = HPRequired[extraRequirements[i]];
-					MPRequired[i + 63] = MPRequired[extraRequirements[i]];
-					OffenseRequired[i + 63] = OffenseRequired[extraRequirements[i]];
-					DefenseRequired[i + 63] = DefenseRequired[extraRequirements[i]];
-					SpeedRequired[i + 63] = SpeedRequired[extraRequirements[i]];
-					BrainsRequired[i + 63] = BrainsRequired[extraRequirements[i]];
-					CareRequired[i + 63] = CareRequired[extraRequirements[i]];
-					WeightRequired[i + 63] = WeightRequired[extraRequirements[i]];
-					DisciplineRequired[i + 63] = DisciplineRequired[extraRequirements[i]];
-					HappinessRequired[i + 63] = HappinessRequired[extraRequirements[i]];
-					BattlesRequired[i + 63] = BattlesRequired[extraRequirements[i]];
-					TechsRequired[i + 63] = TechsRequired[extraRequirements[i]];
-					FlagValues[i + 63] = FlagValues[extraRequirements[i]];
-				}
+				BonusDigimon[i + 63] = BonusDigimon[extraRequirements[i]];
+				HPRequired[i + 63] = HPRequired[extraRequirements[i]];
+				MPRequired[i + 63] = MPRequired[extraRequirements[i]];
+				OffenseRequired[i + 63] = OffenseRequired[extraRequirements[i]];
+				DefenseRequired[i + 63] = DefenseRequired[extraRequirements[i]];
+				SpeedRequired[i + 63] = SpeedRequired[extraRequirements[i]];
+				BrainsRequired[i + 63] = BrainsRequired[extraRequirements[i]];
+				CareRequired[i + 63] = CareRequired[extraRequirements[i]];
+				WeightRequired[i + 63] = WeightRequired[extraRequirements[i]];
+				DisciplineRequired[i + 63] = DisciplineRequired[extraRequirements[i]];
+				HappinessRequired[i + 63] = HappinessRequired[extraRequirements[i]];
+				BattlesRequired[i + 63] = BattlesRequired[extraRequirements[i]];
+				TechsRequired[i + 63] = TechsRequired[extraRequirements[i]];
+				FlagValues[i + 63] = FlagValues[extraRequirements[i]];
 			}
+		}
 
 		for (int i = 0; i < 8; i++)
 		{
@@ -554,12 +559,19 @@ public partial class EvolutionCalculator : Control
 
 				if (BattlesRequired[targetID] != -1)
 				{
-					BattleReq[evolutions].TooltipText = BattlesRequired[targetID] + " ";
+					if (!Maeson)
+					{
+						BattleReq[evolutions].TooltipText = BattlesRequired[targetID] + " ";
 
-					if (FlagValues[targetID] % 1 == 0)
-						BattleReq[evolutions].TooltipText = BattleReq[evolutions].TooltipText + Tr("BattlesH");
+						if (FlagValues[targetID] % 1 == 0)
+							BattleReq[evolutions].TooltipText = BattleReq[evolutions].TooltipText + Tr("BattlesH");
+						else
+							BattleReq[evolutions].TooltipText = BattleReq[evolutions].TooltipText + Tr("BattlesL");
+					}
 					else
-						BattleReq[evolutions].TooltipText = BattleReq[evolutions].TooltipText + Tr("BattlesL");
+					{
+						BattleReq[evolutions].TooltipText = Tr("BetweenC") + (BattlesRequired[targetID] - 3) + Tr("ANDC") + BattlesRequired[targetID] + " " + Tr("BattlesC");
+					}
 				}
 				else
 					BattleReq[evolutions].Visible = false;
@@ -780,10 +792,18 @@ public partial class EvolutionCalculator : Control
 		battlesRequirement = BattlesRequired[target];
 		if (battlesRequirement != -1)
 		{
-			if (isMaxBattles == 0 && battlesRequirement <= currentBattles)
-				isBonusFulfilled = 1;
-			else if (isMaxBattles == 1 && currentBattles <= battlesRequirement)
-				isBonusFulfilled = 1;
+			if (!Maeson)
+			{
+				if (isMaxBattles == 0 && battlesRequirement <= currentBattles)
+					isBonusFulfilled = 1;
+				else if (isMaxBattles == 1 && currentBattles <= battlesRequirement)
+					isBonusFulfilled = 1;
+			}
+			else
+			{
+				if (currentBattles <= battlesRequirement && battlesRequirement - 3 <= currentBattles)
+					isBonusFulfilled = 1;
+			}
 
 		}
 		if ((TechsRequired[target] != -1) && (TechsRequired[target] <= totalTechs))
@@ -960,6 +980,9 @@ public partial class EvolutionCalculator : Control
 		maxWeight = 5;
 		foreach (Control evo in Evolutions)
 			evo.Visible = false;
+
+		foreach (SpinBox value in AllValues)
+			value.SetValueNoSignal(0);
 	}
 
 	void ErrorLoading()

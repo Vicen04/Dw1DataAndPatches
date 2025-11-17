@@ -10,8 +10,8 @@ public partial class DataCheck : Control
 		public string name { get; set; }
 		public int itemID { get; set; }
 		public int itemChance { get; set; }
+		public int[] Types { get; set; }
 		public List<byte> Attacks { get; set; }
-
 		public Texture2D digimonSprite { get; set; }
 	}
 	[Export] AtlasTexture ItemSprites;
@@ -21,9 +21,9 @@ public partial class DataCheck : Control
 
 	[Export] ItemsStuff itemsScript;
 
-	//[Export] ItemsStuff digimonScript;
+	[Export] DigimonStuff digimonScript;
 
-	//[Export] ItemsStuff evolutionScript;
+	[Export] EvolutionStuff evolutionScript;
 
 	[Export] TechStuff techsScript;
 
@@ -122,11 +122,17 @@ public partial class DataCheck : Control
 			}
 		}
 
-		uint ItemInitialOffset = 0x14D6E9FD, currentOffset = ItemInitialOffset;
+		uint ItemInitialOffset = 0x14D6E9FA, currentOffset = ItemInitialOffset;
 		bin.Position = ItemInitialOffset;
 		for (int i = 0; i < 180; i++)
 		{
 			digimonData[i] = new DigimonData();
+			digimonData[i].Types = new int[3];
+			for (int j = 0; j < 3; j++)
+			{
+				digimonData[i].Types[j] = bin.ReadByte();
+			}
+
 			int value = bin.ReadByte();
 			if (CheckIfECC((int)bin.Position))
 			{
@@ -136,39 +142,61 @@ public partial class DataCheck : Control
 
 			digimonData[i].itemID = value;
 			value = bin.ReadByte();
+
+			digimonData[i].Attacks = new List<byte>();
+
+			if (bin.Position != 0x14D6F452)
+				for (int j = 0; j < 16; j++)
+				{
+					int attackID = bin.ReadByte();
+					if (attackID == 0xFF)
+						break;
+					digimonData[i].Attacks.Add((byte)attackID);
+				}
+			else
+			{
+				for (int j = 0; j < 6; j++)
+				{
+					int attackID = bin.ReadByte();
+					digimonData[i].Attacks.Add((byte)attackID);
+				}
+				digimonData[i].Attacks.AddRange([0xE, 0xF, 0x46]);
+			}
+
 			currentOffset = currentOffset + 0x34;
 			if (CheckIfECC((int)currentOffset))
 				currentOffset = currentOffset + 0x130;
 			digimonData[i].itemChance = value;
 
 			bin.Position = currentOffset;
+
+
 		}
 
 		currentOffset = 0x14D6E9DC;
 		for (int i = 0; i < 180; i++)
 		{
 			bin.Position = currentOffset;
-
-
+			
 			if (i != 85)
 				digimonData[i].name = System.Text.Encoding.Default.GetString(reader.ReadBytes(20));
 			else
 				digimonData[i].name = "Piddomon";
 
 
-			if (i > 127)
-			{
+			/*if (i > 127)
+			{			
 				if (i < 177)
-					digimonData[i].name = digimonData[i].name + " NPC";
+					digimonData[i].name = "NPC " + digimonData[i].name;
 				else if (i == 177)
-					digimonData[i].name = digimonData[i].name + " Mansion";
+					digimonData[i].name = "Mansion " + digimonData[i].name;
 				else
-					digimonData[i].name = digimonData[i].name + " Arena";
+					digimonData[i].name = "Arena " + digimonData[i].name;
 			}
 			else if (i == 125)
 			{
-				digimonData[i].name = digimonData[i].name + " Shop";
-			}
+				digimonData[i].name = "Shop " + digimonData[i].name;
+			}*/
 			currentOffset = currentOffset + 0x34;
 			if (CheckIfECC((int)currentOffset))
 				currentOffset = currentOffset + 0x130;
@@ -247,6 +275,9 @@ public partial class DataCheck : Control
 		bin.Position = 0x14D19840;
 		if (bin.ReadByte() == 0x10)
 			vanilla = true;
+		else
+			vanilla = false;
+
 
 		//check if this is Maeson
 		bin.Position = 0x14D19A84;
@@ -255,9 +286,19 @@ public partial class DataCheck : Control
 			Maeson = true;
 			vanilla = false;
 		}
+		else
+			Maeson = false;
+		
+		if (!Maeson && !vanilla)
+        {
+            digimonData[136].digimonSprite = parent.GetDigimonTexture(64, 448);
+			digimonData[148].digimonSprite = parent.GetDigimonTexture(128, 448);
+        }
 
 		itemsScript.SetupData(bin, reader, this, !Maeson && !vanilla);
 		techsScript.SetupData(bin, reader, this, !Maeson && !vanilla);
+		evolutionScript.SetupData(bin, reader, this, !Maeson && !vanilla);
+		digimonScript.SetupData(bin, reader, this, !Maeson && !vanilla);
 
 		reader.Close();
 		reader.Dispose();
@@ -309,19 +350,43 @@ public partial class DataCheck : Control
 	{
 		itemsScript.RestartData();
 		techsScript.RestartData();
+		evolutionScript.RestartData();
+		digimonScript.RestartData();
 		itemsScript.Visible = false;
 		techsScript.Visible = false;
+		evolutionScript.Visible = false;
+		digimonScript.Visible = false;
 	}
 
 	void ItemsPressed()
 	{
 		itemsScript.Visible = true;
 		techsScript.Visible = false;
+		evolutionScript.Visible = false;
+		digimonScript.Visible = false;
 	}
-	
+
 	void TechsPressed()
 	{
 		itemsScript.Visible = false;
 		techsScript.Visible = true;
+		evolutionScript.Visible = false;
+		digimonScript.Visible = false;
+	}
+
+	void EvoPressed()
+	{
+		itemsScript.Visible = false;
+		techsScript.Visible = false;
+		evolutionScript.Visible = true;
+		digimonScript.Visible = false;
+	}
+	
+	void DigimonPressed()
+	{
+		itemsScript.Visible = false;
+		techsScript.Visible = false;
+		evolutionScript.Visible = false;
+		digimonScript.Visible = true;
 	}
 }

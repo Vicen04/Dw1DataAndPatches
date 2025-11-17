@@ -133,6 +133,7 @@ public partial class LearnBattle : Control
 		}
 		else
 		{
+			LastTech.Visible = true;
 			for (int i = 0; i < TechsGivenVice.Length; i++)
 				TechsGivenVice[i].Visible = false;
 

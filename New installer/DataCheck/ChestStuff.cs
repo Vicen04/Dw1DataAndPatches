@@ -131,10 +131,10 @@ public partial class ChestStuff : Control
 				, "Grey Lord's Mansion"),
 				new AreasData(
 				[
-					new ChestData([0x14021169, 0x14021175], "ISCA02"),
-					new ChestData([0x14022D05], "ISCA05"),
-					new ChestData([0x14023625, 0x14023631], "ISCA06"),
-					new ChestData([0x14023F55, 0x14023F61], "ISCA07")
+					new ChestData([0x14021169, 0x14021175], "ICSA02"),
+					new ChestData([0x14022D05], "ICSA05"),
+					new ChestData([0x14023625, 0x14023631], "ICSA06"),
+					new ChestData([0x14023F55, 0x14023F61], "ICSA07")
 				]
 				, "Ice Sanctuary"),
 				new AreasData([new ChestData([0x14030965], "LEOM02")], "Leomon's Ancestor Cave"),

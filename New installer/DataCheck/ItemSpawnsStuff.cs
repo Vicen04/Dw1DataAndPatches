@@ -320,7 +320,7 @@ public partial class ItemSpawnsStuff : Control
 		}
 		if (vice)
 		{
-			allAreas.Add(new AreasData([new MapData([0x13FEDFB1, 0x13FEDFB7, 0x13FEDFBD, 0x13FEDFC3, 0x13FEDFD5, 0x13FEE00D, 0x13FEE005], [], "MIHA03")], "Bonus Area"));
+			allAreas.Add(new AreasData([new MapData([0x13FEDFB1, 0x13FEDFB7, 0x13FEDFBD, 0x13FEDFC3, 0x13FEDFD5, 0x13FEDFED, 0x13FEE005], [], "MIHA03")], "Bonus Area"));
 			for (int i = 0; i < allAreas[allAreas.Count - 1].maps[0].offsets.Count; i++)
 			{
 				bin.Position = allAreas[allAreas.Count - 1].maps[0].offsets[i];

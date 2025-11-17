@@ -19,8 +19,8 @@ public partial class ToolsHandler : SubViewportContainer
 	{
 		EvoCalc.Text = Tr("EvoCalculatorL");
 		EvoCalc.TooltipText = Tr("EvoCalculator");
-		Bingo.Text = Tr("BingoL");
-		Bingo.TooltipText = Tr("BingoInfo");
+		//Bingo.Text = Tr("BingoL");
+		//Bingo.TooltipText = Tr("BingoInfo");
 		GameCheck.Text = Tr("GameCheckerL");
 		GameCheck.TooltipText = Tr("GameChecker");
 		EvoCalc.Pressed += OpenEvoTool;

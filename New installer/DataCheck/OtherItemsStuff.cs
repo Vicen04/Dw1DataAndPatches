@@ -50,6 +50,7 @@ public partial class OtherItemsStuff : Control
 	[Export] Label boostItemslabel;
 	[Export] Label[] BoostEffects;
 	[Export] Label[] boostItems;
+	[Export] Label[] OmniDisk;
 	[Export] TextureRect[] boostIcons;
 	[Export] Label healItemslabel;
 	[Export] Label healHP;
@@ -106,8 +107,8 @@ public partial class OtherItemsStuff : Control
 		AUTOPILOT = 76,
 		OFFCHIP = 124,
 		DEFCHIP = 140,
-		QUICKCHIP = 156,
-		BRAINCHIP = 172,
+		BRAINCHIP = 156,
+		QUICKCHIP = 172,
 		HPCHIP = 188,
 		MPCHIP = 204,
 		DVCHIPA = 220,
@@ -423,9 +424,10 @@ public partial class OtherItemsStuff : Control
 
 		//Setup Boost
 		bin.Position = 0x14D292E4;
+		int[] OmniStats = { 0, 0, 0 };
 		if (bin.ReadByte() == 0x40)
 		{
-			offsetsBoost = new uint[] { 0x14D294F0, 0x14D29554, 0x14D295B8, 0x14D294F0, 0x14D29554, 0x14D295B8, 0x14D2969C, 0x14D29700, 0x14D29764 };
+			offsetsBoost = new uint[] { 0x14D294F0, 0x14D29554, 0x14D295B8, 0x14D2969C, 0x14D29700, 0x14D29764 };
 
 			for (int i = 0; i < 7; i++)
 			{
@@ -433,27 +435,58 @@ public partial class OtherItemsStuff : Control
 				int currentBoost = GetDiskValue(bin.ReadByte(), false);
 				boostItems[i].Text = parent.GetItemData(currentBoost + 15).name;
 				boostIcons[i].Texture = mainParent.GetItemTex(currentBoost + 15);
+				if (i < 3 && currentBoost != 3)
+				{
+					if (currentBoost > 2)
+						currentBoost--;
+					bin.Position = offsetsBoost[currentBoost];
+					if (currentBoost % 4 == 0)
+						OmniStats[0] = OmniStats[0] + reader.ReadInt16();
+					else if (currentBoost % 4 == 1)
+						OmniStats[1] = OmniStats[1] + reader.ReadInt16();
+					else if (currentBoost % 4 == 2)
+						OmniStats[2] = OmniStats[2] + reader.ReadInt16();
+				}
 			}
 		}
 		else
 		{
-			offsetsBoost = new uint[] { 0x14D294A8, 0x14D2950C, 0x14D29570,  0x14D294C8, 0x14D2952C, 0x14D29590, 0x14D295F4, 0x14D29658, 0x14D296BC };
+			offsetsBoost = new uint[] { 0x14D294A8, 0x14D2950C, 0x14D29570, 0x14D295F4, 0x14D29658, 0x14D296BC };
 			bin.Position = ptrOffsetBoost;
-			
+
 			for (int i = 0; i < 7; i++)
 			{
 				bin.Position = i * 4 + ptrOffsetBoost;
 				int currentBoost = GetDiskValue(bin.ReadByte(), true);
 				boostItems[i].Text = parent.GetItemData(currentBoost + 15).name;
 				boostIcons[i].Texture = mainParent.GetItemTex(currentBoost + 15);
+				if (i < 3 && currentBoost != 3)
+				{
+					if (currentBoost > 2)
+						currentBoost--;
+					bin.Position = offsetsBoost[currentBoost];
+					if (currentBoost % 4 == 0)
+						OmniStats[0] = OmniStats[0] + reader.ReadInt16();
+					else if (currentBoost % 4 == 1)
+						OmniStats[1] = OmniStats[1] + reader.ReadInt16();
+					else if (currentBoost % 4 == 2)
+						OmniStats[2] = OmniStats[2] + reader.ReadInt16();
+				}
 			}
 		}
 
+
+
 		for (int i = 0; i < offsetsBoost.Length; i++)
 		{
+			
 			bin.Position = offsetsBoost[i];
 			BoostEffects[i].Text = reader.ReadInt16().ToString();
-		}
+		}			
+
+		OmniDisk[0].Text = OmniStats[0].ToString();
+		OmniDisk[1].Text = OmniStats[1].ToString();
+		OmniDisk[2].Text = OmniStats[2].ToString();
 
 		//curling
 		int previousChance = -1;
@@ -590,9 +623,9 @@ public partial class OtherItemsStuff : Control
 			case CHIPBYTES.DEFCHIP:
 				return 2;
 			case CHIPBYTES.QUICKCHIP:
-				return 3;
-			case CHIPBYTES.BRAINCHIP:
 				return 4;
+			case CHIPBYTES.BRAINCHIP:
+				return 3;
 			case CHIPBYTES.HPCHIP:
 				return 5;
 			case CHIPBYTES.MPCHIP:

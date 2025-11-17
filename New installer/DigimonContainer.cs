@@ -13,7 +13,9 @@ public partial class DigimonContainer : PanelContainer
 	[Export] private CheckBox Curling;
 	[Export] private CheckBox RMTGR;
 	[Export] private CheckBox BWere;
-
+	[Export] private CheckBox Tentomon;
+	[Export] private CheckBox WarGreymon;
+	[Export] private CheckBox MetalGaru;
 
 	[Export] private VicePatcherContainer VicePatcher;
 	// Called when the node enters the scene tree for the first time.
@@ -30,7 +32,12 @@ public partial class DigimonContainer : PanelContainer
 
 	void Myotismon_Toggled(bool toggled) { VicePatcher.SetMyotismon(toggled); }
 
-	void Panjyamon_Toggled(bool toggled) { VicePatcher.SetRestorePanjya(toggled); }
+	void Panjyamon_Toggled(bool toggled) 
+	{ 
+		VicePatcher.SetRestorePanjya(toggled); 
+		if (toggled)
+			BWere.ButtonPressed = false;
+	}
 
 	void Vermillimon_Toggled(bool toggled) { VicePatcher.SetVermillimon(toggled); }
 
@@ -52,8 +59,18 @@ public partial class DigimonContainer : PanelContainer
 
 	void RMTGR_Toggled(bool toggled) { VicePatcher.SetRMetal(toggled); }
 
-	void BWere_Toggled(bool toggled) { VicePatcher.SetBWere(toggled); }
+	void BWere_Toggled(bool toggled) 
+	{ 
+		VicePatcher.SetBWere(toggled); 
+		if (toggled)
+			Panjyamon.ButtonPressed = false;
+	}
 
+	void WarGreymon_Toggled(bool toggled) { }
+
+	void Tentomon_Toggled(bool toggled) { }
+
+	void MetalGaru_Toggled(bool toggled) { }
 
 	void _on_filth_challenge_toggled(bool toggled)
 	{
@@ -100,9 +117,13 @@ public partial class DigimonContainer : PanelContainer
 		Curling.Toggled += Curling_Toggled;
 		RMTGR.Toggled += RMTGR_Toggled;
 		BWere.Toggled += BWere_Toggled;
+		WarGreymon.Toggled += WarGreymon_Toggled;
+		MetalGaru.Toggled += MetalGaru_Toggled;
+		Tentomon.Toggled += Tentomon_Toggled;
 	}
 
-	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS)
+	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS, bool WarGreymonS,
+	bool TentomonS, bool MetalGaruS)
 	{
 		Myotismon.ButtonPressed = MyotismonS;
 		Panjyamon.ButtonPressed = PanjyamonS;
@@ -112,6 +133,9 @@ public partial class DigimonContainer : PanelContainer
 		Curling.ButtonPressed = CurlingS;
 		RMTGR.ButtonPressed = RMTGRS;
 		BWere.ButtonPressed = BWereS;
+		WarGreymon.ButtonPressed = WarGreymonS;
+		Tentomon.ButtonPressed = TentomonS;
+		MetalGaru.ButtonPressed = MetalGaruS;
 	}
 	
 	public void RestartSelection()
@@ -124,5 +148,8 @@ public partial class DigimonContainer : PanelContainer
 		Curling.ButtonPressed = false;
 		RMTGR.ButtonPressed = false;
 		BWere.ButtonPressed = false;
+		WarGreymon.ButtonPressed = false;
+		Tentomon.ButtonPressed = false;
+		MetalGaru.ButtonPressed = false;
 	}
 }

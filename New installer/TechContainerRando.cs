@@ -82,6 +82,9 @@ public partial class TechContainerRando : PanelContainer
 	[Export]
 	private RandomizerContainer baseScript;
 
+	[Export]
+	private CheckBox BoostStatus;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -245,6 +248,8 @@ public partial class TechContainerRando : PanelContainer
 		baseScript.SetLearnBrainsOpt(value);
 	}
 
+	void BoostStatusToggled(bool toggled){ baseScript.SetStatusBoost(toggled); }
+
 
 	void SetUpButtonsTranslations()
 	{
@@ -277,6 +282,8 @@ public partial class TechContainerRando : PanelContainer
 		LearnBrains.TooltipText = Tr("LearnBrainsR_info");
 		GivenTechs.Text = Tr("GivenTechs_L");
 		GivenTechs.TooltipText = Tr("GivenTechs_info");
+		BoostStatus.Text = Tr("BoostStatusR_L");
+		BoostStatus.TooltipText = Tr("BoostStatusR_info");
 	}
 
 	void SetUpOptionsTranslations()
@@ -335,11 +342,12 @@ public partial class TechContainerRando : PanelContainer
 		LearnBattle.Toggled += LearnBattleToggled;
 		LearnBrains.Toggled += LearnBrainsToggled;
 		GivenTechs.Toggled += GivenTechsToggled;
+		BoostStatus.Toggled += BoostStatusToggled;
 	}
 
 	public void LoadSaveData(bool DamageS, bool MPS, bool TypeDamageS, bool AccuracyS, bool StatusS, bool StatusChanceS, bool FinishersS, bool BoostTechS,
 	bool BoostPowerS, bool LearnBattleS, bool LearnBrainsS, bool GivenTechsS, int DamageValue, int MPValue, int TypeValue, int AccuracyValue, int StatusValue, int statusChanceValue,
-	int finisherValue, int boostPowerValue, int battleValue, int brainsValue)
+	int finisherValue, int boostPowerValue, int battleValue, int brainsValue, bool statusBoost)
 	{
 		DamageOpt.Selected = DamageValue;
 		MPOpt.Selected = MPValue;
@@ -363,5 +371,6 @@ public partial class TechContainerRando : PanelContainer
 		LearnBattle.ButtonPressed = LearnBattleS;
 		LearnBrains.ButtonPressed = LearnBrainsS;
 		GivenTechs.ButtonPressed = GivenTechsS;
+		BoostStatus.ButtonPressed = statusBoost;
 	}
 }

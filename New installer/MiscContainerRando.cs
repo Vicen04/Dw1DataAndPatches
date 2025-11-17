@@ -260,8 +260,8 @@ public partial class MiscContainerRando : PanelContainer
 	{
 		Title.Text = Tr("MiscellaneousR_L");
 		Title.TooltipText = Tr("MiscellaneousR_info");
-		Restaurant.Text = Tr("Restaurant_L");
-		Restaurant.TooltipText = Tr("Restaurant_info");
+		Restaurant.Text = Tr("RestaurantR_L");
+		Restaurant.TooltipText = Tr("RestaurantR_info");
 		Birdramon.TooltipText = Tr("Birdramon_info");
 		Boost.Text = Tr("BoostR_L");
 		Boost.TooltipText = Tr("BoostR_info");

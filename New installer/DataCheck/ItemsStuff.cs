@@ -22,6 +22,7 @@ public partial class ItemsStuff : Control
 	[Export] ChestStuff ChestsCheck;
 	[Export] CupItemStuff TournamentsCheck;
 	[Export] OtherItemsStuff OthersCheck;
+	[Export] EvoItems evoItemsSetup;
 
 	private ItemData[] items = new ItemData[128];
 
@@ -97,6 +98,7 @@ public partial class ItemsStuff : Control
 		ChestsCheck.SetUpData(bin, parent, this, vice);
 		TournamentsCheck.SetupData(bin, parent, this, vice);
 		OthersCheck.SetupData(bin, reader, parent, this, vice);
+		evoItemsSetup.SetupData(bin, parent, this, vice);
 
 		this.Visible = false;
 		
