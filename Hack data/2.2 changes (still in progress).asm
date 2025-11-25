@@ -3946,3 +3946,9 @@ Disassembly:
         800df158 00 00 00 00     nop
         800df15c 01 00 42 24     addiu      v0,v0,0x1
         800df160 fa 92 82 a3     sb         v0,-0x6d06(gp)  //ShoeStepCount                  
+
+
+WarGreymon nodes
+
+
+WereGarurumon nodes

@@ -1033,7 +1033,7 @@ public class DigimonRandomizer
       prosperityOffsets[14] = 0x13FF8017; //Bakemon
 
       recruitTriggers[23][0] = 0x13FF8012; //Bakemon
-      recruitTriggers[33][0] = 0x13FE088C; //Coelamon
+      recruitTriggers[32][0] = 0x13FE088C; //Coelamon
       if (trueHardcoreMode)
       recruitTriggers[40][0] = 0x1403F868; //Penguinmon
     }

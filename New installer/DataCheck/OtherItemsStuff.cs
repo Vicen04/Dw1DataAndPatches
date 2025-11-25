@@ -367,8 +367,8 @@ public partial class OtherItemsStuff : Control
 		{
 			bin.Position = offsetsPtrChips + i * 4;
 			int currentChip = GetChipValue((CHIPBYTES)bin.ReadByte());
-			statItems[i].Text = parent.GetItemData(currentChip + 22).name;
-			statsIcons[i].Texture = mainParent.GetItemTex(currentChip + 22);
+			statItems[currentChip].Text = parent.GetItemData(i + 22).name;
+			statsIcons[currentChip].Texture = mainParent.GetItemTex(i + 22);
 		}
 
 		for (int i = 0; i < 8; i++)

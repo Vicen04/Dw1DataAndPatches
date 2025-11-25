@@ -998,7 +998,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*MIHA00*/   0x13FEC445, 0x13FEC45B, 0x13FEC471,
 			/*MIHA01*/   0x13FECD65, 0x13FECD7B, 0x13FECD91,
 			/*MIHA02*/   0x13FED695, 0x13FED6AB, 0x13FED6C1,
-			/*MIHA03*/   0x13FEDFB1, 0x13FEDFB7, 0x13FEDFBD, 0x13FEDFC3, 0x13FEDFD5, 0x13FEDFED, 0x13FEE005,
+			/*MIHA03*/   0x13FEDFB1, 0x13FEDFB7, 0x13FEDFBD, 0x13FEDFC3,
 			/*MIHA04A*/  0x13FEF231, 0x13FEF247, 0x13FEF25D,
 			/*MIHA04B*/  0x13FEFB65, 0x13FEFB7B, 0x13FEFB91,
 			/*MIHA05*/   0x1407B3D5, 0x1407B3EB, 0x1407B401, 0x1407B417, 0x1407B42D,
@@ -1054,11 +1054,13 @@ public partial class RandomizerContainer : SubViewportContainer
 		},
 		exceptions =
 		{
-			/*GCAN09*/  0x13FFCEA9, 0x13FFCEBF, 0x13FFCED5
+			/*GCAN09*/  0x13FFCEA9, 0x13FFCEBF, 0x13FFCED5,
+			/*MIHA03*/  0x13FEDFD5, 0x13FEDFED, 0x13FEE005,
 		},
 		exceptionsHardcore =
 		{
-			/*GCAN09*/  0x13FFCEAD, 0x13FFCEC3, 0x13FFCED9
+			/*GCAN09*/  0x13FFCEAD, 0x13FFCEC3, 0x13FFCED9,
+			/*MIHA03*/  0x13FEDFC9, 0x13FEDFD5, 0x13FEDFDB,
 		};
 
 		bin.Position = 0x13FFCE9A;
@@ -1510,9 +1512,9 @@ public partial class RandomizerContainer : SubViewportContainer
 	{
 		uint[] chestItemOffsets =
 		{
-			/*MAYO10*/   0x13FE3119,
-			/*TROP01*/   0x13FE6845,
 			/*MIHA03*/   0x13FEE011, //This is the Machi/Devil Coder 
+			/*MAYO10*/   0x13FE3119,
+			/*TROP01*/   0x13FE6845,			
 			/*TUNN08*/   0x13FF4DE9, 0x13FF4DF5, //Meramon room
 			/*TUNN10*/   0x13FF6979, 0x13FF6985,
 			/*GCAN04*/   0x13FFA099, //Shellmon mountain down
@@ -1554,6 +1556,12 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*MGEN09*/   0x14080FB5,
 			/*MGEN10*/   0x140818F5, 0x14081901
 		};
+
+		bin.Position = 0x13FEDFE0;
+		int check = bin.ReadByte();
+		if (check != 0x19)
+		chestItemOffsets[0] = 0x13FEDFE1;
+
         int machiChest = numberGenerator.Next(chestItemOffsets.Length);
 		switch (chestsOpt)
 		{
@@ -5988,7 +5996,6 @@ public partial class RandomizerContainer : SubViewportContainer
 		catch (System.ArgumentException)
 		{
 			randomizerError = true;
-
 		}
 		catch (System.IO.FileNotFoundException)
 		{
@@ -5997,6 +6004,11 @@ public partial class RandomizerContainer : SubViewportContainer
 		catch (System.IO.IOException)
 		{
 			randomizerError = true;
+		}
+		if (bin == null)
+		{
+			randomizerError = true;
+			return;
 		}
 		writter = new BinaryWriter(bin);		
 		reader = new BinaryReader(bin);

@@ -959,11 +959,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 				if (!progression)
 					SetPatch(path + "HardcoreVice 1.3.ppf");
 				else
-					SetPatch(path + "HardcoreViceP 1.2.ppf");
+					SetPatch(path + "HardcoreViceP 1.3.ppf");
 
 				if (trueHardcore)
 				{
-					SetPatch(path + "TrueHardcoreVice 1.2.ppf");
+					SetPatch(path + "TrueHardcoreVice 1.3.ppf");
 					if (restorePanjyamon)
 					{
 						bin.Position = 0x9303F20;
