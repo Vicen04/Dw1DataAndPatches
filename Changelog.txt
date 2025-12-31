@@ -372,4 +372,14 @@ Version 2.0:
 
 2.2 Part 3:
 
+- Added names during the tournament entrances
+
+- Agumon Challenge
+
+- Changes in names
+
+- More bug fixes
+
+- New events (in progress)
+
 - Still in progress...
