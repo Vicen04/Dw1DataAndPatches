@@ -138,7 +138,7 @@ public partial class ChestStuff : Control
 				]
 				, "Ice Sanctuary"),
 				new AreasData([new ChestData([0x14030965], "LEOM02")], "Leomon's Ancestor Cave"),
-				new AreasData([new ChestData([0x14045425], "OGRE11")], "Secret Beach Cave"),
+				new AreasData([new ChestData([0x14045429], "OGRE11")], "Secret Beach Cave"),
 				new AreasData([new ChestData([0x1404A6DD], "OMOC08")], "Toy Mansion"),
 				new AreasData(
 				[

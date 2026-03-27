@@ -27,10 +27,13 @@ public partial class DataCheck : Control
 
 	[Export] TechStuff techsScript;
 
+	[Export] MapsStuff mapsScript;
+
 	[Export] Button ItemsActive;
 	[Export] Button DigimonActive;
 	[Export] Button EvolutionActive;
 	[Export] Button TechsActive;
+	[Export] Button MapsActive;
 	private Texture2D[] itemsTex = new Texture2D[128];
 
 	private Texture2D[] typeSprites = new Texture2D[7];
@@ -49,6 +52,7 @@ public partial class DataCheck : Control
 		ItemsActive.Text = Tr("Items_T");
 		EvolutionActive.Text = Tr("Evolution_T");
 		TechsActive.Text = Tr("Techniques_T");
+		MapsActive.Text = Tr("Maps_T");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -307,7 +311,7 @@ public partial class DataCheck : Control
 	}
 
 	public Texture2D GetItemTex(int id) { if (id > 127) return null; return itemsTex[id]; }
-	public DigimonData GetDigimonData(int id) { return digimonData[id]; }
+	public DigimonData GetDigimonData(int id) { if (id > 179) return digimonData[0];  return digimonData[id]; }
 	public Texture2D GetTechsSprites(int id) { if (id > 6) return null; return typeSprites[id]; }
 
 
@@ -356,6 +360,8 @@ public partial class DataCheck : Control
 		techsScript.Visible = false;
 		evolutionScript.Visible = false;
 		digimonScript.Visible = false;
+		mapsScript.Visible = false;
+		mapsScript.CloseMap();
 	}
 
 	void ItemsPressed()
@@ -364,6 +370,7 @@ public partial class DataCheck : Control
 		techsScript.Visible = false;
 		evolutionScript.Visible = false;
 		digimonScript.Visible = false;
+		mapsScript.Visible = false;	
 	}
 
 	void TechsPressed()
@@ -372,6 +379,7 @@ public partial class DataCheck : Control
 		techsScript.Visible = true;
 		evolutionScript.Visible = false;
 		digimonScript.Visible = false;
+		mapsScript.Visible = false;	
 	}
 
 	void EvoPressed()
@@ -380,6 +388,7 @@ public partial class DataCheck : Control
 		techsScript.Visible = false;
 		evolutionScript.Visible = true;
 		digimonScript.Visible = false;
+		mapsScript.Visible = false;	
 	}
 	
 	void DigimonPressed()
@@ -387,6 +396,17 @@ public partial class DataCheck : Control
 		itemsScript.Visible = false;
 		techsScript.Visible = false;
 		evolutionScript.Visible = false;
-		digimonScript.Visible = true;
+		digimonScript.Visible = true;	
+		mapsScript.Visible = false;	
+	}
+
+	void MapsPressed()
+	{
+		itemsScript.Visible = false;
+		techsScript.Visible = false;
+		evolutionScript.Visible = false;
+		digimonScript.Visible = false;
+		mapsScript.Visible = true;
+		mapsScript.CloseMap();
 	}
 }

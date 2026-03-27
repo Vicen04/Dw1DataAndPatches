@@ -3952,3 +3952,808 @@ WarGreymon nodes
 
 
 WereGarurumon nodes
+
+
+
+//Update to the buff code
+
+
+void HandleBuffDisks(int itemValue)
+
+{
+  int maxOff;
+  int maxDef;
+  int maxSpd;
+  int offBoost;
+  int defBoost;
+  int spdBoost;
+  
+  if (Partner.EntityData.DigimonStats.CurrentDigimonHP == 0) 
+    return;
+  
+  offBoost = -1;
+  defBoost = -1;
+  spdBoost = -1;
+  maxOff = ((tempOff * 3) / 10 + tempOff) ;  //TempOff is the current digimon Offense in battle
+  if (999 < maxOff) {
+    maxOff = 999;
+  }
+  maxDef = ((tempDef * 3) / 10 + tempDef);  //TempDef is the current digimon Defense in battle
+  if (999 < maxDef) {
+    maxDef = 999;
+  }
+  maxSpd = ((tempSpeed * 3) / 10 + tempSpeed); //TempSpeed is the current digimon Speed in battle
+  if (999 < maxSpd) {
+    maxSpd = 999;
+  }
+  switch(itemValue) 
+  {
+  case 15:
+    if (maxOff < Partner.EntityData.DigimonStats.DigimonOff + 20) 
+      offBoost = (maxOff - Partner.EntityData.DigimonStats.DigimonOff);    
+    else 
+      offBoost = 20;    
+    break;
+  case 16:
+    if (maxDef < Partner.EntityData.DigimonStats.DigimonDef + 20) 
+      defBoost = (maxDef - Partner.EntityData.DigimonStats.DigimonDef);    
+    else 
+      defBoost = 20;    
+    break;
+  case 17:
+    if (maxSpd < Partner.EntityData.DigimonStats.DigimonSpeed + 20) 
+      spdBoost = (maxSpd - Partner.EntityData.DigimonStats.DigimonSpeed);    
+    else 
+      spdBoost = 20;    
+    break;
+  case 18
+    if (maxOff < Partner.EntityData.DigimonStats.DigimonOff + 20) 
+      offBoost = (maxOff - Partner.EntityData.DigimonStats.DigimonOff);    
+    else 
+      offBoost = 20;
+    
+    if (maxDef < Partner.EntityData.DigimonStats.DigimonDef + 20) 
+      defBoost = (maxDef - Partner.EntityData.DigimonStats.DigimonDef);    
+    else 
+      defBoost = 20;
+    
+    if (maxSpd < Partner.EntityData.DigimonStats.DigimonSpeed + 20) 
+      spdBoost = (maxSpd - Partner.EntityData.DigimonStats.DigimonSpeed);    
+    else 
+      spdBoost = 20;
+    break;
+  case 19:
+    if (maxOff < Partner.EntityData.DigimonStats.DigimonOff + 50) 
+      offBoost = (maxOff - Partner.EntityData.DigimonStats.DigimonOff);    
+    else 
+      offBoost = 50;
+    break;
+  case 20:
+    if (maxDef < Partner.EntityData.DigimonStats.DigimonDef + 50) 
+      defBoost = (maxDef - Partner.EntityData.DigimonStats.DigimonDef);    
+    else 
+      defBoost = 50;
+    break;
+  case 21:
+    if (maxSpd < Partner.EntityData.DigimonStats.DigimonSpeed + 50) 
+      spdBoost = (maxSpd - Partner.EntityData.DigimonStats.DigimonSpeed);    
+    else 
+      spdBoost = 50;    
+    break;
+  default:
+    RenderBoostItemEffect(EntityPtr);
+	return;
+  }
+  if (-1 < offBoost) 
+    BuffStat(EntityPtr, 0, offBoost, &Partner.EntityData.DigimonStats.DigimonOff, 11, 3);  // BuffStat(int* EntityPtr,int targetId,int boostValue, int* statPtr,short colour, byte icon)
+  
+  if (-1 < defBoost) 
+    BuffStat(EntityPtr, 0, defBoost, &Partner.EntityData.DigimonStats.DigimonDef, 11, 4);
+  
+  if (-1 < spdBoost) 
+    BuffStat(EntityPtr, 0, spdBoost, &Partner.EntityData.DigimonStats.DigimonSpeed, 11, 5);
+  
+  RenderBoostItemEffect(EntityPtr);
+  return;
+}
+
+                           
+        800f06f0 d0 ff bd 27     addiu      sp,sp,-0x30
+        800f06f4 15 80 01 3c     lui        at,0x8015
+        800f06f8 2c 00 bf af     sw         ra,0x2c(sp)
+        800f06fc f4 57 22 84     lh         v0,0x57f4(at) //CurrentDigimonHP
+        800f0700 24 00 b1 af     sw         s1,0x24(sp)
+        800f0704 20 00 b2 af     sw         s2,0x20(sp)
+        800f0708 1c 00 b3 af     sw         s3,0x1c(sp)
+        800f070c ea 00 40 10     beq        v0,zero,0x800f0ab8
+        800f0710 28 00 b0 af     _sw        s0,0x28(sp)
+        800f0714 14 80 01 3c     lui        at,0x8014
+        800f0718 ff ff 11 24     li         s1,-0x1
+        800f071c ff ff 12 24     li         s2,-0x1
+        800f0720 ff ff 13 24     li         s3,-0x1
+        800f0724 14 d6 25 84     lh         a1,-0x29ec(at) //tempOff                         
+        800f0728 0a 00 02 24     li         v0,0xa
+        800f072c 40 18 05 00     sll        v1,a1,0x1
+        800f0730 21 18 65 00     addu       v1,v1,a1
+        800f0734 1a 00 62 00     div        v1,v0
+        800f0738 12 10 00 00     mflo       v0
+        800f073c 00 00 00 00     nop
+        800f0740 21 10 45 00     addu       v0,v0,a1
+        800f0744 00 14 02 00     sll        v0,v0,0x10
+        800f0748 03 14 02 00     sra        v0,v0,0x10
+        800f074c e8 03 41 28     slti       at,v0,0x3e8
+        800f0750 04 00 20 14     bne        at,zero,0x800f0764
+        800f0754 00 00 00 00     _nop
+        800f0758 e7 03 02 24     li         v0,0x3e7
+        800f075c 00 14 02 00     sll        v0,v0,0x10
+        800f0760 03 14 02 00     sra        v0,v0,0x10
+                             LAB_800f0764                                   
+        800f0764 14 80 01 3c     lui        at,0x8014
+        800f0768 16 d6 26 84     lh         a2,-0x29ea(at) //tempDef                        
+        800f076c 0a 00 05 24     li         a1,0xa
+        800f0770 40 18 06 00     sll        v1,a2,0x1
+        800f0774 21 18 66 00     addu       v1,v1,a2
+        800f0778 1a 00 65 00     div        v1,a1
+        800f077c 12 18 00 00     mflo       v1
+        800f0780 00 00 00 00     nop
+        800f0784 21 18 66 00     addu       v1,v1,a2
+        800f0788 00 1c 03 00     sll        v1,v1,0x10
+        800f078c 03 1c 03 00     sra        v1,v1,0x10
+        800f0790 e8 03 61 28     slti       at,v1,0x3e8
+        800f0794 04 00 20 14     bne        at,zero,0x800f07a8
+        800f0798 00 00 00 00     _nop
+        800f079c e7 03 03 24     li         v1,0x3e7
+        800f07a0 00 1c 03 00     sll        v1,v1,0x10
+        800f07a4 03 1c 03 00     sra        v1,v1,0x10
+                             LAB_800f07a8                                   
+        800f07a8 14 80 01 3c     lui        at,0x8014
+        800f07ac 18 d6 27 84     lh         a3,-0x29e8(at) //tempSpeed                      
+        800f07b0 0a 00 06 24     li         a2,0xa
+        800f07b4 40 28 07 00     sll        a1,a3,0x1
+        800f07b8 21 28 a7 00     addu       a1,a1,a3
+        800f07bc 1a 00 a6 00     div        a1,a2
+        800f07c0 12 28 00 00     mflo       a1
+        800f07c4 00 00 00 00     nop
+        800f07c8 21 28 a7 00     addu       a1,a1,a3
+        800f07cc 00 34 05 00     sll        a2,a1,0x10
+        800f07d0 03 34 06 00     sra        a2,a2,0x10
+        800f07d4 e8 03 c1 28     slti       at,a2,0x3e8
+        800f07d8 04 00 20 14     bne        at,zero,0x800f07ec
+        800f07dc 00 00 00 00     _nop
+        800f07e0 e7 03 05 24     li         a1,0x3e7
+        800f07e4 00 34 05 00     sll        a2,a1,0x10
+        800f07e8 03 34 06 00     sra        a2,a2,0x10
+                             LAB_800f07ec                                  
+        800f07ec 15 80 10 3c     lui        s0,0x8015
+        800f07f0 f1 ff 84 20     addi       a0,a0,-0xf
+        800f07f4 07 00 81 2c     sltiu      at,a0,0x7
+        800f07f8 ab 00 20 10     beq        at,zero,0x800f0aa8
+        800f07fc e0 57 10 26     _addiu     s0,s0,0x57e0
+        800f0800 11 80 05 3c     lui        a1,0x8011
+        800f0804 00 52 a5 24     addiu      a1  //switchD_800f0834::HandleBuffItems
+        800f0808 80 20 04 00     sll        a0,a0,0x2
+        800f080c 21 20 85 00     addu       a0,a0,a1
+        800f0810 00 00 84 8c     lw         a0,0x0(a0)
+        800f0814 00 00 00 00     nop
+                             switchD_800f0818::switchD
+        800f0818 08 00 80 00     jr         a0
+        800f081c 00 00 00 00     _nop
+                             LAB_800f0820                                   
+        800f0820 00 00 03 86     lh         v1,0x0(s0) //DigimonOff
+        800f0824 00 00 00 00     nop
+        800f0828 21 20 60 00     move       a0,v1
+        800f082c 14 00 63 20     addi       v1,v1,0x14
+        800f0830 2a 08 43 00     slt        at,v0,v1
+        800f0834 04 00 20 10     beq        at,zero,0x800f0848
+        800f0838 21 28 02 00     _move      a1,v0
+        800f083c 22 10 a4 00     sub        v0,a1,a0
+        800f0840 03 00 00 10     b          0x800f0850
+        800f0844 00 8c 02 00     _sll       s1,v0,0x10
+                             LAB_800f0848                                    
+        800f0848 14 00 02 24     li         v0,0x14
+        800f084c 00 8c 02 00     sll        s1,v0,0x10
+                             LAB_800f0850                                   
+        800f0850 71 00 00 10     b          0x800f0a18
+        800f0854 03 8c 11 00     _sra       s1,s1,0x10
+                             LAB_800f0858                                   
+        800f0858 02 00 02 86     lh         v0,0x2(s0) //DigimonDef
+        800f085c 00 00 00 00     nop
+        800f0860 21 20 40 00     move       a0,v0
+        800f0864 14 00 42 20     addi       v0,v0,0x14
+        800f0868 2a 08 62 00     slt        at,v1,v0
+        800f086c 04 00 20 10     beq        at,zero,0x800f0880
+        800f0870 21 28 03 00     _move      a1,v1
+        800f0874 22 10 a4 00     sub        v0,a1,a0
+        800f0878 03 00 00 10     b         0x800f0888
+        800f087c 00 94 02 00     _sll       s2,v0,0x10
+                             LAB_800f0880                                  
+        800f0880 14 00 02 24     li         v0,0x14
+        800f0884 00 94 02 00     sll        s2,v0,0x10
+                             LAB_800f0888                                    
+        800f0888 63 00 00 10     b          0x800f0a18
+        800f088c 03 94 12 00     _sra       s2,s2,0x10
+                             LAB_800f0890                                   
+        800f0890 04 00 02 86     lh         v0,0x4(s0) //DigimonSpeed
+        800f0894 00 00 00 00     nop
+        800f0898 21 18 40 00     move       v1,v0
+        800f089c 14 00 42 20     addi       v0,v0,0x14
+        800f08a0 2a 08 c2 00     slt        at,a2,v0
+        800f08a4 04 00 20 10     beq        at,zero,0x800f08b8
+        800f08a8 21 20 06 00     _move      a0,a2
+        800f08ac 22 10 83 00     sub        v0,a0,v1
+        800f08b0 03 00 00 10     b          0x800f08c0
+        800f08b4 00 9c 02 00     _sll       s3,v0,0x10
+                             LAB_800f08b8                                 
+        800f08b8 14 00 02 24     li         v0,0x14
+        800f08bc 00 9c 02 00     sll        s3,v0,0x10
+                             LAB_800f08c0                                   
+        800f08c0 55 00 00 10     b          0x800f0a18
+        800f08c4 03 9c 13 00     _sra       s3,s3,0x10
+                             LAB_800f08c8                                   
+        800f08c8 00 00 05 86     lh         a1,0x0(s0) //DigimonOff
+        800f08cc 00 00 00 00     nop
+        800f08d0 21 20 05 00     move       a0,a1
+        800f08d4 14 00 a5 20     addi       a1,a1,0x14
+        800f08d8 2a 08 45 00     slt        at,v0,a1
+        800f08dc 05 00 20 10     beq        at,zero,0x800f08f4
+        800f08e0 21 28 02 00     _move      a1,v0
+        800f08e4 22 10 a4 00     sub        v0,a1,a0
+        800f08e8 00 8c 02 00     sll        s1,v0,0x10
+        800f08ec 04 00 00 10     b          0x800f0900
+        800f08f0 03 8c 11 00     _sra       s1,s1,0x10
+                             LAB_800f08f4                                   
+        800f08f4 14 00 02 24     li         v0,0x14
+        800f08f8 00 8c 02 00     sll        s1,v0,0x10
+        800f08fc 03 8c 11 00     sra        s1,s1,0x10
+                             LAB_800f0900                                   
+        800f0900 02 00 02 86     lh         v0,0x2(s0) //DigimonDef
+        800f0904 00 00 00 00     nop
+        800f0908 21 20 40 00     move       a0,v0
+        800f090c 14 00 42 20     addi       v0,v0,0x14
+        800f0910 2a 08 62 00     slt        at,v1,v0
+        800f0914 05 00 20 10     beq        at,zero,0x800f092c
+        800f0918 21 28 03 00     _move      a1,v1
+        800f091c 22 10 a4 00     sub        v0,a1,a0
+        800f0920 00 94 02 00     sll        s2,v0,0x10
+        800f0924 04 00 00 10     b          0x800f0938
+        800f0928 03 94 12 00     _sra       s2,s2,0x10
+                             LAB_800f092c                                  
+        800f092c 14 00 02 24     li         v0,0x14
+        800f0930 00 94 02 00     sll        s2,v0,0x10
+        800f0934 03 94 12 00     sra        s2,s2,0x10
+                             LAB_800f0938                                   
+        800f0938 04 00 02 86     lh         v0,0x4(s0) //DigimonSpeed
+        800f093c 00 00 00 00     nop
+        800f0940 21 18 40 00     move       v1,v0
+        800f0944 14 00 42 20     addi       v0,v0,0x14
+        800f0948 2a 08 c2 00     slt        at,a2,v0
+        800f094c 04 00 20 10     beq        at,zero,0x800f0960
+        800f0950 21 20 06 00     _move      a0,a2
+        800f0954 22 10 83 00     sub        v0,a0,v1
+        800f0958 03 00 00 10     b          0x800f0968
+        800f095c 00 9c 02 00     _sll       s3,v0,0x10
+                             LAB_800f0960                                   
+        800f0960 14 00 02 24     li         v0,0x14
+        800f0964 00 9c 02 00     sll        s3,v0,0x10
+                             LAB_800f0968                                    
+        800f0968 2b 00 00 10     b          0x800f0a18
+        800f096c 03 9c 13 00     _sra       s3,s3,0x10
+                             LAB_800f0970                
+        800f0970 00 00 03 86     lh         v1,0x0(s0) //DigimonOff
+        800f0974 00 00 00 00     nop
+        800f0978 21 20 60 00     move       a0,v1
+        800f097c 32 00 63 20     addi       v1,v1,0x32
+        800f0980 2a 08 43 00     slt        at,v0,v1
+        800f0984 04 00 20 10     beq        at,zero,0x800f0998
+        800f0988 21 28 02 00     _move      a1,v0
+        800f098c 22 10 a4 00     sub        v0,a1,a0
+        800f0990 03 00 00 10     b          0x800f09a0
+        800f0994 00 8c 02 00     _sll       s1,v0,0x10
+                             LAB_800f0998                                  
+        800f0998 32 00 02 24     li         v0,0x32
+        800f099c 00 8c 02 00     sll        s1,v0,0x10
+                             LAB_800f09a0                                   
+        800f09a0 1d 00 00 10     b          0x800f0a18
+        800f09a4 03 8c 11 00     _sra       s1,s1,0x10
+                             LAB_800f09a8                
+        800f09a8 02 00 02 86     lh         v0,0x2(s0) //DigimonDef
+        800f09ac 00 00 00 00     nop
+        800f09b0 21 20 40 00     move       a0,v0
+        800f09b4 32 00 42 20     addi       v0,v0,0x32
+        800f09b8 2a 08 62 00     slt        at,v1,v0
+        800f09bc 04 00 20 10     beq        at,zero,0x800f09d0
+        800f09c0 21 28 03 00     _move      a1,v1
+        800f09c4 22 10 a4 00     sub        v0,a1,a0
+        800f09c8 03 00 00 10     b          0x800f09d8
+        800f09cc 00 94 02 00     _sll       s2,v0,0x10
+                             LAB_800f09d0                                   
+        800f09d0 32 00 02 24     li         v0,0x32
+        800f09d4 00 94 02 00     sll        s2,v0,0x10
+                             LAB_800f09d8                                   
+        800f09d8 0f 00 00 10     b          0x800f0a18
+        800f09dc 03 94 12 00     _sra       s2,s2,0x10
+                             LAB_800f09e0               
+        800f09e0 04 00 02 86     lh         v0,0x4(s0) //DigimonSpeed
+        800f09e4 00 00 00 00     nop
+        800f09e8 21 18 40 00     move       v1,v0
+        800f09ec 32 00 42 20     addi       v0,v0,0x32
+        800f09f0 2a 08 c2 00     slt        at,a2,v0
+        800f09f4 05 00 20 10     beq        at,zero,0x800f0a0c
+        800f09f8 21 20 06 00     _move      a0,a2
+        800f09fc 22 10 83 00     sub        v0,a0,v1
+        800f0a00 00 9c 02 00     sll        s3,v0,0x10
+        800f0a04 04 00 00 10     b          0x800f0a18
+        800f0a08 03 9c 13 00     _sra       s3,s3,0x10
+                             LAB_800f0a0c                                   
+        800f0a0c 32 00 02 24     li         v0,0x32
+        800f0a10 00 9c 02 00     sll        s3,v0,0x10
+        800f0a14 03 9c 13 00     sra        s3,s3,0x10
+                             LAB_800f0a18                                  
+        800f0a18 0b 00 20 06     bltz       s1,0x800f0a48
+        800f0a1c 00 00 00 00     _nop
+        800f0a20 21 30 11 00     move       a2,s1
+        800f0a24 0b 00 02 24     li         v0,0xb
+        800f0a28 10 00 a2 af     sw         v0,0x10(sp)
+        800f0a2c 03 00 02 24     li         v0,0x3
+        800f0a30 14 00 a2 af     sw         v0,0x14(sp)
+        800f0a34 13 80 01 3c     lui        at,0x8013
+        800f0a38 48 f3 24 8c     lw         a0,-0xcb8(at) //Partner           
+        800f0a3c 21 28 00 00     clear      a1
+        800f0a40 cf 73 01 0c     jal        0x8005cf3c  //BuffStat
+        800f0a44 21 38 00 02     _move      a3,s0  //DigimonOff
+                             LAB_800f0a48                                   
+        800f0a48 0b 00 40 06     bltz       s2,0x800f0a78
+        800f0a4c 00 00 00 00     _nop
+        800f0a50 21 30 12 00     move       a2,s2
+        800f0a54 0b 00 02 24     li         v0,0xb
+        800f0a58 10 00 a2 af     sw         v0,0x10(sp)
+        800f0a5c 04 00 02 24     li         v0,0x4
+        800f0a60 14 00 a2 af     sw         v0,0x14(sp)
+        800f0a64 13 80 01 3c     lui        at,0x8013
+        800f0a68 48 f3 24 8c     lw         a0,-0xcb8(at) //Partner       
+        800f0a6c 21 28 00 00     clear      a1
+        800f0a70 cf 73 01 0c     jal        0x8005cf3c  //BuffStat
+        800f0a74 02 00 07 26     _addiu     a3,s0,0x2 //DigimonDef
+                             LAB_800f0a78                                   
+        800f0a78 0b 00 60 06     bltz       s3,0x800f0aa8
+        800f0a7c 00 00 00 00     _nop
+        800f0a80 21 30 13 00     move       a2,s3
+        800f0a84 0b 00 02 24     li         v0,0xb
+        800f0a88 10 00 a2 af     sw         v0,0x10(sp)
+        800f0a8c 05 00 02 24     li         v0,0x5
+        800f0a90 14 00 a2 af     sw         v0,0x14(sp)
+        800f0a94 13 80 01 3c     lui        at,0x8013
+        800f0a98 48 f3 24 8c     lw         a0,-0xcb8(at) //Partner          
+        800f0a9c 21 28 00 00     clear      a1
+        800f0aa0 cf 73 01 0c     jal        0x8005cf3c  //BuffStat
+        800f0aa4 04 00 07 26     _addiu     a3,s0,0x4 //DigimonSpeed
+                             LAB_800f0aa8                                  
+        800f0aa8 13 80 01 3c     lui        at,0x8013
+        800f0aac 48 f3 24 8c     lw         a0,-0xcb8(at) //Partner          
+        800f0ab0 7f c8 01 0c     jal        0x800721fc  //RenderBoostItemEffect
+        800f0ab4 00 00 00 00     _nop
+                             LAB_800f0ab8                                   
+        800f0ab8 1c 00 b3 8f     lw         s3,0x1c(sp)
+        800f0abc 20 00 b2 8f     lw         s2,0x20(sp)
+        800f0ac0 24 00 b1 8f     lw         s1,0x24(sp)
+        800f0ac4 2c 00 bf 8f     lw         ra,0x2c(sp)
+        800f0ac8 28 00 b0 8f     lw         s0,0x28(sp)
+        800f0acc 08 00 e0 03     jr         ra
+        800f0ad0 30 00 bd 27     _addiu     sp,sp,0x30
+        800f0ad4 00 00 00 00     nop
+        800f0ad8 00 00 00 00     nop
+        800f0adc 00 00 00 00     nop
+        800f0ae0 00 00 00 00     nop
+        800f0ae4 00 00 00 00     nop
+        800f0ae8 00 00 00 00     nop
+        800f0aec 00 00 00 00     nop
+        800f0af0 00 00 00 00     nop
+        800f0af4 00 00 00 00     nop
+        800f0af8 00 00 00 00     nop
+        800f0afc 00 00 00 00     nop
+        800f0b00 00 00 00 00     nop
+        800f0b04 00 00 00 00     nop
+        800f0b08 00 00 00 00     nop
+        800f0b0c 00 00 00 00     nop
+        800f0b10 00 00 00 00     nop
+        800f0b14 00 00 00 00     nop
+        800f0b18 00 00 00 00     nop
+        800f0b1c 00 00 00 00     nop
+        800f0b20 00 00 00 00     nop
+        800f0b24 00 00 00 00     nop
+        800f0b28 00 00 00 00     nop
+		
+	
+	//switch statement data
+	                switchD_800f0834::HandleBuffItems
+        80115200 20 08 0f 80     addr       LAB_800f0820
+        80115204 58 08 0f 80     addr       LAB_800f0858
+        80115208 90 08 0f 80     addr       LAB_800f0890
+        8011520c c8 08 0f 80     addr       LAB_800f08c8
+        80115210 70 09 0f 80     addr       LAB_800f0970
+        80115214 a8 09 0f 80     addr       LAB_800f09a8
+        80115218 e0 09 0f 80     addr       LAB_800f09e0
+
+
+
+
+//This is the battle version, the tournament version is located at 800638c8
+
+bool CheckIfBuffs(DigimonEntity *Digi,int digiID,int Tech)
+
+{
+  bool boostedTech;
+  int defLimit;
+  int offLimit;
+  int spdLimit;
+  int tempValue;
+  int Off;
+  int Def;
+  int Spd;
+  
+  Off = -1;
+  Def = -1;
+  Spd = -1;
+  
+  if (Tech == 30) //Full potential
+  {
+    Off = (Digi->DigimonStats).DigimonOff;  //Yes, this is the only one that makes sure the stats are not negative and only the Offense...
+    if (Off < 0) {
+      Off = Off + 3;
+    }
+    Off = Off / 4;
+    Def = ((Digi->DigimonStats).DigimonDef * 3) / 20;
+    Spd = ((Digi->DigimonStats).DigimonSpeed * 3) / 20;
+  }
+  else if (Tech == 21)  //Aqua magic
+  {
+    Off = ((Digi->DigimonStats).DigimonOff * 7) / 100;
+    Def = ((Digi->DigimonStats).DigimonDef << 3) / 100;
+    Spd = ((Digi->DigimonStats).DigimonSpeed * 7) / 100;
+  }
+  else if (Tech == 34) //Mass morph
+  {
+    Def = (Digi->DigimonStats).DigimonDef / 5;
+    Spd = (Digi->DigimonStats).DigimonSpeed / 10;
+  }
+  else if (Tech == 42) //War cry
+  {
+    Off = ((Digi->DigimonStats).DigimonOff / 10;
+    Def = ((Digi->DigimonStats).DigimonDef * 5) / 100;
+    Spd = ((Digi->DigimonStats).DigimonSpeed / 10;
+  }
+  else {
+    if (Tech != 41) //Muscle charge
+      return false;
+    
+    Off = ((short)(Digi->DigimonStats).DigimonOff * 3) / 10;
+  }
+  boostedTech = false;
+  if ((EntityPtr[1] == Digi) && (Tech == (&TempMovementBoostID)[(EntityPtr[1]->Entity).DigimonType * 0x1c])) //checks if it is a boosted tech
+    boostedTech = true;
+  
+  if (-1 < Off) 
+  {
+    tempValue = (int)(short)(Digi->DigimonStats).DigimonOff;
+    offLimit = 999;
+    if (boostedTech) 
+      offLimit = 2000;
+    
+    if ((offLimit < Off + tempValue) && (Off = offLimit - tempValue, Off < 1)) 
+      Off = 0;
+    
+    BuffStat(Digi, digiID, Off, &Digi->DigimonStats, 11, 3);
+  }
+  if (-1 < Def) 
+  {
+    tempValue = (int)(short)(Digi->DigimonStats).DigimonDef;
+    defLimit = 999;
+    if (boostedTech) 
+      defLimit = 2000;
+    
+    if ((defLimit < Def + tempValue) && (Def = defLimit - tempValue, Def < 1)) 
+      Def = 0;
+    
+    BuffStat(Digi, digiID, Def, &(Digi->DigimonStats).DigimonDef, 11, 4);
+  }
+  if (-1 < Spd) 
+  {
+    tempValue = (int)(short)(Digi->DigimonStats).DigimonSpeed;
+    spdLimit = 999;
+    if (boostedTech) 
+      spdLimit = 2000;
+    
+    if ((spdLimit < Spd + tempValue) && (Spd = spdLimit - tempValue, Spd < 1)) 
+      Spd = 0;
+    
+    BuffStat(Digi, digiID, Spd, &(Digi->DigimonStats).DigimonSpeed, 11, 5);
+  }
+  return true;
+}
+
+                             CheckIfBuffs                                    
+        8005b7d4 c8 ff bd 27     addiu      sp,sp,-0x38
+        8005b7d8 24 00 bf af     sw         ra,0x24(sp)
+        8005b7dc 20 00 b2 af     sw         s2,0x20(sp)
+        8005b7e0 1c 00 b1 af     sw         s1,0x1c(sp)
+        8005b7e4 18 00 b0 af     sw         s0,0x18(sp)
+        8005b7e8 28 00 b3 af     sw         s3,0x28(sp)
+        8005b7ec 2c 00 b4 af     sw         s4,0x2c(sp)
+        8005b7f0 30 00 b5 af     sw         s5,0x30(sp)
+        8005b7f4 21 88 80 00     move       s1,a0
+        8005b7f8 21 90 a0 00     move       s2,a1
+        8005b7fc ff ff 13 24     li         s3,-0x1
+        8005b800 ff ff 14 24     li         s4,-0x1
+        8005b804 ff ff 15 24     li         s5,-0x1
+        8005b808 1e 00 01 24     li         at,0x1e
+        8005b80c 70 00 c1 10     beq        a2,at,0x8005b9d0
+        8005b810 21 80 06 00     _move      s0,a2
+        8005b814 15 00 01 24     li         at,0x15
+        8005b818 48 00 c1 10     beq        a2,at,0x8005b93c
+        8005b81c 00 00 00 00     _nop
+        8005b820 22 00 01 24     li         at,0x22
+        8005b824 32 00 c1 10     beq        a2,at,0x8005b8f0
+        8005b828 00 00 00 00     _nop
+        8005b82c 2a 00 01 24     li         at,0x2a
+        8005b830 10 00 c1 10     beq        a2,at,0x8005b874
+        8005b834 00 00 00 00     _nop
+        8005b838 29 00 01 24     li         at,0x29
+        8005b83c df 00 c1 14     bne        a2,at,0x8005bbbc
+        8005b840 00 00 00 00     _nop
+        8005b844 38 00 23 86     lh         v1,0x38(s1)
+        8005b848 00 00 00 00     nop
+        8005b84c 40 10 03 00     sll        v0,v1,0x1
+        8005b850 20 18 43 00     add        v1,v0,v1
+        8005b854 66 66 02 3c     lui        v0,0x6666
+        8005b858 67 66 42 34     ori        v0,v0,0x6667
+        8005b85c 18 00 43 00     mult       v0,v1
+        8005b860 10 10 00 00     mfhi       v0
+        8005b864 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b868 83 10 02 00     sra        v0,v0,0x2
+        8005b86c 76 00 00 10     b          0x8005ba48
+        8005b870 21 98 43 00     _addu      s3,v0,v1
+                             LAB_8005b874                                   
+        8005b874 66 66 02 3c     lui        v0,0x6666
+        8005b878 38 00 23 86     lh         v1,0x38(s1)
+        8005b87c 67 66 42 34     ori        v0,v0,0x6667
+        8005b880 18 00 43 00     mult       v0,v1
+        8005b884 00 00 00 00     nop
+        8005b888 10 10 00 00     mfhi       v0
+        8005b88c c2 1f 03 00     srl        v1,v1,0x1f
+        8005b890 83 10 02 00     sra        v0,v0,0x2
+        8005b894 21 98 43 00     addu       s3,v0,v1
+        8005b898 3a 00 23 86     lh         v1,0x3a(s1)
+        8005b89c 00 00 00 00     nop
+        8005b8a0 80 10 03 00     sll        v0,v1,0x2
+        8005b8a4 20 18 43 00     add        v1,v0,v1
+        8005b8a8 eb 51 02 3c     lui        v0,0x51eb
+        8005b8ac 1f 85 42 34     ori        v0,v0,0x851f
+        8005b8b0 18 00 43 00     mult       v0,v1
+        8005b8b4 00 00 00 00     nop
+        8005b8b8 10 10 00 00     mfhi       v0
+        8005b8bc c2 1f 03 00     srl        v1,v1,0x1f
+        8005b8c0 43 11 02 00     sra        v0,v0,0x5
+        8005b8c4 21 a0 43 00     addu       s4,v0,v1
+        8005b8c8 66 66 02 3c     lui        v0,0x6666
+        8005b8cc 3c 00 23 86     lh         v1,0x3c(s1)
+        8005b8d0 67 66 42 34     ori        v0,v0,0x6667
+        8005b8d4 18 00 43 00     mult       v0,v1
+        8005b8d8 00 00 00 00     nop
+        8005b8dc 10 10 00 00     mfhi       v0
+        8005b8e0 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b8e4 83 10 02 00     sra        v0,v0,0x2
+        8005b8e8 57 00 00 10     b          0x8005ba48
+        8005b8ec 21 a8 43 00     _addu      s5,v0,v1
+                             LAB_8005b8f0                                    
+        8005b8f0 66 66 02 3c     lui        v0,0x6666
+        8005b8f4 3a 00 23 86     lh         v1,0x3a(s1)
+        8005b8f8 67 66 42 34     ori        v0,v0,0x6667
+        8005b8fc 18 00 43 00     mult       v0,v1
+        8005b900 00 00 00 00     nop
+        8005b904 10 10 00 00     mfhi       v0
+        8005b908 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b90c 43 10 02 00     sra        v0,v0,0x1
+        8005b910 21 a0 43 00     addu       s4,v0,v1
+        8005b914 66 66 02 3c     lui        v0,0x6666
+        8005b918 3c 00 23 86     lh         v1,0x3c(s1)
+        8005b91c 67 66 42 34     ori        v0,v0,0x6667
+        8005b920 18 00 43 00     mult       v0,v1
+        8005b924 00 00 00 00     nop
+        8005b928 10 10 00 00     mfhi       v0
+        8005b92c c2 1f 03 00     srl        v1,v1,0x1f
+        8005b930 83 10 02 00     sra        v0,v0,0x2
+        8005b934 44 00 00 10     b          0x8005ba48
+        8005b938 21 a8 43 00     _addu      s5,v0,v1
+                             LAB_8005b93c                                  
+        8005b93c 38 00 23 86     lh         v1,0x38(s1)
+        8005b940 00 00 00 00     nop
+        8005b944 c0 10 03 00     sll        v0,v1,0x3
+        8005b948 22 18 43 00     sub        v1,v0,v1
+        8005b94c eb 51 02 3c     lui        v0,0x51eb
+        8005b950 1f 85 42 34     ori        v0,v0,0x851f
+        8005b954 18 00 43 00     mult       v0,v1
+        8005b958 10 10 00 00     mfhi       v0
+        8005b95c c2 1f 03 00     srl        v1,v1,0x1f
+        8005b960 43 11 02 00     sra        v0,v0,0x5
+        8005b964 21 98 43 00     addu       s3,v0,v1
+        8005b968 3a 00 22 86     lh         v0,0x3a(s1)
+        8005b96c 00 00 00 00     nop
+        8005b970 c0 18 02 00     sll        v1,v0,0x3
+        8005b974 eb 51 02 3c     lui        v0,0x51eb
+        8005b978 1f 85 42 34     ori        v0,v0,0x851f
+        8005b97c 18 00 43 00     mult       v0,v1
+        8005b980 00 00 00 00     nop
+        8005b984 10 10 00 00     mfhi       v0
+        8005b988 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b98c 43 11 02 00     sra        v0,v0,0x5
+        8005b990 21 a0 43 00     addu       s4,v0,v1
+        8005b994 3c 00 23 86     lh         v1,0x3c(s1)
+        8005b998 00 00 00 00     nop
+        8005b99c c0 10 03 00     sll        v0,v1,0x3
+        8005b9a0 22 18 43 00     sub        v1,v0,v1
+        8005b9a4 eb 51 02 3c     lui        v0,0x51eb
+        8005b9a8 1f 85 42 34     ori        v0,v0,0x851f
+        8005b9ac 18 00 43 00     mult       v0,v1
+        8005b9b0 00 00 00 00     nop
+        8005b9b4 10 10 00 00     mfhi       v0
+        8005b9b8 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b9bc 43 11 02 00     sra        v0,v0,0x5
+        8005b9c0 21 10 43 00     addu       v0,v0,v1
+        8005b9c4 c2 1f 03 00     srl        v1,v1,0x1f
+        8005b9c8 1f 00 00 10     b          0x8005ba48
+        8005b9cc 21 a8 43 00     _addu      s5,v0,v1
+                             LAB_8005b9d0                                   
+        8005b9d0 38 00 22 86     lh         v0,0x38(s1)
+        8005b9d4 00 00 00 00     nop
+        8005b9d8 03 00 41 04     bgez       v0,0x8005b9e8
+        8005b9dc 83 98 02 00     _sra       s3,v0,0x2
+        8005b9e0 03 00 42 24     addiu      v0,v0,0x3
+        8005b9e4 83 98 02 00     sra        s3,v0,0x2
+                             LAB_8005b9e8                                    
+        8005b9e8 3a 00 23 86     lh         v1,0x3a(s1)
+        8005b9ec 00 00 00 00     nop
+        8005b9f0 40 10 03 00     sll        v0,v1,0x1
+        8005b9f4 20 18 43 00     add        v1,v0,v1
+        8005b9f8 66 66 02 3c     lui        v0,0x6666
+        8005b9fc 67 66 42 34     ori        v0,v0,0x6667
+        8005ba00 18 00 43 00     mult       v0,v1
+        8005ba04 00 00 00 00     nop
+        8005ba08 10 10 00 00     mfhi       v0
+        8005ba0c c2 1f 03 00     srl        v1,v1,0x1f
+        8005ba10 c3 10 02 00     sra        v0,v0,0x3
+        8005ba14 21 a0 43 00     addu       s4,v0,v1
+        8005ba18 3c 00 23 86     lh         v1,0x3c(s1)
+        8005ba1c 00 00 00 00     nop
+        8005ba20 40 10 03 00     sll        v0,v1,0x1
+        8005ba24 20 18 43 00     add        v1,v0,v1
+        8005ba28 66 66 02 3c     lui        v0,0x6666
+        8005ba2c 67 66 42 34     ori        v0,v0,0x6667
+        8005ba30 18 00 43 00     mult       v0,v1
+        8005ba34 00 00 00 00     nop
+        8005ba38 10 10 00 00     mfhi       v0
+        8005ba3c c2 1f 03 00     srl        v1,v1,0x1f
+        8005ba40 c3 10 02 00     sra        v0,v0,0x3
+        8005ba44 21 a8 43 00     addu       s5,v0,v1
+                             LAB_8005ba48                                  
+        8005ba48 13 80 01 3c     lui        at,0x8013
+        8005ba4c 48 f3 21 8c     lw         at,-0xcb8(at) //PartnerPtr
+        8005ba50 00 00 00 00     nop
+        8005ba54 0e 00 31 14     bne        at,s1,0x8005ba90
+        8005ba58 21 18 00 00     _clear     v1
+        8005ba5c 00 00 24 8c     lw         a0,0x0(at) //DigimonType
+        8005ba60 00 00 00 00     nop
+        8005ba64 c0 08 04 00     sll        at,a0,0x3
+        8005ba68 22 08 24 00     sub        at,at,a0
+        8005ba6c 80 20 01 00     sll        a0,at,0x2
+        8005ba70 12 80 01 3c     lui        at,0x8012
+        8005ba74 c7 25 21 24     addiu      at,at,0x25c7
+        8005ba78 21 08 24 00     addu       at,at,a0
+        8005ba7c 00 00 24 80     lb         a0,0x0(at) //TempMovementBoostID
+        8005ba80 00 00 00 00     nop
+        8005ba84 02 00 04 16     bne        s0,a0,0x8005ba90
+        8005ba88 00 00 00 00     _nop
+        8005ba8c 01 00 03 24     li         v1,0x1
+                             LAB_8005ba90                                  
+        8005ba90 16 00 60 06     bltz       s3,0x8005baec
+        8005ba94 21 80 03 00     _move      s0,v1
+        8005ba98 38 00 27 26     addiu      a3,s1,0x38
+        8005ba9c 0b 00 02 24     li         v0,0xb
+        8005baa0 10 00 a2 af     sw         v0,0x10(sp)
+        8005baa4 03 00 02 24     li         v0,0x3
+        8005baa8 14 00 a2 af     sw         v0,0x14(sp)
+        8005baac 38 00 22 86     lh         v0,0x38(s1)
+        8005bab0 e7 03 03 24     li         v1,0x3e7
+        8005bab4 21 30 62 02     addu       a2,s3,v0
+        8005bab8 02 00 00 12     beq        s0,zero,0x8005bac4
+        8005babc 21 20 11 00     _move      a0,s1
+        8005bac0 d0 07 03 24     li         v1,0x7d0
+                             LAB_8005bac4                                 
+        8005bac4 2a 08 66 00     slt        at,v1,a2
+        8005bac8 05 00 20 10     beq        at,zero,0x8005bae0
+        8005bacc 00 00 00 00     _nop
+        8005bad0 22 18 62 00     sub        v1,v1,v0
+        8005bad4 02 00 60 1c     bgtz       v1,0x8005bae0
+        8005bad8 21 98 03 00     _move      s3,v1
+        8005badc 21 98 00 00     clear      s3
+                             LAB_8005bae0                                    
+        8005bae0 00 34 13 00     sll        a2,s3,0x10
+        8005bae4 cf 73 01 0c     jal        0x8005cf3c  //BuffStat                                        
+        8005bae8 03 34 06 00     _sra       a2,a2,0x10
+                             LAB_8005baec                                   
+        8005baec 18 00 80 06     bltz       s4,0x8005bb50
+        8005baf0 00 00 00 00     _nop
+        8005baf4 3a 00 27 26     addiu      a3,s1,0x3a
+        8005baf8 0b 00 02 24     li         v0,0xb
+        8005bafc 10 00 a2 af     sw         v0,0x10(sp)
+        8005bb00 04 00 02 24     li         v0,0x4
+        8005bb04 14 00 a2 af     sw         v0,0x14(sp)
+        8005bb08 21 28 12 00     move       a1,s2
+        8005bb0c 21 20 11 00     move       a0,s1
+        8005bb10 3a 00 22 86     lh         v0,0x3a(s1)
+        8005bb14 e7 03 03 24     li         v1,0x3e7
+        8005bb18 21 30 82 02     addu       a2,s4,v0
+        8005bb1c 02 00 00 12     beq        s0,zero,0x8005bb28
+        8005bb20 00 00 00 00     _nop
+        8005bb24 d0 07 03 24     li         v1,0x7d0
+                             LAB_8005bb28                                   
+        8005bb28 2a 08 66 00     slt        at,v1,a2
+        8005bb2c 05 00 20 10     beq        at,zero,0x8005bb44
+        8005bb30 00 00 00 00     _nop
+        8005bb34 22 18 62 00     sub        v1,v1,v0
+        8005bb38 02 00 60 1c     bgtz       v1,0x8005bb44
+        8005bb3c 21 a0 03 00     _move      s4,v1
+        8005bb40 21 a0 00 00     clear      s4
+                             LAB_8005bb44                                    
+        8005bb44 00 34 14 00     sll        a2,s4,0x10
+        8005bb48 cf 73 01 0c     jal        0x8005cf3c  //BuffStat                                         
+        8005bb4c 03 34 06 00     _sra       a2,a2,0x10
+                             LAB_8005bb50                                   
+        8005bb50 18 00 a0 06     bltz       s5,0x8005bbb4
+        8005bb54 00 00 00 00     _nop
+        8005bb58 3c 00 27 26     addiu      a3,s1,0x3c
+        8005bb5c 0b 00 02 24     li         v0,0xb
+        8005bb60 10 00 a2 af     sw         v0,0x10(sp)
+        8005bb64 05 00 02 24     li         v0,0x5
+        8005bb68 14 00 a2 af     sw         v0,0x14(sp)
+        8005bb6c 21 28 12 00     move       a1,s2
+        8005bb70 21 20 11 00     move       a0,s1
+        8005bb74 3c 00 22 86     lh         v0,0x3c(s1)
+        8005bb78 e7 03 03 24     li         v1,0x3e7
+        8005bb7c 21 30 a2 02     addu       a2,s5,v0
+        8005bb80 02 00 00 12     beq        s0,zero,0x8005bb8c
+        8005bb84 00 00 00 00     _nop
+        8005bb88 d0 07 03 24     li         v1,0x7d0
+                             LAB_8005bb8c                                 
+        8005bb8c 2a 08 66 00     slt        at,v1,a2
+        8005bb90 05 00 20 10     beq        at,zero,0x8005bba8
+        8005bb94 00 00 00 00     _nop
+        8005bb98 22 18 62 00     sub        v1,v1,v0
+        8005bb9c 02 00 60 1c     bgtz       v1,0x8005bba8
+        8005bba0 21 a8 03 00     _move      s5,v1
+        8005bba4 21 a8 00 00     clear      s5
+                             LAB_8005bba8                                   
+        8005bba8 00 34 15 00     sll        a2,s5,0x10
+        8005bbac cf 73 01 0c     jal        0x8005cf3c //BuffStat                                         
+        8005bbb0 03 34 06 00     _sra       a2,a2,0x10
+                             LAB_8005bbb4                                   
+        8005bbb4 02 00 00 10     b          0x8005bbc0
+        8005bbb8 01 00 02 24     _li        v0,0x1
+                             LAB_8005bbbc                                   
+        8005bbbc 21 10 00 00     clear      v0
+                             LAB_8005bbc0                                 
+        8005bbc0 30 00 b5 8f     lw         s5,0x30(sp)
+        8005bbc4 2c 00 b4 8f     lw         s4,0x2c(sp)
+        8005bbc8 28 00 b3 8f     lw         s3,0x28(sp)
+        8005bbcc 24 00 bf 8f     lw         ra,0x24(sp)
+        8005bbd0 20 00 b2 8f     lw         s2,0x20(sp)
+        8005bbd4 1c 00 b1 8f     lw         s1,0x1c(sp)
+        8005bbd8 18 00 b0 8f     lw         s0,0x18(sp)
+        8005bbdc 08 00 e0 03     jr         ra
+        8005bbe0 38 00 bd 27     _addiu     sp,sp,0x38
+
+
+//BuffStat change
+
+        8005cf78 cf 07 06 24     _li        BuffValue,0x7cf  //limit changed to 1999
+
+		800646f4 cf 07 06 24     _li        BuffValue,0x7cf  //tournament version

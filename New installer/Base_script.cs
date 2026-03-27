@@ -54,7 +54,10 @@ public partial class Base_script : Node2D
 	private Label WindowSize;
 
 	[Export]
-	private OptionButton WindowSizeChoice;
+	private Button WindowSizeNormal;
+
+	[Export]
+	private Button WindowSizeBig;
 
 	[Export]
 	private Label CreditsTitle;
@@ -83,11 +86,19 @@ public partial class Base_script : Node2D
 	[Export]
 	private Button Tools;
 
+	int installerSelected = -1;
+	int screenX = 1800, screenY = 950;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
-		DisplayServer.WindowSetSize(new Vector2I(900, 425));
+		if (DisplayServer.ScreenGetSize().Y < 900 || DisplayServer.ScreenGetSize().X < 1800)
+		{
+			DisplayServer.WindowSetSize(new Vector2I(900, 425));
+			//DisplayServer.WindowSetPosition(new Vector2I(0,25));
+			this.GetWindow().MoveToCenter();
+			screenX = 900; screenY = 425;
+		}
 		viceInstaller.Pressed += SetViceInstaller;
 		optionalInstaller.Pressed += SetOptionalInstaller;
 		randomizer.Pressed += SetRandomizer;
@@ -98,6 +109,7 @@ public partial class Base_script : Node2D
 		Start.Pressed += GoToMainMenu;
 		CloseSettings.Pressed += ExitSettings;
 		Tools.Pressed += ToolsPressed;
+		fileSearch.FileSelected += OpenProgram;
 
 		viceInstaller.Text = Tr("ViceButton");
 		viceInstaller.TooltipText = Tr("ViceButton_info");
@@ -118,8 +130,8 @@ public partial class Base_script : Node2D
 		Tools.Text = Tr("ToolsL");
 		Tools.TooltipText = Tr("ToolsInfo");
 
-		WindowSizeChoice.SetItemText(0, Tr("WindowS"));
-		WindowSizeChoice.SetItemText(1, Tr("WindowL"));
+		WindowSizeNormal.Text = Tr("WindowS");
+		WindowSizeBig.Text = Tr("WindowL");
 
 		TranslationServer.SetLocale("EN");
 	}
@@ -131,25 +143,43 @@ public partial class Base_script : Node2D
 
 	void SetViceInstaller()
 	{
-		fileSearch.FileSelected += OpenViceInstaller;
+		installerSelected = 0;
 		fileSearch.Visible = true;
 	}
 
 	void SetOptionalInstaller()
 	{
-		fileSearch.FileSelected += OpenOptionalInstaller;
+		installerSelected = 2;
 		fileSearch.Visible = true;
 	}
 
 	void SetRandomizer()
 	{
-		fileSearch.FileSelected += OpenRandomizer;
+		installerSelected = 1;
 		fileSearch.Visible = true;
+	}
+
+	void OpenProgram(string path)
+	{
+		switch(installerSelected)
+		{
+			case 0:
+				OpenViceInstaller(path);
+				break;
+			case 1:
+				OpenRandomizer(path);
+				break;
+			case 2:
+				OpenOptionalInstaller(path);
+				break;
+			default:
+				break;
+		}
+
 	}
 
 	void OpenViceInstaller(string file)
 	{
-		fileSearch.FileSelected -= OpenViceInstaller;
 		var scene = GD.Load<PackedScene>("res://Scenes/VicePatcher.tscn");
 		var patcher = scene.Instantiate() as VicePatcherContainer;
 		fileSearch.Visible = false;
@@ -161,7 +191,6 @@ public partial class Base_script : Node2D
 
 	void OpenOptionalInstaller(string file)
 	{
-		fileSearch.FileSelected -= OpenOptionalInstaller;
 		var scene = GD.Load<PackedScene>("res://Scenes/VicePatcher.tscn");
 		var patcher = scene.Instantiate() as VicePatcherContainer;
 		fileSearch.Visible = false;
@@ -173,7 +202,6 @@ public partial class Base_script : Node2D
 
 	void OpenRandomizer(string file)
 	{
-		fileSearch.FileSelected -= OpenRandomizer;
 		var scene = GD.Load<PackedScene>("res://Scenes/SceneRandomizer.tscn");
 		var patcher = scene.Instantiate() as RandomizerContainer;
 		fileSearch.Visible = false;
@@ -215,17 +243,16 @@ public partial class Base_script : Node2D
 		}
 	}
 
-	void WindowsSizeSelected(int selected)
+	void SetWindowsSizeNormal()
 	{
-		switch (selected)
-		{
-			case 0:
-				DisplayServer.WindowSetSize(new Vector2I(900, 425));
-				break;
-			case 1:
-				DisplayServer.WindowSetSize(new Vector2I(1800, 950));
-				break;
-		}
+		DisplayServer.WindowSetSize(new Vector2I(screenX, screenY));
+		this.GetWindow().MoveToCenter();
+	}
+
+	void SetWindowSizeBig()
+	{
+		DisplayServer.WindowSetSize(new Vector2I(DisplayServer.ScreenGetSize().X - 100, DisplayServer.ScreenGetSize().Y - 100));
+		this.GetWindow().MoveToCenter();
 	}
 
 	void ExitViceInfo()

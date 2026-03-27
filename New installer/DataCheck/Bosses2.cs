@@ -2,6 +2,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 
 public partial class Bosses2 : Control
@@ -68,6 +69,7 @@ public partial class Bosses2 : Control
 
 	[Export] Control ByMap;
 	[Export] Control ByItem;
+	[Export] Control ByDigimon;
 	[Export] OptionButton Areas;
 	[Export] OptionButton Maps;
 	[Export] VBoxContainer DigimonContainer;
@@ -78,11 +80,19 @@ public partial class Bosses2 : Control
 	[Export] Label MoneyLabel;
 	[Export] Button SetByMap;
 	[Export] Button SetByTech;
+	[Export] Button SetByDigimon;
 	[Export] OptionButton AllTechs;
+	[Export] OptionButton AllDigimon;
 	[Export] Label[] AttacksTech;
 	[Export] Label MoneyLabelTech;
 	[Export] Label MapNameLabel;
 	[Export] VBoxContainer TechSearchList;
+	[Export] VBoxContainer DigimonSearchList;
+	[Export] Label MoneyLabelDigi;
+	[Export] Label MapDigiLabel;
+	[Export] Label SelectedTechLabel;
+	[Export] Label SelectedDigiLabel;
+	[Export] Label[] AttacksDigi;
 
 	DigimonStuff digimonData;
 	DataCheck mainP;
@@ -91,31 +101,45 @@ public partial class Bosses2 : Control
 
 	List<MapDigimon> digimonMap;
 	List<MapDigimon> searchDigimonMap;
+	List<MapDigimon> searchDigiMap;
 
 	List<AreasNPCData> NPCsData;
 
-	bool hardcore = false, truehardcore = false;
+	bool hardcore = false, truehardcore = false, AguChallenge = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		SetByMap.Pressed += MapSelected;
 		SetByTech.Pressed += TechSelected;
+		if (SetByDigimon != null)
+		SetByDigimon.Pressed += DigiSelected;
 		for (int i = 0; i < Attacks.Length; i++)
 		{
 			Attacks[i].Text = Tr("AttackText" + i);
 			AttacksTech[i].Text = Tr("AttackText" + i);
+			if (AttacksDigi.Length > 0)
+				AttacksDigi[i].Text = Tr("AttackText" + i);
 		}
 
 		for (int i = 0; i < ChanceLabel.Length; i++)
 			ChanceLabel[i].Text = Tr("StatusChaTechCheck");
 		MoneyLabel.Text = Tr("DigimonMoney_T");
 		MoneyLabelTech.Text = Tr("DigimonMoney_T");
+		if (MoneyLabelDigi != null)
+			MoneyLabelDigi.Text = Tr("DigimonMoney_T");
 		MapNameLabel.Text = Tr("MapLabelSearch");
 		MapsLabel.Text = Tr("MapSpawnLabel");
+		if (MapDigiLabel != null)
+			MapDigiLabel.Text = Tr("MapLabelSearch");
 		AreasLabel.Text = Tr("AreasSpawnLabel");
 		SetByMap.Text = Tr("SearchSpawnMap");
 		SetByTech.Text = Tr("SearchByTech");
+		if (SetByDigimon != null)
+			SetByDigimon.Text = Tr("SearchByDigi");
+		SelectedTechLabel.Text = Tr("SelTechL");
+		if (SelectedDigiLabel != null)
+		SelectedDigiLabel.Text= Tr("SelectedDig");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -138,7 +162,20 @@ public partial class Bosses2 : Control
 			bin.Position = 0x723F7EE;
 			if (bin.ReadByte() == 0x2F)
 				truehardcore = true;
+			else
+				truehardcore = false;
 		}
+		else
+		{
+			hardcore = false;
+			truehardcore = false;
+		}
+		bin.Position = 0x9C9B75E;
+    	if (bin.ReadByte() != 0x80)
+			AguChallenge = true;
+		else
+			AguChallenge = false;
+
 		if (bosses)
 			SetupBosses(vice);
 		else
@@ -245,8 +282,16 @@ public partial class Bosses2 : Control
 				digi.QueueFree();
 			searchDigimonMap.Clear();
 		}
+
+		if (searchDigiMap != null)
+		{
+			foreach (MapDigimon digi in searchDigiMap)
+					digi.QueueFree();
+				searchDigiMap.Clear();			
+		}
 		digimonMap = new List<MapDigimon>();
 		searchDigimonMap = new List<MapDigimon>();
+		searchDigiMap = new List<MapDigimon>();
 
 		digimonData = digimons;
 		mainP = main;
@@ -262,6 +307,13 @@ public partial class Bosses2 : Control
 
 		for (int i = 0; i < 58 - extra; i++)
 			AllTechs.AddIconItem(main.GetTechsSprites(digimonData.GetTechData().GetTechData(i).type), digimonData.GetTechData().GetTechData(i).name);
+
+		if (AllDigimon != null)
+		{
+			for (int i = 1; i < 177; i++)
+				AllDigimon.AddIconItem(main.GetDigimonData(i).digimonSprite, main.GetDigimonData(i).name);
+			AllDigimon.Selected = -1;
+		}
 
 		Areas.Selected = -1;
 		currentArea = -1;
@@ -328,20 +380,65 @@ public partial class Bosses2 : Control
 
 	}
 
+	void DigimonSelected(int selected)
+	{
+		foreach (MapDigimon digi in searchDigiMap)
+			digi.QueueFree();
+		searchDigiMap.Clear();
+		foreach (AreasNPCData area in NPCsData)
+		{
+			foreach (DigimonNPCData DigimonData in area.maps)
+			{
+				for (int i = 0; i < DigimonData.digimonIds.Count; i++)
+				{
+					if (DigimonData.digimonIds[i] == selected + 1)
+					{
+						var scene = GD.Load<PackedScene>("res://Items/MapDigimon.tscn");
+						searchDigiMap.Add(scene.Instantiate() as MapDigimon);
+						searchDigiMap[searchDigiMap.Count -1].SetupDigimon(mainP.GetDigimonData(DigimonData.digimonIds[i]).digimonSprite, mainP.GetDigimonData(DigimonData.digimonIds[i]).name, DigimonData.HP[i], DigimonData.MP[i],
+						DigimonData.cHP[i], DigimonData.cMP[i], DigimonData.Off[i], DigimonData.Def[i], DigimonData.Spd[i], DigimonData.Brn[i], DigimonData.Money[i], digimonData.GetTechData().GetTechData(DigimonData.Attack1[i]).name,
+						digimonData.GetTechData().GetTechData(DigimonData.Attack2[i]).name, digimonData.GetTechData().GetTechData(DigimonData.Attack3[i]).name,
+						digimonData.GetTechData().GetTechData(DigimonData.Attack4[i]).name, DigimonData.Attack1C[i], DigimonData.Attack2C[i], DigimonData.Attack3C[i], DigimonData.Attack4C[i], DigimonData.mapName);
+						DigimonSearchList.AddChild(searchDigiMap[searchDigiMap.Count -1]);
+					}
+				}
+			}
+		}
+
+	}
+
 	void MapSelected()
 	{
 		ByMap.Visible = true;
 		ByItem.Visible = false;
+		if (ByDigimon != null)
+			ByDigimon.Visible = false;
 		SetByMap.Disabled = true;
 		SetByTech.Disabled = false;
+		if (SetByDigimon != null)
+		SetByDigimon.Disabled = false;
 	}
 
 	void TechSelected()
 	{
 		ByMap.Visible = false;
 		ByItem.Visible = true;
+		if (ByDigimon != null)
+			ByDigimon.Visible = false;
 		SetByMap.Disabled = false;
 		SetByTech.Disabled = true;
+		if (SetByDigimon != null)
+		SetByDigimon.Disabled = false;
+	}
+
+	void DigiSelected()
+	{
+		ByMap.Visible = false;
+		ByItem.Visible = false;
+		ByDigimon.Visible = true;
+		SetByMap.Disabled = false;
+		SetByTech.Disabled = false;
+		SetByDigimon.Disabled = true;
 	}
 
 	void SetupBosses(bool vice)
@@ -356,6 +453,9 @@ public partial class Bosses2 : Control
 				]
 				, "Native Forest")
 		);
+		
+		if (AguChallenge)
+			NPCsData[0].maps[0].offsets.AddRange([0x9C9B7BE, 0x9C9B81E, 0x9C9B44E]);
 		if (hardcore)
 		{
 			NPCsData.Add(new AreasNPCData([new DigimonNPCData([0x17C609E], "MAYO05")], "Coela Point")
@@ -399,7 +499,7 @@ public partial class Bosses2 : Control
 			NPCsData[NPCsData.Count - 1].maps[0].offsets.Insert(0, 0x7D6A636);
 
 		if (hardcore)
-			NPCsData.Add(new AreasNPCData([new DigimonNPCData([0x6ED3D42], "GCAN04")], "Great Canyon Bridge"));
+			NPCsData.Add(new AreasNPCData([new DigimonNPCData([0xA4F0B4E], "GCAN04_2")], "Great Canyon Bridge"));
 
 		NPCsData.Add(new AreasNPCData([new DigimonNPCData([0x6FA261C], "GCAN05")], "Fortress Entrance"));
 
@@ -511,7 +611,7 @@ public partial class Bosses2 : Control
 			NPCsData[NPCsData.Count - 1].maps.Insert(1, new DigimonNPCData([0x2929254], "FACT06"));
 
 
-		NPCsData.Add(new AreasNPCData([new DigimonNPCData([0x4F4D9AE, 0x4F4DA0E], "FACT11B")], "Sewers"));
+		NPCsData.Add(new AreasNPCData([new DigimonNPCData([0x4F4DA0E], "FACT11B")], "Sewers"));
 		if (hardcore)
 			NPCsData[NPCsData.Count - 1].maps[0].offsets.Add(0x4F4DA6E);
 
@@ -593,10 +693,14 @@ public partial class Bosses2 : Control
 
 	void SetupNPC(bool vice)
 	{
+		uint kune = 0x9C9B44E;
+		if (AguChallenge)
+			kune = 0x9C9B75E;
+
 		NPCsData.AddRange(
 			[new AreasNPCData(
 				[
-					new DigimonNPCData([0x9C9B44E, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE], "MAYO00"),
+					new DigimonNPCData([kune, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE], "MAYO00"),
 					new DigimonNPCData([0x1420C5C, 0x1420CC2, 0x1420D22, 0x1420D8E, 0x1420DFA, 0x1420E66, 0x1420ECC, 0x1420F38], "MAYO01"),
 					new DigimonNPCData([0x14D3A16, 0x14D3ACA, 0x14D3B24, 0x14D3B7E], "MAYO02"),
 					new DigimonNPCData([0x157DD56, 0x157DDB6, 0x157DE76, 0x157DED0], "MAYO03"),

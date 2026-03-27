@@ -79,9 +79,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 		public bool unlockAreas { get; set; }
 		public bool mapColour { get; set; }
 		public bool ultraHardcore { get; set; }
-		public bool WarGreymon { get; set; }
-		public bool MetalGaru { get; set; }
-		public bool Tentomon { get; set; }
 		public bool restorePanjyamon { get; set; }
 		public bool starters2 { get; set; }
 		public bool kunemon { get; set; }
@@ -104,6 +101,9 @@ public partial class VicePatcherContainer : SubViewportContainer
 		public bool allBattles { get; set; }
 		public bool removeExtraInfo { get; set; }
 		public bool moreEffects { get; set; }
+		public bool agumon { get; set; }
+
+		public bool clockV2 { get; set; }
 
 		public ViceSaveData(ViceDifficulty viceDifficulty, bool myotismon, bool vermillimon, bool filth, bool restoreFilth, bool superHardcore, bool hardMono, bool hardTourney,
 		bool betterBattleTech, bool betterBrainTechs, bool betterDrop, bool superBonus, bool tanemon, bool rookieOnly, bool ultraBonus, bool dirtReduction,
@@ -112,10 +112,10 @@ public partial class VicePatcherContainer : SubViewportContainer
 		bool usefulItems2, bool curling, bool trainingBoost, bool insaneDamage, bool trueHardcore, bool noOrders, bool medals, bool seadramon, bool rareSpawns,
 		bool hyperMono, bool extraInput, bool removeEvoInfo, bool originalType, bool newMono, bool realMetal, bool vendingMachine, bool easyStart,
 		bool moreItemDrops, bool MoreItemSpawn, bool insaneBattle, bool restoreLifetime, bool removeTechBoost, bool unlockAreas, bool mapColour, bool ultraHardcore,
-		bool WarGreymon, bool MetalGaru, bool Tentomon, bool restorePanjyamon, bool starters2, bool kunemon, bool removeTelephone, bool easyTechs,
+		bool restorePanjyamon, bool starters2, bool kunemon, bool removeTelephone, bool easyTechs,
 		bool BlackWere, bool quickText, bool digitalClock, bool noRNG, bool boostItems, bool nerfTechBoost, int StatsValue, int RareSpawnValue, bool dropItemsBattle = false,
 		bool nerfEffect = false, bool removeEffect = false, bool removeNewEffects = false, bool addTimer = false, bool allBattles = false, bool removeExtraInfo = false,
-		bool moreEffects = false)
+		bool moreEffects = false, bool agumon = false, bool clockV2 = false)
 		{
 			this.viceDifficulty = viceDifficulty;
 			this.myotismon = myotismon;
@@ -176,9 +176,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 			this.unlockAreas = unlockAreas;
 			this.mapColour = mapColour;
 			this.ultraHardcore = ultraHardcore;
-			this.WarGreymon = WarGreymon;
-			this.MetalGaru = MetalGaru;
-			this.Tentomon = Tentomon;
 			this.restorePanjyamon = restorePanjyamon;
 			this.starters2 = starters2;
 			this.kunemon = kunemon;
@@ -202,6 +199,9 @@ public partial class VicePatcherContainer : SubViewportContainer
 			this.allBattles = allBattles;
 			this.removeExtraInfo = removeExtraInfo;
 			this.moreEffects = moreEffects;
+			this.agumon = agumon;
+
+			this.clockV2 = clockV2;
 		}
 	}
 	//main stuff
@@ -346,7 +346,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 	byte[] statHexValues1 = {0x21, 0x18, 0x0, 0x1, 0x18, 0x0, 0x83, 0x0, 0x12, 0x18, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x18, 0x0, 0x62, 0x0, 0x12, 0x18, 0x0, 0x0,
 	0x0, 0x0, 0x0, 0x0, 0x64, 0x0, 0x2, 0x24, 0x1a, 0x0, 0x62, 0x0, 0x12, 0x18, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2a, 0x8, 0x82, 0x0};
 	byte[] statHexValues2 = { 0x19, 0x0, 0x60, 0x10 };
-	string newSaveName = null;
+	string newSaveName = null, cueFileName;
 	int currentSave = -1;
 
 	ViceDifficulty currentViceDifficulty;
@@ -360,9 +360,9 @@ public partial class VicePatcherContainer : SubViewportContainer
 		 vendingMachine, easyStart, moreItemDrops, MoreItemSpawn;
 
 	//Vice exclusive
-	bool insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, WarGreymon, MetalGaru, Tentomon, DropItemsBattle,
+	bool insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, DropItemsBattle,
 		 restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
-		 removeEffectBoost, nerfEffectBoost, removeNewEffects, poisonTimer, allBattles, removeExtraInfo, moreEffects;
+		 removeEffectBoost, nerfEffectBoost, removeNewEffects, poisonTimer, allBattles, removeExtraInfo, moreEffects, agumon, clockV2;
 
 	int StatsValue = 1, RareSpawnValue = 10;
 
@@ -831,7 +831,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		insaneBattle = restoreLifetime = removeTechBoost = unlockAreas = mapColour = ultraHardcore = DropItemsBattle = removeEffectBoost = nerfEffectBoost = removeNewEffects = 
 		restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG = boostItems = nerfTechBoost = poisonTimer =
-		allBattles = removeExtraInfo = moreEffects = false;
+		allBattles = removeExtraInfo = moreEffects = agumon = clockV2 = false;
 
 		currentViceDifficulty = ViceDifficulty.NONE;
 	}
@@ -920,6 +920,9 @@ public partial class VicePatcherContainer : SubViewportContainer
 	public void SetAllBattles(bool enabled) { allBattles = enabled; }
 	public void SetRemoveExtraInfo(bool enabled) { removeExtraInfo = enabled; }
 	public void SetMoreEffects(bool enabled) { moreEffects = enabled; }
+	public void SetAgumon(bool enabled) { agumon = enabled; }
+
+	public void SetDigitalClockV2(bool enabled) { clockV2 = enabled; }
 
 	public void CreatePatchedFile(string folderDestination, string newFilename)
 	{
@@ -931,6 +934,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 		fileDirectory = folderDestination;
 		newFilePath = System.IO.Path.Combine(folderDestination, newFilename);
 		newFilePath = newFilePath + System.IO.Path.GetExtension(filePath);
+		cueFileName = newFilename;
 
 		waiting.Start();
 
@@ -1084,7 +1088,12 @@ public partial class VicePatcherContainer : SubViewportContainer
 			SetPatch("Patches/ViceHack/RestoreTypes.ppf");
 
 		if (extraInput && !noRNG)
-			SetPatch("Patches/ViceHack/ExtraInput.ppf");
+		{
+			if (!ultraHardcore)
+				SetPatch("Patches/ViceHack/ExtraInput.ppf");
+			else
+				SetPatch("Patches/ViceHack/ExtraInputRNG.ppf");
+		}
 
 		if (progression && currentViceDifficulty != ViceDifficulty.HARDCORE && !allBattles)
 			SetPatch(path + "Difficulty patches/ProgressionPatch.ppf");
@@ -1099,6 +1108,19 @@ public partial class VicePatcherContainer : SubViewportContainer
 				SetPatch("Patches/ViceHack/AllBattles.ppf");
         }
 
+		if (agumon)
+        {
+            if (currentViceDifficulty == ViceDifficulty.HARDCORE)
+			{
+				if (trueHardcore)
+				SetPatch("Patches/ViceHack/AgumonCTH.ppf");
+				else
+				SetPatch("Patches/ViceHack/AgumonCH.ppf");
+			}
+			else
+				SetPatch("Patches/ViceHack/AgumonC.ppf");
+        }
+
 		if (BlackWere)
 			SetPatch("Patches/ViceHack/BWereGaru.ppf");
 
@@ -1107,6 +1129,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		if (digitalClock)
 			SetPatch("Patches/ViceHack/DigitalClock.ppf");
+		else if (clockV2)
+			SetPatch("Patches/ViceHack/DigitalClockV2.ppf");
 
 		if (noRNG)
 		{
@@ -1119,7 +1143,32 @@ public partial class VicePatcherContainer : SubViewportContainer
 			SetPatch("Patches/ViceHack/RemoveLifetimeInfo.ppf");
 
 		if (boostItems)
-			SetPatch("Patches/ViceHack/SuperDiskBuff.ppf");
+		{
+			SetPatch("Patches/ViceHack/NewSuperDiskBuff.ppf");
+			if (trueHardcore)
+			{
+				bin.Position = 0x14D292C4; //Off
+				bin.WriteByte(220);
+				bin.WriteByte(5);
+				bin.Position = 0x14D292D0;
+				bin.WriteByte(219);
+				bin.WriteByte(5);
+				
+				bin.Position = 0x14D29308; //Def
+				bin.WriteByte(220);
+				bin.WriteByte(5);
+				bin.Position = 0x14D29314;
+				bin.WriteByte(219);
+				bin.WriteByte(5);
+
+				bin.Position = 0x14D2934C; //Spd
+				bin.WriteByte(220);
+				bin.WriteByte(5);
+				bin.Position = 0x14D29358;
+				bin.WriteByte(219);
+				bin.WriteByte(5);
+			}
+		}
 
 		if (removeNewEffects)
 			SetPatch("Patches/ViceHack/RemoveNewStatus.ppf");
@@ -1149,15 +1198,15 @@ public partial class VicePatcherContainer : SubViewportContainer
 			SetPatch(path + "Difficulty patches/IncreaseMonochromonGoal.ppf");
 
 		if (hardTourney)
-			SetPatch(path + "Difficulty patches/MoreDifficultTournaments.ppf");
+			SetPatch(path + "Difficulty patches/hardcoreTournaments.ppf");
 
 		if (hyperMono)
 			SetPatch(path + "Difficulty patches/8KMono.ppf");
 
-		if (betterBattleTech)
+		if (betterBattleTech && !progression)
 			SetPatch(path + "Tech patches/BetterBattleTechChances.ppf");
 
-		if (betterBrainTechs)
+		if (betterBrainTechs && !progression)
 			SetPatch(path + "Tech patches/BetterBrainsTechChances.ppf");
 
 		if (multipleTechs)
@@ -1419,6 +1468,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		string filename = "";
 
+		string cueData = "FILE " + '"' + cueFileName + '"' + " BINARY" + "\n" + "  TRACK 01 MODE2/2352" + "\n" + "    INDEX 01 00:00:00";
+
 		switch (currentPatcher)
 		{
 			case patchType.VICEHACK:
@@ -1428,10 +1479,22 @@ public partial class VicePatcherContainer : SubViewportContainer
 				filename = Tr("NameOptional_txt") + ".txt";
 				break;
 		}
-		string path = System.IO.Path.Combine(fileDirectory, filename);
+		
+		string path = System.IO.Path.Combine(fileDirectory, cueFileName + ".cue");
 		System.IO.Stream txt = System.IO.File.OpenWrite(path);
 
 		System.IO.StreamWriter txtWritter = new System.IO.StreamWriter(txt);
+
+		txtWritter.Write(cueData);
+
+		txtWritter.Close();
+		txtWritter.Dispose();
+		txt.Close();
+		txt.Dispose();
+
+		path = System.IO.Path.Combine(fileDirectory, filename);
+		txt = System.IO.File.OpenWrite(path);
+		txtWritter = new System.IO.StreamWriter(txt);
 
 		switch (currentPatcher)
 		{
@@ -1535,6 +1598,12 @@ public partial class VicePatcherContainer : SubViewportContainer
 			txtWritter.WriteLine();
 		}
 
+		if (agumon)
+		{
+			txtWritter.Write("- " + Tr("AgumonC_L"));
+			txtWritter.WriteLine();
+		}
+
 		txtWritter.WriteLine();
 		txtWritter.Write(Tr("Digimon_N"));
 		txtWritter.WriteLine();
@@ -1562,6 +1631,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 			txtWritter.Write("- " + Tr("Starters2_L"));
 			txtWritter.WriteLine();
 		}
+		if (restorePanjyamon)
+		{
+			txtWritter.Write("- " + Tr("Panjyamon_L"));
+			txtWritter.WriteLine();
+		}
 
 		if (kunemon)
 		{
@@ -1578,26 +1652,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 		if (BlackWere)
 		{
 			txtWritter.Write("- Black WereGarurumon");
-			txtWritter.WriteLine();
-		}
-
-		if (WarGreymon)
-		{
-			txtWritter.Write("- WarGreymon");
-			txtWritter.WriteLine();
-		}
-
-
-		if (MetalGaru)
-		{
-			txtWritter.Write("- MetalGarurumon");
-			txtWritter.WriteLine();
-		}
-
-
-		if (Tentomon)
-		{
-			txtWritter.Write("- Tentomon");
 			txtWritter.WriteLine();
 		}
 
@@ -1670,6 +1724,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 		if (digitalClock)
 		{
 			txtWritter.Write("- " + Tr("Clock_L"));
+			txtWritter.WriteLine();
+		}
+		else if (clockV2)
+		{
+			txtWritter.Write("- " + Tr("ClockV2_L"));
 			txtWritter.WriteLine();
 		}
 
@@ -1862,13 +1921,13 @@ public partial class VicePatcherContainer : SubViewportContainer
 		txtWritter.Write(Tr("Techniques_N"));
 		txtWritter.WriteLine();
 
-		if (betterBattleTech)
+		if (betterBattleTech && !progression)
 		{
 			txtWritter.Write("- " + Tr("BetterBattle_L"));
 			txtWritter.WriteLine();
 		}
 
-		if (betterBrainTechs)
+		if (betterBrainTechs && !progression)
 		{
 			txtWritter.Write("- " + Tr("BetterBrains_L"));
 			txtWritter.WriteLine();
@@ -2064,9 +2123,9 @@ public partial class VicePatcherContainer : SubViewportContainer
 		superBonus, tanemon, rookieOnly, ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
 		curlingRandomizer, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
 		trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal,
-		vendingMachine, easyStart, moreItemDrops, MoreItemSpawn, insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, WarGreymon, MetalGaru,
-		Tentomon, restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
-		StatsValue, RareSpawnValue, DropItemsBattle, nerfEffectBoost, removeEffectBoost, removeNewEffects, poisonTimer);
+		vendingMachine, easyStart, moreItemDrops, MoreItemSpawn, insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, restorePanjyamon, starters2, 
+		kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
+		StatsValue, RareSpawnValue, DropItemsBattle, nerfEffectBoost, removeEffectBoost, removeNewEffects, poisonTimer, allBattles, removeExtraInfo, moreEffects, agumon, clockV2);
 
 		Directory.CreateDirectory(OS.GetExecutablePath().GetBaseDir() + "/SaveData");
 
@@ -2116,11 +2175,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 			{
 
 				digimonScript.LoadSaveData(saveData.myotismon, saveData.restorePanjyamon, saveData.vermillimon, saveData.starters2, saveData.kunemon, saveData.curlingRandomizer, saveData.realMetal,
-				saveData.BlackWere, saveData.WarGreymon, saveData.Tentomon, saveData.MetalGaru);
+				saveData.BlackWere);
 
 				miscScript.LoadSaveData(saveData.digitalClock, saveData.extraInput, saveData.unlockAreas, saveData.quickText, saveData.boostItems, saveData.restoreLifetime,
 				saveData.removeEvoInfo, saveData.newMono, saveData.insaneBattle, saveData.mapColour, saveData.removeTelephone, saveData.originalType, saveData.dropItemsBattle,
-				saveData.removeExtraInfo);
+				saveData.removeExtraInfo, saveData.clockV2);
 
 				usefulScript.LoadSaveData(saveData.statsGains, saveData.rareSpawns, saveData.shortIntro, saveData.easyStart, saveData.superBonus, saveData.ultraBonus, saveData.trainingBoost,
 				saveData.dirtReduction, saveData.sDirtReduction, saveData.drimogemon, saveData.lessMono, saveData.seadramon, saveData.evoItem, saveData.moreItemDrops, saveData.betterDrop,
@@ -2133,7 +2192,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 				difficultyScript.LoadSaveData(saveData.viceDifficulty == ViceDifficulty.CHALLENGE, saveData.viceDifficulty == ViceDifficulty.HARDMODE, saveData.viceDifficulty == ViceDifficulty.HARDCORE,
 				saveData.trueHardcore, saveData.ultraHardcore, saveData.progression, saveData.filth, saveData.restoreFilth, saveData.superHardcore, saveData.hardTourney, saveData.noRNG,
-				saveData.hardMono, saveData.hyperMono, saveData.rookieOnly, saveData.tanemon, saveData.allBattles);
+				saveData.hardMono, saveData.hyperMono, saveData.rookieOnly, saveData.tanemon, saveData.allBattles, saveData.agumon);
 			}
 		}
 
@@ -2173,14 +2232,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(false, false, false, false, false, true, true, false, false, false, false);
 
-		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false);
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false, false);
 
 		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
 		true, true, false, false, true, true, true, 1, 10);
 
 		techScript.LoadSaveData(true, true, true, false, false, false, true, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2190,14 +2249,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false, false, false, false);
 
-		miscScript.LoadSaveData(true, true, true, false, true, false, false, true, false, false, true, false, false, false);
+		miscScript.LoadSaveData(true, true, true, false, true, false, false, true, false, false, true, false, false, false, false);
 
 		usefulScript.LoadSaveData(true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
 		true, true, true, 20, 100);
 
 		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2207,14 +2266,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(false, false, false, false, false, false, true, false, false, false, false);
 
-		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false);
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false, false);
 
 		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
 		true, true, false, false, true, true, true, 1, 10);
 
 		techScript.LoadSaveData(true, true, true, false, false, true, false, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2225,14 +2284,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		digimonScript.LoadSaveData(true, false, false, false, false, false, true, true, false, false, false);
 
-		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false);
+		miscScript.LoadSaveData(true, true, false, false, true, false, false, true, false, false, false, false, false, false, false);
 
 		usefulScript.LoadSaveData(true, false, true, false, false, false, false, true, false, true, false, false, false, true, false, false, true, false, false, true,
 		true, true, false, false, true, true, true, 1, 10);
 
 		techScript.LoadSaveData(false, false, false, false, false, false, true, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, true, false, true, false, false, false, false, true, true, true, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, true, false, true, false, false, false, false, true, true, true, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2242,14 +2301,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false, false, false, false);
 
-		miscScript.LoadSaveData(true, true, true, true, true, false, false, true, false, false, true, false, true, false);
+		miscScript.LoadSaveData(true, true, true, true, true, false, false, true, false, false, true, false, true, false, false);
 
 		usefulScript.LoadSaveData(true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
 		true, true, true, 20, 100);
 
 		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2259,14 +2318,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(true, false, false, false, false, false, true, false, false, false, false);
 
-		miscScript.LoadSaveData(true, true, true, true, true, false, false, true, false, false, true, false, true, false);
+		miscScript.LoadSaveData(true, true, true, true, true, false, false, true, false, false, true, false, true, false, false);
 
 		usefulScript.LoadSaveData(true, true, true, true, false, false, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
 		true, true, true, 10, 100);
 
 		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2276,14 +2335,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false);
 
-		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, false, false, false, true, false, true);
+		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, false, false, false, true, false, true, false);
 
 		usefulScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
 		false, false, false, false, false, false, false, 1, 3);
 
-		techScript.LoadSaveData(false, false, false, false, false, false, false, false, true, false, true, true, false, false);
+		techScript.LoadSaveData(false, false, false, false, false, false, false, false, true, true, false, true, false, false);
 
-		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;
@@ -2293,14 +2352,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		digimonScript.LoadSaveData(false, false, false, false, false, false, false, true, false, false, false);
 
-		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, true, true, false, false, false, true);
+		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, true, true, false, false, false, true, false);
 
 		usefulScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
 		false, false, false, false, false, false, false, 1, 1);
 
 		techScript.LoadSaveData(false, false, false, true, false, false, false, false, true, false, false, false, false, false);
 
-		difficultyScript.LoadSaveData(false, false, true, true, true, true, false, false, false, true, true, false, true, false, false, false);
+		difficultyScript.LoadSaveData(false, false, true, true, true, true, false, false, false, true, true, false, true, false, false, false, true);
 
 		ViceRecommended.Visible = false;
 		ViceMainSettings.Visible = true;

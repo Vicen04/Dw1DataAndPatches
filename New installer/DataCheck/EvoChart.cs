@@ -78,7 +78,7 @@ public partial class EvoChart : Control
 			evolutions.Add(new List<int>());
 			bin.Position = i * 11 + startOffset;
 
-			if (bin.Position > jumpOffset)
+			if (bin.Position >= jumpOffset)
 				bin.Position = bin.Position + 0x130;
 
 			for (int j = 0; j < 5; j++)			

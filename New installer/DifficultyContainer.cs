@@ -23,6 +23,7 @@ public partial class DifficultyContainer : PanelContainer
 	[Export] private CheckBox Rookie;
 	[Export] private CheckBox Tanemon;
 	[Export] private CheckBox AllBattles;
+	[Export] private CheckBox Agumon;
 	[Export] private VicePatcherContainer VicePatcher;
 	[Export] private Panel Difficulty1;
 	[Export] private Panel Difficulty2;
@@ -122,7 +123,12 @@ public partial class DifficultyContainer : PanelContainer
 	{
 		VicePatcher.SetUltraHardcore(toggled);
 		if (toggled)
+		{
 			FairBattles.ButtonPressed = false;
+			RNG.Disabled = true;
+		}
+		else
+			RNG.Disabled = false;
 	}
 
 	void Progression_Toggled(bool toggled) { VicePatcher.SetProgression(toggled); }
@@ -199,6 +205,12 @@ public partial class DifficultyContainer : PanelContainer
         VicePatcher.SetAllBattles(toggled);
     }
 
+	void Agumon_Toggled(bool toggled)
+    {
+        VicePatcher.SetAgumon(toggled);
+    }
+	
+
 	void SetupTextTranslation()
 	{
 		Title.Text = Tr("Difficulty_L");
@@ -239,6 +251,8 @@ public partial class DifficultyContainer : PanelContainer
 		Tanemon.TooltipText = Tr("Tanemon_info");
 		AllBattles.Text = Tr("AllBattles_L");
 		AllBattles.TooltipText = Tr("AllBattles_info");
+		Agumon.Text = Tr("AgumonC_L");
+		Agumon.TooltipText = Tr("AgumonC_info");
 	}
 
 	void SetupButtons()
@@ -259,6 +273,7 @@ public partial class DifficultyContainer : PanelContainer
 		Rookie.Toggled += Rookie_Toggled;
 		Tanemon.Toggled += Tanemon_Toggled;
 		AllBattles.Toggled += AllBattles_Toggled;
+		Agumon.Toggled += Agumon_Toggled;
 	}
 
 	void ChangeToPage2()
@@ -274,7 +289,7 @@ public partial class DifficultyContainer : PanelContainer
 	}
 
 	public void LoadSaveData(bool ChallengeS, bool HardmodeS, bool HardcoreS, bool TrueHardcoreS, bool UltraHardcoreS, bool ProgressionS, bool FilthS, bool RFilthS, bool FairBattlesS,
-	bool TournamentsS, bool NoRNGS, bool Mono4KS, bool Mono8KS, bool RookieS, bool TanemonS, bool allBattles)
+	bool TournamentsS, bool NoRNGS, bool Mono4KS, bool Mono8KS, bool RookieS, bool TanemonS, bool allBattles, bool AgumonS)
 	{
 		Challenge.ButtonPressed = ChallengeS;
 		Hardmode.ButtonPressed = HardmodeS;
@@ -292,6 +307,7 @@ public partial class DifficultyContainer : PanelContainer
 		Rookie.ButtonPressed = RookieS;
 		Tanemon.ButtonPressed = TanemonS;
 		AllBattles.ButtonPressed = allBattles;
+		Agumon.ButtonPressed = AgumonS;
 	}
 	
 	public void RestartSelection()
@@ -312,6 +328,7 @@ public partial class DifficultyContainer : PanelContainer
 		Rookie.ButtonPressed = false;
 		Tanemon.ButtonPressed = false;
 		AllBattles.ButtonPressed = false;
+		Agumon.ButtonPressed = false;
 	}
 	/*void _on_exit_installer_pressed()
 	{

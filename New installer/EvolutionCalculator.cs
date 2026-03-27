@@ -238,7 +238,7 @@ public partial class EvolutionCalculator : Control
 			for (int j = 0; j < 6; j++)
 			{
 				bin.Position = 11 * i + startOffset + 5 + j;
-				if (bin.Position > jumpOffset)
+				if (bin.Position >= jumpOffset)
 					bin.Position = bin.Position + 0x130;
 				int digimon = bin.ReadByte();
 
@@ -283,7 +283,7 @@ public partial class EvolutionCalculator : Control
 		for (int i = 0; i < 63; i++)
 		{
 			bin.Position = i * 28 + startOffset;
-			if (bin.Position > jumpOffset)
+			if (bin.Position >= jumpOffset)
 				bin.Position = bin.Position + 0x130;
 
 			BonusDigimon[i] = reader.ReadInt16();

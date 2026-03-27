@@ -93,6 +93,22 @@ public partial class TechContainer : PanelContainer
 			RemoveNewStatus.ButtonPressed = false;
 	}
 
+	void ProgressionEnabled(bool enabled)
+	{
+		if (enabled)
+		{
+			BetterBattle.ButtonPressed = false;
+			BetterBrains.ButtonPressed = false;
+			BetterBattle.Disabled = true;
+			BetterBrains.Disabled = true;
+		}
+		else
+		{
+			BetterBattle.Disabled = false;
+			BetterBrains.Disabled = false;
+		}
+	}
+
 	void SetupTextTranslation()
 	{
 		Title.Text = Tr("Techniques_L");

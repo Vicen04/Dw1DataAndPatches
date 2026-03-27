@@ -143,7 +143,9 @@ public class DigimonRandomizer
   List<digimonNecessaryData> digimonData;
   List<TechNecessaryData> techData;
 
-  bool hardcoreMode = false, trueHardcoreMode = false;
+  bool hardcoreMode = false, trueHardcoreMode = false, aguChallenge = false;
+
+  
 
   List<int> NPCOffsets =
   new List<int>(){0x1420C5C, 0x1420CC2, 0x1420D22, 0x1420D8E, 0x1420DFA, 0x1420E66, 0x1420ECC, 0x1420F38, 0x14D3A16, 0x14D3ACA, 0x14D3B24, 0x14D3B7E, 0x157DD56, 0x157DDB6,
@@ -174,7 +176,7 @@ public class DigimonRandomizer
                   0x90B83EC, 0x90B8452, 0x919D74A, 0x919D7AA, 0x919D80A, 0x919D864, 0x919D8C4, 0x919D924, 0x92475CE, 0x924762E, 0x9247694, 0x92476F4, 0x9303D68, 0x9303DCE,
                   0x9303E2E, 0x9303E94, 0x93BFFF6, 0x93C0056, 0x93C00BC, 0x93C011C, 0x94F2E2A, 0x94F2EA2, 0x94F303E, 0x963383E, 0x9633898, 0x96338F2, 0x96CA9A2, 0x96CAA14,
                   0x96CAA7A, 0x96CAAE6, 0x9774054, 0x97740AE, 0x9774108, 0x97C191E, 0x97C1984, 0x991EF12, 0x991EF6C, 0x991F0FC, 0x991F162, 0x991F1C8, 0x991F222, 0x991F282,
-                  0x991F2E8, 0x9C9B44E, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE, 0x9EEBC16, 0x9EEBC76, 0x9EEBCD0, 0x9EEBD30, 0x9EEBD90, 0x9EEBDEA, 0x9FAF9BC, 0x9FAFA22, 0x9FAFA88,
+                  0x991F2E8, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE, 0x9EEBC16, 0x9EEBC76, 0x9EEBCD0, 0x9EEBD30, 0x9EEBD90, 0x9EEBDEA, 0x9FAF9BC, 0x9FAFA22, 0x9FAFA88,
                   0x9FAFAE8, 0x9FAFB4E, 0x9FAFCDE, 0xA073802, 0xA073992, 0xA0739F2, 0xA073A52, 0xA073AB8, 0xA073B18, 0xA073B7E, 0xA1376B2, 0xA137712, 0xA137772, 0xA1377D2,
                   0xA137832, 0xA346156, 0xA3461B6, 0xA346216, 0xA346276, 0xA4F0BA8, 0xA5B5E3A, 0xA5B5E94, 0xA5B5EEE, 0xA7EEAD0, 0xA7EEB36, 0xA7EEB96, 0xA7EEBFC, 0xA86D5FE,
                   0xA86D658, 0xA86D6B2, 0xA86D70C, 0xA86D896, 0xA86D8F0, 0xA86D94A, 0xA86D9A4},
@@ -182,7 +184,7 @@ public class DigimonRandomizer
   new List<int>(){0x14D3A70, 0x157DE1C, 0x164339A, 0x17C609E, 0x18D6692, 0x1C01852, 0x2133FCA, 0x2134024, 0x213407E, 0x21340D8, 0x2134132, 0x254ABC2, 0x26D5A72, 0x2929254,
                   0x2A3286A, 0x2AF131C, 0x2E3C072, 0x2EA2E6A, 0x2EA2EC4, 0x2EA2F1E, 0x3085C02, 0x3085C5C, 0x314D97A, 0x314D9D4, 0x3214FBA, 0x3215014, 0x32DC392, 0x32DC3EC,
                   0x33A37DA, 0x33A3834, 0x346AF4A, 0x346AFA4, 0x35328BA, 0x3532914, 0x35F9D02, 0x35F9D5C, 0x36C1472, 0x36C14CC, 0x3789012, 0x378919C, 0x3850EBA, 0x3850F14,
-                  0x3918E2A, 0x3918E84, 0x4F4D9AE, 0x4F4DA0E, 0x517BBF6, 0x558834A, 0x59E5B6A, 0x5EBEA00, 0x60AC7FE, 0x61EF0C2, 0x8EEBF2E, 0x68440E4, 0x684413E, 0x6844198,
+                  0x3918E2A, 0x3918E84, 0x4F4DA0E, 0x517BBF6, 0x558834A, 0x59E5B6A, 0x5EBEA00, 0x60AC7FE, 0x61EF0C2, 0x8EEBF2E, 0x68440E4, 0x684413E, 0x6844198,
                   0x69CECCA, 0x6FA261C, 0x7195B30, 0x7195B8A, 0x7195BE4, 0x7351FCA, 0x76268AE, 0x7626908, 0x7626962, 0x76269BC, 0x76B102E, 0x76B1088, 0x76B10E2, 0x76B113C,
                   0x780E4D2, 0x7D6A690, 0x800E7FA, 0x831290E, 0x8836592, 0x88365EC, 0x8B162AA, 0x8E50416, 0x8EEBE7A, 0x9303D0E, 0x9303EF4, 0x9858822, 0x9E286E0, 0x9E28740,
                   0xA07377E, 0xA5B5F48, 0xA5B5FA2, 0xA5B5FFC, 0xA668D76, 0xA7EEA76,
@@ -237,11 +239,23 @@ public class DigimonRandomizer
     }
 
        NPCMapData = new List<AreaData>();
+    
+    //check if Agumon challenge 
+    
+    int kune = 0x9C9B44E;
+    bin.Position = 0x9C9B75E;
+    if (bin.ReadByte() != 0x80)
+    {
+      kune = 0x9C9B75E;
+      aguChallenge = true;
+    }
+
+    NPCOffsets.Add(kune);
 
     NPCMapData.AddRange(
     [
       new AreaData([new MapData([0x9C9B69E, 0x9C9B6FE], [0x140B8B77, 0x140B8B7B, 0x140B8B75])]), //MAYO00
-      new AreaData([new MapData([0x9C9B44E, 0x9C9B4AE], [0x140B8B85, 0x140B8B89, 0x140B8B83])]), //MAYO00 NIGHT
+      new AreaData([new MapData([kune, 0x9C9B4AE], [0x140B8B85, 0x140B8B89, 0x140B8B83])]), //MAYO00 NIGHT
       new AreaData([new MapData([0x1420C5C, 0x1420CC2, 0x1420DFA], [0x140B73C7, 0x140B73C3, 0x140B73D3, 0x140B73BF]),
       new MapData([0x1420D22, 0x1420D8E], [0x140B73CB, 0x140B73CF, 0x140B73C1])]), //MAYO01
       new AreaData([new MapData([0x1420E66, 0x1420ECC, 0x1420F38], [0x140B73DD, 0x140B73E1, 0x140B73E5, 0x140B73DB])]), //MAYO01 NIGHT
@@ -262,7 +276,7 @@ public class DigimonRandomizer
       new AreaData([new MapData([0x1CAB7EA, 0x1CAB85C, 0x1CAB8C8], [0x140B768B, 0x140B768F, 0x140B7693, 0x140B7689])]), //TROP02
       new AreaData([new MapData([0x1CAB922], [0x140B769F, 0x140B769B]), new MapData([0x1CABAC4, 0x1CABB30], [0x140B76A3, 0x140B76A7, 0x140B769D])]), //TROP02 NIGHT
       new AreaData([new MapData([0x1D68A54, 0x1D68B08], [0x140B76CD, 0x140B76D1, 0x140B76CB])]), //TROP03
-      new AreaData([new MapData([0x1D68B62], [0x140B76DD, 0x140B76D9]), new MapData([0x1D68BBC], [0x140B76E1, 0x140B76DB])]), //TROP03 NIGHT
+      new AreaData([new MapData([0x1D68B62, 0x1D68BBC], [0x140B76DD, 0x140B76D9, 0x140B76E1, 0x140B76DB])]), //TROP03 NIGHT (had to make it only 1 species to avoid crashes in all battles)
       new AreaData([new MapData([0x6580D9C], [0x140B771B, 0x140B7719])]), //TROP04, different from vanilla
       new AreaData([new MapData([0x6580E02], [0x140B7725, 0x140B7723])]), //TROP04 NIGHT
       new AreaData([new MapData([0x6633BA6, 0x6633C06], [0x140B787B, 0x140B787F, 0x140B7879]), new MapData([0x6633C72], [0x140B7885, 0x140B7883])]), //TROP05
@@ -336,7 +350,7 @@ public class DigimonRandomizer
       new AreaData([new MapData([0x2497646, 0x24976A6, 0x249770C], [0x140B9093, 0x140B9097, 0x140B909B, 0x140B9091])]), //STIC01
       new AreaData([new MapData([0x249776C, 0x24977CC, 0x2497832], [0x140B90A5, 0x140B90A9, 0x140B90AD, 0x140B90A3])]), //STIC01 NIGHT
       new AreaData([new MapData([0x254AA4E, 0x254AAA8], [0x140B90EF, 0x140B90F3, 0x140B90ED])]), //STIC02 
-      new AreaData([new MapData([0x254AB02, 0x254AB62], [0x140B90FD, 0x140B9101, 0x140B90FB])]), //STIC02 NIGHT
+      //new AreaData([new MapData([0x254AB02, 0x254AB62], [0x140B90FD, 0x140B9101, 0x140B90FB])]), //STIC02 NIGHT
 
       new AreaData([new MapData([0x86BCF7E], [0x140B8679, 0x140B8675]), new MapData([0x86BCFD8], [0x140B867D, 0x140B8677])]), //FRZL01
       new AreaData([new MapData([0x86BD038, 0x86BD092], [0x140B8687, 0x140B868B, 0x140B8685])]), //FRZL01 NIGHT
@@ -422,27 +436,57 @@ public class DigimonRandomizer
 
     bossMapData = new List<BossMapData>();
 
-    bossMapData.AddRange([new BossMapData(0x140B7637, 0x140B7639, 0x1C01852), new BossMapData(0x140B94AB, 0x140B94AD, 0x26D5A72),
-    new BossMapData(0x140B791B, 0x140B791D, 0x61EF0C2), new BossMapData(0x140B7D05, 0x140B7D07, 0x6FA261C), new BossMapData(0x140B745F, 0x140B7461, 0x157DE1C),
-    new BossMapData(0x140B8495, 0x140B84A3, 0x8B162AA), new BossMapData(0x140B82E7, 0x140B82E9, 0x800E7FA), new BossMapData(0x140B87E3, 0x140B87E5, 0x9303D0E),
-    new BossMapData(0x140B8DE3, 0x140B8DE5, 0xA7EEA76), new BossMapData(0x140B8D0D, 0x140B8D0F, 0xA07377E), new BossMapData(0x140B81F1, 0x140B81F3, 0x831290E),
-    new BossMapData(0x140BACEB, 0x140BACED, 0x60AC7FE), new BossMapData(0x140BA973, 0x140BA975, 0x517BBF6), new BossMapData(0x140BA9ED, 0x140BA9EF, 0x59E5B6A),
-    new BossMapData(0x140B85DD, 0x140B85DF, 0x8E50416)]);
+    bossMapData.AddRange([
+    new BossMapData(0x140B7637, 0x140B7639, 0x1C01852), //Piximon
+    new BossMapData(0x140B94AB, 0x140B94AD, 0x26D5A72), //MetalMamemon
+    new BossMapData(0x140B791B, 0x140B791D, 0x61EF0C2), //Mamemon
+    new BossMapData(0x140B7D05, 0x140B7D07, 0x6FA261C), //Ogremon entrance Agumon
+    new BossMapData(0x140B745F, 0x140B7461, 0x157DE1C), //Palmon
+    new BossMapData(0x140B8495, 0x140B84A3, 0x8B162AA), //Tyrannomon
+    new BossMapData(0x140B82E7, 0x140B82E9, 0x800E7FA), //Patamon
+    new BossMapData(0x140B8DE3, 0x140B8DE5, 0xA7EEA76), //Gabumon
+    new BossMapData(0x140B8D0D, 0x140B8D0F, 0xA07377E), //Kokatorimon
+    new BossMapData(0x140B81F1, 0x140B81F3, 0x831290E), //Tekkamon underground lab
+    new BossMapData(0x140BACEB, 0x140BACED, 0x60AC7FE), //Megadramon
+    new BossMapData(0x140BA973, 0x140BA975, 0x517BBF6), //MetalGreymon
+    new BossMapData(0x140BA9ED, 0x140BA9EF, 0x59E5B6A), //Digitamamon
+    new BossMapData(0x140B85DD, 0x140B85DF, 0x8E50416), //Saberdramon guide
+    new BossMapData(0x140B8F15, 0x1403A6D7, 0xA668D76), //Birdramon
+    new BossMapData(0x140BA909, 0x140BA90B, 0x4F4DA0E), //Numemon
+    new BossMapData(0x140B8809, 0x140B880B, 0x9303EF4)]); //Garurumon 2
 
+    if (hardcore)
+    {
+      bossMapData.AddRange([
+        new BossMapData(0x140B8339, 0x140B833B, 0x80D4B82), //Biyomon
+        new BossMapData(0x140B76FF, 0x140B7701, 0x6580D42), //Betamon
+        new BossMapData(0x140B8EBF, 0x140B8ED5, 0xA4F0B4E), //Shellmon
+        new BossMapData(0x140BAAAF, 0x140BAAB1, 0x5A8FA32), //Unimon
+        new BossMapData(0x140B828F, 0x140B8291, 0x7F6E32A), //Elecmon
+        new BossMapData(0x140B8617, 0x140B8619, 0x8EEBED4), //Nanimon Dino
+        new BossMapData(0x140B9445, 0x140B9447, 0x2E3C0CC), //Nanimon Toy
+        new BossMapData(0x140BA933, 0x140BA935, 0x4F4DA6E), //Nanimon Sewer
+        new BossMapData(0x140B7ED9, 0x140B7EDB, 0x76B1196), //Nanimon Ogre
+        new BossMapData(0x140B9641, 0x140B9643, 0x2A3286A)]); //Giromon 2
+
+      if (trueHardcore)
+      {
+        bossMapData.AddRange([
+         new BossMapData(0x14048277, 0x14048279, 0x23A3066), //Monzaemon
+         new BossMapData(0x1403F893, 0x1403F895, 0x1EC08C6), //Seadramon
+         new BossMapData(0x14044E9F, 0x14044EA1, 0x20C7328)]); //Whamon
+      }
+    }
 
     bin.Position = 0x6580D42;
-    if (bin.ReadByte() == 0x80)
-      return;
-    else
+    if (bin.ReadByte() != 0x80)
     {
       hardcoreMode = true;
       bossOffsets.AddRange([0x1D68AAE, 0x2E3C0CC, 0x4F4DA6E, 0x5A8FA32, 0x5B399C6, 0x6580D42, 0x66F9FCA, 0x66FA024, 0x66FA07E, 0x6C08F5A, 0x6ED3D42, 0x76B1196, 0x7F6E32A,
                             0x80D4B82, 0x8A6330E, 0x8EEBED4, 0x94851F6, 0x9AA152A, 0x9AA1584, 0x9AA15DE, 0x9B3AAC6, 0x9B3AB20, 0x9B3AB7A, 0x9BBF4FE]);
 
       bin.Position = 0x723F7EE;
-      if (bin.ReadByte() != 0x2F)
-        return;
-      else
+      if (bin.ReadByte() == 0x2F)
       {
         trueHardcoreMode = true;
         bossOffsets.AddRange([0x1EC08C6, 0x1F404D2, 0x20C7328, 0x23A3066, 0x723F7EE, 0x740DEC6, 0x740DF20, 0x7D6A636, 0x825FCA2, 0x825FCFC, 0x991F282, 0x991F2E8, 0xA40BA06,
@@ -465,10 +509,10 @@ public class DigimonRandomizer
     SpecialNPCData = new List<MapData>();
     SpecialNPCData.AddRange(
     [
-      new MapData([0x6C08FBA, 0x6C0901A, 0x6C0907A], [0x140B7BE1, 0x140B7BE5, 0x140B7BE9, 0x140B7BDF]), //DGHA02 Tsukaimon
+      new MapData([0x6C08FBA, 0x6C0901A, 0x6C0907A], [0x140B7BC3, 0x140B7BC5, 0x140B7BC9, 0x140B7BE1, 0x140B7BE5, 0x140B7BE9, 0x140B7BDF]), //DGHA02 Tsukaimon
       new MapData([0x6ED3D9C], [0x140B7CE7, 0x140B7CE5]), //GCAN04
       new MapData([0xA4F0BA8], [0x140B8ED9, 0x140B8EBD]), //GCAN04_2
-      new MapData([0x6CCE592, 0x6CCE5F8], [0x140B7DE3, monoOffset1, monoOffset2, 0x140B7DE5]), //GCAN09 
+      new MapData([0x723F662, 0x723F6C2], [0x140B7DE3, monoOffset1, monoOffset2, 0x140B7DE5]), //GCAN09 
       new MapData([0x723F728, 0x723F788], [0x140B7DF5, 0x140B7DF9, 0x140B7DF3]), //GCAN09 NIGHT
       new MapData([0x8836646, 0x88366B2], [0x140B83DD, 0x140B83E1, 0x140B83DB]), //GIAS06A 
       new MapData([0x883671E, 0x883678A], [0x140B83EB, 0x140B83EF, 0x140B83E9]), //GIAS06A NIGHT 
@@ -558,7 +602,11 @@ public class DigimonRandomizer
       for (int i = 0; i < digimonData.Count; i++)
       {
         if (digimonData[i].HasFinisher && (i < 67 || i > 128))
+        {
+          if (i == 62)
+          continue;
           validDigimon.Add((byte)i);
+        }
       }
 
       validDigimon.Add(112);
@@ -578,10 +626,17 @@ public class DigimonRandomizer
         RandomizeTechSingle(mapData.mapOffset, numberGenerator, writter, false);
       }
 
-      List<MapData> extraBosses = [new MapData([0x57EE0C6, 0x57EE120],[0x140187A1, 0x140187B3, 0x140187B9]), new MapData([0x5860516, 0x5860570],[0x140223DD, 0x140223EF, 0x140223F5]),
-      new MapData([0x59201CE, 0x5920228],[0x1401A339, 0x1401A34B, 0x1401A351]),
-      new MapData([0x3085C02, 0x314D97A, 0x3214FBA, 0x32DC392, 0x33A37DA, 0x346AF4A, 0x35328BA, 0x35F9D02, 0x36C1472, 0x3789012, 0x3850EBA, 0x3918E2A],[0x1405B46D, 0x1405B46F]),
-      new MapData([0x3085C5C, 0x314D9D4, 0x3215014, 0x32DC3EC, 0x33A3834, 0x346AFA4, 0x3532914, 0x35F9D5C, 0x36C14CC, 0x378919C, 0x3850F14, 0x3918E84],[0x1405B8DB, 0x1405B8DD]) ];
+      List<MapData> extraBosses = [
+      new MapData([0x57EE0C6, 0x57EE120],[0x140187A1, 0x140187B3, 0x140187B9]), //MetalEtemon
+      new MapData([0x5860516, 0x5860570],[0x140223DD, 0x140223EF, 0x140223F5]), //Gigadramon
+      new MapData([0x59201CE, 0x5920228],[0x1401A339, 0x1401A34B, 0x1401A351]), //Frigimon
+      new MapData([0x3085C02, 0x314D97A, 0x3214FBA, 0x32DC392, 0x33A37DA, 0x346AF4A, 0x35328BA, 0x35F9D02, 0x36C1472, 0x3789012, 0x3850EBA, 0x3918E2A],[0x1405B46D, 0x1405B46F]), //Greymon
+      new MapData([0x3085C5C, 0x314D9D4, 0x3215014, 0x32DC3EC, 0x33A3834, 0x346AFA4, 0x3532914, 0x35F9D5C, 0x36C14CC, 0x378919C, 0x3850F14, 0x3918E84],[0x1405B8DB, 0x1405B8DD]), //Airdramon
+      new MapData([0x9303D0E], [0x140B87E3, 0x140B87E5, 0x140B8829, 0x140B882B]) ]; //Garurumon 1
+
+      if (isHardcore)      
+        extraBosses.Add(new MapData([0x66F9FCA, 0x66FA024, 0x66FA07E],[0x13FEB4FD, 0x13FEB849, 0x13FEBCA3, 0x140B78A9]));//Centarumon
+      
 
       foreach (MapData mapData in extraBosses)
       {
@@ -703,7 +758,7 @@ public class DigimonRandomizer
     }
   }
 
-  public void RandomizeStarter(int option, Random numberGenerator)
+  public void RandomizeStarter(int option, Random numberGenerator, byte digimonRando = 0)
   {
     List<byte> possibleDigimon = new List<byte>();
 
@@ -714,8 +769,10 @@ public class DigimonRandomizer
         if (digimonData[i].Level == (option + 1))        
           possibleDigimon.Add((byte)i);        
       }
-      else      
-        possibleDigimon.Add((byte)i);       
+      else if (digimonRando == 0)     
+        possibleDigimon.Add((byte)i);      
+      else
+        possibleDigimon.Add(digimonRando);
     }
 
     uint[] digimonOffsets = { 0x14D271C0, 0x14D271B8, 0x14D19DB0, 0x14D19DD4 },
@@ -925,6 +982,16 @@ public class DigimonRandomizer
       writer.Write(jumps[i]);
     }
 
+    uint minReq = 0x140A679A;
+
+    for (int i = 0; i < 13; i++)
+    {
+      bin.Position = minReq;
+      bin.WriteByte(3);
+      minReq = minReq + 6;
+        
+    }
+
     uint bugOffset = 0x1402897E;
     bin.Position = bugOffset;
     switch (option)
@@ -987,7 +1054,7 @@ public class DigimonRandomizer
         [0x140209F6, 0x14020E84],//Angemon
         [0x13FD767C, 0x13FD769C ,0x1401F636, 0x140A0236, 0x140B87FC, 0x140B881C],//Garurumon
         [0x13FD7EE2, 0x14040D64, 0x140A0152, 0x140B9062],//Frigimon
-        [0x13FD6DE0, 0x1400BA8C, 0x1409A90A, 0x140B7F60],//SkullGreymon
+        [0x13FD6DE0, 0x1400497A, 0x1400BA8C, 0x1409A588, 0x1409A90A, 0x1409A958, 0x1409AB38, 0x140B7F60],//SkullGreymon
         [0x13FD8322, 0x13FD9982, 0x1404CF3E, 0x140A1824, 0x140B94A2, 0x140BAB02],//MetalMamemon
         [0x1407BDD8, 0x1407BE1E, 0x1407C320, 0x140A1908],//Vademon
         [0x13FD715E, 0x1400E6D6, 0x140A072E, 0x140B82DE],//Patamon
@@ -1001,7 +1068,7 @@ public class DigimonRandomizer
         [0x13FD84B8, 0x14052A7A, 0x140A1240, 0x140B9638],//Giromon
         [0x13FD630C, 0x13FD6348, 0x13FD6362, 0x13FDF1CC, 0x13FDF210, 0x13FDF54E, 0x140A1776, 0x140B748C, 0x140B74C8, 0x140B74E2],//Etemon
         [0x13FD71AC, 0x1400EFFC, 0x140150C0, 0x1400F148, 0x1400F292, 0x1400F50C, 0x1400F914, 0x140A0732, 0x140B832C],//Biyomon           
-        [0x13FD6D72, 0x13FFFC7C, 0x13FFFC96, 0x14000C52, 0x140A05B0, 0x140B7EF2, ],//Monochromon
+        [0x13FD6D72, 0x13FFFC7C, 0x13FFFC96, 0x14000C52, 0x140A05B0, 0x140B7EF2],//Monochromon
         [0x13FD72F4, 0x13FD7AA2, 0x14012928, 0x140122D6, 0x140B8474, 0x140B8C22],//Leomon
         [0x13FE08F2, 0x13FE0398, 0x13FE03EE, 0x13FE056A, 0x13FE0908, 0x1409FBF6],//Coelamon
         [0x13FD7B84, 0x14032EE4, 0x14032EF4, 0x14032FA4, 0x14059D20, 0x14059F00, 0x140A050E, 0x140B8D04],//Kokatorimon
@@ -1034,8 +1101,20 @@ public class DigimonRandomizer
 
       recruitTriggers[23][0] = 0x13FF8012; //Bakemon
       recruitTriggers[32][0] = 0x13FE088C; //Coelamon
+      recruitTriggers[32][3] = 0x13FE08EE; //Coelamon 2
+      
       if (trueHardcoreMode)
-      recruitTriggers[40][0] = 0x1403F868; //Penguinmon
+      {
+        recruitTriggers[40][0] = 0x1403F868; //Penguinmon
+        recruitTriggers[recruitTriggers.Count - 1] = [0x14010D70, 0x1402543A, 0x1402551E, 0x14025604]; //H-Kabuterimon 
+      }
+    }
+
+    uint aguCha = 0x1402BAA2;
+    if (aguChallenge)
+    {
+      aguCha = 0x1402BA6C;
+      prosperityOffsets[27] = 0x1402BA71;
     }
 
     switch (option)
@@ -1057,8 +1136,9 @@ public class DigimonRandomizer
         numberGenerator.Shuffle(prosperity);
         SetProsperity(prosperityOffsets, prosperity, hardcoreMode);
         triggers.AddRange([203, 205, 221, 224, 225, 235, 246, 261, 236]);
+        
         recruitTriggers.AddRange(
-          [[0x13FD79D2, 0x13FFF39C, 0x13FFF3B8, 0x1402BAA2, 0x1402BFDE, 0x140B8B52], // Agumon
+            [[0x13FD79D2, 0x13FFF39C, 0x13FFF3B8, aguCha, 0x1402BFDE, 0x140B8B52], // Agumon
             [0x1405B446, 0x1405B8C8, 0x1409E4BA, 0x1409E4D6, 0x140A092C] , // Greymon
             [0x1403A5A2, 0x1403AAF6, 0x140A0306, 0x14D725C6], // Birdramon
             [0x13FD7E6C, 0x1403E676, 0x140441D4, 0x14044250, 0x140450AE, 0x14059D10, 0x14059F08, 0x1406193E, 0x140B8FEC], // Whamon

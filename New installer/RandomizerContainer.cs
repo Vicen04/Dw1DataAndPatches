@@ -376,10 +376,12 @@ public partial class RandomizerContainer : SubViewportContainer
 		 restaurantOpt, birdramonOpt, boostOpt, healingOpt, devilOpt, chipsOpt, fishOpt, tournamentScheduleOpt, foodOpt, rareSpawnsOpt,
 		 treeOpt, timeOpt, statGainsOpt, requirementsEvoOpt, specialEvoOpt, specialChanceOpt, evoItemsOpt, speEvoReqOpt, factorialOpt,
 		 damageTechOpt, MPtechOpt, damageTypeOpt, accuracyOpt, statusOpt, statusChanceOpt, finishersOpt, boostedTechValueOpt, learnBattleOpt, learnBrainsOpt;
+	
+	byte digiRando = 0;
 
 	Base_script parent_script;
 
-	string folderPath, filePath, newFilename;
+	string folderPath, filePath, newFilename, cueFileName;
 
 	bool randomizerfinished = false, randomizerError = false;
 
@@ -415,7 +417,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		FileNameL.Text = Tr("FName");
 		randomSeeder.Text = Tr("Seed");
 		FolderPath.PlaceholderText = Tr("SFolderT");
-		patchConfirmTitle.Text = Tr("PatchTitle");
+		patchConfirmTitle.Text = Tr("SRandomizeTitle");
 		StartRandomizer.Text = Tr("RandomizeButton");
 		Seed.TooltipText = Tr("Seed_info");
 		PatchingWait.GetOkButton().Text = Tr("CancelButton");
@@ -817,6 +819,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		newFilename = newFilename + System.IO.Path.GetExtension(filePath);
 		randomizerfinished = false;
 		MetalWait.FrameChanged += CheckRandomizer;
+		cueFileName = nFilename;
 		
 		waiting.Start();
 		
@@ -830,6 +833,8 @@ public partial class RandomizerContainer : SubViewportContainer
 			if (difficultyOpt == 1)
 				trueHardcore = true;
 		}
+		
+		CheckDigimonSeed(Seed.Value);
 
 		if (itemsSpawn)
 			RandomizeItemSpawns();
@@ -880,6 +885,8 @@ public partial class RandomizerContainer : SubViewportContainer
 			RandomizeLearningChancesBrains();
 		if (givenTechs)
 			RandomizeGivenTechs();
+		if (statusBoost)
+			RandomizeBoostStatus();
 
 		if (specialEvo)
 			RandomizeSpecialEvo();
@@ -935,33 +942,38 @@ public partial class RandomizerContainer : SubViewportContainer
 
 
 		DigimonRandomizer digimonRando = new DigimonRandomizer(hardcore, trueHardcore, ref bin, reader);
+		if (tournamentNPC)
+			digimonRando.TournamentNPC(tournamentNPCOpt, reader, writter, numberGenerator);
+		if (recruits)
+			digimonRando.Recruitments(recruitsOpt, numberGenerator, writter);
 
-		if (digimonNPC)
-			digimonRando.RandomizeDigimonNPC(digimonNPCOpt, bosses, numberGenerator, writter);
-		if (statsNPC)
-			digimonRando.RandomizeNPCStats(statsNPCOpt, bosses, numberGenerator, reader, writter);
-		if (moneyNPC)
-			digimonRando.RandomizeNPCMoney(moneyNPCOpt, bosses, numberGenerator, reader, writter);
-		if (techNPC)
-			digimonRando.RandomizeNPCTechs(bosses, digimonNPC, numberGenerator, writter);
 		if (!filth && !tanemon && !rookieOnly)
 		{
-			if (starter)
+			if (starter || digiRando != 0)
 			{
-				if (starterLevel)
+				if (starterLevel && digiRando == 0)
 					digimonRando.RandomizeStarter(starterLevelOpt, numberGenerator);
-				else
+				else if (digiRando == 0)
 					digimonRando.RandomizeStarter(2, numberGenerator);
+				else
+					digimonRando.RandomizeStarter(5, numberGenerator, digiRando);
 				if (starterTech)
 					digimonRando.StarterTech(starterTechOpt, numberGenerator);
 				if (starterStats)
 					digimonRando.StarterStats(starterStatsOpt, writter, reader, numberGenerator);
 			}
 		}
-		if (tournamentNPC)
-			digimonRando.TournamentNPC(tournamentNPCOpt, reader, writter, numberGenerator);
-		if (recruits)
-			digimonRando.Recruitments(recruitsOpt, numberGenerator, writter);
+		if (moneyNPC)
+			digimonRando.RandomizeNPCMoney(moneyNPCOpt, bosses, numberGenerator, reader, writter);			
+		if (digimonNPC)
+			digimonRando.RandomizeDigimonNPC(digimonNPCOpt, bosses, numberGenerator, writter);
+		if (statsNPC)
+			digimonRando.RandomizeNPCStats(statsNPCOpt, bosses, numberGenerator, reader, writter);		
+		if (techNPC)
+			digimonRando.RandomizeNPCTechs(bosses, digimonNPC, numberGenerator, writter);
+		
+		CheckSpecialSeed(Seed.Value);
+		
 		reader.Close();
 		reader.Dispose();
 		writter.Close();
@@ -1028,7 +1040,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*KODA01*/   0x14014759, 0x1401476F, 0x14014785, 0x1401479B,
 			/*KODA02*/   0x14015089, 0x1401509F, 0x140150B5,
 			/*KODA03*/   0x140162E5, 0x140162FB, 0x14016311, 0x14016327,
-			/*KODA07*/   0x140190C9,
+			/*KODA07*/   0x140190CD,  //different than in vanilla
 			/*FRZL01*/   0x1401AC6D, 0x1401AC83, 0x1401AC99,
 			/*FRZL02*/   0x1401B595, 0x1401B5AB,
 			/*FRZL03*/   0x1401BEC5, 0x1401BEDB, 0x1401BEF1,
@@ -1222,7 +1234,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*KODA01*/   0x14014751, 0x14014767, 0x1401477D, 0x14014793,
 			/*KODA02*/   0x14015081, 0x14015097, 0x140150AD,
 			/*KODA03*/   0x140162DD, 0x140162F3, 0x14016309, 0x1401631F,
-			/*KODA07*/   0x140190C1,
+			/*KODA07*/   0x140190C5,   //different than in vanilla
 			/*FRZL01*/   0x1401AC65, 0x1401AC7B, 0x1401AC91,
 			/*FRZL02*/   0x1401B58D, 0x1401B5A3, 
 			/*FRZL03*/   0x1401BEBD, 0x1401BED3, 0x1401BEE9,
@@ -1536,7 +1548,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			/*TUNN08_3*/ 0x14038A05,
 			/*GCAN04_2*/ 0x14039339, //Shellmon screen mountain up
 			/*OGRE04*/   0x1403AEC5, 0x1403AED1, 0x1403AEDD, 0x1403AEE9,
-			/*OGRE11*/   0x14045425,
+			/*OGRE11*/   0x14045429,
             /*OMOC08*/   0x1404A6DD,
 			/*FACT09*/   0x140539ED, 0x140539F9,
 			/*FACT10*/   0x1405430D, 0x14054319, 0x14054325,
@@ -2606,7 +2618,7 @@ public partial class RandomizerContainer : SubViewportContainer
 					currentTech = (byte)bin.ReadByte();
 					if (currentTech != 0xFF)
 					{
-						if (currentTech > 56 || currentTech == 21 || currentTech == 30 || currentTech == 34 || currentTech == 41 || currentTech == 42)
+						if (currentTech > 56)
 							continue;
 						digimonTechs.Add(currentTech);
 					}
@@ -2657,7 +2669,8 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void RandomizeTechBoostPower()
 	{		
-		int[] RookiesPower = { 3, 4, 17, 18, 31, 32, 45, 46, 57 },
+		int[] babyPower = { 2, 16, 30, 44 },
+		RookiesPower = { 3, 4, 17, 18, 31, 32, 45, 46, 57 },
 		ChampionsPower = { 5, 6, 7, 8, 9, 10, 11, 19, 20, 21, 22, 23, 24, 25, 33, 34, 35, 36, 37, 38, 39, 47, 48, 49, 50, 51, 52, 53, 58 },
 		UltimatesPower = { 12, 13, 14, 26, 27, 28, 40, 41, 42, 54, 55, 56, 59, 60, 61, 62, 63, 64, 65 };
 
@@ -2669,6 +2682,7 @@ public partial class RandomizerContainer : SubViewportContainer
 				ShuffleBoostPower(UltimatesPower);					
 				break;
 			case 1:
+				randomizeBoostPower(babyPower, 51, 10);
 				randomizeBoostPower(RookiesPower, 151, 50);
 				randomizeBoostPower(ChampionsPower, 301, 100);
 				randomizeBoostPower(UltimatesPower, 551, 100);
@@ -2680,6 +2694,7 @@ public partial class RandomizerContainer : SubViewportContainer
 				else if (trueHardcore)
 					boostValue = 1500;
 
+				randomizeBoostPower(babyPower, boostValue, 1);
 				randomizeBoostPower(RookiesPower, boostValue, 1);
 				randomizeBoostPower(ChampionsPower, boostValue, 1);
 				randomizeBoostPower(UltimatesPower, boostValue, 1);
@@ -2958,7 +2973,7 @@ public partial class RandomizerContainer : SubViewportContainer
 						continue;
 					}
 					bin.Position = i * 11 + startOffset + 5;
-					if (bin.Position > jumpOffset)
+					if (bin.Position >= jumpOffset)
 						bin.Position = bin.Position + 0x130;
 					if (checkBabies.Count > 0 && checkBabies.First() == i)
 					{
@@ -3224,13 +3239,13 @@ public partial class RandomizerContainer : SubViewportContainer
 					writter.Write((short)0);
 					writter.Write((short)5);
 					foreach (uint offset in digimonOffsets)
-				{
+					{
 					bin.Position = offset;
-					byte rand = (byte)(numberGenerator.Next(65) + 1);
-					while (rand == currentSukamon)
-						rand = (byte)(numberGenerator.Next(65) + 1);
-					bin.WriteByte(rand);
-				}
+						byte rand = (byte)(numberGenerator.Next(65) + 1);
+						while (rand == currentSukamon)
+							rand = (byte)(numberGenerator.Next(65) + 1);
+						bin.WriteByte(rand);
+					}
 					
 				
 					SetSukamonToyEvolution();
@@ -3326,7 +3341,10 @@ public partial class RandomizerContainer : SubViewportContainer
 					foreach (uint offset in digimonOffsets)
 					{
 						bin.Position = offset;
-						bin.WriteByte((byte)(numberGenerator.Next(65) + 1));
+						byte rand = (byte)(numberGenerator.Next(64) + 1);
+						if (rand == 62)
+							rand = 65;
+						bin.WriteByte(rand);
 					}
 
 					//Remove Champion requirement from special evo
@@ -3387,8 +3405,11 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void randomizeRestaurant()
 	{
-		uint[] offsets = { 0x140AD588, 0x140AD790, 0x140AD998, 0x140ADDE6, 0x140ADFCC, 0x140AE1BA, 0x140AE602, 0x140AE7D0,
-						   0x140AE9E2, 0x140AF0B6, 0x140AF262, 0x140AF412, 0x140AF7F8, 0x140AFA72, 0x140AFD02,
+		uint[] offsets = { 0x140AD588, 0x140AD790, 0x140AD998, 
+		                   0x140ADDE6, 0x140ADFCC, 0x140AE1BA, 
+						   0x140AE602, 0x140AE7D0, 0x140AE9E2, 
+						   0x140AF0B6, 0x140AF262, 0x140AF412, 
+						   0x140AF7F8, 0x140AFA72, 0x140AFD02,
 						   0x140B01B8, 0x140B02D6, 0x140B03F6, 0x140B0686, 0x140B07D2, 0x140B0A28, 0x140B0CBC, 0x140B0E10, 0x140B0F66 };
 
 		switch (restaurantOpt)
@@ -3477,6 +3498,11 @@ public partial class RandomizerContainer : SubViewportContainer
 					
 				case 1:
 					selectedMap = (byte)numberGenerator.Next(248);
+					if (selectedMap == 50)
+						selectedMap = 238;
+					else if (selectedMap == 61)
+						selectedMap = 236;
+					
 					if (selectedMap > 239)
 					{
 						if (selectedMap < 246)
@@ -3683,7 +3709,7 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void RandomizeBoost(bool ignoreShuffle = false)
 	{
-		uint ptrOffset = 0x14D53558;
+		uint ptrOffset = 0x14D53558;		
 
 		if (!ignoreShuffle)
 		{
@@ -3691,20 +3717,21 @@ public partial class RandomizerContainer : SubViewportContainer
 
 			for (int i = 0; i < 7; i++)
 			{
-				if (i != 3)
-				{
-					bin.Position = i * 4 + ptrOffset;
-					pointers.Add(reader.ReadInt32());
-				}
+				bin.Position = i * 4 + ptrOffset;								
+				pointers.Add(reader.ReadInt32());				
+
 			}
 
 			int[] shuffledPtr = pointers.ToArray();
 			numberGenerator.Shuffle<int>(shuffledPtr);
+			int pos = 0;
+			
 
 			for (int i = 0; i < pointers.Count; i++)
-			{
-				bin.Position = i * 4 + ptrOffset;
+			{				
+				bin.Position = pos * 4 + ptrOffset;
 				writter.Write(shuffledPtr[i]);
+				pos++;				
 			}
 		}
 
@@ -3714,48 +3741,45 @@ public partial class RandomizerContainer : SubViewportContainer
 
 			case 1:
 				bin.Position = 0x14D292E4;
-				if (bin.ReadByte() == 0x40)
-				{
-					offsets = new uint[] { 0x14D294F0, 0x14D29510, 0x14D29554, 0x14D29574, 0x14D295B8, 0x14D295D8,
-										   0x14D2969C, 0x14D296BC, 0x14D29700, 0x14D29720, 0x14D29764, 0x14D29784 };
-					RandomizeBuffs(offsets, 81, 20);
-				}
-				else
-				{
-					offsets = new uint[] { 0x14D294A8, 0x14D294C8, 0x14D2950C, 0x14D2952C, 0x14D29570, 0x14D29590,
-										   0x14D295F4, 0x14D29614, 0x14D29658, 0x14D29678, 0x14D296BC, 0x14D296DC };
-					RandomizeBuffs(offsets, 81, 20);
-				}
+				
+				offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
+					                    0x14D295D4, 0x14D295EC, 0x14D29608, 0x14D29624, 0x14D29640, 0x14D2965C, 0x14D29678, 0x14D29694,  0x14D296B4};
+				RandomizeBuffs(offsets, 81, 20);
+				
 				break;
 			case 2:
 				bin.Position = 0x14D29290;
 				bin.WriteByte(0x80);
 
 				bin.Position = 0x14D292E4;
-				if (bin.ReadByte() == 0x40)
-				{
-					bin.Position = 0x14D292E4;
-					bin.WriteByte(0x80);
-					bin.Position = 0x14D29338;
-					bin.WriteByte(0x80);
+				
+				bin.Position = 0x14D292C4; //Off
+				writter.Write((short)1500);
+				bin.Position = 0x14D292D0;
+				writter.Write((short)1499);
+				
+				bin.Position = 0x14D29308; //Def
+				writter.Write((short)1500);
+				bin.Position = 0x14D29314;
+				writter.Write((short)1499);
 
-					offsets = new uint[] { 0x14D294F0, 0x14D29510, 0x14D29554, 0x14D29574, 0x14D295B8, 0x14D295D8,
-										   0x14D2969C, 0x14D296BC, 0x14D29700, 0x14D29720, 0x14D29764, 0x14D29784 };
+				bin.Position = 0x14D2934C; //Spd
+				writter.Write((short)1500);
+				bin.Position = 0x14D29358;
+				writter.Write((short)1499);
 
-					RandomizeBuffs(offsets, 251, -100);
-				}
-				else
-				{
-					bin.Position = 0x14D292CC;
-					bin.WriteByte(0x80);
-					bin.Position = 0x14D29308;
-					bin.WriteByte(0x80);
-					
-					offsets = new uint[] { 0x14D294A8, 0x14D294C8, 0x14D2950C, 0x14D2952C, 0x14D29570, 0x14D29590,
-										   0x14D295F4, 0x14D29614, 0x14D29658, 0x14D29678, 0x14D296BC, 0x14D296DC };
+				bin.Position = 0x14D296C4; //Change the code to accept negative values
+				writter.Write(640810908);
+				bin.Position = 0x14D296F4;
+				writter.Write(642973596);
+				bin.Position = 0x14D29724;
+				writter.Write(645136284);
 
-					RandomizeBuffs(offsets, 251, -100);			
-				}
+				offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
+					                       0x14D295D4, 0x14D295EC, 0x14D29608, 0x14D29624, 0x14D29640, 0x14D2965C, 0x14D29678, 0x14D29694,  0x14D296B4 };
+
+				RandomizeBuffs(offsets, 351, 0);			
+				
 
 				break;
 		}
@@ -4411,8 +4435,13 @@ public partial class RandomizerContainer : SubViewportContainer
 			uint finalOffset = (uint)(value * 0x1C + startOffset);
 			if (finalOffset >= jumpOffsetBoost)
 				finalOffset = finalOffset + 0x130;
+			bin.Position = finalOffset - 3;
+			int check = reader.ReadByte();			
 			bin.Position = finalOffset;
-			writter.Write((short)(numberGenerator.Next(maxValue) + minValue));
+			if (check == 21 || check == 30 || check == 34 || check == 41 || check == 42)
+				writter.Write((short)0);
+			else
+				writter.Write((short)(numberGenerator.Next(maxValue) + minValue));
 		}
 	}
 
@@ -4973,14 +5002,53 @@ public partial class RandomizerContainer : SubViewportContainer
 		}		
 	}
 
+	void CheckDigimonSeed(double seed)
+    {
+        switch (seed)
+        {
+            //Digimon seeds will be secret for a while
+
+			default:
+				break;
+        }
+    }
+
+	void CheckSpecialSeed(double seed)
+    {
+		uint startingOffset, currentOffset, jumpOffset;
+		bool jumped;	
+		uint[] jumpOffsets;
+		int jumpValue = 0;
+	
+        switch (seed)
+        {
+			//Special seeds will be secret for a while
+			default:
+			break;
+        }
+    }
+
 	void CreateRandoTxt()
 	{
 		string filename = Tr("Rando_txt") + ".txt";
 
-		string path = System.IO.Path.Combine(folderPath, filename);
+		string cueData = "FILE " + '"' + cueFileName + ".bin" + '"' + " BINARY" + "\n" + "  TRACK 01 MODE2/2352" + "\n" + "    INDEX 01 00:00:00";
+
+		string path = System.IO.Path.Combine(folderPath, cueFileName + ".cue");
 		System.IO.Stream txt = System.IO.File.OpenWrite(path);
 
 		System.IO.StreamWriter txtWritter = new System.IO.StreamWriter(txt);
+
+		txtWritter.Write(cueData);
+
+		txtWritter.Close();
+		txtWritter.Dispose();
+		txt.Close();
+		txt.Dispose();
+
+		path = System.IO.Path.Combine(folderPath, filename);
+		txt = System.IO.File.OpenWrite(path);
+		txtWritter = new System.IO.StreamWriter(txt);
 
 		txtWritter.Write(Tr("InitialSeed") + ": " + Seed.Value);
 		txtWritter.WriteLine();
@@ -5916,9 +5984,69 @@ public partial class RandomizerContainer : SubViewportContainer
 		MetalWait.Visible = false;
 		patchingLoading.Text = Tr("RandomizedP");
 		PatchingWait.GetOkButton().Text = Tr("ExitButton");
+		digiRando = 0;
 		SaveData();
 		PatchingWait.Confirmed -= HandleError;
 		PatchingWait.Confirmed += ExitRandomizerPressed;
+	}
+
+	void ApplyPPF3Patch(string patchPath)
+	{
+		BinaryReader ppf;
+
+		patchPath = "Patches/RandoDigi/" + patchPath;
+		try
+		{
+			if (OS.HasFeature("editor"))
+			{
+				patchPath = "res://" + patchPath;
+				patchPath = ProjectSettings.GlobalizePath(patchPath);
+				ppf = new System.IO.BinaryReader(System.IO.File.Open(patchPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite));
+			}
+			else
+			{
+				//var file = Godot.FileAccess.(patchPath, Godot.FileAccess.ModeFlags.ReadWrite);
+				ppf = new System.IO.BinaryReader(new MemoryStream(Godot.FileAccess.GetFileAsBytes(patchPath)));
+				if (ppf == null)
+				{
+					randomizerError = true;
+					return;
+				}
+			}
+
+		}
+
+		catch (System.IO.FileNotFoundException)
+		{
+			randomizerError = true;
+			return;
+		}
+		catch (System.IO.IOException)
+		{
+			randomizerError = true;
+			return;
+		}
+
+		ppf.BaseStream.Position = 60;
+		int offset, change;
+
+
+		while (ppf.BaseStream.Position < ppf.BaseStream.Length)
+		{
+			offset = ppf.ReadInt32();
+			ppf.ReadInt32();
+			change = ppf.ReadByte();
+			bin.Position = offset;
+
+			while (change > 0)
+			{
+				bin.WriteByte(ppf.ReadByte());
+				change--;
+			}
+
+		}
+		ppf.Close();
+		ppf.Dispose();
 	}
 
 	void CheckSaveData()
@@ -6044,8 +6172,21 @@ public partial class RandomizerContainer : SubViewportContainer
 		}
 		else if (randomizerError)
 		{
+			digiRando = 0;
 			MetalWait.FrameChanged -= CheckRandomizer;
 			SetError();
 		}
+	}
+
+	int GenerateRandomCrypto(int limit)
+	{
+		int value = 0;
+		using (System.Security.Cryptography.RandomNumberGenerator rg = System.Security.Cryptography.RandomNumberGenerator.Create())
+		{
+			byte[] rno = new byte[5];
+			rg.GetBytes(rno);
+			value = BitConverter.ToInt32(rno, 0);
+		}
+		return value % limit;
 	}
 }

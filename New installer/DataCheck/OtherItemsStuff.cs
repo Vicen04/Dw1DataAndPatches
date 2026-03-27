@@ -130,13 +130,13 @@ public partial class OtherItemsStuff : Control
 
 	enum SUPERDISKBYTES
 	{
-		OFF = 244,
+		OFF = 32,
 		DEF = 88,
-		SPD = 188,
-		OMNI = 32,
-		SOFF = 64,
-		SDEF = 164,
-		SSPD = 8,
+		SPD = 144,
+		OMNI = 200,
+		SOFF = 112,
+		SDEF = 168,
+		SSPD = 224,
 	}
 
 
@@ -425,6 +425,8 @@ public partial class OtherItemsStuff : Control
 		//Setup Boost
 		bin.Position = 0x14D292E4;
 		int[] OmniStats = { 0, 0, 0 };
+
+		int isNegative = 0;
 		if (bin.ReadByte() == 0x40)
 		{
 			offsetsBoost = new uint[] { 0x14D294F0, 0x14D29554, 0x14D295B8, 0x14D2969C, 0x14D29700, 0x14D29764 };
@@ -433,45 +435,50 @@ public partial class OtherItemsStuff : Control
 			{
 				bin.Position = i * 4 + ptrOffsetBoost;
 				int currentBoost = GetDiskValue(bin.ReadByte(), false);
-				boostItems[i].Text = parent.GetItemData(currentBoost + 15).name;
-				boostIcons[i].Texture = mainParent.GetItemTex(currentBoost + 15);
+				boostItems[currentBoost].Text = parent.GetItemData(i + 15).name;
+				boostIcons[currentBoost].Texture = mainParent.GetItemTex(i + 15);
 				if (i < 3 && currentBoost != 3)
 				{
 					if (currentBoost > 2)
 						currentBoost--;
 					bin.Position = offsetsBoost[currentBoost];
-					if (currentBoost % 4 == 0)
+					if (currentBoost % 3 == 0)
 						OmniStats[0] = OmniStats[0] + reader.ReadInt16();
-					else if (currentBoost % 4 == 1)
+					else if (currentBoost % 3 == 1)
 						OmniStats[1] = OmniStats[1] + reader.ReadInt16();
-					else if (currentBoost % 4 == 2)
+					else if (currentBoost % 3 == 2)
 						OmniStats[2] = OmniStats[2] + reader.ReadInt16();
 				}
 			}
 		}
 		else
 		{
-			offsetsBoost = new uint[] { 0x14D294A8, 0x14D2950C, 0x14D29570, 0x14D295F4, 0x14D29658, 0x14D296BC };
+			offsetsBoost = new uint[] { 0x14D294F0, 0x14D29528, 0x14D29560, 0x14D29640, 0x14D29678, 0x14D296B4 };
 			bin.Position = ptrOffsetBoost;
 
 			for (int i = 0; i < 7; i++)
 			{
 				bin.Position = i * 4 + ptrOffsetBoost;
 				int currentBoost = GetDiskValue(bin.ReadByte(), true);
-				boostItems[i].Text = parent.GetItemData(currentBoost + 15).name;
-				boostIcons[i].Texture = mainParent.GetItemTex(currentBoost + 15);
-				if (i < 3 && currentBoost != 3)
-				{
-					if (currentBoost > 2)
-						currentBoost--;
-					bin.Position = offsetsBoost[currentBoost];
-					if (currentBoost % 4 == 0)
-						OmniStats[0] = OmniStats[0] + reader.ReadInt16();
-					else if (currentBoost % 4 == 1)
-						OmniStats[1] = OmniStats[1] + reader.ReadInt16();
-					else if (currentBoost % 4 == 2)
-						OmniStats[2] = OmniStats[2] + reader.ReadInt16();
+				boostItems[currentBoost].Text = parent.GetItemData(i + 15).name;
+				boostIcons[currentBoost].Texture = mainParent.GetItemTex(i + 15);
+				if (currentBoost == 3)
+				{					
+					bin.Position = 0x14D2959C;					
+						OmniStats[0] = reader.ReadInt16();
+					bin.Position = 0x14D295D4;
+						OmniStats[1] = reader.ReadInt16();
+					bin.Position = 0x14D29608;
+						OmniStats[2] = reader.ReadInt16();
 				}
+			}
+			bin.Position = 0x14D296C4;
+			if (bin.ReadByte() != 0)
+			{
+				isNegative = -100;
+				OmniStats[0] = OmniStats[0] - 100;
+				OmniStats[1] = OmniStats[1] - 100;
+				OmniStats[2] = OmniStats[2] - 100;
 			}
 		}
 
@@ -481,7 +488,7 @@ public partial class OtherItemsStuff : Control
 		{
 			
 			bin.Position = offsetsBoost[i];
-			BoostEffects[i].Text = reader.ReadInt16().ToString();
+			BoostEffects[i].Text = (reader.ReadInt16() + isNegative).ToString();
 		}			
 
 		OmniDisk[0].Text = OmniStats[0].ToString();

@@ -76,6 +76,9 @@ public partial class TechStuff : Control
 		}
 
 		uint jump = 0x0;
+		int bubble = 112;
+		if (vice)
+			bubble = 115;
 
 		for (int i = 0; i < 121; i++)
 		{
@@ -83,7 +86,7 @@ public partial class TechStuff : Control
 			uint currentOffset;
 
 
-			if (i == 33 || i == 40 || i == 42 || i == 45 || i > 112)
+			if (i == 33 || i == 40 || i == 42 || i == 45 || i > bubble)
 				currentOffset = reader.ReadUInt32() - 0x80134338 + 0x14D77030;
 			else if (i == 107 || i == 108)
 				currentOffset = reader.ReadUInt32() - 0x80124c6c + namesOffset;

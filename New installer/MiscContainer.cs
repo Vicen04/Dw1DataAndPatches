@@ -19,6 +19,7 @@ public partial class MiscContainer : PanelContainer
 	[Export] private CheckBox OGType;
 	[Export] private CheckBox DropBattle;
 	[Export] private CheckBox RemoveExtraInfo;
+	[Export] private CheckBox ClockV2;
 	[Export] private VicePatcherContainer VicePatcher;
 
 	// Called when the node enters the scene tree for the first time.
@@ -37,6 +38,8 @@ public partial class MiscContainer : PanelContainer
 	void Clock_Toggled(bool toggled)
 	{
 		VicePatcher.SetDigitalClock(toggled);
+		if (toggled)
+			ClockV2.ButtonPressed = false;
 	}
 
 	void Input_Toggled(bool toggled)
@@ -104,6 +107,13 @@ public partial class MiscContainer : PanelContainer
 		VicePatcher.SetRemoveExtraInfo(toggled);
 	}
 
+	void ClockV2_Toggled(bool toggled)
+	{
+		VicePatcher.SetDigitalClockV2(toggled);
+		if (toggled)
+			Clock.ButtonPressed = false;
+	}
+
 
 	void SetupTextTranslation()
 	{
@@ -137,6 +147,8 @@ public partial class MiscContainer : PanelContainer
 		DropBattle.TooltipText = Tr("DropBattle_info");
 		RemoveExtraInfo.Text = Tr("RemoveLifeEvo_L");
 		RemoveExtraInfo.TooltipText = Tr("RemoveLifeEvo_info");
+		ClockV2.Text = Tr("ClockV2_L");
+		ClockV2.TooltipText = Tr("ClockV2_info");
 	}
 
 	void SetupButtons()
@@ -155,10 +167,11 @@ public partial class MiscContainer : PanelContainer
 		OGType.Toggled += OGType_Toggled;
 		DropBattle.Toggled += Drop_Toggled;
 		RemoveExtraInfo.Toggled += RemoveExtraInfo_Toggled;
+		ClockV2.Toggled += ClockV2_Toggled;
 	}
 
 	public void LoadSaveData(bool ClockS, bool InputS, bool AreasS, bool BattleTextS, bool BoostItemsS, bool OGLifeS, bool RemoveEvoS,
-	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS, bool DropItemsS, bool RemoveExtraInfoS)
+	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS, bool DropItemsS, bool RemoveExtraInfoS, bool clockV2)
 	{
 		Clock.ButtonPressed = ClockS;
 		Input.ButtonPressed = InputS;
@@ -174,6 +187,7 @@ public partial class MiscContainer : PanelContainer
 		OGType.ButtonPressed = OGTypeS;
 		DropBattle.ButtonPressed = DropItemsS;
 		RemoveExtraInfo.ButtonPressed = RemoveExtraInfoS;
+		ClockV2.ButtonPressed = clockV2;
 	}
 
 	public void RestartSelection()
@@ -192,5 +206,6 @@ public partial class MiscContainer : PanelContainer
 		OGType.ButtonPressed = false;
 		DropBattle.ButtonPressed = false;
 		RemoveExtraInfo.ButtonPressed = false;
+		ClockV2.ButtonPressed = false;
 	}
 }

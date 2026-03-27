@@ -346,6 +346,9 @@ public partial class DamageCalculator : Control
 				if (damage <= 0)
 					damage = 1;
 			}
+			else 
+				damage = damage + cAttack;
+
 			int type1 = mainParent.GetDigimonData(defSel).Types[0];
 			if (type1 == 255)
 				type1 = noType;
@@ -365,7 +368,7 @@ public partial class DamageCalculator : Control
 			damage = damage * (type1 + type2 + type3);
 
 			int moveAccuracy = parent.GetTechData(techSel).accuracy;
-			int blockChance = moveAccuracy / 2 * (cSpdDef - (cSpdAtk / 10)) / 1998;
+			int blockChance = moveAccuracy / 2 * (cSpdDef - (cSpdAtk / 10)) / 999;
 			if (isBlocking.ButtonPressed)
 				blockChance = blockChance * 6 / 5;
 
@@ -382,27 +385,6 @@ public partial class DamageCalculator : Control
 			{
 				maxDamage = damage / 30 * (min + range) / 100;									
 				minDamage = damage / 30 * min / 100;
-				if (isBurnt.ButtonPressed)
-				{
-					maxDamage = maxDamage - maxDamage / 4;
-					minDamage = minDamage - minDamage / 4;
-				}
-				if (maxDamage <= 0)
-					maxDamage = 1;
-				if (minDamage <= 0)
-					minDamage = 1;
-				if (isFrozen.ButtonPressed)
-				{
-					maxDamage = maxDamage / 4 + maxDamage;
-					minDamage = minDamage / 4 + minDamage;
-				}
-				
-				if (maxDamage > 9999)
-					maxDamage = 9999;
-				if (minDamage > 9999)
-					minDamage = 9999;
-				MaxDamageLabelValue.Text = maxDamage.ToString();
-				MinDamageLabelValue.Text = minDamage.ToString();
 			}
 			else
 			{
@@ -410,59 +392,36 @@ public partial class DamageCalculator : Control
 				{
 					maxDamage = damage / 30 * 200 / 100 * (90 + 20) / 100;
 					minDamage = damage / 30 * 90 / 100;
-					
-					if (isBurnt.ButtonPressed)
-					{
-						maxDamage = maxDamage - maxDamage / 4;
-						minDamage = minDamage - minDamage / 4;
-					}
-					if (maxDamage <= 0)
-						maxDamage = 1;
-					if (minDamage <= 0)
-						minDamage = 1;
-						
-					if (isFrozen.ButtonPressed)
-					{
-						maxDamage = maxDamage / 4 + maxDamage;
-						minDamage = minDamage / 4 + minDamage;
-					}
-
-					if (maxDamage > 9999)
-						maxDamage = 9999;
-					if (minDamage > 9999)
-						minDamage = 9999;
-					MaxDamageLabelValue.Text = maxDamage.ToString();
-					MinDamageLabelValue.Text = minDamage.ToString();
 				}
 				else
 				{
 					maxDamage = damage / 30 * (minFinisher + maxFinisher) / 100 * (90 + 20) / 100;					
 					minDamage = damage / 30 * minFinisher / 100 * 90 / 100;
-					if (isBurnt.ButtonPressed)
-					{
-						maxDamage = maxDamage - maxDamage / 4;
-						minDamage = minDamage - minDamage / 4;
-					}
-					if (maxDamage <= 0)
-						maxDamage = 1;
-					if (minDamage <= 0)
-						minDamage = 1;
-
-					if (isFrozen.ButtonPressed)
-					{
-						maxDamage = maxDamage / 4 + maxDamage;
-						minDamage = minDamage / 4 + minDamage;
-					}
-					if (maxDamage > 9999)
-						maxDamage = 9999;
-					if (minDamage > 9999)
-						minDamage = 9999;
-					MaxDamageLabelValue.Text = maxDamage.ToString();
-					MinDamageLabelValue.Text = minDamage.ToString();
 				}
 				AccuracyValue.Text = "100";
 			}
-			
+
+			if (isBurnt.ButtonPressed)
+			{
+				maxDamage = maxDamage - maxDamage / 4;
+				minDamage = minDamage - minDamage / 4;
+			}
+			if (maxDamage <= 0)
+				maxDamage = 1;
+			if (minDamage <= 0)
+				minDamage = 1;
+			if (isFrozen.ButtonPressed)
+			{
+				maxDamage = maxDamage / 4 + maxDamage;
+				minDamage = minDamage / 4 + minDamage;
+			}
+				
+			if (maxDamage > 9999)
+				maxDamage = 9999;
+			if (minDamage > 9999)
+				minDamage = 9999;
+			MaxDamageLabelValue.Text = maxDamage.ToString();
+			MinDamageLabelValue.Text = minDamage.ToString();	
 
 			
 
