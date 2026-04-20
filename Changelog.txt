@@ -382,4 +382,15 @@ Version 2.0:
 
 - New events (in progress)
 
-- Still in progress...
+(10/04/25):
+
+- Major changes in the code, mostly the damage calculation and AI that handles the type matchups
+
+- Added colour to the damage numbers, this colour will let the player know how effective the attack is based on the type advantage
+
+- Added 3 more optional patches
+
+- All of the Vice changes now work in VS mode
+
+- Fixed an issue in VS mode from the original game
+
