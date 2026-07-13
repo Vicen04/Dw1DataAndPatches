@@ -97,7 +97,7 @@ public partial class DamageCalculator : Control
 		if (!newVice)
 			bin.Position = 0x14B58744;
 		else
-			bin.Position = 0x14CC0E68;
+			bin.Position = 0x14CC120C;
 		noType = bin.ReadByte();
 
 		for (int i = 1; i < 180; i++)
@@ -135,13 +135,13 @@ public partial class DamageCalculator : Control
 				if (!newVice)
 					bin.Position = 0x14CED42C; //check if a hard difficulty is enabled
 				else
-					bin.Position = 0x14CC0F86;
+					bin.Position = 0x14CC1136;
 				if (bin.ReadByte() == 1)
 				{
 					if (!newVice)
 						bin.Position = 0x14CCFE14;
 					else
-						bin.Position = 0x14CC0F90;
+						bin.Position = 0x14CC113C;
 					extraBoost = reader.ReadInt16();
 				}
 				else
@@ -153,7 +153,7 @@ public partial class DamageCalculator : Control
 				if (!newVice)
 					bin.Position = 0x14CCFE34;
 				else
-					bin.Position = 0x14CC0FAC;
+					bin.Position = 0x14CC1180;
 				extraBoost = reader.ReadInt16();
 				ultra = true;
 			}
@@ -225,17 +225,17 @@ public partial class DamageCalculator : Control
 
 		else
 		{
-			bin.Position = 0x14CC0F60;
+			bin.Position = 0x14CC0EE0;
 			range = reader.ReadInt16() - 1;
-			bin.Position = 0x14CC0FE4;
+			bin.Position = 0x14CC0F24;
 			min = reader.ReadInt16();
 
-			bin.Position = 0x14CC10D8;
-			maxFinisher = reader.ReadInt16();
-			bin.Position = 0x14CC10DC;
+			bin.Position = 0x14CC1024;
+			maxFinisher = reader.ReadInt16() - 1;
+			bin.Position = 0x14CC1028;
 			minFinisher = reader.ReadInt16();
 
-			bin.Position = 0x14CC0F3C;
+			bin.Position = 0x14CC0EBC;
 			maxDef = reader.ReadInt16() - 1;
 		}
 	}

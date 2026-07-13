@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections;
 
 namespace PatcherData
 {
@@ -11,7 +11,7 @@ namespace PatcherData
 	}
 }
 
-public partial class Base_script : Node2D
+public partial class SceneInstaller : Node2D
 {
 	string filePath, newFilePath, fileDirectory;
 
@@ -51,15 +51,6 @@ public partial class Base_script : Node2D
 	private TextureButton Support;
 
 	[Export]
-	private Label WindowSize;
-
-	[Export]
-	private Button WindowSizeNormal;
-
-	[Export]
-	private Button WindowSizeBig;
-
-	[Export]
 	private Label CreditsTitle;
 
 	[Export]
@@ -83,22 +74,13 @@ public partial class Base_script : Node2D
 	[Export]
 	private Label Disclaimer;
 
-	[Export]
-	private Button Tools;
-
-	int installerSelected = -1;
-	int screenX = 1800, screenY = 950;
+	int selectedInstaller = -1;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if (DisplayServer.ScreenGetSize().Y < 900 || DisplayServer.ScreenGetSize().X < 1800)
-		{
-			DisplayServer.WindowSetSize(new Vector2I(900, 425));
-			//DisplayServer.WindowSetPosition(new Vector2I(0,25));
-			this.GetWindow().MoveToCenter();
-			screenX = 900; screenY = 425;
-		}
+
+		DisplayServer.WindowSetSize(new Vector2I(900, 425));
 		viceInstaller.Pressed += SetViceInstaller;
 		optionalInstaller.Pressed += SetOptionalInstaller;
 		randomizer.Pressed += SetRandomizer;
@@ -107,9 +89,8 @@ public partial class Base_script : Node2D
 		Support.Pressed += OpenSupport;
 		Spreadsheet.Pressed += OpenSpreadsheet;
 		Start.Pressed += GoToMainMenu;
-		CloseSettings.Pressed += ExitSettings;
-		Tools.Pressed += ToolsPressed;
-		fileSearch.FileSelected += OpenProgram;
+		CloseSettings.Pressed += ExitSettings;	
+		fileSearch.FileSelected += OpenProgram;	
 
 		viceInstaller.Text = Tr("ViceButton");
 		viceInstaller.TooltipText = Tr("ViceButton_info");
@@ -122,16 +103,10 @@ public partial class Base_script : Node2D
 		LanguageText.Text = Tr("LanguageS");
 		Credits.Text = Tr("Credits");
 		CreditsTitle.Text = Tr("Credits");
-		WindowSize.Text = Tr("SizeS");
 		ViceExplain.Text = Tr("WhatVice");
 		CreditsInfo.Text = Tr("Credits_text");
 		Start.Text = Tr("StartInstaller_L");
 		Disclaimer.Text = Tr("Disclaimer_L");
-		Tools.Text = Tr("ToolsL");
-		Tools.TooltipText = Tr("ToolsInfo");
-
-		WindowSizeNormal.Text = Tr("WindowS");
-		WindowSizeBig.Text = Tr("WindowL");
 
 		TranslationServer.SetLocale("EN");
 	}
@@ -139,47 +114,50 @@ public partial class Base_script : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
 	void SetViceInstaller()
 	{
-		installerSelected = 0;
-		fileSearch.Visible = true;
+		OS.RequestPermissions();
+		selectedInstaller = 0;
+		fileSearch.Visible = true;		
 	}
 
 	void SetOptionalInstaller()
 	{
-		installerSelected = 2;
+		OS.RequestPermissions();
+		selectedInstaller = 2;
 		fileSearch.Visible = true;
 	}
 
 	void SetRandomizer()
 	{
-		installerSelected = 1;
+		OS.RequestPermissions();
+		selectedInstaller = 1;
 		fileSearch.Visible = true;
 	}
 
 	void OpenProgram(string path)
 	{
-		switch(installerSelected)
+		switch(selectedInstaller)
 		{
 			case 0:
-				OpenViceInstaller(path);
+			OpenViceInstaller(path);
 				break;
 			case 1:
-				OpenRandomizer(path);
+			OpenRandomizer(path);
 				break;
 			case 2:
-				OpenOptionalInstaller(path);
+			OpenOptionalInstaller(path);
 				break;
 			default:
 				break;
 		}
-
 	}
 
 	void OpenViceInstaller(string file)
-	{
+	{		
 		var scene = GD.Load<PackedScene>("res://Scenes/VicePatcher.tscn");
 		var patcher = scene.Instantiate() as VicePatcherContainer;
 		fileSearch.Visible = false;
@@ -242,20 +220,21 @@ public partial class Base_script : Node2D
 				break;
 			case 2:
 				TranslationServer.SetLocale("DE");
-				break;	
+				break;
 		}
 	}
 
-	void SetWindowsSizeNormal()
+	void WindowsSizeSelected(int selected)
 	{
-		DisplayServer.WindowSetSize(new Vector2I(screenX, screenY));
-		this.GetWindow().MoveToCenter();
-	}
-
-	void SetWindowSizeBig()
-	{
-		DisplayServer.WindowSetSize(new Vector2I(DisplayServer.ScreenGetSize().X - 100, DisplayServer.ScreenGetSize().Y - 100));
-		this.GetWindow().MoveToCenter();
+		switch (selected)
+		{
+			case 0:
+				DisplayServer.WindowSetSize(new Vector2I(900, 425));
+				break;
+			case 1:
+				DisplayServer.WindowSetSize(new Vector2I(1800, 950));
+				break;
+		}
 	}
 
 	void ExitViceInfo()
@@ -301,16 +280,6 @@ public partial class Base_script : Node2D
 		ExitSettings();
 	}
 
-	void ToolsPressed()
-	{
-		var scene = GD.Load<PackedScene>("res://Scenes/ToolsScene.tscn");
-		var Tools = scene.Instantiate() as ToolsHandler;
-		fileSearch.Visible = false;
-		BaseContainer.Visible = false;
-		Tools.SetParent(this);
-		this.AddChild(Tools);
-	}
-
 	void OpenLink(string url)
 	{
 		try
@@ -334,7 +303,7 @@ public partial class Base_script : Node2D
 			}
 			else
 			{
-				throw;
+				OS.ShellOpen(url);
 			}
 		}
 	}

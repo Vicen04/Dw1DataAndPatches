@@ -33,7 +33,7 @@
 
 //Calculate damage function, it has been changed and adapted to the new effects, it is also now shared between the battle and tournament functions
 
-
+//First 2.2 version (2.2 part 1 & 2)
 int CalculateDamage(DigimonEntity *AttackerPtr, DigimonEntity *DefenderPtr, int moveID)
 {
   byte attackType;
@@ -4757,3 +4757,40 @@ bool CheckIfBuffs(DigimonEntity *Digi,int digiID,int Tech)
         8005cf78 cf 07 06 24     _li        BuffValue,0x7cf  //limit changed to 1999
 
 		800646f4 cf 07 06 24     _li        BuffValue,0x7cf  //tournament version
+		
+		
+		
+		
+		80124b48  SquareUI [6]                       
+
+        1C 00 2B 00 4E 00 82 00 
+		81 00 32 00 3c 00 04 00 
+		88 00 55 00 30 00 2E 00 
+		D6 00 2a 00 4E 00 82 00 
+		6A 00 BB 00 6C 00 04 00 
+		5E 00 CC 00 84 00 04 00
+
+
+//Rework of the entire battle system damage
+
+//Change in the targeting priority
+
+//Change in the AI calculating the power of the attacks
+
+//Change in the AI calculating the type damage effectiveness
+
+//Fixed AI weakness score calculation
+
+//Fixed VS mode finisher damage
+
+//Addition of a funtion to calculate the tech boost
+
+//Addition of a function to calculate the total type damage
+
+//Damage colour numbers
+
+//Addition of the golden colour for the baby boost
+
+//Rework on the small chart rendering method
+
+//Evolution requirements code

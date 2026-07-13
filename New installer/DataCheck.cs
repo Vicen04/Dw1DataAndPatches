@@ -39,6 +39,8 @@ public partial class DataCheck : Control
 	private Texture2D[] typeSprites = new Texture2D[7];
 
 	private DigimonData[] digimonData = new DigimonData[180];
+	private int[] AreaNamesID = new int[256];
+	private string[] AreaNames = new string[256];	
 
 	bool Maeson = false, vanilla = false;
 
@@ -299,6 +301,38 @@ public partial class DataCheck : Control
 			digimonData[148].digimonSprite = parent.GetDigimonTexture(128, 448);
         }
 
+		int areaJump = 0x14D6AAD8, areaJump2 = 0x14D6B408;
+
+		uint AreaDataOff = 0x14D6A5AC;	
+
+		for (int i = 0; i < 255; i++)
+		{
+			bin.Position = AreaDataOff + i * 16;
+
+			if (bin.Position > areaJump)
+				bin.Position = bin.Position + 0x130;
+
+			if (bin.Position > areaJump2)
+				bin.Position = bin.Position + 0x130;
+
+			AreaNames[i] = System.Text.Encoding.Default.GetString(reader.ReadBytes(10));
+
+			bin.Position = AreaDataOff + i * 16 + 15;
+
+			if (bin.Position > areaJump)
+				bin.Position = bin.Position + 0x130;
+
+			if (bin.Position > areaJump2)
+				bin.Position = bin.Position + 0x130;
+
+			AreaNamesID[i] = bin.ReadByte();
+		}
+
+		AreaNames[255] = "NO VALUE";
+		AreaNamesID[255] = 0;
+
+		if (!Maeson && !vanilla) AreaNames[255] = "ISCA08";
+
 		itemsScript.SetupData(bin, reader, this, !Maeson && !vanilla);
 		techsScript.SetupData(bin, reader, this, !Maeson && !vanilla);
 		evolutionScript.SetupData(bin, reader, this, !Maeson && !vanilla);
@@ -408,5 +442,158 @@ public partial class DataCheck : Control
 		digimonScript.Visible = false;
 		mapsScript.Visible = true;
 		mapsScript.CloseMap();
+	}
+
+	public int GetMapIDName(int value) {return AreaNamesID[value];}
+	public string GetMapName(int value) {return AreaNames[value];}
+
+	public string returnAreaName(int value, int area = 0)
+	{
+		if (area == 255)
+		return "WereGarurumon secret";
+		switch(value)
+		{
+			case 0:
+			return "Native Forest";
+			case 1:
+			return "Coela Point";
+			case 2:
+			return "Dragon Eye Lake";
+			case 3:
+			return "Drill Tunnel Entrance";
+			case 4:
+			return "Digimon Bridge";
+			case 5:
+			return "Tropical Jungle";
+			case 6:
+			return "Mangrove Region";
+			case 7:
+			return "Path Thru Mt. Panorama";
+			case 8:
+			return "Entrance to File City";
+			case 9:
+			return "Mt. Panorama Plains";
+			case 10:
+			return "Foot of Mt. Panorama";
+			case 11:
+			return "Mt. Panorama Spore Area";
+			case 12:
+			return "Drill Tunnel";
+			case 13:
+			return "Drill Tunnel 2nd floor";
+			case 14:
+			return "Drill Tunnel 3rd floor";
+			case 15:
+			return "Residential Area";
+			case 16:
+			return "Underground Pond";
+			case 17:
+			return "Lava Cave";
+			case 18:
+			return "Overdell";
+			case 19:
+			return "Overdell Cemetery";
+			case 20:
+			return "Great Canyon Entrance";
+			case 21:
+			return "Great Canyon Top Area";
+			case 22:
+			return "Great Canyon Bridge";
+			case 23:
+			return "Fortress Entrance";
+			case 24:
+			return "Great Canyon Bot. Area";
+			case 25:
+			return "Ogre Fortress";
+			case 26:
+			return "Monochrome Shop";
+			case 27:
+			return "Grey Lord's Mansion";
+			case 28:			
+			return "Mansion Basement";
+			case 29:
+			return "Underground Lab";
+			case 30:
+			return "Gear Savanna";
+			case 31:
+			return "Ancient Dino Region";
+			case 32:
+			return "Ancient Glacial Region";
+			case 33:
+			return "Ancient Speedy Region";
+			case 34:
+			case 40:
+			return "Freezeland";
+			case 35:
+			return "Ice Sanctuary";
+			case 36:
+			return "Green Gym";
+			case 37:
+			return "Leomon Ancestor's Cave";
+			case 38:
+			return "Misty Trees";
+			case 39:
+			return "Great Canyon";
+			case 41:
+			return "Geko Swamp";
+			case 42:
+			return "Volume Villa";
+			case 43:
+			return "File City";
+			case 44:
+			return "Item Keeper";
+			case 45:
+			return "Centar Clinic";
+			case 46:
+			return "Restaurant";
+			case 47:
+			return "Item Shop";
+			case 48:
+			return "Jijimon's house";
+			case 49:
+			return "Secret Item Shop";
+			case 50:
+			return "Toy Town";
+			case 51:
+			return "Secret Beach Cave";
+			case 52:
+			return "Factorial Town";
+			case 53:
+			return "Birdra Transport";
+			case 54:
+			return "Arena Lobby";
+			case 55:
+			return "Treasure Hunt";
+			case 56:
+			return "Trash Mountain";
+			case 57:
+			return "Sewer";
+			case 58:
+			return "Beetle Land";
+			case 59:
+			return "Mt. Infinity";
+			case 60:
+			return "Digimon Curling";
+			case 61:
+			return "Toy Mansion";
+			case 62:
+			return "Costume House";
+			case 63:
+			return "Robot House";
+			case 64:
+			return "Mansion 2nd floor";
+			case 65:
+			return "Mansion Attic";
+			case 66:
+			return "Tree?";
+			case 67:
+			return "Back Dimension";
+			case 68:
+			return "Kunemon's Bed";
+			case 69:
+			return "Amida Forest";
+			default:
+			return "Native Forest";
+		}
 	}
 }

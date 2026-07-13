@@ -55,7 +55,7 @@ public partial class TechDamage : Control
 		if (bin.ReadByte() == 0xD0) //checks if the Attack function still exists there
 			bin.Position = 0x14B58744;
 		else
-			bin.Position = 0x14CC0E68;		
+			bin.Position = 0x14CC120C;		
 		
 		int noneDamage = bin.ReadByte();
 		noType = noneDamage;

@@ -388,6 +388,8 @@ Version 2.0:
 
 - Added colour to the damage numbers, this colour will let the player know how effective the attack is based on the type advantage
 
+- The Baby boost in now visible to the player, the training numbers will have a gold colour when it has been upgraded.
+
 - Added 3 more optional patches
 
 - All of the Vice changes now work in VS mode

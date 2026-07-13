@@ -5,6 +5,9 @@ public partial class TechContainer : PanelContainer
 {
 
 	[Export] private Label Title;
+	[Export] private Label General;
+	[Export] private Label Boost;
+	[Export] private Label Other;
 	[Export] private CheckBox BetterBattle;
 	[Export] private CheckBox BetterBrains;
 	[Export] private CheckBox LearnMulti;
@@ -21,6 +24,10 @@ public partial class TechContainer : PanelContainer
 	[Export] private CheckBox AddEffects;
 	[Export] private CheckBox AddCrits;
 	[Export] private VicePatcherContainer VicePatcher;
+
+	[Export] private TextureButton[] infoButtons;
+	
+	System.Collections.Generic.List<CheckBox> allCheckboxes;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -94,14 +101,14 @@ public partial class TechContainer : PanelContainer
 			RemoveNewStatus.ButtonPressed = false;
 	}
 
-	void ProgressionEnabled(bool enabled)
+	void Progression_Toggled(bool toggled) 
 	{
-		if (enabled)
+		if (toggled)
 		{
 			BetterBattle.ButtonPressed = false;
 			BetterBrains.ButtonPressed = false;
 			BetterBattle.Disabled = true;
-			BetterBrains.Disabled = true;
+			BetterBrains.Disabled = true;				
 		}
 		else
 		{
@@ -116,6 +123,9 @@ public partial class TechContainer : PanelContainer
 	{
 		Title.Text = Tr("Techniques_L");
 		Title.TooltipText = Tr("Techniques_info");
+		General.Text = Tr("TechGeneralM_L");
+		Boost.Text = Tr("TechBoostM_L");
+		Other.Text = Tr("TechOtherM_L");
 		BetterBattle.Text = Tr("BetterBattle_L");
 		BetterBattle.TooltipText = Tr("BetterBattle_info");
 		BetterBrains.Text = Tr("BetterBrains_L");
@@ -146,6 +156,9 @@ public partial class TechContainer : PanelContainer
 		AddEffects.TooltipText = Tr("MoreEffects_info");
 		AddCrits.Text = Tr("Crits_L");
 		AddCrits.TooltipText = Tr("Crits_info");
+
+		if (Title.GetLineCount() > 2)		
+			Title.AddThemeFontSizeOverride("font_size", 70);	
 	}
 
 	void SetupButtons()
@@ -165,6 +178,17 @@ public partial class TechContainer : PanelContainer
 		PoisonTimer.Toggled += PoisonTimer_Toggled;
 		AddEffects.Toggled += AddEffects_Toggled;
 		AddCrits.Toggled += AddCrits_Toggled;
+
+		allCheckboxes = [BetterBattle, BetterBrains, LearnMulti, InsaneDamage, Telepathy, SkipOrders, NerfStatue, RemoveTech, NerfTech, RemoveNewStatus, RemoveEffect, NerfEffect, PoisonTimer, AddEffects, AddCrits];
+
+		for (int i = 0; i < infoButtons.Length; i++)
+		{
+			int cat = i;
+			infoButtons[i].Pressed += () =>
+			{
+				VicePatcher.OpenInfoWindowTech(allCheckboxes[cat].TooltipText, allCheckboxes[cat].Text);
+			};
+		}	
 	}
 
 	public void LoadSaveData(bool BetterBattleS, bool BetterBrainsS, bool LearnMultiS, bool InsaneDamageS, bool TelepathyS, bool SkipOrdersS, bool NerfStatueS,
@@ -204,5 +228,18 @@ public partial class TechContainer : PanelContainer
 		PoisonTimer.ButtonPressed = false;
 		AddEffects.ButtonPressed = false;
 		AddCrits.ButtonPressed = false;
+	}
+
+	void CloseTechs()
+	{
+		RestartSelection();
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	void ApplyTechs()
+	{
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
 	}
 }

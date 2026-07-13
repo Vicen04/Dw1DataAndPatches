@@ -1,8 +1,11 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class ItemsContainer : PanelContainer
 {
+	[Export]
+	private Label ItemTitle;
 
 	[Export]
 	private Label ItemSpawn;
@@ -99,6 +102,11 @@ public partial class ItemsContainer : PanelContainer
 
 	[Export]
 	private RandomizerContainer baseScript;
+	[Export] private Button ApplyPatches;
+
+	[Export] private TextureButton[] infoButtons;
+	
+	System.Collections.Generic.List<CheckBox> allCheckboxes;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -307,6 +315,7 @@ public partial class ItemsContainer : PanelContainer
 
 	void SetUpButtonsTranslations()
 	{
+		ItemTitle.Text = Tr("Items_T");
 		ItemSpawn.Text = Tr("Item_T");
 		ItemSpawn.TooltipText = Tr("Item_info");
 		ItemDrop.Text = Tr("Drop_T");
@@ -345,6 +354,7 @@ public partial class ItemsContainer : PanelContainer
 		KeyItems.TooltipText = Tr("KeyItems_info");
 		CurlingRewards.Text = Tr("CurlingRewards_T");
 		CurlingRewards.TooltipText = Tr("CurlingRewards_info");
+		ApplyPatches.Text = Tr("Apply_L");
 	}
 
 	void SetUpOptionsTranslations()
@@ -405,6 +415,17 @@ public partial class ItemsContainer : PanelContainer
 		Tokomon.Toggled += TokomonToggled;
 		KeyItems.Toggled += KeyItemsToggled;
 		CurlingRewards.Toggled += CurlingRewardsToggled;
+
+		allCheckboxes = [ItemSpawned, ItemSpawnRate, ItemDropped, ItemDropRate, ChestItems, ShopItems, ShopPrices, Mojyamon, Merit, MeritPrices, Tournaments, Tokomon, KeyItems, CurlingRewards];
+
+		for (int i = 0; i < infoButtons.Length; i++)
+		{
+			int cat = i;
+			infoButtons[i].Pressed += () =>
+			{
+				baseScript.OpenInfoWindowItems(allCheckboxes[cat].TooltipText, ReturnLabelTitle(cat) + ":" + "\n" + allCheckboxes[cat].Text);
+			};
+		}
 	}
 
 	public void LoadData(bool ItemSpawnedS, bool ItemSpawnRateS, bool ItemDroppedS, bool ItemDropRateS, bool ChestItemsS, bool ShopItemsS, bool ShopPricesS, bool MojyamonS, bool MeritS,
@@ -437,6 +458,72 @@ public partial class ItemsContainer : PanelContainer
 		Tokomon.ButtonPressed = TokomonS;
 		KeyItems.ButtonPressed = KeyItemsS;
 		CurlingRewards.ButtonPressed = CurlingRewardsS;
+	}
+
+	public void RestartData()
+	{		
+		ItemSpawned.ButtonPressed = false;
+		ItemSpawnRate.ButtonPressed = false;
+		ItemDropped.ButtonPressed = false;
+		ItemDropRate.ButtonPressed = false;
+		ChestItems.ButtonPressed = false;
+		ShopItems.ButtonPressed = false;
+		ShopPrices.ButtonPressed = false;
+		Mojyamon.ButtonPressed = false;
+		Merit.ButtonPressed = false;
+		MeritPrices.ButtonPressed = false;
+		Tournaments.ButtonPressed = false;
+		Tokomon.ButtonPressed = false;
+		KeyItems.ButtonPressed = false;
+		CurlingRewards.ButtonPressed = false;
+		ItemSpawnedOpt.Selected = 0;
+		ItemSpawnRateOpt.Selected = 0;
+		ItemDroppedOpt.Selected = 0;
+		ItemDropRateOpt.Selected = 0;
+		ChestItemsOpt.Selected = 0;
+		ShopItemsOpt.Selected = 0;
+		ShopPricesOpt.Selected = 0;
+		MojyamonOpt.Selected = 0;
+		MeritOpt.Selected = 0;
+		MeritPricesOpt.Selected = 0;
+		TournamentsOpt.Selected = 0;
+		TokomonOpt.Selected = 0;
+	}
+
+	void CloseItems()
+	{
+		RestartData();
+		baseScript.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	void ApplyItems()
+	{
+		baseScript.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	string ReturnLabelTitle(int value)
+	{
+		switch(value)
+		{
+			case 0:
+			case 1:
+			return ItemSpawn.Text;
+			case 2:
+			case 3:
+			return ItemDrop.Text;
+			case 4:
+			return Chests.Text;
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+			return Shops.Text;
+			default:
+			return Aditional.Text;
+		}
 	}
 
 }

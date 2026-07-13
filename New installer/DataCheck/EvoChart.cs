@@ -23,6 +23,8 @@ public partial class EvoChart : Control
 	[Export] Label DigiLevel;
 	[Export] Control Extra;
 	[Export] Panel Last;
+	[Export] Panel[] ExtraDigimons;
+	[Export] Panel Background;
 
 	List<List<int>> preEvolutions;
 	List<List<int>> evolutions;
@@ -111,14 +113,43 @@ public partial class EvoChart : Control
 		}
 		
 		bin.Position = 0x14CEA0A8;
-		if (bin.ReadByte() == 9)
-		{			
+		int versionCheck = bin.ReadByte();
+		if (versionCheck != 8)
+		{				
 			Last.Visible = true;
 			Extra.Visible = true;
 
 			bin.Position = 0x14D19D3C;
 			if (vice)
+			{				
 				bin.Position = 0x14D19CC8;
+				Background.Size = new Vector2(1010.0f, 650.0f);
+				Extra.Size = new Vector2(80.0f, 570.0f);
+				Extra.Position = new Vector2(910.0f, 5.0f);	
+				if (parent.GetDigimonData(62).name != "Panjyamon")
+				{
+					ExtraDigimons[0].Position = new Vector2( 0.0f, 5.0f);
+					ExtraDigimons[1].Position = new Vector2( 0.0f, 75.0f);
+					ExtraDigimons[2].Position = new Vector2( 0.0f, 145.0f);		
+				}
+				else
+				{
+					ExtraDigimons[0].Position = new Vector2( -440.0f, 494.0f);
+					ExtraDigimons[1].Position = new Vector2( 0.0f, 5.0f);
+					ExtraDigimons[2].Position = new Vector2( 0.0f, 75.0f);		
+				}
+					
+			}
+			else
+			{
+				Background.Size = new Vector2(930.0f, 650.0f);
+				Extra.Size = new Vector2(255.0f, 75.0f);
+				Extra.Position = new Vector2(465.0f, 500.0f);
+				ExtraDigimons[0].Position = new Vector2( 5.0f, 0.0f);
+				ExtraDigimons[1].Position = new Vector2( 85.0f, 0.0f);
+				ExtraDigimons[2].Position = new Vector2( 165.0f, 0.0f);				
+			}
+				
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -136,6 +167,7 @@ public partial class EvoChart : Control
 		}
 		else
 		{
+			Background.Size = new Vector2(930.0f, 650.0f);
 			Last.Visible = false;
 			Extra.Visible = false;
 		}

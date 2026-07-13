@@ -256,6 +256,9 @@ public partial class RandomizerContainer : SubViewportContainer
 	private Label mainTitle;
 
 	[Export]
+	private Control mainMenu;
+
+	[Export]
 	private PanelContainer itemsContainer;
 
 	[Export]
@@ -292,16 +295,26 @@ public partial class RandomizerContainer : SubViewportContainer
 	private TextureButton ExitRandomizer;
 
 	[Export]
-	private Window InformationWindow;
+	private Control InformationWindow;
 
 	[Export]
-	private LinkButton InformationButton;
+	private Label InformationTitle;
 
 	[Export]
-	private TextEdit InformationText;
+	private Polygon2D InformationBG;
 
 	[Export]
-	private ConfirmationDialog confirmationPatch;
+	private RichTextLabel InformationText;
+
+	[Export]
+	private Control Patching;
+
+	[Export]
+	private Panel confirmationPatch;
+	[Export]
+	private Button PatchCancel;
+	[Export]
+	private Button PatchConfirm;
 
 	[Export]
 	private FileDialog selectFolder;
@@ -337,7 +350,7 @@ public partial class RandomizerContainer : SubViewportContainer
 	private Label patchingLoading;
 
 	[Export]
-	private AcceptDialog PatchingWait;
+	private Panel PatchingWait;
 
 	[Export]
 	private CheckBox Difficulty;
@@ -362,6 +375,8 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	System.Threading.Thread waiting;
 
+	Control currentOption;
+
 	//transference
 	bool filth = false, hardcore = false, trueHardcore = false, ultraHardcore = false, merit = false, removeTechBoost = false, easyStart = false, tanemon = false, rookieOnly = false;
 
@@ -376,10 +391,10 @@ public partial class RandomizerContainer : SubViewportContainer
 		 restaurantOpt, birdramonOpt, boostOpt, healingOpt, devilOpt, chipsOpt, fishOpt, tournamentScheduleOpt, foodOpt, rareSpawnsOpt,
 		 treeOpt, timeOpt, statGainsOpt, requirementsEvoOpt, specialEvoOpt, specialChanceOpt, evoItemsOpt, speEvoReqOpt, factorialOpt,
 		 damageTechOpt, MPtechOpt, damageTypeOpt, accuracyOpt, statusOpt, statusChanceOpt, finishersOpt, boostedTechValueOpt, learnBattleOpt, learnBrainsOpt;
-	
+
 	byte digiRando = 0;
 
-	Base_script parent_script;
+	SceneInstaller parent_script;
 
 	string folderPath, filePath, newFilename, cueFileName;
 
@@ -391,18 +406,17 @@ public partial class RandomizerContainer : SubViewportContainer
 		Seed.MinValue = int.MinValue;
 		Seed.MaxValue = int.MaxValue;
 		GenerateRandomSeed();
-		Items.Toggled += ItemsActive;
-		Digimon.Toggled += DigimonActive;
-		Miscellaneous.Toggled += MiscActive;
-		Evolution.Toggled += EvolutionActive;
-		Techniques.Toggled += TechniqueActive;
+		Items.Pressed += ItemsActive;
+		Digimon.Pressed += DigimonActive;
+		Miscellaneous.Pressed += MiscActive;
+		Evolution.Pressed += EvolutionActive;
+		Techniques.Pressed += TechniqueActive;
 		ExitRandomizer.Pressed += ExitRandomizerPressed;
 		StartRandomizer.Pressed += OnRandomize;
 		selectFolder.DirSelected += OnFolderSelected;
-		confirmationPatch.Confirmed += OnRandomizerConfirmed;
+		PatchConfirm.Pressed += OnRandomizerConfirmed;
 		FileNameSet.TextChanged += OnNameSet;
-		confirmationPatch.Canceled += OnRandomizedCanceled;
-		confirmationPatch.CloseRequested += OnRandomizedCanceled;
+		PatchCancel.Pressed += OnRandomizedCanceled;
 		chooseFolder.Pressed += _on_folderButton_pressed;
 		randomSeeder.Pressed += _on_seed_random_pressed;
 		SaveDataButton.Pressed += LoadSaveData;
@@ -420,12 +434,16 @@ public partial class RandomizerContainer : SubViewportContainer
 		patchConfirmTitle.Text = Tr("SRandomizeTitle");
 		StartRandomizer.Text = Tr("RandomizeButton");
 		Seed.TooltipText = Tr("Seed_info");
-		PatchingWait.GetOkButton().Text = Tr("CancelButton");
-		PatchingWait.Confirmed += HandleError;
-		confirmationPatch.GetOkButton().Text = Tr("RandomizeButton");
-		confirmationPatch.GetCancelButton().Text = Tr("CancelButton");
+		PatchCancel.Text = Tr("CancelButton");
+		PatchConfirm.Text = Tr("RandomizeButton");
 		SaveDataButton.Text = Tr("RandoSettings");
 		SaveDataButton.TooltipText = Tr("RandoSettingsInfo");
+
+		if (StartRandomizer.Text.Length > 14)
+		{
+			StartRandomizer.AddThemeFontSizeOverride("font_size", 70);
+			PatchConfirm.AddThemeFontSizeOverride("font_size", 50);
+		}
 
 		RestartStuffRandomizer();
 		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
@@ -439,13 +457,13 @@ public partial class RandomizerContainer : SubViewportContainer
 	{
 	}
 
-	public void SetBasicData(string fileP, Base_script OGScript)
+	public void SetBasicData(string fileP, SceneInstaller OGScript)
 	{
 		filePath = fileP;
 		parent_script = OGScript;
 	}
 
-	public void SetStartingData(bool filthR, bool hardcoreR, bool trueHardcoreR, bool ultraHardcoreR, bool meritR, bool removeTechBoostR, bool easyStartR, bool tanemonR, bool RookieR, string folderP, string fileP, Base_script OGScript)
+	public void SetStartingData(bool filthR, bool hardcoreR, bool trueHardcoreR, bool ultraHardcoreR, bool meritR, bool removeTechBoostR, bool easyStartR, bool tanemonR, bool RookieR, string folderP, string fileP, SceneInstaller OGScript)
 	{
 		filth = filthR;
 		hardcore = hardcoreR;
@@ -479,111 +497,36 @@ public partial class RandomizerContainer : SubViewportContainer
 			Evolution.Visible = false;
 	}
 
-	void ItemsActive(bool pressed)
+	void ItemsActive()
 	{
-		if (pressed)
-		{
-			itemsContainer.Visible = true;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			evolutionContainer.Visible = false;
-			techContainer.Visible = false;
-			Items.Disabled = true;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Evolution.Disabled = false;
-			Evolution.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-		}
+		itemsContainer.Visible = true;
+		mainMenu.Visible = false;
 	}
 
-	void DigimonActive(bool pressed)
+	void DigimonActive()
 	{
-		if (pressed)
-		{
-			itemsContainer.Visible = false;
-			digimonContainer.Visible = true;
-			miscContainer.Visible = false;
-			evolutionContainer.Visible = false;
-			techContainer.Visible = false;
-			Items.Disabled = false;
-			Items.ButtonPressed = false;
-			Digimon.Disabled = true;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Evolution.Disabled = false;
-			Evolution.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-		}
+		digimonContainer.Visible = true;
+		mainMenu.Visible = false;
+		
 	}
 
-	void MiscActive(bool pressed)
+	void MiscActive()
 	{
-		if (pressed)
-		{
-			itemsContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = true;
-			evolutionContainer.Visible = false;
-			techContainer.Visible = false;
-			Items.Disabled = false;
-			Items.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = true;
-			Evolution.Disabled = false;
-			Evolution.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-		}
+		miscContainer.Visible = true;
+		mainMenu.Visible = false;
+		
 	}
 
-	void EvolutionActive(bool pressed)
+	void EvolutionActive()
 	{
-		if (pressed)
-		{
-			itemsContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			evolutionContainer.Visible = true;
-			techContainer.Visible = false;
-			Items.Disabled = false;
-			Items.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Evolution.Disabled = true;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-		}
+		evolutionContainer.Visible = true;
+		mainMenu.Visible = false;
 	}
 
-	void TechniqueActive(bool pressed)
+	void TechniqueActive()
 	{
-		if (pressed)
-		{
-			itemsContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			evolutionContainer.Visible = false;
-			techContainer.Visible = true;
-			Items.Disabled = false;
-			Items.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Evolution.Disabled = false;
-			Evolution.ButtonPressed = false;
-			Techniques.Disabled = true;
-
-		}
-
+		techContainer.Visible = true;
+		mainMenu.Visible = false;	
 	}
 
 	void OnNameSet(string name)
@@ -594,15 +537,15 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void OnRandomize()
 	{
-		StartRandomizer.Visible = false;
-		confirmationPatch.Visible = true;
+		mainMenu.Visible = false;
+		Patching.Visible = true;
 		GenerateRandomSeed();
 	}
 
 	void OnFolderSelected(string folder)
 	{
 		FolderPath.Text = folder;
-		confirmationPatch.Visible = true;
+		Patching.Visible = true;
 	}
 
 	void OnRandomizerConfirmed()
@@ -612,7 +555,7 @@ public partial class RandomizerContainer : SubViewportContainer
 		else if (FolderPath.Text != null && FolderPath.Text != "")
 			CreateRandomizedFile(FolderPath.Text, FileNameSet.PlaceholderText);
 		else
-			OnRandomizedCanceled();
+			patchConfirmTitle.Text = Tr("FolderError_info");
 	}
 
 	void ExitRandomizerPressed()
@@ -632,21 +575,91 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void _on_folderButton_pressed()
 	{
-		confirmationPatch.Visible = false;
+		Patching.Visible = false;
 		selectFolder.Visible = true;
 	}
 
+	void Information(string info, string title)
+	{
+		InformationTitle.Text = title;
+		InformationText.Text = info;
+		InformationWindow.Visible = true;
+		InformationText.ScrollToLine(0);		
+	}
+
+	public void MainMenuVisible()
+	{
+		mainMenu.Visible = true;
+	}
+
+	public void CloseWindowInfo()
+	{
+		InformationWindow.Visible = false;
+		currentOption.Visible = true;
+	}
+
+	public void OpenInfoWindowItems(string info, string title)
+	{
+		currentOption = itemsContainer;
+		Information(info, title);		
+		InformationBG.Color = new Godot.Color(1, 0, 0, 0.80f);		
+		itemsContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(1,1,1)) ;
+	}	
+
+	public void OpenInfoWindowDigimon(string info, string title)
+	{
+		currentOption = digimonContainer;
+		Information(info, title);		
+		InformationBG.Color = new Godot.Color(1, 1, 0.525f, 0.80f);	
+		digimonContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
+	
+	public void OpenInfoWindowMisc(string info, string title)
+	{
+		currentOption = miscContainer;
+		Information(info, title);		
+		InformationBG.Color = new Godot.Color(1, 0.5f, 0, 0.80f);
+		miscContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(1,1,1)) ;
+	}	
+
+	public void OpenInfoWindowEvo(string info, string title)
+	{
+		currentOption = evolutionContainer;
+		Information(info, title);		
+		InformationBG.Color = new Godot.Color(0.6f, 1, 0.6f, 0.80f);
+		evolutionContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
+
+	public void OpenInfoWindowTech(string info, string title)
+	{
+		currentOption = techContainer;
+		Information(info, title);		
+		InformationBG.Color = new Godot.Color(0.867f, 0.627f, 0.867f, 0.80f);
+		techContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
+
 	void OnRandomizedCanceled()
 	{
-		StartRandomizer.Visible = true;
-		confirmationPatch.Visible = false;
+		mainMenu.Visible = true;
+		confirmationPatch.Visible = true;
+		PatchingWait.Visible = false;
+		Patching.Visible = false;
+		patchConfirmTitle.Text = Tr("SRandomizeTitle");
 	}
 
 	void HandleError()
 	{
-		PatchingWait.Visible = false;
 		patchingLoading.Text = Tr("Randomizing");
-		StartRandomizer.Visible = true;
+		mainMenu.Visible = true;
+		confirmationPatch.Visible = true;
+		PatchingWait.Visible = false;
+		Patching.Visible = false;
+		patchConfirmTitle.Text = Tr("SRandomizeTitle");
 
 	}
 
@@ -673,7 +686,7 @@ public partial class RandomizerContainer : SubViewportContainer
 	void _on_choose_folder_canceled()
 	{
 		selectFolder.Visible = false;
-		confirmationPatch.Visible = true;
+		Patching.Visible = true;
 	}
 
 	public void SetItemSpawns(bool active, int id) { itemsSpawn = active; itemsSpawnOpt = id; }
@@ -820,6 +833,9 @@ public partial class RandomizerContainer : SubViewportContainer
 		randomizerfinished = false;
 		MetalWait.FrameChanged += CheckRandomizer;
 		cueFileName = nFilename;
+
+		PatchCancel.Pressed -= OnRandomizedCanceled;
+		PatchCancel.Pressed += HandleError;
 		
 		waiting.Start();
 		
@@ -2964,7 +2980,6 @@ public partial class RandomizerContainer : SubViewportContainer
 									bin.Position = bin.Position + 0x130;
 							}
 						}
-
 					}
 				}
 
@@ -3112,12 +3127,13 @@ public partial class RandomizerContainer : SubViewportContainer
 					for (int j = 0; j < 6; j++)  //stats
 					{
 						if (numberGenerator.Next(2) == 1 || j == choosenStat)						
-							writter.Write((short)(numberGenerator.Next(950) + 50));						
+							writter.Write((short)(numberGenerator.Next(950) + 50));										
 						else						
-							writter.Write((short)-1);							
-						
+							writter.Write((short)-1);
+
 						if (bin.Position == jumpOffset)
-								bin.Position = bin.Position + 0x130;
+							bin.Position = bin.Position + 0x130;
+						
 					}
 					writter.Write((short)numberGenerator.Next(100)); //care mistakes
 					writter.Write((short)(numberGenerator.Next(99) + 1));  //weight
@@ -3138,7 +3154,8 @@ public partial class RandomizerContainer : SubViewportContainer
 						writter.Write((short)-1);
 
 					writter.Write((short)numberGenerator.Next(56));  //techs
-					writter.Write((short)(numberGenerator.Next(2) * 16 + numberGenerator.Next(2)));  //flags	
+					writter.Write((short)(numberGenerator.Next(2) * 16 + numberGenerator.Next(2)));  //flags						
+							
 				}
 				break;
 				
@@ -3449,11 +3466,6 @@ public partial class RandomizerContainer : SubViewportContainer
 					
 				case 1:
 					selectedMap = (byte)numberGenerator.Next(248);
-					if (selectedMap == 50)
-						selectedMap = 238;
-					else if (selectedMap == 61)
-						selectedMap = 236;
-					
 					if (selectedMap > 239)
 					{
 						if (selectedMap < 246)
@@ -3530,7 +3542,7 @@ public partial class RandomizerContainer : SubViewportContainer
 				{
 					bin.Position = i * 24 + favouriteOffset;
 
-					writter.Write((short)(numberGenerator.Next(33) + 38));
+					writter.Write((short)(numberGenerator.Next(34) + 38));
 				}
 				bin.Position = itemFished;
 				for (int i = 0; i < 6; i++)
@@ -3664,7 +3676,8 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void RandomizeBoost(bool ignoreShuffle = false)
 	{
-		uint ptrOffset = 0x14D53558;		
+		uint ptrOffset = 0x14D53558;
+
 
 		if (!ignoreShuffle)
 		{
@@ -3672,9 +3685,8 @@ public partial class RandomizerContainer : SubViewportContainer
 
 			for (int i = 0; i < 7; i++)
 			{
-				bin.Position = i * 4 + ptrOffset;								
-				pointers.Add(reader.ReadInt32());				
-
+				bin.Position = i * 4 + ptrOffset;	
+				pointers.Add(reader.ReadInt32());
 			}
 
 			int[] shuffledPtr = pointers.ToArray();
@@ -3686,7 +3698,7 @@ public partial class RandomizerContainer : SubViewportContainer
 			{				
 				bin.Position = pos * 4 + ptrOffset;
 				writter.Write(shuffledPtr[i]);
-				pos++;				
+				pos++;
 			}
 		}
 
@@ -3695,11 +3707,10 @@ public partial class RandomizerContainer : SubViewportContainer
 		{
 
 			case 1:
-				bin.Position = 0x14D292E4;
 				
-				offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
-					                    0x14D295D4, 0x14D295EC, 0x14D29608, 0x14D29624, 0x14D29640, 0x14D2965C, 0x14D29678, 0x14D29694,  0x14D296B4};
-				RandomizeBuffs(offsets, 81, 20);
+					offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
+					                       0x14D295D4, 0x14D295EC, 0x14D29608, 0x14D29624, 0x14D29640, 0x14D2965C, 0x14D29678, 0x14D29694,  0x14D296B4 };
+					RandomizeBuffs(offsets, 81, 20);
 				
 				break;
 			case 2:
@@ -3708,32 +3719,32 @@ public partial class RandomizerContainer : SubViewportContainer
 
 				bin.Position = 0x14D292E4;
 				
-				bin.Position = 0x14D292C4; //Off
-				writter.Write((short)1500);
-				bin.Position = 0x14D292D0;
-				writter.Write((short)1499);
-				
-				bin.Position = 0x14D29308; //Def
-				writter.Write((short)1500);
-				bin.Position = 0x14D29314;
-				writter.Write((short)1499);
+					bin.Position = 0x14D292C4; //Off
+					writter.Write((short)1500);
+					bin.Position = 0x14D292D0;
+					writter.Write((short)1499);
 
-				bin.Position = 0x14D2934C; //Spd
-				writter.Write((short)1500);
-				bin.Position = 0x14D29358;
-				writter.Write((short)1499);
+					bin.Position = 0x14D29308; //Def
+					writter.Write((short)1500);
+					bin.Position = 0x14D29314;
+					writter.Write((short)1499);
 
-				bin.Position = 0x14D296C4; //Change the code to accept negative values
-				writter.Write(640810908);
-				bin.Position = 0x14D296F4;
-				writter.Write(642973596);
-				bin.Position = 0x14D29724;
-				writter.Write(645136284);
+					bin.Position = 0x14D2934C; //Spd
+					writter.Write((short)1500);
+					bin.Position = 0x14D29358;
+					writter.Write((short)1499);
 
-				offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
+					bin.Position = 0x14D296C4; //Change the code to accept negative values
+					writter.Write(640810908);
+					bin.Position = 0x14D296F4;
+					writter.Write(642973596);
+					bin.Position = 0x14D29724;
+					writter.Write(645136284);
+
+					offsets = new uint[] { 0x14D294D4, 0x14D294F0,  0x14D2950C, 0x14D29528, 0x14D29544, 0x14D29560, 0x14D2957C, 0x14D2959C, 0x14D295B4, 
 					                       0x14D295D4, 0x14D295EC, 0x14D29608, 0x14D29624, 0x14D29640, 0x14D2965C, 0x14D29678, 0x14D29694,  0x14D296B4 };
 
-				RandomizeBuffs(offsets, 351, 0);			
+					RandomizeBuffs(offsets, 351, 0);			
 				
 
 				break;
@@ -4961,28 +4972,86 @@ public partial class RandomizerContainer : SubViewportContainer
     {
         switch (seed)
         {
-           //secret Digimon seeds here
+            //Secret Digimon seeds here
         }
     }
 
 	void CheckSpecialSeed(double seed)
     {
-		uint startingOffset, currentOffset, jumpOffset;
-		bool jumped;	
+        uint startingOffset, currentOffset, jumpOffset;
+		bool jumped;			
 		uint[] jumpOffsets;
 		int jumpValue = 0;
 	
         switch (seed)
         {
-			//secret special seeds here
+			//Secret special seeds here
         }
     }
+
+	void ApplyPPF3Patch(string patchPath)
+	{
+		BinaryReader ppf;
+		patchPath = "res://" + "/Patches/RandoDigi/" + patchPath;
+		try
+		{
+			if (OS.HasFeature("editor"))
+			{
+				
+				patchPath = ProjectSettings.GlobalizePath(patchPath);
+				ppf = new System.IO.BinaryReader(System.IO.File.Open(patchPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite)); 
+			}
+			else
+			{
+				//var file = Godot.FileAccess.(patchPath, Godot.FileAccess.ModeFlags.ReadWrite);				
+				ppf = new System.IO.BinaryReader(new MemoryStream(Godot.FileAccess.GetFileAsBytes(patchPath)));
+				if (ppf == null)
+				{
+					randomizerError = true;
+					return;
+				}
+			}
+
+		}
+		catch (System.IO.FileNotFoundException)
+		{
+			randomizerError = true;
+			return;
+		}
+		catch (System.IO.IOException)
+		{
+			randomizerError = true;
+			return;
+		}
+
+		ppf.BaseStream.Position = 60;
+		int offset, change;
+
+
+		while (ppf.BaseStream.Position < ppf.BaseStream.Length)
+		{
+			offset = ppf.ReadInt32();
+			ppf.ReadInt32();
+			change = ppf.ReadByte();
+			bin.Position = offset;
+
+			while (change > 0)
+			{
+				bin.WriteByte(ppf.ReadByte());
+				change--;
+			}
+
+		}
+		ppf.Close();
+		ppf.Dispose();
+	}
 
 	void CreateRandoTxt()
 	{
 		string filename = Tr("Rando_txt") + ".txt";
 
 		string cueData = "FILE " + '"' + cueFileName + ".bin" + '"' + " BINARY" + "\n" + "  TRACK 01 MODE2/2352" + "\n" + "    INDEX 01 00:00:00";
+
 
 		string path = System.IO.Path.Combine(folderPath, cueFileName + ".cue");
 		System.IO.Stream txt = System.IO.File.OpenWrite(path);
@@ -5933,75 +6002,16 @@ public partial class RandomizerContainer : SubViewportContainer
 		MetalFinish.Visible = true;
 		MetalWait.Visible = false;
 		patchingLoading.Text = Tr("RandomizedP");
-		PatchingWait.GetOkButton().Text = Tr("ExitButton");
+		PatchCancel.Text = Tr("ExitButton");
+		PatchCancel.Pressed -= HandleError;
+		PatchCancel.Pressed += ExitRandomizerPressed;
 		digiRando = 0;
 		SaveData();
-		PatchingWait.Confirmed -= HandleError;
-		PatchingWait.Confirmed += ExitRandomizerPressed;
-	}
-
-	void ApplyPPF3Patch(string patchPath)
-	{
-		BinaryReader ppf;
-
-		patchPath = "Patches/RandoDigi/" + patchPath;
-		try
-		{
-			if (OS.HasFeature("editor"))
-			{
-				patchPath = "res://" + patchPath;
-				patchPath = ProjectSettings.GlobalizePath(patchPath);
-				ppf = new System.IO.BinaryReader(System.IO.File.Open(patchPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite));
-			}
-			else
-			{
-				//var file = Godot.FileAccess.(patchPath, Godot.FileAccess.ModeFlags.ReadWrite);
-				ppf = new System.IO.BinaryReader(new MemoryStream(Godot.FileAccess.GetFileAsBytes(patchPath)));
-				if (ppf == null)
-				{
-					randomizerError = true;
-					return;
-				}
-			}
-
-		}
-
-		catch (System.IO.FileNotFoundException)
-		{
-			randomizerError = true;
-			return;
-		}
-		catch (System.IO.IOException)
-		{
-			randomizerError = true;
-			return;
-		}
-
-		ppf.BaseStream.Position = 60;
-		int offset, change;
-
-
-		while (ppf.BaseStream.Position < ppf.BaseStream.Length)
-		{
-			offset = ppf.ReadInt32();
-			ppf.ReadInt32();
-			change = ppf.ReadByte();
-			bin.Position = offset;
-
-			while (change > 0)
-			{
-				bin.WriteByte(ppf.ReadByte());
-				change--;
-			}
-
-		}
-		ppf.Close();
-		ppf.Dispose();
 	}
 
 	void CheckSaveData()
 	{
-		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
+		if (!File.Exists(ProjectSettings.GlobalizePath("user://" + "SaveData/RandoSave")))
 		{
 			SaveDataButton.Disabled = true;
 		}
@@ -6020,9 +6030,10 @@ public partial class RandomizerContainer : SubViewportContainer
 		treeOpt, timeOpt, statGainsOpt, requirementsEvoOpt, specialEvoOpt, specialChanceOpt, evoItemsOpt, speEvoReqOpt, factorialOpt,
 		damageTechOpt, MPtechOpt, damageTypeOpt, accuracyOpt, statusOpt, statusChanceOpt, finishersOpt, boostedTechValueOpt, learnBattleOpt, learnBrainsOpt, statusBoost);
 
-		Directory.CreateDirectory(OS.GetExecutablePath().GetBaseDir() + "/SaveData");
+		var dir = DirAccess.Open("user://");		
+		dir.MakeDir(ProjectSettings.GlobalizePath("user://") + "SaveData");
 		
-		using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave", Godot.FileAccess.ModeFlags.Write);
+		using var saveFile = Godot.FileAccess.Open("user://" + "SaveData/RandoSave", Godot.FileAccess.ModeFlags.Write);
 
 		var bytes = JsonSerializer.SerializeToUtf8Bytes(saveData);
 		
@@ -6031,9 +6042,9 @@ public partial class RandomizerContainer : SubViewportContainer
 
 	void LoadSaveData()
 	{
-		if (File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave"))
+		if (File.Exists(ProjectSettings.GlobalizePath("user://") + "SaveData/RandoSave"))
 		{
-			using var saveFile = System.IO.File.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/RandoSave", System.IO.FileMode.Open);
+			using var saveFile = System.IO.File.Open(ProjectSettings.GlobalizePath("user://") + "SaveData/RandoSave", System.IO.FileMode.Open);
 			var saveData = JsonSerializer.Deserialize<RandoSaveData>(saveFile);
 			saveFile.Close();
 			if (saveData != null)
@@ -6122,8 +6133,8 @@ public partial class RandomizerContainer : SubViewportContainer
 		}
 		else if (randomizerError)
 		{
-			digiRando = 0;
 			MetalWait.FrameChanged -= CheckRandomizer;
+			digiRando = 0;
 			SetError();
 		}
 	}

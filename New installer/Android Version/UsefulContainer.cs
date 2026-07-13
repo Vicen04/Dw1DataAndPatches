@@ -3,10 +3,10 @@ using System;
 
 public partial class UsefulContainer : PanelContainer
 {
-	[Export] private Panel Panel1;
-	[Export] private Panel Panel2;
 	[Export] private Label Title;
-	[Export] private Label Title2;
+	[Export] private Label General;
+	[Export] private Label Items;
+	[Export] private Label Shops;
 	[Export] private CheckBox StatGains;
 	[Export] private CheckBox RareSpawns;
 	[Export] private CheckBox ShortIntro;
@@ -40,6 +40,10 @@ public partial class UsefulContainer : PanelContainer
 	[Export] private LineEdit RareValue;
 
 	[Export] private VicePatcherContainer VicePatcher;
+
+	[Export] private TextureButton[] infoButtons;
+	
+	System.Collections.Generic.List<CheckBox> allCheckboxes;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -193,18 +197,6 @@ public partial class UsefulContainer : PanelContainer
 		}
 	}
 
-	void _on_page_2_pressed()
-	{
-		Panel1.Visible = false;
-		Panel2.Visible = true;
-	}
-
-	void _on_page_1_pressed()
-	{
-		Panel1.Visible = true;
-		Panel2.Visible = false;
-	}
-
 	void _on_hardcore_toggled(bool toggled)
 	{
 		if (toggled)
@@ -273,8 +265,9 @@ public partial class UsefulContainer : PanelContainer
 	{
 		Title.Text = Tr("UsefulTitle_L");
 		Title.TooltipText = Tr("UsefulTitle_info");
-		Title2.Text = Tr("Useful_L");
-		Title2.TooltipText = Tr("Useful_info");
+		Items.Text = Tr("UsefulItemsM_L");
+		General.Text = Tr("UsefulGameplayM_L");
+		Shops.Text = Tr("UsefulShopM_L");
 		StatGains.Text = Tr("StatGains_L");
 		StatGains.TooltipText = Tr("StatGains_info");
 		StatSlider.TooltipText = Tr("StatGains_Sinfo");
@@ -330,7 +323,19 @@ public partial class UsefulContainer : PanelContainer
 		Useful.Text = Tr("Useful_L");
 		Useful.TooltipText = Tr("Useful_info");
 		Useful2.Text = Tr("Useful2_L");
-		Useful2.TooltipText = Tr("Useful2_info");
+		Useful2.TooltipText = Tr("Useful2_info");	
+
+		if (Title.GetLineCount() > 2)		
+			Title.AddThemeFontSizeOverride("font_size", 70);	
+		
+		if (Items.Text.Length > 22)
+			Items.AddThemeFontSizeOverride("font_size", 55);
+
+		if (General.Text.Length > 22)
+			General.AddThemeFontSizeOverride("font_size", 55);
+		
+		if (Shops.Text.Length > 22)
+			Shops.AddThemeFontSizeOverride("font_size", 55);
 	}
 
 	void SetupButtons()
@@ -366,6 +371,18 @@ public partial class UsefulContainer : PanelContainer
 		StatSlider.ValueChanged += StatSlider_ValueChanged;
 		StatValue.TextChanged += StatValue_TextChanged;
 		RareValue.TextChanged += RareValue_TextChanged;
+
+		allCheckboxes = [StatGains, RareSpawns, ShortIntro, EasyStart, UsefulRigging, UltraLucky, TrainingBoost, Dirt, SuperDirt, Treasure, LowMono, Seadramon, EvoItem, MoreItemDrops, BetterItemDrops, Raise, MoreItemSpawns, 
+		                 BetterItemSpawns, Easymedals, VendingMachines, BetterCurling, Restaurant, Cards, Merit, Fishing, Useful, Useful2];
+
+		for (int i = 0; i < infoButtons.Length; i++)
+		{
+			int cat = i;
+			infoButtons[i].Pressed += () =>
+			{
+				VicePatcher.OpenInfoWindowUseful(allCheckboxes[cat].TooltipText, allCheckboxes[cat].Text);
+			};
+		}					 
 	}
 
 	public void LoadSaveData(bool StatGainsS, bool RareSpawnsS, bool ShortIntroS, bool EasyStartS, bool UsefulRiggingS, bool UltraLuckyS, bool TrainingBoostS, bool DirtS, bool SuperDirtS,
@@ -434,5 +451,18 @@ public partial class UsefulContainer : PanelContainer
 		Useful2.ButtonPressed = false;
 		StatSlider.Value = 1;
 		RareSlider.Value = 10;
+	}
+
+	void CloseUseful()
+	{
+		RestartSelection();
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	void ApplyUseful()
+	{
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
 	}
 }

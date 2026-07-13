@@ -23,6 +23,10 @@ public partial class MiscContainer : PanelContainer
 	[Export] private CheckBox RemoveColour;
 	[Export] private CheckBox Aggro;
 	[Export] private VicePatcherContainer VicePatcher;
+	[Export] private Button AddPatches;
+	[Export] private TextureButton[] infoButtons;
+
+	System.Collections.Generic.List<CheckBox> allCheckboxes;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -146,7 +150,7 @@ public partial class MiscContainer : PanelContainer
 		RemoveEvo.Text = Tr("RemoveEvo_L");
 		RemoveEvo.TooltipText = Tr("RemoveEvo_info");
 		NewMono.Text = Tr("NewMono_L");
-		NewMono.TooltipText = Tr("NewMono_info");
+		NewMono.TooltipText = Tr("MONOCHROMON");
 		InsaneBattles.Text = Tr("InsaneBattles_L");
 		InsaneBattles.TooltipText = Tr("InsaneBattles_info");
 		MapColour.Text = Tr("MapColour_L");
@@ -159,12 +163,16 @@ public partial class MiscContainer : PanelContainer
 		DropBattle.TooltipText = Tr("DropBattle_info");
 		RemoveExtraInfo.Text = Tr("RemoveLifeEvo_L");
 		RemoveExtraInfo.TooltipText = Tr("RemoveLifeEvo_info");
+		AddPatches.Text = Tr("Apply_L");
 		ClockV2.Text = Tr("ClockV2_L");
 		ClockV2.TooltipText = Tr("ClockV2_info");
 		RemoveColour.Text = Tr("RemoveAttColor_L");
 		RemoveColour.TooltipText = Tr("RemoveAttColor_info");
 		Aggro.Text = Tr("Vengeful_L");
 		Aggro.TooltipText = Tr("Vengeful_info");
+
+		if (Title.GetLineCount() > 2)		
+			Title.AddThemeFontSizeOverride("font_size", 70);
 	}
 
 	void SetupButtons()
@@ -186,10 +194,23 @@ public partial class MiscContainer : PanelContainer
 		ClockV2.Toggled += ClockV2_Toggled;
 		RemoveColour.Toggled += RemoveColour_Toggled;
 		Aggro.Toggled += Aggro_Toggled;
+
+		allCheckboxes = [NewMono, Clock, Input, Areas, BattleText, BoostItems, OGLife, RemoveEvo, InsaneBattles, MapColour, OgreTel, OGType, DropBattle, RemoveExtraInfo, ClockV2, RemoveColour, Aggro];
+
+		infoButtons[0].Pressed += () => {VicePatcher.OpenInfoWindowMisc(allCheckboxes[0].TooltipText, allCheckboxes[0].Text, "https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?usp=sharing");};
+		
+		for (int i = 1; i < infoButtons.Length; i++)
+		{
+			int cat = i;
+			infoButtons[i].Pressed += () =>
+			{
+				VicePatcher.OpenInfoWindowMisc(allCheckboxes[cat].TooltipText, allCheckboxes[cat].Text, null);
+			};
+		}	
 	}
 
 	public void LoadSaveData(bool ClockS, bool InputS, bool AreasS, bool BattleTextS, bool BoostItemsS, bool OGLifeS, bool RemoveEvoS,
-	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS, bool DropItemsS, bool RemoveExtraInfoS, bool clockV2, bool colour, bool aggro)
+	bool NewMonoS, bool InsaneBattlesS, bool MapColourS, bool OgreTelS, bool OGTypeS, bool DropItemsS, bool RemoveExtraInfoS, bool ClockV2S, bool colour, bool aggro)
 	{
 		Clock.ButtonPressed = ClockS;
 		Input.ButtonPressed = InputS;
@@ -205,7 +226,7 @@ public partial class MiscContainer : PanelContainer
 		OGType.ButtonPressed = OGTypeS;
 		DropBattle.ButtonPressed = DropItemsS;
 		RemoveExtraInfo.ButtonPressed = RemoveExtraInfoS;
-		ClockV2.ButtonPressed = clockV2;
+		ClockV2.ButtonPressed = ClockV2S;
 		RemoveColour.ButtonPressed = colour;
 		Aggro.ButtonPressed = aggro;
 	}
@@ -229,5 +250,18 @@ public partial class MiscContainer : PanelContainer
 		ClockV2.ButtonPressed = false;
 		RemoveColour.ButtonPressed = false;
 		Aggro.ButtonPressed = false;
+	}
+
+	void CloseMisc()
+	{
+		RestartSelection();
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	void ApplyMisc()
+	{
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
 	}
 }

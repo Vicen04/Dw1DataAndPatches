@@ -1,7 +1,9 @@
 
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Threading;
 
@@ -29,8 +31,10 @@ public partial class Bosses2 : Control
 		public List<int> Attack2C { get; set; }
 		public List<int> Attack3C { get; set; }
 		public List<int> Attack4C { get; set; }
+		public List<int> time { get; set; }
 
-		public DigimonNPCData(List<uint> NpcOffset, string name)
+
+		public DigimonNPCData(List<uint> NpcOffset, string name, List<int> times = null)
 		{
 			offsets = NpcOffset;
 			mapName = name;
@@ -52,6 +56,8 @@ public partial class Bosses2 : Control
 			Attack2C = new List<int>();
 			Attack3C = new List<int>();
 			Attack4C = new List<int>();
+			if (times != null)
+			time = times;
 		}
 	}
 
@@ -308,8 +314,11 @@ public partial class Bosses2 : Control
 		for (int i = 0; i < 58 - extra; i++)
 			AllTechs.AddIconItem(main.GetTechsSprites(digimonData.GetTechData().GetTechData(i).type), digimonData.GetTechData().GetTechData(i).name);
 
+		
 		if (AllDigimon != null)
 		{
+			AllDigimon.Clear();
+
 			for (int i = 1; i < 177; i++)
 				AllDigimon.AddIconItem(main.GetDigimonData(i).digimonSprite, main.GetDigimonData(i).name);
 			AllDigimon.Selected = -1;
@@ -339,15 +348,24 @@ public partial class Bosses2 : Control
 			digi.QueueFree();
 		digimonMap.Clear();
 		var data = NPCsData[currentArea].maps[selected];
+		int timeData = 0;
 		for (int i = 0; i < data.offsets.Count; i++)
 		{
 
 			var scene = GD.Load<PackedScene>("res://Items/MapDigimon.tscn");
 			digimonMap.Add(scene.Instantiate() as MapDigimon);
+
+			if (data.time == null)
+			{
+				timeData = 0;
+			}
+			else
+				timeData = data.time[i];
+
 			digimonMap[i].SetupDigimon(mainP.GetDigimonData(data.digimonIds[i]).digimonSprite, mainP.GetDigimonData(data.digimonIds[i]).name, data.HP[i], data.MP[i],
 									   data.cHP[i], data.cMP[i], data.Off[i], data.Def[i], data.Spd[i], data.Brn[i], data.Money[i], digimonData.GetTechData().GetTechData(data.Attack1[i]).name,
 									   digimonData.GetTechData().GetTechData(data.Attack2[i]).name, digimonData.GetTechData().GetTechData(data.Attack3[i]).name,
-									   digimonData.GetTechData().GetTechData(data.Attack4[i]).name, data.Attack1C[i], data.Attack2C[i], data.Attack3C[i], data.Attack4C[i]);
+									   digimonData.GetTechData().GetTechData(data.Attack4[i]).name, data.Attack1C[i], data.Attack2C[i], data.Attack3C[i], data.Attack4C[i], null, timeData);
 			DigimonContainer.AddChild(digimonMap[i]);
 
 		}
@@ -358,6 +376,9 @@ public partial class Bosses2 : Control
 		foreach (MapDigimon digi in searchDigimonMap)
 			digi.QueueFree();
 		searchDigimonMap.Clear();
+
+		int timeData = 0;
+
 		foreach (AreasNPCData area in NPCsData)
 		{
 			foreach (DigimonNPCData DigimonData in area.maps)
@@ -366,12 +387,19 @@ public partial class Bosses2 : Control
 				{
 					if (DigimonData.Attack1[i] == selected || DigimonData.Attack2[i] == selected || DigimonData.Attack3[i] == selected || DigimonData.Attack4[i] == selected)
 					{
+						if (DigimonData.time == null)
+						{
+							timeData = 0;
+						}
+						else
+							timeData = DigimonData.time[i];
+
 						var scene = GD.Load<PackedScene>("res://Items/MapDigimon.tscn");
 						searchDigimonMap.Add(scene.Instantiate() as MapDigimon);
 						searchDigimonMap[searchDigimonMap.Count -1].SetupDigimon(mainP.GetDigimonData(DigimonData.digimonIds[i]).digimonSprite, mainP.GetDigimonData(DigimonData.digimonIds[i]).name, DigimonData.HP[i], DigimonData.MP[i],
 						DigimonData.cHP[i], DigimonData.cMP[i], DigimonData.Off[i], DigimonData.Def[i], DigimonData.Spd[i], DigimonData.Brn[i], DigimonData.Money[i], digimonData.GetTechData().GetTechData(DigimonData.Attack1[i]).name,
 						digimonData.GetTechData().GetTechData(DigimonData.Attack2[i]).name, digimonData.GetTechData().GetTechData(DigimonData.Attack3[i]).name,
-						digimonData.GetTechData().GetTechData(DigimonData.Attack4[i]).name, DigimonData.Attack1C[i], DigimonData.Attack2C[i], DigimonData.Attack3C[i], DigimonData.Attack4C[i], DigimonData.mapName);
+						digimonData.GetTechData().GetTechData(DigimonData.Attack4[i]).name, DigimonData.Attack1C[i], DigimonData.Attack2C[i], DigimonData.Attack3C[i], DigimonData.Attack4C[i], DigimonData.mapName, timeData);
 						TechSearchList.AddChild(searchDigimonMap[searchDigimonMap.Count -1]);
 					}
 				}
@@ -385,6 +413,8 @@ public partial class Bosses2 : Control
 		foreach (MapDigimon digi in searchDigiMap)
 			digi.QueueFree();
 		searchDigiMap.Clear();
+
+		int timeData = 0;
 		foreach (AreasNPCData area in NPCsData)
 		{
 			foreach (DigimonNPCData DigimonData in area.maps)
@@ -393,12 +423,19 @@ public partial class Bosses2 : Control
 				{
 					if (DigimonData.digimonIds[i] == selected + 1)
 					{
+						if (DigimonData.time == null)
+						{
+							timeData = 0;
+						}
+						else
+							timeData = DigimonData.time[i];
+
 						var scene = GD.Load<PackedScene>("res://Items/MapDigimon.tscn");
 						searchDigiMap.Add(scene.Instantiate() as MapDigimon);
 						searchDigiMap[searchDigiMap.Count -1].SetupDigimon(mainP.GetDigimonData(DigimonData.digimonIds[i]).digimonSprite, mainP.GetDigimonData(DigimonData.digimonIds[i]).name, DigimonData.HP[i], DigimonData.MP[i],
 						DigimonData.cHP[i], DigimonData.cMP[i], DigimonData.Off[i], DigimonData.Def[i], DigimonData.Spd[i], DigimonData.Brn[i], DigimonData.Money[i], digimonData.GetTechData().GetTechData(DigimonData.Attack1[i]).name,
 						digimonData.GetTechData().GetTechData(DigimonData.Attack2[i]).name, digimonData.GetTechData().GetTechData(DigimonData.Attack3[i]).name,
-						digimonData.GetTechData().GetTechData(DigimonData.Attack4[i]).name, DigimonData.Attack1C[i], DigimonData.Attack2C[i], DigimonData.Attack3C[i], DigimonData.Attack4C[i], DigimonData.mapName);
+						digimonData.GetTechData().GetTechData(DigimonData.Attack4[i]).name, DigimonData.Attack1C[i], DigimonData.Attack2C[i], DigimonData.Attack3C[i], DigimonData.Attack4C[i], DigimonData.mapName, timeData);
 						DigimonSearchList.AddChild(searchDigiMap[searchDigiMap.Count -1]);
 					}
 				}
@@ -700,37 +737,38 @@ public partial class Bosses2 : Control
 		NPCsData.AddRange(
 			[new AreasNPCData(
 				[
-					new DigimonNPCData([kune, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE], "MAYO00"),
-					new DigimonNPCData([0x1420C5C, 0x1420CC2, 0x1420D22, 0x1420D8E, 0x1420DFA, 0x1420E66, 0x1420ECC, 0x1420F38], "MAYO01"),
-					new DigimonNPCData([0x14D3A16, 0x14D3ACA, 0x14D3B24, 0x14D3B7E], "MAYO02"),
+					new DigimonNPCData([kune, 0x9C9B4AE, 0x9C9B69E, 0x9C9B6FE], "MAYO00", [2,2,1,1]),
+					new DigimonNPCData([0x1420C5C, 0x1420CC2, 0x1420D22, 0x1420D8E, 0x1420DFA, 0x1420E66, 0x1420ECC, 0x1420F38], "MAYO01", [1,1,1,1,1,2,2,2]),
+					new DigimonNPCData([0x14D3A16, 0x14D3ACA, 0x14D3B24, 0x14D3B7E], "MAYO02", [1,1,2,2]),
 					new DigimonNPCData([0x157DD56, 0x157DDB6, 0x157DE76, 0x157DED0], "MAYO03"),
-					new DigimonNPCData([0x16433F4, 0x164344E, 0x16434AE, 0x1643508], "MAYO04A"),
+					new DigimonNPCData([0x16433F4, 0x164344E, 0x16434AE, 0x1643508], "MAYO04A", [1,1,2,2]),
 				]
 				, "Native Forest"),
+				new AreasNPCData([new DigimonNPCData([0x17C5F1E, 0x17C5F84, 0x17C5FDE, 0x17C6038, 0x17C609E], "MAYO05", [6,6,6,6,6])], "Coela Point"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x18D6626, 0x18D66EC], "MAYO08A"),
-					new DigimonNPCData([0x199D106, 0x199D16C, 0x199D1D8, 0x199D232, 0x199D298, 0x199D304], "MAYO08B")
+					new DigimonNPCData([0x18D6626, 0x18D66EC], "MAYO08A", [1,2]),
+					new DigimonNPCData([0x199D106, 0x199D16C, 0x199D1D8, 0x199D232, 0x199D298, 0x199D304], "MAYO08B", [1,1,1,2,2,2])
 				], "Digimon Bridge"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x1BA6246, 0x1BA62AC, 0x1BA6306, 0x1BA636C], "TROP00"),
-					new DigimonNPCData([0x1C018B2, 0x1C0190C, 0x1C01978, 0x1C019D2], "TROP01"),
-					new DigimonNPCData([0x1CAB7EA, 0x1CAB85C, 0x1CAB8C8, 0x1CAB922, 0x1CABAC4, 0x1CABB30], "TROP02"),
-					new DigimonNPCData([0x1D68A54, 0x1D68B08, 0x1D68B62, 0x1D68BBC], "TROP03")
+					new DigimonNPCData([0x1BA6246, 0x1BA62AC, 0x1BA6306, 0x1BA636C], "TROP00",[1,1,2,2]),
+					new DigimonNPCData([0x1C018B2, 0x1C0190C, 0x1C01978, 0x1C019D2], "TROP01",[1,1,2,2]),
+					new DigimonNPCData([0x1CAB7EA, 0x1CAB85C, 0x1CAB8C8, 0x1CAB922, 0x1CABAC4, 0x1CABB30], "TROP02",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x1D68A54, 0x1D68B08, 0x1D68B62, 0x1D68BBC], "TROP03",[1,1,2,2])
 				], "Tropical Jungle"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x6580D9C, 0x6580E02], "TROP04"),
-					new DigimonNPCData([0x6633BA6, 0x6633C06, 0x6633C72, 0x6633CDE, 0x6633D3E, 0x6633DAA], "TROP05")
+					new DigimonNPCData([0x6580D9C, 0x6580E02], "TROP04",[1,2]),
+					new DigimonNPCData([0x6633BA6, 0x6633C06, 0x6633C72, 0x6633CDE, 0x6633D3E, 0x6633DAA], "TROP05",[1,1,1,2,2,2])
 				], "Mangrove Region"),
 				new AreasNPCData(
 				[
 					new DigimonNPCData([0x67AC99A], "TUNN01"),
 					new DigimonNPCData([0x6843EA6, 0x6844030, 0x684408A], "TUNN02")
 				], "Drill Tunnel"),
-				new AreasNPCData([new DigimonNPCData([0x6B4270E, 0x6B4276E, 0x6B427DA, 0x6B42964, 0x6B429BE, 0x6B42A1E, 0x6B42A8A, 0x6B42AE4], "DGHA01"),], "Overdell"),
-				new AreasNPCData([new DigimonNPCData([0x6C08FBA, 0x6C0901A, 0x6C0907A, 0x6C090E6, 0x6C09146, 0x6C091B2], "DGHA02")], "Overdell Cemetery"),
+				new AreasNPCData([new DigimonNPCData([0x6B4270E, 0x6B4276E, 0x6B427DA, 0x6B42964, 0x6B429BE, 0x6B42A1E, 0x6B42A8A, 0x6B42AE4], "DGHA01",[1,1,1,1,2,2,2,2])], "Overdell"),
+				new AreasNPCData([new DigimonNPCData([0x6C08FBA, 0x6C0901A, 0x6C0907A, 0x6C090E6, 0x6C09146, 0x6C091B2], "DGHA02",[4,4,4,5,5,5])], "Overdell Cemetery"),
 				new AreasNPCData(
 				[
 					new DigimonNPCData([0x77489B2, 0x7748A0C], "YAKA02"),
@@ -738,14 +776,14 @@ public partial class Bosses2 : Control
 					new DigimonNPCData([0x7C6E44E], "YAKA16"),
 					new DigimonNPCData([0x7D0A3AE], "YAKA17")
 				], "Grey's Lord Mansion"),
-				new AreasNPCData([new DigimonNPCData([0x6CCE592, 0x6CCE5F8, 0x6CCE658, 0x6CCE6BE], "GCAN01"),], "Great Canyon Entrance"),
+				new AreasNPCData([new DigimonNPCData([0x6CCE592, 0x6CCE5F8, 0x6CCE658, 0x6CCE6BE], "GCAN01",[1,1,2,2])], "Great Canyon Entrance"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x6D9CA06, 0x6D9CA7E, 0x6D9CAF6, 0x6D9CB6E, 0x6D9CBE6, 0x6D9CC5E], "GCAN02"),
-					new DigimonNPCData([0x6E0EF4E, 0x6E0EFBA, 0x6E0F01A, 0x6E0F07A, 0x6E0F0E6], "GCAN03"),
+					new DigimonNPCData([0x6D9CA06, 0x6D9CA7E, 0x6D9CAF6, 0x6D9CB6E, 0x6D9CBE6, 0x6D9CC5E], "GCAN02",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x6E0EF4E, 0x6E0EFBA, 0x6E0F01A, 0x6E0F07A, 0x6E0F0E6], "GCAN03",[1,1,1,2,2]),
 					new DigimonNPCData([0x7195A22, 0x7195A7C, 0x7195AD6], "GCAN08_1"),
 					new DigimonNPCData([0xA5B5E3A, 0xA5B5E94, 0xA5B5EEE], "GCAN08_2"),
-					new DigimonNPCData([0x723F662, 0x723F6C2, 0x723F728, 0x723F788], "GCAN09")
+					new DigimonNPCData([0x723F662, 0x723F6C2, 0x723F728, 0x723F788], "GCAN09",[1,1,2,2])
 				], "Great Canyon Top Area"),
 				new AreasNPCData(
 				[
@@ -754,26 +792,26 @@ public partial class Bosses2 : Control
 				], "Great Canyon Bridge"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x7070BC6, 0x7070C2C, 0x7070C86, 0x7070CE6, 0x7070D4C, 0x7070DA6], "GCAN06"),
-					new DigimonNPCData([0x70FE5D6, 0x70FE630, 0x70FE696, 0x70FE6F0, 0x70FE74A, 0x70FE7B0], "GCAN07")
+					new DigimonNPCData([0x7070BC6, 0x7070C2C, 0x7070C86, 0x7070CE6, 0x7070D4C, 0x7070DA6], "GCAN06",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x70FE5D6, 0x70FE630, 0x70FE696, 0x70FE6F0, 0x70FE74A, 0x70FE7B0], "GCAN07",[1,1,1,2,2,2])
 				], "Great Canyon Bot. Area"),
-				new AreasNPCData([new DigimonNPCData([0x8B16304, 0x8B16370, 0x8B163CA, 0x8B16436], "KODA00"),], "Ancient Dino Region"),
-				new AreasNPCData([new DigimonNPCData([0x8B846D2, 0x8B84738, 0x8B8479E, 0x8B847F8, 0x8B8485E, 0x8B848C4], "KODA01"),], "Ancient Glacial Region"),
+				new AreasNPCData([new DigimonNPCData([0x8B16304, 0x8B16370, 0x8B163CA, 0x8B16436], "KODA00",[1,1,2,2]),], "Ancient Dino Region"),
+				new AreasNPCData([new DigimonNPCData([0x8B846D2, 0x8B84738, 0x8B8479E, 0x8B847F8, 0x8B8485E, 0x8B848C4], "KODA01",[1,1,1,2,2,2]),], "Ancient Glacial Region"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x8D464D2, 0x8D46538, 0x8D46598, 0x8D465F2, 0x8D46658, 0x8D466B8], "KODA04"),
-					new DigimonNPCData([0x8F3E146, 0x8F3E1B2, 0x8F3E34E, 0x8F3E3BA], "KODA08")
+					new DigimonNPCData([0x8D464D2, 0x8D46538, 0x8D46598, 0x8D465F2, 0x8D46658, 0x8D466B8], "KODA04",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x8F3E146, 0x8F3E1B2, 0x8F3E34E, 0x8F3E3BA], "KODA08",[1,1,2,2])
 				], "Ancient Speedy Region"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x615FE1E, 0x615FE78, 0x6160002, 0x6160062, 0x61600C2, 0x616011C, 0x6160176, 0x61601D6], "MIHA00"),
+					new DigimonNPCData([0x615FE1E, 0x615FE78, 0x6160002, 0x6160062, 0x61600C2, 0x616011C, 0x6160176, 0x61601D6], "MIHA00",[1,1,1,1,2,2,2,2]),
 					new DigimonNPCData([0x62A221E, 0x62A2284, 0x62A22F0, 0x62A235C], "MIHA02")
 				], "Path Thru Mt. Panorama"),
 				new AreasNPCData([new DigimonNPCData([0x61EF122, 0x61EF182, 0x61EF1E2], "MIHA01"),], "Mt. Panorama Plains"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x6407EFA, 0x6407F66, 0x6407FD8, 0x640803E, 0x64080B0, 0x640811C, 0x640818E, 0x64081F4], "MIHA04A"),
-					new DigimonNPCData([0x64BADB6, 0x64BAE22, 0x64BAE94, 0x64BAEFA, 0x64BB09C, 0x64BB108, 0x64BB17A, 0x64BB1E0], "MIHA04B")
+					new DigimonNPCData([0x6407EFA, 0x6407F66, 0x6407FD8, 0x640803E, 0x64080B0, 0x640811C, 0x640818E, 0x64081F4], "MIHA04A",[1,1,1,1,2,2,2,2]),
+					new DigimonNPCData([0x64BADB6, 0x64BAE22, 0x64BAE94, 0x64BAEFA, 0x64BB09C, 0x64BB108, 0x64BB17A, 0x64BB1E0], "MIHA04B",[1,1,1,1,2,2,2,2])
 				], "Foot of Mt. Panorama"),
 				new AreasNPCData(
 				[
@@ -783,34 +821,34 @@ public partial class Bosses2 : Control
 				], "Ogre Fortress"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x7DF0324, 0x7DF037E, 0x7DF03DE, 0x7DF044A], "GIAS00"),
-					new DigimonNPCData([0x7EA7F7A, 0x7EA7FDA, 0x7EA8040, 0x7EA80B2, 0x7EA8112, 0x7EA8178], "GIAS01"),
-					new DigimonNPCData([0x7F6E396, 0x7F6E3F6, 0x7F6E462, 0x7F6E4BC, 0x7F6E51C, 0x7F6E588], "GIAS02"),
-					new DigimonNPCData([0x800E866, 0x800E8CC, 0x800E92C, 0x800E992], "GIAS03"),
-					new DigimonNPCData([0x80D4BDC, 0x80D4D6C, 0x80D4DD8, 0x80D4E44, 0x80D4EA4, 0x80D4F10], "GIAS04"),
-					new DigimonNPCData([0x819AB92, 0x819ABF2, 0x819AC52, 0x819ACB2, 0x819AD12, 0x819AD72], "GIAS05"),
-					new DigimonNPCData([0x8836646, 0x88366B2, 0x883671E, 0x883678A], "GIAS06A"),
+					new DigimonNPCData([0x7DF0324, 0x7DF037E, 0x7DF03DE, 0x7DF044A], "GIAS00",[1,1,2,2]),
+					new DigimonNPCData([0x7EA7F7A, 0x7EA7FDA, 0x7EA8040, 0x7EA80B2, 0x7EA8112, 0x7EA8178], "GIAS01",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x7F6E396, 0x7F6E3F6, 0x7F6E462, 0x7F6E4BC, 0x7F6E51C, 0x7F6E588], "GIAS02",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x800E866, 0x800E8CC, 0x800E92C, 0x800E992], "GIAS03",[1,1,2,2]),
+					new DigimonNPCData([0x80D4BDC, 0x80D4D6C, 0x80D4DD8, 0x80D4E44, 0x80D4EA4, 0x80D4F10], "GIAS04",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x819AB92, 0x819ABF2, 0x819AC52, 0x819ACB2, 0x819AD12, 0x819AD72], "GIAS05",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x8836646, 0x88366B2, 0x883671E, 0x883678A], "GIAS06A",[1,1,2,2]),
 					new DigimonNPCData([0x88E959C, 0x88E9602,], "GIAS07"),
-					new DigimonNPCData([0x899CB36, 0x899CB9C, 0x899CC02, 0x899CC68, 0x899CCCE, 0x899CD34], "GIAS08"),
+					new DigimonNPCData([0x899CB36, 0x899CB9C, 0x899CC02, 0x899CC68, 0x899CCCE, 0x899CD34], "GIAS08",[1,1,2,2]),
 				], "Gear Savanna"),
-				new AreasNPCData([new DigimonNPCData([0x2D4BF48, 0x2D4BFA2, 0x2D4C008, 0x2D4C062, 0x2D4C0BC, 0x2D4C122], "GOMI01"),], "Trash Mountain"),
+				new AreasNPCData([new DigimonNPCData([0x2D4BF48, 0x2D4BFA2, 0x2D4C008, 0x2D4C062, 0x2D4C0BC, 0x2D4C122], "GOMI01",[1,1,1,2,2,2])], "Trash Mountain"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x2497646, 0x24976A6, 0x249770C, 0x249776C, 0x24977CC, 0x2497832], "STIC01"),
-					new DigimonNPCData([0x254AA4E, 0x254AAA8, 0x254AB02, 0x254AB62], "STIC02")
+					new DigimonNPCData([0x2497646, 0x24976A6, 0x249770C, 0x249776C, 0x24977CC, 0x2497832], "STIC01",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x254AA4E, 0x254AAA8, 0x254AB02, 0x254AB62], "STIC02",[1,1,2,2])
 				], "Geko Swamp"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x86BCF7E, 0x86BCFD8, 0x86BD038, 0x86BD092], "FRLZ01"),
-					new DigimonNPCData([0x87700E6, 0x8770146, 0x87701A6, 0x8770206], "FRLZ02"),
-					new DigimonNPCData([0x9004E22, 0x9004E8E, 0x9004EF4, 0x9004F60], "FRLZ03"),
-					new DigimonNPCData([0x90B824E, 0x90B82B4, 0x90B831A, 0x90B8386, 0x90B83EC, 0x90B8452], "FRLZ04"),
-					new DigimonNPCData([0x919D74A, 0x919D7AA, 0x919D80A, 0x919D864, 0x919D8C4, 0x919D924], "FRLZ06"),
-					new DigimonNPCData([0x92475CE, 0x924762E, 0x9247694, 0x92476F4], "FRLZ07"),
-					new DigimonNPCData([0x9303D68, 0x9303DCE, 0x9303E2E, 0x9303E94], "FRLZ08"),
-					new DigimonNPCData([0x93BFFF6, 0x93C0056, 0x93C00BC, 0x93C011C], "FRLZ12"),
-					new DigimonNPCData([0xA346156, 0xA3461B6, 0xA346216, 0xA346276], "FRLZ13"),
-					new DigimonNPCData([0x1E0A2C4, 0x1E0A378], "FRLZ16")
+					new DigimonNPCData([0x86BCF7E, 0x86BCFD8, 0x86BD038, 0x86BD092], "FRLZ01",[1,1,2,2]),
+					new DigimonNPCData([0x87700E6, 0x8770146, 0x87701A6, 0x8770206], "FRLZ02",[1,1,2,2]),
+					new DigimonNPCData([0x9004E22, 0x9004E8E, 0x9004EF4, 0x9004F60], "FRLZ03",[1,1,2,2]),
+					new DigimonNPCData([0x90B824E, 0x90B82B4, 0x90B831A, 0x90B8386, 0x90B83EC, 0x90B8452], "FRLZ04",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x919D74A, 0x919D7AA, 0x919D80A, 0x919D864, 0x919D8C4, 0x919D924], "FRLZ06",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x92475CE, 0x924762E, 0x9247694, 0x92476F4], "FRLZ07",[1,1,2,2]),
+					new DigimonNPCData([0x9303D68, 0x9303DCE, 0x9303E2E, 0x9303E94], "FRLZ08",[1,1,2,2]),
+					new DigimonNPCData([0x93BFFF6, 0x93C0056, 0x93C00BC, 0x93C011C], "FRLZ12",[1,1,2,2]),
+					new DigimonNPCData([0xA346156, 0xA3461B6, 0xA346216, 0xA346276], "FRLZ13",[1,1,2,2]),
+					new DigimonNPCData([0x1E0A2C4, 0x1E0A378], "FRLZ16",[1,2])
 				], "Freezeland"),
 				new AreasNPCData(
 				[
@@ -822,22 +860,22 @@ public partial class Bosses2 : Control
 				], "Ice Sanctuary"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x9EEBC16, 0x9EEBC76, 0x9EEBCD0, 0x9EEBD30, 0x9EEBD90, 0x9EEBDEA], "MIST01"),
-					new DigimonNPCData([0x9FAF956, 0x9FAF9BC, 0x9FAFA22, 0x9FAFA88, 0x9FAFAE8, 0x9FAFB4E, 0x9FAFCDE], "MIST02"),
-					new DigimonNPCData([0xA073802, 0xA073992, 0xA0739F2, 0xA073A52, 0xA073AB8, 0xA073B18, 0xA073B7E], "MIST03"),
-					new DigimonNPCData([0xA1376B2, 0xA137712, 0xA137772, 0xA1377D2, 0xA137832], "MIST04"),
-					new DigimonNPCData([0xA7EEAD0, 0xA7EEB36, 0xA7EEB96, 0xA7EEBFC], "MIST06"),
-					new DigimonNPCData([0xA86D5FE, 0xA86D658, 0xA86D6B2, 0xA86D70C, 0xA86D896, 0xA86D8F0, 0xA86D94A, 0xA86D9A4], "MIST07")
+					new DigimonNPCData([0x9EEBC16, 0x9EEBC76, 0x9EEBCD0, 0x9EEBD30, 0x9EEBD90, 0x9EEBDEA], "MIST01", [1,1,1,2,2,2]),
+					new DigimonNPCData([0x9FAF956, 0x9FAF9BC, 0x9FAFA22, 0x9FAFA88, 0x9FAFAE8, 0x9FAFB4E, 0x9FAFCDE], "MIST02", [3,3,3,1,1,2,2]),
+					new DigimonNPCData([0xA073802, 0xA073992, 0xA0739F2, 0xA073A52, 0xA073AB8, 0xA073B18, 0xA073B7E], "MIST03", [3,3,3,1,1,2,2]),
+					new DigimonNPCData([0xA1376B2, 0xA137712, 0xA137772, 0xA1377D2, 0xA137832], "MIST04", [3,1,1,2,2]),
+					new DigimonNPCData([0xA7EEAD0, 0xA7EEB36, 0xA7EEB96, 0xA7EEBFC], "MIST06", [1,1,2,2]),
+					new DigimonNPCData([0xA86D5FE, 0xA86D658, 0xA86D6B2, 0xA86D70C, 0xA86D896, 0xA86D8F0, 0xA86D94A, 0xA86D9A4], "MIST07", [3,3,3,1,1,1,2,2])
 				], "Misty Trees"),
 				new AreasNPCData([new DigimonNPCData([0x991EF12, 0x991EF6C, 0x991F0FC, 0x991F162, 0x991F1C8, 0x991F222, 0x991F282, 0x991F2E8], "BETL01"),], "Beetle Land"),
 				new AreasNPCData(
 				[
-					new DigimonNPCData([0x26198D6, 0x2619936, 0x2619990, 0x2619B20], "FACT01"),
-					new DigimonNPCData([0x26D58FE, 0x26D595E, 0x26D59B8, 0x26D5A18], "FACT02"),
-					new DigimonNPCData([0x279B38A, 0x279B3F0, 0x279B450, 0x279B4AA, 0x279B510, 0x279B570], "FACT03"),
-					new DigimonNPCData([0x2860346, 0x28603A0, 0x2860406, 0x286046C, 0x28604C6, 0x286052C], "FACT04"),
-					new DigimonNPCData([0x29924EE, 0x2992548, 0x29925AE, 0x2992608, 0x2992662, 0x29926C8], "FACT07"),
-					new DigimonNPCData([0x2B7EC76, 0x2B7ECD0, 0x2B7ED30, 0x2B7ED8A, 0x2B7EDEA, 0x2B7EE50], "FACT09"),
+					new DigimonNPCData([0x26198D6, 0x2619936, 0x2619990, 0x2619B20], "FACT01",[1,1,2,2]),
+					new DigimonNPCData([0x26D58FE, 0x26D595E, 0x26D59B8, 0x26D5A18], "FACT02",[1,1,2,2]),
+					new DigimonNPCData([0x279B38A, 0x279B3F0, 0x279B450, 0x279B4AA, 0x279B510, 0x279B570], "FACT03",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x2860346, 0x28603A0, 0x2860406, 0x286046C, 0x28604C6, 0x286052C], "FACT04",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x29924EE, 0x2992548, 0x29925AE, 0x2992608, 0x2992662, 0x29926C8], "FACT07",[1,1,1,2,2,2]),
+					new DigimonNPCData([0x2B7EC76, 0x2B7ECD0, 0x2B7ED30, 0x2B7ED8A, 0x2B7EDEA, 0x2B7EE50], "FACT09",[1,1,1,2,2,2]),
 					new DigimonNPCData([0x2C15F42, 0x2C15F9C, 0x2C15FF6], "FACT10")
 				], "Factorial Town"),
 				new AreasNPCData(
@@ -851,7 +889,7 @@ public partial class Bosses2 : Control
 				[
 					new DigimonNPCData([0x2F3084E, 0x2F308A8, 0x2F30902, 0x2F3095C, 0x2F309B6], "MGEN01"),
 					new DigimonNPCData([0x2FBE59E, 0x2FBE5FE, 0x2FBE66A, 0x2FBE6CA, 0x2FBE724], "MGEN02"),
-					new DigimonNPCData([0x4FD240E, 0x4FD246E, 0x4FD24C8, 0x4FD2522, 0x4FD257C], "MGEN03"),
+					new DigimonNPCData([0x4FD240E, 0x4FD246E, 0x4FD24C8, 0x4FD2522, 0x4FD257C], "MGEN03", [0,0,6,0,0]),
 					new DigimonNPCData([0x506015E, 0x50601B8, 0x5060212, 0x50602C6], "MGEN04"),
 					new DigimonNPCData([0x50EDEAE, 0x50EDF0E, 0x50EDF68], "MGEN05"),
 					new DigimonNPCData([0x5EBE83E, 0x5EBE898, 0x5EBE8F2, 0x5EBE94C, 0x5EBE9A6], "MGEN06"),
@@ -879,5 +917,5 @@ public partial class Bosses2 : Control
 		if (position >= 0x800)
 			return true;
 		return false;
-	}		 
+	}	 
 }

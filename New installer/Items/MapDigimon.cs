@@ -6,8 +6,10 @@ public partial class MapDigimon : Control
 	[Export] Panel IconP;
 	[Export] Panel IconP2;
 	[Export] TextureRect Icon;
+	[Export] TextureRect Daytime1;
 	[Export] Label Digimon;
 	[Export] TextureRect Icon2;
+	[Export] TextureRect Daytime2;
 	[Export] Label Digimon2;
 	[Export] Label Map;
 	[Export] Label HP;
@@ -27,13 +29,17 @@ public partial class MapDigimon : Control
 	[Export] Label Attack2Chance;
 	[Export] Label Attack3Chance;
 	[Export] Label Attack4Chance;
+	[Export] Texture2D[] DayIcons; 
 
 	// Called when the node enters the scene tree for the first time.
 	public void SetupDigimon(Texture2D icon, string name, int hp, int mp, int chp, int cmp, int off, int def, int spd, int brn, int money,
-							 string att1, string att2, string att3, string att4, int attC1, int attC2, int attC3, int attC4, string map = null)
+							 string att1, string att2, string att3, string att4, int attC1, int attC2, int attC3, int attC4, string map = null, int daytime = 0)
 	{
 		Icon.Texture = icon;
 		Digimon.Text = name;
+
+		SetTimeIcon(daytime);
+		
 		if (map != null)
 		{
 			IconP.Visible = false;
@@ -62,5 +68,44 @@ public partial class MapDigimon : Control
 		Attack2Chance.Text = attC2.ToString();
 		Attack3Chance.Text = attC3.ToString();
 		Attack4Chance.Text = attC4.ToString();
+	}
+
+	void SetTimeIcon(int value)
+	{
+		switch(value)
+		{
+			case 1:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon0");
+			Daytime1.Texture = Daytime2.Texture = DayIcons[0];
+			break;
+			case 2:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon1"); 
+			Daytime1.Texture = Daytime2.Texture = DayIcons[1];
+			break;
+
+			case 3:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon2"); 
+			Daytime1.Texture = Daytime2.Texture = DayIcons[2];
+			break;
+
+			case 4:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon3");
+			Daytime1.Texture = Daytime2.Texture = DayIcons[3];
+			break;
+
+			case 5:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon4");
+			Daytime1.Texture = Daytime2.Texture = DayIcons[4];
+			break;
+
+			case 6:
+			Daytime1.TooltipText = Daytime2.TooltipText = Tr("DayIcon5");
+			Daytime1.Texture = Daytime2.Texture = DayIcons[5];
+			break;
+
+			default:
+			return;
+
+		}
 	}
 }

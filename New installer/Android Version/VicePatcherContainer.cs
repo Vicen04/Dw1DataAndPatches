@@ -78,7 +78,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 		public bool removeTechBoost { get; set; }
 		public bool unlockAreas { get; set; }
 		public bool mapColour { get; set; }
-		public bool ultraHardcore { get; set; }
+		public bool ultraHardcore { get; set; }		
 		public bool restorePanjyamon { get; set; }
 		public bool starters2 { get; set; }
 		public bool kunemon { get; set; }
@@ -216,6 +216,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 	[Export]
 	private Label mainTitle;
+	[Export]
+	private Control MainMenu;
 
 	[Export]
 	private PanelContainer difficultyContainer;
@@ -231,12 +233,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 	[Export]
 	private PanelContainer techContainer;
-
-	[Export]
-	private Panel useful1;
-
-	[Export]
-	private Panel useful2;
 
 	[Export]
 	private Button Difficulty;
@@ -260,16 +256,22 @@ public partial class VicePatcherContainer : SubViewportContainer
 	private TextureButton ExitInstaller;
 
 	[Export]
-	private Window InformationWindow;
+	private Control InformationWindow;
+
+	[Export]
+	private Label InformationTitle;
+
+	[Export]
+	private Polygon2D InformationBG;
+
+	[Export]
+	private TextureButton InformationExit;
 
 	[Export]
 	private LinkButton InformationButton;
 
 	[Export]
-	private TextEdit InformationText;
-
-	[Export]
-	private ConfirmationDialog confirmationPatch;
+	private RichTextLabel InformationText;
 
 	[Export]
 	private FileDialog selectFolder;
@@ -299,13 +301,29 @@ public partial class VicePatcherContainer : SubViewportContainer
 	private Label patchingLoading;
 
 	[Export]
-	private ConfirmationDialog PatchingWait;
-
-	[Export]
 	private Panel difficulty1;
 
 	[Export]
-	private Panel difficulty2;
+	private Control PatchHolder;
+
+	[Export]
+	private Panel PatchConfirm;
+
+	[Export]
+	private Panel PatchWaiting;
+
+	[Export]
+	private Button PatchApply;
+	
+	[Export]
+	private Button PatchCancel;
+
+	[Export]
+	private Button Randomize;
+
+	[Export]
+	private Label FolderError;
+
 
 	[Export] DifficultyContainer difficultyScript;
 	[Export] DigimonContainer digimonScript;
@@ -341,13 +359,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 	[Export] Button LatestOptions;
 
 
-
 	System.IO.BinaryReader ppf;
 	System.IO.Stream bin;
 	patchType currentPatcher;
 
 	string filePath, newFilePath, fileDirectory;
 	ViceSaveData saveData;
+
+	Control currentOption = null;
 
 	string[] saveNames = new string[8];
 
@@ -359,7 +378,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 	ViceDifficulty currentViceDifficulty;
 
-	Base_script parent_script;
+	SceneInstaller parent_script;
 
 	bool myotismon, vermillimon, filth, restoreFilth, hardmode, superHardcore, hardMono, hardTourney, betterBattleTech, betterBrainTechs, betterDrop, superBonus, tanemon, rookieOnly,
 		 ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
@@ -381,20 +400,19 @@ public partial class VicePatcherContainer : SubViewportContainer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Difficulty.Toggled += DifficultyActive;
-		Digimon.Toggled += DigimonActive;
-		Miscellaneous.Toggled += MiscActive;
-		Useful.Toggled += UsefulActive;
-		Techniques.Toggled += TechniqueActive;
+		Difficulty.Pressed += DifficultyActive;
+		Digimon.Pressed += DigimonActive;
+		Miscellaneous.Pressed += MiscActive;
+		Useful.Pressed += UsefulActive;
+		Techniques.Pressed += TechniqueActive;
 		ExitInstaller.Pressed += ExitViceInstaller;
 		StartPatch.Pressed += OnPatch;
 		selectFolder.DirSelected += OnFolderSelected;
-		confirmationPatch.Confirmed += OnPatchConfirmed;
+		PatchApply.Pressed += OnPatchConfirmed;
 		FileNameSet.TextChanged += OnNameSet;
-		confirmationPatch.Canceled += OnPatchCanceled;
-		confirmationPatch.CloseRequested += OnPatchCanceled;
+		PatchCancel.Pressed += OnPatchCanceled;
 		chooseFolder.Pressed += _on_folderButton_pressed;
-		PatchingWait.Canceled += HandleError;
+		Randomize.Pressed += _on_patching_loader_confirmed;
 		for (int i = 0; i < Saves.Length; i++)
 		{
 			int temp = i;
@@ -442,11 +460,10 @@ public partial class VicePatcherContainer : SubViewportContainer
 		FolderPath.PlaceholderText = Tr("SFolderT");
 		patchConfirmTitle.Text = Tr("PatchTitle");
 		StartPatch.Text = Tr("PatchButton");
-		PatchingWait.GetOkButton().Visible = false;
-		PatchingWait.GetOkButton().Text = Tr("PatchToRando");
-		PatchingWait.GetCancelButton().Text = Tr("CancelButton");
-		confirmationPatch.GetOkButton().Text = Tr("PatchButton");
-		confirmationPatch.GetCancelButton().Text = Tr("CancelButton");
+		Randomize.Visible = false;
+		Randomize.Text = Tr("PatchToRando");
+		PatchCancel.Text = Tr("CancelButton");
+		PatchApply.Text = Tr("PatchButton");
 		OpenViceSettings.Text = Tr("ViceSettingsButton");
 		OpenViceSettings.TooltipText = Tr("ViceSettingsButtonInfo");
 		RecommendedSettings.Text = Tr("RecommendedSettings");
@@ -472,6 +489,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 		UltraSettings.TooltipText = Tr("PainfulModeInfo");
 		LatestOptions.Text = Tr("LatestOptions");
 		LatestOptions.TooltipText = Tr("LatestOptionsInfo");
+		FolderError.Text = Tr("FolderError_info");
 
 		RestartBoolsInstaller();
 		CheckSaveFiles();
@@ -484,7 +502,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 	}
 
-	public void SetStartingData(patchType selectedPatcher, string BINfilePath, Base_script OGScript)
+	public void SetStartingData(patchType selectedPatcher, string BINfilePath, SceneInstaller OGScript)
 	{
 		if (selectedPatcher == patchType.OPTIONAL)
 		{
@@ -501,126 +519,34 @@ public partial class VicePatcherContainer : SubViewportContainer
 		parent_script = OGScript;
 	}
 
-	void DifficultyActive(bool pressed)
+	void DifficultyActive()
 	{
-		if (pressed)
-		{
-			difficultyContainer.Visible = true;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			usefulContainer.Visible = false;
-			techContainer.Visible = false;
-			Difficulty.Disabled = true;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Useful.Disabled = false;
-			Useful.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-			ViceSettings.Visible = false;
-			OpenViceSettings.Disabled = false;
-
-			difficulty1.Visible = true;
-			difficulty2.Visible = false;
-		}
+		difficultyContainer.Visible = true;
+		MainMenu.Visible = false;
 	}
 
-	void DigimonActive(bool pressed)
+	void DigimonActive()
 	{
-		if (pressed)
-		{
-			difficultyContainer.Visible = false;
-			digimonContainer.Visible = true;
-			miscContainer.Visible = false;
-			usefulContainer.Visible = false;
-			techContainer.Visible = false;
-			Difficulty.Disabled = false;
-			Difficulty.ButtonPressed = false;
-			Digimon.Disabled = true;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Useful.Disabled = false;
-			Useful.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-			ViceSettings.Visible = false;
-			OpenViceSettings.Disabled = false;
-		}
+		digimonContainer.Visible = true;
+		MainMenu.Visible = false;
 	}
 
-	void MiscActive(bool pressed)
+	void MiscActive()
 	{
-		if (pressed)
-		{
-			difficultyContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = true;
-			usefulContainer.Visible = false;
-			techContainer.Visible = false;
-			Difficulty.Disabled = false;
-			Difficulty.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = true;
-			Useful.Disabled = false;
-			Useful.ButtonPressed = false;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-			ViceSettings.Visible = false;
-			OpenViceSettings.Disabled = false;
-		}
+		miscContainer.Visible = true;
+		MainMenu.Visible = false;
 	}
 
-	void UsefulActive(bool pressed)
+	void UsefulActive()
 	{
-		if (pressed)
-		{
-			difficultyContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			usefulContainer.Visible = true;
-			techContainer.Visible = false;
-			Difficulty.Disabled = false;
-			Difficulty.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Useful.Disabled = true;
-			Techniques.Disabled = false;
-			Techniques.ButtonPressed = false;
-			ViceSettings.Visible = false;
-			OpenViceSettings.Disabled = false;
-
-			useful1.Visible = true;
-			useful2.Visible = false;
-		}
+		usefulContainer.Visible = true;
+		MainMenu.Visible = false;
 	}
 
-	void TechniqueActive(bool pressed)
+	void TechniqueActive()
 	{
-		if (pressed)
-		{
-			difficultyContainer.Visible = false;
-			digimonContainer.Visible = false;
-			miscContainer.Visible = false;
-			usefulContainer.Visible = false;
-			techContainer.Visible = true;
-			Difficulty.Disabled = false;
-			Difficulty.ButtonPressed = false;
-			Digimon.Disabled = false;
-			Digimon.ButtonPressed = false;
-			Miscellaneous.Disabled = false;
-			Miscellaneous.ButtonPressed = false;
-			Useful.Disabled = false;
-			Useful.ButtonPressed = false;
-			Techniques.Disabled = true;
-			ViceSettings.Visible = false;
-			OpenViceSettings.Disabled = false;
-		}
-
+		techContainer.Visible = true;
+		MainMenu.Visible = false;
 	}
 
 	void ExitViceInstaller()
@@ -629,105 +555,86 @@ public partial class VicePatcherContainer : SubViewportContainer
 		this.QueueFree();
 	}
 
-	void Information(string info, string title, string link, string buttonText = null)
+	void Information(string info, string title, string link = null)
 	{
-		InformationWindow.Title = title;
-		if (buttonText != null)
-			InformationButton.Text = buttonText;
+		InformationTitle.Text = title;
 		InformationText.Text = info;
-		InformationButton.Uri = link;
-	}
-
-	void SetDifficultyInfo()
-	{
-		StyleBoxFlat StyleboxUpdate = InformationWindow.GetThemeStylebox("embedded_border").Duplicate() as StyleBoxFlat;
-		StyleboxUpdate.BgColor = new Godot.Color(1, 0, 0);
-		InformationWindow.AddThemeStyleboxOverride("embedded_border", StyleboxUpdate);
-		InformationWindow.AddThemeColorOverride("title_color", new Godot.Color(1, 1, 1));
-		InformationWindow.Visible = true;
-	}
-
-	void _on_window_close_requested()
-	{
-		InformationWindow.Visible = false;
-		InformationButton.Visible = true;
-	}
-
-	void _on_qhardmode_pressed()
-	{
-		Information(Tr("HARDMODE"), "Hardmode information", "https://docs.google.com/spreadsheets/d/14wAuaMaLK6YZqwGXQSaG4RKCBfH6JWnrXg2cVAL_KW4/edit?usp=sharing");
-		SetDifficultyInfo();
-	}
-
-	void _on_qprogression_pressed()
-	{
-		OpenLink("https://docs.google.com/spreadsheets/d/147dr8Uq_LT1X0STYwuvS59PwbZ_l4hK97GsVCvzJISU/edit?usp=sharing");
-	}
-
-	void _on_q_flith_pressed()
-	{
-		Information(Tr("FILTH"), "Filth Challenge", "https://docs.google.com/spreadsheets/d/1I0rPMIKg5Q7H1EwDlyiOBTGRkKlFxaXM_O4I5mxMdfg/edit?usp=sharing");
-		SetDifficultyInfo();
-	}
-
-	void _on_qhardcore_pressed()
-	{
-		Information(Tr("HARDCORE"), "Hardcore information", "https://docs.google.com/spreadsheets/d/13hKiq2UGXikMRRLJfKpkudDk9RZ4BRvlCYma1Sof11A/edit?usp=sharing");
-		SetDifficultyInfo();
-	}
-
-	void SetDigimonInfo()
-	{
-		StyleBoxFlat StyleboxUpdate = InformationWindow.GetThemeStylebox("embedded_border").Duplicate() as StyleBoxFlat;
-		StyleboxUpdate.BgColor = new Godot.Color(1, 1, 0.525f);
-		InformationWindow.AddThemeStyleboxOverride("embedded_border", StyleboxUpdate);
-		InformationWindow.AddThemeColorOverride("title_color", new Godot.Color(0, 0, 0));
+		if (link != null)
+		{
+			InformationButton.Visible = true;
+			InformationButton.Text = Tr("InfoLink_L");
+			InformationButton.Uri = link;
+		}	
+		else 
 		InformationButton.Visible = false;
 		InformationWindow.Visible = true;
+		InformationText.ScrollToLine(0);		
 	}
 
-	void _on_qmtgr_pressed()
+	public void MainMenuVisible()
 	{
-		Information(Tr("RMTGR"), "Real MetalGreymon", "");
-		SetDigimonInfo();
+		MainMenu.Visible = true;
 	}
 
-	void _on_qb_were_pressed()
+	public void CloseWindowInfo()
 	{
-		Information(Tr("BWERE"), "Black WereGarurumon", "");
-		SetDigimonInfo();
+		InformationWindow.Visible = false;
+		currentOption.Visible = true;
 	}
 
-	void _on_q_curling_pressed()
+	public void OpenInfoWindowDifficulty(string info, string title, string link = null)
 	{
-		Information(Tr("CURLING"), "Curling randomizer", "");
-		SetDigimonInfo();
-	}
+		currentOption = difficultyContainer;
+		Information(info, title, link);		
+		InformationBG.Color = new Godot.Color(1, 0, 0, 0.80f);		
+		difficultyContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(1,1,1)) ;
+	}	
 
-	void _on_q_mono_pressed()
+	public void OpenInfoWindowDigimon(string info, string title, string link = null)
 	{
-		Information(Tr("MONOCHROMON"), "New Monochromon", "https://docs.google.com/spreadsheets/d/1dYhxP6BNmiXRcwR9djcCMr7fpn3joppjbWun5_Pk-fQ/edit?usp=sharing");
-		StyleBoxFlat StyleboxUpdate = InformationWindow.GetThemeStylebox("embedded_border").Duplicate() as StyleBoxFlat;
-		StyleboxUpdate.BgColor = new Godot.Color(1, 1, 0.525f);
-		InformationWindow.AddThemeStyleboxOverride("embedded_border", StyleboxUpdate);
-		InformationWindow.AddThemeColorOverride("title_color", new Godot.Color(0, 0, 0));
-		InformationWindow.Visible = true;
-	}
+		currentOption = digimonContainer;
+		Information(info, title, link);		
+		InformationBG.Color = new Godot.Color(1, 1, 0.525f, 0.80f);	
+		digimonContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
+	
+	public void OpenInfoWindowMisc(string info, string title, string link = null)
+	{
+		currentOption = miscContainer;
+		Information(info, title, link);		
+		InformationBG.Color = new Godot.Color(1, 0.5f, 0, 0.80f);
+		miscContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(1,1,1)) ;
+	}	
 
-	void _on_q_useful_pressed()
+	public void OpenInfoWindowUseful(string info, string title)
 	{
-		OpenLink("https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
-	}
+		currentOption = usefulContainer;
+		Information(info, title, "https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");		
+		InformationBG.Color = new Godot.Color(0.6f, 1, 0.6f, 0.80f);
+		usefulContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
 
-	void _on_q_useful2_pressed()
+	public void OpenInfoWindowTech(string info, string title)
 	{
-		OpenLink("https://docs.google.com/spreadsheets/d/1Wi1Cg0uHVHaEwUeSRae2neZoD93dYVkoHmjdqvDd9Ko/edit?usp=sharing");
-	}
+		currentOption = techContainer;
+		Information(info, title, "https://docs.google.com/spreadsheets/d/1OBg9Ke_JZ_8TjA62ldYacz5GYiKS0L-56FoG0JQe60Y/edit?usp=sharing");		
+		InformationBG.Color = new Godot.Color(0.867f, 0.627f, 0.867f, 0.80f);
+		techContainer.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(0,0,0)) ;
+	}	
 
-	void _on_q_techs_pressed()
+	public void OpenInfoWindowVice()
 	{
-		OpenLink("https://docs.google.com/spreadsheets/d/1OBg9Ke_JZ_8TjA62ldYacz5GYiKS0L-56FoG0JQe60Y/edit?usp=sharing");
-	}
+		currentOption = ViceSettings;
+		Information(Tr("RecommendedInfo_M"), Tr("RecommendedSettings"), null);		
+		InformationBG.Color = new Godot.Color(0, 0.5f, 1, 0.80f);
+		ViceSettings.Visible = false;
+		InformationTitle.AddThemeColorOverride("font_color", new Godot.Color(1,1,1)) ;
+	}	
 
 	void OpenLink(string url)
 	{
@@ -750,7 +657,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 			{
 				System.Diagnostics.Process.Start("open", url);
 			}
-			else
+			else 
 			{
 				throw;
 			}
@@ -760,7 +667,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 	void OnFolderSelected(string folder)
 	{
 		FolderPath.Text = folder;
-		confirmationPatch.Visible = true;
+		PatchHolder.Visible = true;
 	}
 
 	void OnNameSet(string name)
@@ -771,20 +678,23 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 	void OnPatch()
 	{
-		StartPatch.Visible = false;
-		confirmationPatch.Visible = true;
+		MainMenu.Visible = false;
+		PatchHolder.Visible = true;
+		FolderError.Visible = false;
+		PatchWaiting.Visible = false;
+		PatchConfirm.Visible = true;
 	}
 
 	void _on_folderButton_pressed()
 	{
-		confirmationPatch.Visible = false;
+		PatchHolder.Visible = false;
 		selectFolder.Visible = true;
 	}
 
 	void _on_choose_folder_canceled()
 	{
 		selectFolder.Visible = false;
-		confirmationPatch.Visible = true;
+		PatchHolder.Visible = true;
 	}
 
 	void OnPatchConfirmed()
@@ -792,15 +702,18 @@ public partial class VicePatcherContainer : SubViewportContainer
 		if (FileNameSet.Text != null && FolderPath.Text != null && FileNameSet.Text != "" && FolderPath.Text != "")
 			CreatePatchedFile(FolderPath.Text, FileNameSet.Text);
 		else if (FolderPath.Text != null && FolderPath.Text != "")
-			CreatePatchedFile(FolderPath.Text, FileNameSet.PlaceholderText);
-		else
-			OnPatchCanceled();
+			CreatePatchedFile(FolderPath.Text, FileNameSet.PlaceholderText);		
+		else			
+			FolderError.Visible = true;			
+		
 	}
 
 	void OnPatchCanceled()
 	{
-		StartPatch.Visible = true;
-		confirmationPatch.Visible = false;
+		MainMenu.Visible = true;
+		PatchHolder.Visible = false;
+		PatchWaiting.Visible = false;
+		PatchConfirm.Visible = true;
 	}
 
 	void _on_patching_loader_confirmed()
@@ -814,9 +727,14 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 	void HandleError()
 	{
-		PatchingWait.Visible = false;
+		PatchWaiting.Visible = false;
+		PatchConfirm.Visible = true;
 		patchingLoading.Text = Tr("Patching");
-		StartPatch.Visible = true;
+		MainMenu.Visible = true;
+		PatchCancel.Pressed -= HandleError;
+		PatchCancel.Pressed += OnPatchCanceled;
+		WarWait.FrameChanged -= CheckFrame;
+		PatchHolder.Visible = false;
 	}
 
 	void SetError()
@@ -839,7 +757,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		insaneBattle = restoreLifetime = removeTechBoost = unlockAreas = mapColour = ultraHardcore = DropItemsBattle = removeEffectBoost = nerfEffectBoost = removeNewEffects = 
 		restorePanjyamon = kunemon = starters2 = removeTelephone = easyTechs = BlackWere = quickText = digitalClock = noRNG = boostItems = nerfTechBoost = poisonTimer =
-		allBattles = removeExtraInfo = moreEffects = agumon = clockV2 = crits = aggro = removeColour = false;
+		allBattles = removeExtraInfo = moreEffects = agumon = clockV2 = false;
 
 		currentViceDifficulty = ViceDifficulty.NONE;
 	}
@@ -931,29 +849,32 @@ public partial class VicePatcherContainer : SubViewportContainer
 	public void SetAgumon(bool enabled) { agumon = enabled; }
 
 	public void SetDigitalClockV2(bool enabled) { clockV2 = enabled; }
-
+	
 	public void SetCrits(bool enabled) { crits = enabled; }
 	public void SetAggro(bool enabled) { aggro = enabled; }
 	public void SetRemoveColour(bool enabled) { removeColour = enabled; }
 
 	public void CreatePatchedFile(string folderDestination, string newFilename)
 	{
-		confirmationPatch.Visible = false;
-		PatchingWait.Visible = true;
+		PatchConfirm.Visible = false;
+		PatchWaiting.Visible = true;
 		WarWait.Play();
+
+		PatchCancel.Pressed += HandleError;
+		PatchCancel.Pressed -= OnPatchCanceled;
 
 
 		fileDirectory = folderDestination;
 		newFilePath = System.IO.Path.Combine(folderDestination, newFilename);
 		newFilePath = newFilePath + System.IO.Path.GetExtension(filePath);
+
 		cueFileName = newFilename;
 
-		waiting.Start();
-
+		waiting.Start();		
+        
 		WarWait.FrameChanged += CheckFrame;
 
-
-
+		//StartWaiting();
 	}
 
 	public void InstallVicePatch()
@@ -977,12 +898,13 @@ public partial class VicePatcherContainer : SubViewportContainer
 				else
 					SetPatch(path + "HardcoreViceP 1.4.ppf");
 
-				if (trueHardcore)				
+				if (trueHardcore)
+				{
 					SetPatch(path + "TrueHardcoreVice 1.4.ppf");					
-				
+				}
 				break;
 			default:
-				break;
+				break;			
 		}
 
 		if (ultraHardcore)
@@ -997,7 +919,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 			else
 				SetPatch(path + "UltraHardmodeEnabler.ppf");
 		}
-		
+
 		if (restorePanjyamon)
 		{
 			bin.Position = 0x9303F20;
@@ -1014,6 +936,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 			bin.Position = 0x9303F20;
 			bin.WriteByte(0x31);
 		}
+
 		InstallOptionalPatches();
 	}
 
@@ -1152,9 +1075,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 		}
 		if (removeExtraInfo)
 			SetPatch("Patches/ViceHack/RemoveLifetimeInfo.ppf");
-
-		if (aggro)
-			SetPatch("Patches/ViceHack/Vengeful.ppf");
 
 		if (boostItems)
 		{
@@ -1342,31 +1262,25 @@ public partial class VicePatcherContainer : SubViewportContainer
 		if (moreEffects)
 			SetPatch("Patches/ViceHack/EffectsCommon.ppf");
 
-		if (crits)
-			SetPatch("Patches/ViceHack/Crits.ppf");
-
-		if (removeColour)
-			SetPatch("Patches/ViceHack/NoColour.ppf");
-
 		bin.Close();
 		bin.Dispose();
 		warFrame = true;
 	}
 
-
 	void SetPatch(string patchPath)
 	{
+		patchPath = "res://" + patchPath;
 		try
 		{
 			if (OS.HasFeature("editor"))
 			{
-				patchPath = "res://" + patchPath;
+				
 				patchPath = ProjectSettings.GlobalizePath(patchPath);
-				ppf = new System.IO.BinaryReader(System.IO.File.Open(patchPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite));
+				ppf = new System.IO.BinaryReader(System.IO.File.Open(patchPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite)); 
 			}
 			else
 			{
-				//var file = Godot.FileAccess.(patchPath, Godot.FileAccess.ModeFlags.ReadWrite);
+				//var file = Godot.FileAccess.(patchPath, Godot.FileAccess.ModeFlags.ReadWrite);				
 				ppf = new System.IO.BinaryReader(new MemoryStream(Godot.FileAccess.GetFileAsBytes(patchPath)));
 				if (ppf == null)
 				{
@@ -1386,7 +1300,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 			warError = true;
 			return;
 		}
-
 
 		ApplyPPF3Patch();
 	}
@@ -1468,7 +1381,8 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		string filename = "";
 
-		string cueData = "FILE " + '"' + cueFileName + ".bin" + '"' + " BINARY" + "\n" + "  TRACK 01 MODE2/2352" + "\n" + "    INDEX 01 00:00:00";
+		string cueData = "FILE " + '"' + cueFileName + ".bin" +'"' + " BINARY" + "\n" + "  TRACK 01 MODE2/2352" + "\n" + "    INDEX 01 00:00:00";
+
 
 		switch (currentPatcher)
 		{
@@ -1479,7 +1393,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 				filename = Tr("NameOptional_txt") + ".txt";
 				break;
 		}
-		
+
 		string path = System.IO.Path.Combine(fileDirectory, cueFileName + ".cue");
 		System.IO.Stream txt = System.IO.File.OpenWrite(path);
 
@@ -1631,15 +1545,16 @@ public partial class VicePatcherContainer : SubViewportContainer
 			txtWritter.Write("- " + Tr("Starters2_L"));
 			txtWritter.WriteLine();
 		}
-		if (restorePanjyamon)
-		{
-			txtWritter.Write("- " + Tr("Panjyamon_L"));
-			txtWritter.WriteLine();
-		}
 
 		if (kunemon)
 		{
 			txtWritter.Write("- Kunemon");
+			txtWritter.WriteLine();
+		}
+
+		if (restorePanjyamon)
+		{
+			txtWritter.Write("- " + Tr("Panjyamon_L"));
 			txtWritter.WriteLine();
 		}
 
@@ -1761,7 +1676,6 @@ public partial class VicePatcherContainer : SubViewportContainer
 			txtWritter.Write("- " + Tr("RemoveAttColor_L"));
 			txtWritter.WriteLine();			
 		}
-
 
 		txtWritter.WriteLine();
 		txtWritter.Write(Tr("Useful_N"));
@@ -2034,36 +1948,30 @@ public partial class VicePatcherContainer : SubViewportContainer
 		WarWait.Visible = false;
 		patchingLoading.Text = Tr("FinishedP");
 		if (currentPatcher != patchType.OPTIONAL)
-			PatchingWait.GetOkButton().Visible = true;
-		PatchingWait.GetCancelButton().Text = Tr("ExitButton");
-		SaveData();
-		PatchingWait.Canceled -= HandleError;
-		PatchingWait.Canceled += _on_patching_loader_canceled;
-
+			Randomize.Visible = true;
+		PatchCancel.Text = Tr("ExitButton");
+		PatchCancel.Pressed -= HandleError;
+		PatchCancel.Pressed += _on_patching_loader_canceled;
+		SaveData();	
 
 	}
 
 	void OpenViceSave()
 	{
 		ViceSettings.Visible = true;
-		difficultyContainer.Visible = false;
-		digimonContainer.Visible = false;
-		miscContainer.Visible = false;
-		usefulContainer.Visible = false;
-		techContainer.Visible = false;
-		Difficulty.Disabled = false;
-		Difficulty.ButtonPressed = false;
-		Digimon.Disabled = false;
-		Miscellaneous.Disabled = false;
-		Miscellaneous.ButtonPressed = false;
-		Useful.Disabled = false;
-		Useful.ButtonPressed = false;
-		Techniques.Disabled = false;
-		Techniques.ButtonPressed = false;
 		ViceMainSettings.Visible = true;
 		ViceSave.Visible = false;
 		ViceRecommended.Visible = false;
-		OpenViceSettings.Disabled = true;
+		MainMenu.Visible = false;
+	}
+
+	void CloseViceSave()
+	{
+		ViceSettings.Visible = false;
+		ViceMainSettings.Visible = true;
+		ViceSave.Visible = false;
+		ViceRecommended.Visible = false;
+		MainMenu.Visible = true;
 	}
 
 	void SetSave()
@@ -2141,34 +2049,36 @@ public partial class VicePatcherContainer : SubViewportContainer
 		superBonus, tanemon, rookieOnly, ultraBonus, dirtReduction, sDirtReduction, shortIntro, statsGains, multipleTechs, evoItem, helpfulItems, lessMono, nerfIce,
 		curlingRandomizer, betterRestaurant, progression, itemSpawns, raise, drimogemon, cards, merit, fishing, usefulItems2, curling,
 		trainingBoost, insaneDamage, trueHardcore, noOrders, medals, seadramon, rareSpawns, hyperMono, extraInput, removeEvoInfo, originalType, newMono, realMetal,
-		vendingMachine, easyStart, moreItemDrops, MoreItemSpawn, insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore, restorePanjyamon, 
-		starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
+		vendingMachine, easyStart, moreItemDrops, MoreItemSpawn, insaneBattle, restoreLifetime, removeTechBoost, unlockAreas, mapColour, ultraHardcore,
+		restorePanjyamon, starters2, kunemon, removeTelephone, easyTechs, BlackWere, quickText, digitalClock, noRNG, boostItems, nerfTechBoost,
 		StatsValue, RareSpawnValue, DropItemsBattle, nerfEffectBoost, removeEffectBoost, removeNewEffects, poisonTimer, allBattles, removeExtraInfo, moreEffects, agumon, clockV2, crits, aggro, removeColour);
 
-		Directory.CreateDirectory(OS.GetExecutablePath().GetBaseDir() + "/SaveData");
+		var dir = DirAccess.Open("user://");		
+		dir.MakeDir(ProjectSettings.GlobalizePath("user://") + "SaveData");
 
 		var bytes = JsonSerializer.SerializeToUtf8Bytes(saveData);
 		if (saveName != null)
 		{
 			string name;
 			if (oldName != null)
-				name = "/SaveData/" + oldName + ".ViceSave";
+				name = "SaveData/" + oldName + ".ViceSave";
 			else
-				name = "/SaveData/" + saveName + ".ViceSave";
+				name = "SaveData/" + saveName + ".ViceSave";
 
-			using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + name, Godot.FileAccess.ModeFlags.Write);
-
+			using var saveFile = Godot.FileAccess.Open("user://" + name, Godot.FileAccess.ModeFlags.Write);
+            
 			saveFile.StoreBuffer(bytes);
 			saveFile.Close();
 			if (oldName != null)
-				File.Move(OS.GetExecutablePath().GetBaseDir() + name, OS.GetExecutablePath().GetBaseDir() + "/SaveData/" + saveName + ".ViceSave");
+				File.Move(ProjectSettings.GlobalizePath("user://" + name), ProjectSettings.GlobalizePath("user://" + "SaveData/" + saveName + ".ViceSave"));
 
 			saveNames[currentSave] = saveName;
 			Saves[currentSave].Text = saveName;
+			
 		}
 		else
 		{
-			using var saveFile = Godot.FileAccess.Open(OS.GetExecutablePath().GetBaseDir() + "/SaveData/LatestSave", Godot.FileAccess.ModeFlags.Write);
+			using var saveFile = Godot.FileAccess.Open("user://" + "SaveData/LatestSave", Godot.FileAccess.ModeFlags.Write);
 			saveFile.StoreBuffer(bytes);
 			saveFile.Close();
 		}
@@ -2179,13 +2089,13 @@ public partial class VicePatcherContainer : SubViewportContainer
 	{
 		string name;
 		if (saveName == null)
-			name = "/SaveData/LatestSave";
+			name = "SaveData/LatestSave";
 		else
-			name = "/SaveData/" + saveName + ".ViceSave";
+			name = "SaveData/" + saveName + ".ViceSave";
 
-		if (File.Exists(OS.GetExecutablePath().GetBaseDir() + name))
+		if (File.Exists(ProjectSettings.GlobalizePath("user://" + name)))
 		{
-			using var saveFile = System.IO.File.Open(OS.GetExecutablePath().GetBaseDir() + name, System.IO.FileMode.Open);
+			using var saveFile = System.IO.File.Open(ProjectSettings.GlobalizePath("user://" + name), System.IO.FileMode.Open);
 			saveData = JsonSerializer.Deserialize<ViceSaveData>(saveFile);
 			saveFile.Close();
 
@@ -2214,16 +2124,15 @@ public partial class VicePatcherContainer : SubViewportContainer
 			}
 		}
 
-		ViceSave.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void CheckSaveFiles()
 	{
-		if (Directory.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData"))
+		if (DirAccess.DirExistsAbsolute(ProjectSettings.GlobalizePath("user://" + "SaveData")))
 		{
 			int saves = 0;
-			foreach (string file in DirAccess.GetFilesAt(OS.GetExecutablePath().GetBaseDir() + "/SaveData"))
+			foreach (string file in DirAccess.GetFilesAt("user://" + "SaveData"))
 			{
 				if (file.GetExtension() == "ViceSave")
 				{
@@ -2241,7 +2150,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 				Saves[i].Text = saveNames[i];
 		}
 
-		if (!File.Exists(OS.GetExecutablePath().GetBaseDir() + "/SaveData/LatestSave"))
+		if (!File.Exists(ProjectSettings.GlobalizePath("user://" + "SaveData/LatestSave")))
 			LatestOptions.Disabled = true;
 
 	}
@@ -2259,8 +2168,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void EasyVice()
@@ -2276,8 +2184,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void Hardcore()
@@ -2293,8 +2200,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void UltraHardcore()
@@ -2311,8 +2217,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		difficultyScript.LoadSaveData(false, false, true, false, true, false, false, false, false, true, true, true, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void SpeedrunMode()
@@ -2324,12 +2229,11 @@ public partial class VicePatcherContainer : SubViewportContainer
 		usefulScript.LoadSaveData(true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
 		true, true, true, 20, 100);
 
-		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false, true);
+		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false, false);
 
 		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void SpeedHardcore()
@@ -2341,29 +2245,27 @@ public partial class VicePatcherContainer : SubViewportContainer
 		usefulScript.LoadSaveData(true, true, true, true, false, false, true, false, true, true, true, true, true, false, true, true, false, true, true, true, true, true, true, true,
 		true, true, true, 10, 100);
 
-		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false, true);
+		techScript.LoadSaveData(true, true, true, false, true, true, false, false, false, false, false, false, false, false, false);
 
 		difficultyScript.LoadSaveData(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void VanillaMode()
 	{
 		digimonScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false);
 
-		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, false, false, false, true, false, true, false, true, false);
+		miscScript.LoadSaveData(false, false, false, false, false, true, true, false, false, false, false, true, false, true, false, false, false);
 
 		usefulScript.LoadSaveData(false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
 		false, false, false, false, false, false, false, 1, 3);
 
-		techScript.LoadSaveData(false, false, false, false, false, false, false, false, true, true, false, true, false, false, false);
+		techScript.LoadSaveData(false, false, false, false, false, false, false, false, true, false, true, true, false, false, false);
 
 		difficultyScript.LoadSaveData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void MasochistMode()
@@ -2379,8 +2281,7 @@ public partial class VicePatcherContainer : SubViewportContainer
 
 		difficultyScript.LoadSaveData(false, false, true, true, true, true, false, false, false, true, true, false, true, false, false, false, true);
 
-		ViceRecommended.Visible = false;
-		ViceMainSettings.Visible = true;
+		CloseViceSave();
 	}
 
 	void LoadLatest() { LoadSaveData(); }
@@ -2388,10 +2289,20 @@ public partial class VicePatcherContainer : SubViewportContainer
 	void StartWaiting()
 	{
 		warError = false;
-		System.IO.File.Copy(filePath, newFilePath, true);
+		//try
+		//{
+			System.IO.File.Copy(filePath, newFilePath, true);
+			System.IO.File.SetAttributes(newFilePath, FileAttributes.Normal);
+		//}
+		/*catch (Exception ex)
+		{
+			patchingLoading.Text = ex.ToString();
+		}*/
 		try
 		{
 			bin = System.IO.File.OpenWrite(newFilePath);
+			if (bin == null)
+			warError = true;
 		}
 		catch (System.ArgumentException)
 		{
@@ -2405,6 +2316,10 @@ public partial class VicePatcherContainer : SubViewportContainer
 		{
 			warError = true;
 		}
+		/*catch (Exception ex)
+		{
+			patchingLoading.Text = patchingLoading.Text + "\n" + ex.ToString();
+		}*/
 
 		switch (currentPatcher)
 		{

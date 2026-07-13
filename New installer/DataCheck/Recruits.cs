@@ -81,6 +81,11 @@ public partial class Recruits : Control
     		offsets[27] = 0x1402BA6C;
 			prosperity[27] = 0x1402BA71;
 		}
+		else
+		{
+			offsets[27] = 0x1402BAA2;
+			prosperity[27] = 0x1402BAA7;
+		}
 
 		for (int i = 0; i < offsets.Length; i++)
 		{

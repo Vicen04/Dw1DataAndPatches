@@ -1,4 +1,5 @@
 using Godot;
+using GodotPlugins.Game;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,10 @@ public partial class OtherItemsStuff : Control
 	[Export] Control Curling;
 	[Export] Control Treasure;
 	[Export] Control Restaurant;
+	[Export] Control FishBait;
+	[Export] Control FishItem;
+	[Export] Control Shops;
+	[Export] Control Bird;
 
 	[Export] Label foodItem;
 	[Export] Label foodEnergy;
@@ -100,6 +105,57 @@ public partial class OtherItemsStuff : Control
 	[Export] Label[] RestaurantDef;
 	[Export] Label[] RestaurantSpd;
 	[Export] Label[] RestaurantBrn;
+	[Export] Label FishChance;
+	[Export] Label BaitTitle;
+	[Export] Label[] baitNames;
+	[Export] TextureRect[] baitIcons;
+	[Export] Label[] FishChancesValues;
+	[Export] Label SeadramonInfo;
+	[Export] Label[] ItemHookChance;
+	[Export] Label[] itemHookNames;
+	[Export] TextureRect[] itemHookIcons;
+	[Export] Label HookItemName;
+	[Export] Label HookItemChance;
+	[Export] Control smallShop;
+	[Export] Control bigShop;
+	[Export] Control gearShop;
+	[Export] Control secretShop;
+	[Export] Control shogunShop;
+	[Export] Control GekoShop;
+	[Export] Control GymShop;
+	[Export] OptionButton shopOptions;
+	[Export] Label[] priceNormalShop;
+	[Export] Label[] nameNormalShop;
+	[Export] TextureRect[] iconNormalShop;
+	[Export] Label[] priceBigShop;
+	[Export] Label[] nameBigShop;
+	[Export] TextureRect[] iconBigShop;
+	[Export] Label[] priceFrogShop;
+	[Export] Label[] nameFrogShop;
+	[Export] TextureRect[] iconFrogShop;
+	[Export] Label[] priceGymShop;
+	[Export] Label[] nameGymShop;
+	[Export] TextureRect[] iconGymShop;
+	[Export] VBoxContainer shogunShopItems;
+	[Export] Label shogunShopMerit;
+	[Export] Label[] priceShopLabels;
+	[Export] Label[] itemShopLabels;
+	[Export] Label[] birdAreas;
+	[Export] Label[] birdIDs;	
+	[Export] Label[] birdPrices;
+
+	[Export] Label smallShopLabel;
+	[Export] Label bigShopLabel;
+	[Export] Label gearShopLabel;
+	[Export] Label secretShopLabel;
+	[Export] Label gekoShopLabel;
+	[Export] Label gymShopLabel;
+	[Export] Label birdArea;
+	[Export] Label birdID;
+	[Export] Label birdPrice;
+	[Export] Control birdExtra1;
+	[Export] Control birdExtra2;
+
 
 
 	enum CHIPBYTES
@@ -208,6 +264,23 @@ public partial class OtherItemsStuff : Control
 					   			 0x140B0686, 0x140B07D2, 0x140B0A28, //Omelet
 					  			 0x140B0CBC, 0x140B0E10, 0x140B0F66 }; //Egg Bowl
 
+	uint baitOffset = 0x14BA9F54, favouriteOffset = 0x14BAA6D4, itemFished = 0x14BA9D5C;
+
+	uint[] normalShopsOffsets =
+		{
+			0x1403BDFE, 0x1403BE02, 0x1403BE06, 0x1403BE0A, 0x1403BE0E, 0x1403BE12, 0x1403BE16, //Gear Savanna Shop
+			0x1405CD6A, 0x1405CD6E, 0x1405CD72, 0x1405CD76, 0x1405CD7A, 0x1405CD7E, //Coelamon + Betamon shop speak to Betamon
+			0x1405CDA6, 0x1405CDAA, 0x1405CDAE, //Coelamon or Betamon only shop speak to Betamon
+			0x1405E42E, 0x1405E432, 0x1405E436, 0x1405E43A, 0x1405E43E, 0x1405E442, //Coelamon + Betamon shop interact with the shop
+			0x1405E46A, 0x1405E46E, 0x1405E472, //Coelamon or Betamon only shop interact with the shop
+			0x14070322, 0x14070326, //Numemon shop
+			0x1407034A, 0x1407034E, //Mojyamon shop
+			0x14070372, 0x14070376, 0x1407037A, 0x1407037E, //Mamemon shop
+			0x140703AA, 0x140703AE, 0x140703B2,  //Devimon shop			
+		};
+	uint[] bigShopItems = { 0x1406E484, 0x1406E488, 0x1406E48C, 0x1406E490, 0x1406E494, 0x1406E498, 0x1406E49C, 0x1406E4A0, 0x1406E4A4, 0x1406E4A8, 
+							0x1406E4B8, 0x1406E4C8, 0x1406E4D8, 0x1406E4E8, 0x1406E528, 0x1406E52C, 0x1406E5AC, 0x1406E5B0, 0x1406E5B4};
+							
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -227,6 +300,10 @@ public partial class OtherItemsStuff : Control
 		MiscItemsOpt.SetItemText(0, Tr("CurlingCheckOpt"));
 		MiscItemsOpt.SetItemText(1, Tr("TreasureCheckOpt"));
 		MiscItemsOpt.SetItemText(2, Tr("RestaurantCheckOpt"));
+		MiscItemsOpt.SetItemText(3, Tr("ShopsCheckOpt"));
+		MiscItemsOpt.SetItemText(4, Tr("FishCheckOpt"));
+		MiscItemsOpt.SetItemText(5, Tr("FishItemCheckOpt"));
+		MiscItemsOpt.SetItemText(6, Tr("BirdraTransportOpt"));
 		foodItem.Text = Tr("SearchItemCheckLabel");
 		foodEnergy.Text = Tr("foodEnergyCheck");
 		foodEnergy.TooltipText = Tr("foodEnergyCheckInfo");
@@ -276,6 +353,27 @@ public partial class OtherItemsStuff : Control
 		GabumonTreasure.Text = Tr("GabumonTreasureCheck");
 		GabumonTreasure2.Text = Tr("GabumonTreasureCheck");
 		OtherItemsLabel.Text = Tr("OtherItemsCheck");
+		FishChance.Text = Tr("FishBaitC_L");
+		FishChance.TooltipText = Tr("FishBaitC_info");
+		BaitTitle.Text = Tr("FishBait_L");
+		HookItemName.Text = Tr("ItemsSpawnSearchLabel");
+		HookItemChance.Text = Tr("ChanceCheckOtherLabel");
+		birdArea.Text = Tr("AreaNameL");
+		birdID.Text = Tr("MapCheckNameLabel");
+		birdPrice.Text = Tr("MoneyCostL");
+		smallShopLabel.Text = Tr("SmallShopL");
+		bigShopLabel.Text = Tr("BigShopL");
+		gearShopLabel.Text = Tr("GearShopL");
+		secretShopLabel.Text = Tr("SecretShopL");
+		gekoShopLabel.Text = Tr("GekoShopL");
+		gymShopLabel.Text = Tr("GymShopL");
+		shogunShopMerit.Text = Tr("MeritPriceL");
+
+		foreach(Label price in priceShopLabels)
+			price.Text = Tr("MoneyCostL");
+
+		foreach(Label item in itemShopLabels)
+			item.Text = Tr("SearchItemCheckLabel");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -587,6 +685,189 @@ public partial class OtherItemsStuff : Control
 			DigimonRestaurant[i].Texture = mainParent.GetDigimonData(digimonRestaurant[i / 3]).digimonSprite;
 		}
 
+
+		//Setup shop data
+
+		shopOptions.Clear();
+
+		shopOptions.AddItem(Tr("SmallShopL"));
+		shopOptions.AddItem(Tr("BigShopL"));
+		shopOptions.AddItem(Tr("GearShopL"));
+		shopOptions.AddItem(Tr("SecretShopL"));
+		shopOptions.AddItem(Tr("MeritShopL"));
+
+		for (int i = 0; i < normalShopsOffsets.Count(); i++)
+		{
+			bin.Position = normalShopsOffsets[i];
+
+			int item = reader.ReadInt16() - 384;
+			priceNormalShop[i].Text = parent.GetItemData(item).price.ToString();
+			nameNormalShop[i].Text = parent.GetItemData(item).name;
+			iconNormalShop[i].Texture = mainParent.GetItemTex(item);
+			
+		}
+
+		for (int i = 0; i < bigShopItems.Count(); i++)
+		{
+			bin.Position = bigShopItems[i];
+			int item = reader.ReadInt16() - 384;
+			priceBigShop[i].Text = parent.GetItemData(item).price.ToString();
+			nameBigShop[i].Text = parent.GetItemData(item).name;
+			iconBigShop[i].Texture = mainParent.GetItemTex(item);
+		}
+
+		if (shogunShopItems.GetChildCount() != 0)
+		{
+			foreach (Node n in shogunShopItems.GetChildren())
+			{
+				shogunShopItems.RemoveChild(n);
+				n.QueueFree();
+			}
+		}	
+		
+		for (int i = 0; i < 128; i++)
+		{
+			if (parent.GetItemData(i).merit != 0)
+			{
+				var scene = GD.Load<PackedScene>("res://Items/ItemPrice.tscn");
+				var child = scene.Instantiate() as ItemPrice;
+				child.SetupData(mainParent.GetItemTex(i), parent.GetItemData(i).name, parent.GetItemData(i).merit.ToString());
+				shogunShopItems.AddChild(child);
+			}
+			
+		}
+
+		bin.Position = 0x1407C704;
+
+		if(bin.ReadByte() != 0xFF)  //check if the Gekomon shop exists
+		{
+			shopOptions.AddItem(Tr("GekoShopL"));
+			uint[] gekomonShop ={ 0x1407C74E, 0x1407C752, 0x1407C756, 0x1407C75A, 0x1407C75E, 0x1407C762};
+			for (int i = 0; i < gekomonShop.Count(); i++)
+			{
+				bin.Position = gekomonShop[i];
+				int item = reader.ReadInt16() - 384;
+				priceFrogShop[i].Text = parent.GetItemData(item).price.ToString();
+				nameFrogShop[i].Text = parent.GetItemData(item).name;
+				iconFrogShop[i].Texture = mainParent.GetItemTex(item);
+			}
+		}
+
+		bin.Position = 0x1402FCA0;
+
+		if (bin.ReadByte() == 0x1C) //Check if helpful items 2 is active
+		{
+			shopOptions.AddItem(Tr("GymShopL"));
+			uint[] gymShop = {0x1402FCA2, 0x1402FCA6, 0x1402FCAA, 0x1402FCAE, 0x1402FCB2, 0x1402FCB6, 0x1402FCBA, 0x1402FCBE, 0x1402FCC2, 0x1402FCC6, 0x1402FCCA, //Shop 1
+				   			  0x1402FDAC, 0x1402FDB0, 0x1402FDB4, 0x1402FDB8, 0x1402FDBC, 0x1402FDC0, 0x1402FDC4, 0x1402FDC8, 0x1402FDCC, 0x1402FDD0, 0x1402FDD4, 0x1402FDD8}; //Shop 2;
+
+			for (int i = 0; i < gymShop.Count(); i++)
+			{
+				bin.Position = gymShop[i];
+				int item = reader.ReadInt16() - 384;
+				if (item >= 0)
+				{
+					(priceGymShop[i].GetParent() as Control).Visible = true;
+					priceGymShop[i].Text = parent.GetItemData(item).price.ToString();
+					nameGymShop[i].Text = parent.GetItemData(item).name;
+					iconGymShop[i].Texture = mainParent.GetItemTex(item);
+				}
+				else
+				 (priceGymShop[i].GetParent() as Control).Visible = false;
+				
+			}
+
+		}
+
+		shopOptions.Selected = -1;
+
+		//Setup fish bait
+
+		bin.Position = baitOffset;
+
+		for (int i = 0; i < 198; i++)			
+		{	
+			FishChancesValues[i].Text = bin.ReadByte().ToString() + "%";
+			FishChancesValues[i].RemoveThemeColorOverride("font_color");
+		}
+
+		for (int i = 0; i < 6; i++)
+		{
+			bin.Position = i * 24 + favouriteOffset;
+
+			int favourite = bin.ReadByte();
+
+			if (favourite > 70) continue;
+
+			favourite = (favourite - 38) * 6 + i;
+			FishChancesValues[favourite].AddThemeColorOverride("font_color", new Color(0,1,1,1));
+		}
+
+		for (int i = 0; i < 33; i++)
+		{			
+			baitNames[i].Text = parent.GetItemData(i + 38).name;
+			baitIcons[i].Texture = mainParent.GetItemTex(i + 38);
+		}
+
+		bin.Position = 0x14BA4DF8;
+		SeadramonInfo.Text = Tr("FishBaitSea_info") + bin.ReadByte() + "%" ;
+		
+		//Hooked items
+
+		bin.Position = itemFished;
+		int currentHookChance = 0;
+
+		for (int i = 0; i < 6; i++)
+		{
+			int item =  bin.ReadByte();
+			
+			
+			itemHookNames[i].Text = parent.GetItemData(item).name;
+			itemHookIcons[i].Texture = mainParent.GetItemTex(item);
+
+			item = bin.ReadByte();
+			currentHookChance = item - currentHookChance;
+
+			ItemHookChance[i].Text =  currentHookChance.ToString() + "/99";
+			
+			currentHookChance = item;
+		}
+
+		//Birdra transport
+
+		
+
+		bin.Position = 0x14D725C4;
+
+		if (vice)
+		{			
+			birdExtra1.Visible = true;
+			birdExtra2.Visible = true;
+
+			for (int i = 0; i < 8; i++)
+			{
+				int area = bin.ReadByte();
+				bin.ReadByte();
+				birdAreas[i].Text = mainParent.returnAreaName(mainParent.GetMapIDName(area), area);
+				birdIDs[i].Text = mainParent.GetMapName(area);
+				reader.ReadInt16();
+				birdPrices[i].Text = reader.ReadInt16().ToString();			
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				int area = bin.ReadByte();
+				bin.ReadByte();
+				birdAreas[i].Text = mainParent.returnAreaName(mainParent.GetMapIDName(area), area);
+				birdIDs[i].Text = mainParent.GetMapName(area);
+				reader.ReadInt16();
+				birdPrices[i].Text = reader.ReadInt32().ToString();			
+			}
+			birdExtra1.Visible = false;
+			birdExtra2.Visible = false;
+		}
 	}
 
 	public void RestartData()
@@ -600,6 +881,10 @@ public partial class OtherItemsStuff : Control
 		Curling.Visible = false;
 		Treasure.Visible = false;
 		Restaurant.Visible = false;
+		Shops.Visible = false;
+		Bird.Visible = false;
+		FishBait.Visible = false;
+		FishItem.Visible = false;
 		AllItemsEffects.Visible = false;
 		AllMiscItems.Visible = false;
 	}
@@ -609,14 +894,30 @@ public partial class OtherItemsStuff : Control
 		BuffItems.Visible = option == 2;
 		HealingItems.Visible = option == 0;
 		Chips.Visible = option == 1;
-		Food.Visible = option == 3;
+		Food.Visible = option == 3;	
+
 	}
 
 	void SetOptionOther(int option)
 	{
 		Curling.Visible = option == 0;
 		Treasure.Visible = option == 1;
-		Restaurant.Visible = option == 2;
+		Restaurant.Visible = option == 2;		
+		Shops.Visible = option == 3;
+		FishBait.Visible = option == 4;
+		FishItem.Visible = option == 5;
+		Bird.Visible = option == 6;
+	}
+
+	void SetShopOption(int option)
+	{
+		smallShop.Visible = option == 0;
+		bigShop.Visible = option == 1;
+		gearShop.Visible = option == 2;		
+		secretShop.Visible = option == 3;
+		shogunShop.Visible = option == 4;
+		GekoShop.Visible = option == 5;
+		GymShop.Visible = option == 6;
 	}
 
 	int GetChipValue(CHIPBYTES chipByte)
@@ -717,5 +1018,8 @@ public partial class OtherItemsStuff : Control
 		AllItemsEffects.Visible = false;
 		AllMiscItems.Visible = true;
 	}
+	
+
+	
 
 }

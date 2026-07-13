@@ -1,6 +1,5 @@
 using Godot;
 using System;
-
 public partial class DigimonContainer : PanelContainer
 {
 
@@ -13,8 +12,13 @@ public partial class DigimonContainer : PanelContainer
 	[Export] private CheckBox Curling;
 	[Export] private CheckBox RMTGR;
 	[Export] private CheckBox BWere;
+	[Export] private Button Apply;
 
 	[Export] private VicePatcherContainer VicePatcher;
+
+	[Export] private TextureButton[] infoButtons;
+	
+	System.Collections.Generic.List<CheckBox> allCheckboxes;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -92,10 +96,11 @@ public partial class DigimonContainer : PanelContainer
 		Starters2.TooltipText = Tr("Starters2_info");
 		Vermillimon.TooltipText = Tr("Vermillimon_info");
 		Kunemon.TooltipText = Tr("Kunemon_info");
-		Curling.TooltipText = Tr("CurlingR_info");
-		RMTGR.TooltipText = Tr("RMTGR_info");
-		BWere.TooltipText = Tr("BWere_info");
+		Curling.TooltipText = Tr("CURLING");
+		RMTGR.TooltipText = Tr("RMTGR");
+		BWere.TooltipText = Tr("BWERE");
 		Myotismon.TooltipText = Tr("Myotismon_info");
+		Apply.Text = Tr("Apply_L");
 	}
 
 	void SetupButtons()
@@ -108,6 +113,17 @@ public partial class DigimonContainer : PanelContainer
 		Curling.Toggled += Curling_Toggled;
 		RMTGR.Toggled += RMTGR_Toggled;
 		BWere.Toggled += BWere_Toggled;
+
+		allCheckboxes = [Myotismon, Panjyamon, Starters2, Vermillimon, Kunemon, Curling, RMTGR, BWere];
+		infoButtons[0].Pressed += () =>	{VicePatcher.OpenInfoWindowDigimon(allCheckboxes[0].TooltipText, allCheckboxes[0].Text, "https://docs.google.com/spreadsheets/d/1lG3aLJsLiCwcZXo5-OS18o21GngTVuyAiKA0liV_kpM/edit?gid=1719894242#gid=1719894242");};
+		for (int i = 1; i < infoButtons.Length; i++)
+		{
+			int cat = i;
+			infoButtons[i].Pressed += () =>
+			{
+				VicePatcher.OpenInfoWindowDigimon(allCheckboxes[cat].TooltipText, allCheckboxes[cat].Text, null);
+			};
+		}	
 	}
 
 	public void LoadSaveData(bool MyotismonS, bool PanjyamonS, bool VermillimonS, bool Starters2S, bool KunemonS, bool CurlingS, bool RMTGRS, bool BWereS)
@@ -132,5 +148,18 @@ public partial class DigimonContainer : PanelContainer
 		Curling.ButtonPressed = false;
 		RMTGR.ButtonPressed = false;
 		BWere.ButtonPressed = false;
+	}
+
+	void CloseDigimon()
+	{
+		RestartSelection();
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
+	}
+
+	void ApplyDigimon()
+	{
+		VicePatcher.MainMenuVisible();
+		this.Visible = false;
 	}
 }
