@@ -396,3 +396,33 @@ Version 2.0:
 
 - Fixed an issue in VS mode from the original game
 
+???:
+
+- Fixed more bugs in both the game and the randomizer
+
+- The tech boost can now be applied to moves that increase your stats, it lets the Digimon break the stat limit.
+
+- Updated all of the difficulties to allow the NPCs to use the stat break limit when they buff themselves, but in a smaller scale. This limit is based on the difficulty
+
+- The buffed stat now display the correct amount of buff value, instead of giving the idea that the player can buff infinitely... (originally it kept displaying a value even when the game doesn't buff anything)
+
+09/08/26:
+
+- Fixed more bugs in both the game and the randomizer
+
+- Fixed some script issues the original game still had
+
+- Added new functionalities to Metalgreymon and Airdramon
+
+- Added a way to see the evolution requirements in game
+
+27/09/26:
+
+- Added the battle against MetalGarurumon
+
+- Gabumon challenge
+
+- Progression Plus
+
+- Digitamamon finisher improvement patch
+
