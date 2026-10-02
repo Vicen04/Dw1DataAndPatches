@@ -406,6 +406,10 @@ Version 2.0:
 
 - The buffed stat now display the correct amount of buff value, instead of giving the idea that the player can buff infinitely... (originally it kept displaying a value even when the game doesn't buff anything)
 
+- Changed Wind Cutter, Seadramon and MegaSeadramon finishers to now hit the target instead of dissapearing when they touch an entity...
+
+- Lots of secret seeds for the randomizer
+
 09/08/26:
 
 - Fixed more bugs in both the game and the randomizer
@@ -415,6 +419,8 @@ Version 2.0:
 - Added new functionalities to Metalgreymon and Airdramon
 
 - Added a way to see the evolution requirements in game
+
+- Tekkamon secret seed
 
 27/09/26:
 
