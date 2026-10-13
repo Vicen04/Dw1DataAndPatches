@@ -14,7 +14,7 @@ For anyone who wants to ask questions or want help with modding:
 
 I have created a hack which mostly includes the changes shown in this repository (Last update 09/08/26).
 
-[New installer + randomizer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/New_Installer)
+[New installer + randomizer (Vice 2.2)](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/New_Installer)
 
 [Vice 2.1 installer](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Digimon_Installer_2)
 
@@ -52,7 +52,8 @@ Hardmode vanilla version:
 Filth Challenge vanilla version:
 [Filth Challenge](https://github.com/Vicen04/Dw1DataAndPatches/releases/tag/Filth_challenge)
 
+## About
 
-This is being done during my free time; the hack has been finished, more updates may come in the future. I'm not sure if I'll upload more of the original code.
+This is being done during my free time
 
 Contact form: https://forms.gle/tJ1bYcuCKB2cdkCP6
